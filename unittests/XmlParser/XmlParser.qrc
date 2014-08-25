@@ -1,0 +1,20 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+<qresource>
+    <file>broken.xml</file>
+    <file>doc_footer.xml</file>
+    <file>doc_header.xml</file>
+    <file>fonts.xml</file>
+    <file>handlerWithError.xml</file>
+    <file>handler.xml</file>
+    <file>htmlid.xml</file>
+    <file>margins.xml</file>
+    <file>simple.xml</file>
+    <file>spreadsheet.xml</file>
+    <file>tabs.xml</file>
+    <file>textid.xml</file>
+    <file>vspaceInHeader.xml</file>
+    <file>wrongTopElement.xml</file>
+</qresource>
+</RCC>
+

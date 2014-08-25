@@ -1,0 +1,34 @@
+What is new in KD Reports 1.4
+===============================
+
+Features:
+---------
+
+* Setting the page number of the first page, so that the variable PageNumber
+  starts at another value than 1. This is useful when composing a large report
+  from smaller reports. See Report::setFirstPageNumber.
+
+* Added example for setFirstPageNumber and for generating a table of contents.
+
+Bug fixes:
+----------
+* Fix compilation with gcc-4.6
+
+* Preserve font when inserting a variable, and when updating a variable value
+  later on (KDRE-91)
+
+* printWithDialog() didn't handle page ranges (KDRE-94)
+
+* Fix support for empty text elements with an ID (<text id="someid"/>)
+
+* Fix implementation of vertical spacing so that it works before the first element too,
+and so that multiple spacings can be added in sequence.
+
+* associateTextValue now also updates headers and footers, when being called
+after the document was loaded (KDRE-192)
+
+Performance fixes:
+------------------
+
+* KDRE-74: Remove internal QPrinter object in Report class, to gain some performance.
+

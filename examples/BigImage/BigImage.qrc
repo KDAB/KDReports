@@ -1,0 +1,8 @@
+<!DOCTYPE RCC>
+<RCC>
+  <qresource>
+    <file alias="imageTall.jpg">imageTall.jpg</file>
+    <file alias="image.jpg">image.jpg</file>
+  </qresource>
+</RCC>
+

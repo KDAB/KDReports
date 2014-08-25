@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.kdab.com/kdreports">
+  <text pointsize="18" alignment="hcenter">Hello World!</text>
+  <vspace size="20"/>
+  <text>This is a report generated with KD Reports from an XML source.</text>
+  <text>The chart below is specified in the XML with &lt;chart/&gt; and is
+     customized in code</text>
+  <chart width="150"/>
+</report>
+

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.kdab.com/kdreports" header-body-spacing="10" footer-body-spacing="10" pointsize="10">
+  <header location="odd">
+    <tabs>
+       <tab type="center" position="page"/>
+       <tab type="right" position="page"/>
+    </tabs>
+    <image file=":/kdab_small.jpg" width="30%"/>
+    <text inline="true">&#x9;</text>
+    <variable type="pagenumber"/>
+    <text inline="true"> / </text>
+    <variable type="pagecount"/>
+    <text inline="true">&#x9;Date: </text>
+    <variable type="textdate"/>
+    <text inline="true">, Time: </text>
+    <variable type="texttime"/>
+  </header>
+
+  <header location="even">
+    <tabs>
+       <tab type="center" position="page"/>
+       <tab type="right" position="page"/>
+    </tabs>
+    <image file=":/kdab_small.jpg" width="30%"/>
+
+    <text inline="true">&#x9;</text>
+    <text inline="true">Even pages header: </text>
+    <variable type="pagenumber"/>
+    <text inline="true"> / </text>
+    <variable type="pagecount"/>
+
+<!-- test for variables in tables in headers
+    <table inline="true">
+      <cell row="0" column="0">
+        <text alignment="hcenter">Number of pages</text>
+      </cell>
+      <cell row="0" column="1">
+        <text alignment="hcenter">: </text>
+        <variable type="pagecount"/>
+      </cell>
+    </table>
+-->
+  </header>
+
+  <footer>
+    <text alignment="right" id="company_address"/>
+  </footer>
+
+  <text pointsize="18" alignment="hcenter" id="title_element"/>
+<!--  <vspace size="10"/>
+  <text bold="true" paragraph-background="#CCCCFF" id="table1_title"/>
+  <table model="table1" width="100%"/>
+  <vspace size="5"/>
+  
+  <text bold="true" paragraph-background="#CCCCFF" id="table2_title"/>
+  <table model="table2" width="100%"/>
+
+  <page-break/>
+
+  <text bold="true" paragraph-background="#CCCCFF" id="table1_title"/>
+  <table model="table1" width="100%"/>
+  <vspace size="5"/>
+  
+  <text bold="true" paragraph-background="#CCCCFF" id="table2_title"/>
+  <table model="table2" width="100%"/>
+  <vspace size="5"/>
+-->
+
+  <hline/>
+
+  <!-- Another kind of table, where the data is in the xml and does not come from a model: -->
+  <table headerRowCount="2" cellpadding="3">
+    <cell row="0" column="0" colspan="2" background="#DADADA">
+      <text alignment="hcenter">TableElement example</text>
+    </cell>
+    <cell row="1" column="0" background="#DADADA">
+      <image id="image_system"/>
+      <text inline="true"> Item</text>
+    </cell>
+    <cell row="1" column="1" background="#DADADA">
+      <text italic="true" background="#999999">Expected</text>
+      <text inline="true"> shipping time</text>
+    </cell>
+    <cell row="2" column="0">
+      <text>Network Peripherals</text>
+    </cell>
+    <cell row="2" column="1">
+      <text>4 days</text>
+    </cell>
+    <cell row="3" column="0">
+      <text>Printer Cartridges</text>
+    </cell>
+    <cell row="3" column="1">
+      <text>3 days</text>
+    </cell>
+  </table>
+
+</report>
+

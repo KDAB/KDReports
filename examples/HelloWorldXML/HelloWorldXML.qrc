@@ -1,0 +1,7 @@
+<!DOCTYPE RCC>
+<RCC>
+  <qresource>
+    <file>HelloWorld.xml</file>
+  </qresource>
+</RCC>
+

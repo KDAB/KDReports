@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.kdab.com/kdreports">
+  <text pointsize="18" alignment="hcenter">Tit</text>
+  <text inline="true">le</text>
+  <text>Test used by XmlParser.cpp</text>
+</report>

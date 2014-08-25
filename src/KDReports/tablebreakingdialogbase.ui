@@ -1,0 +1,257 @@
+<ui version="4.0" >
+ <class>TableBreakingSettingsDialog</class>
+ <widget class="QDialog" name="TableBreakingSettingsDialog" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>688</width>
+    <height>533</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Table Breaking / Font Scaling</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2" >
+   <item>
+    <widget class="QCheckBox" name="breakTables" >
+     <property name="text" >
+      <string>&amp;Break tables over multiple pages in the horizontal direction</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="scalingBox" >
+     <property name="title" >
+      <string>Font scaling</string>
+     </property>
+     <layout class="QGridLayout" >
+      <item row="0" column="0" >
+       <widget class="QRadioButton" name="scaleFonts" >
+        <property name="text" >
+         <string>Scale &amp;fonts by</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3" >
+       <widget class="QSpinBox" name="scalingFactor" >
+        <property name="suffix" >
+         <string>%</string>
+        </property>
+        <property name="maximum" >
+         <number>10000</number>
+        </property>
+        <property name="singleStep" >
+         <number>5</number>
+        </property>
+        <property name="value" >
+         <number>100</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" >
+       <widget class="QRadioButton" name="fit" >
+        <property name="text" >
+         <string>&amp;Scale to fit</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" >
+       <widget class="QSpinBox" name="numHorizontalPages" >
+        <property name="minimum" >
+         <number>1</number>
+        </property>
+        <property name="maximum" >
+         <number>10000</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2" >
+       <widget class="QLabel" name="labelPagesH" >
+        <property name="text" >
+         <string>page(s) wide</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3" >
+       <widget class="QSpinBox" name="numVerticalPages" >
+        <property name="minimum" >
+         <number>1</number>
+        </property>
+        <property name="maximum" >
+         <number>10000</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4" >
+       <widget class="QLabel" name="labelPagesV" >
+        <property name="text" >
+         <string>page(s) high</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="pageOrderBox" >
+     <property name="title" >
+      <string>Page order for table breaking</string>
+     </property>
+     <layout class="QVBoxLayout" >
+      <item>
+       <widget class="QRadioButton" name="downThenRight" >
+        <property name="text" >
+         <string>Page &amp;down, then to right</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="rightThenDown" >
+        <property name="text" >
+         <string>Page to &amp;right, then down</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="tableSettingsGroupBox" >
+     <property name="title" >
+      <string>Table settings</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout" >
+      <item>
+       <widget class="QCheckBox" name="showHorizontalHeader" >
+        <property name="text" >
+         <string>Show &amp;horizontal header</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="showVerticalHeader" >
+        <property name="text" >
+         <string>Show &amp;vertical header</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="showGrid" >
+        <property name="text" >
+         <string>Show &amp;grid</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer>
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>659</width>
+       <height>81</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons" >
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>TableBreakingSettingsDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>272</x>
+     <y>397</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>TableBreakingSettingsDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>340</x>
+     <y>397</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>numVerticalPages</sender>
+   <signal>valueChanged(QString)</signal>
+   <receiver>fit</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>438</x>
+     <y>127</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>96</x>
+     <y>128</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>scalingFactor</sender>
+   <signal>valueChanged(QString)</signal>
+   <receiver>scaleFonts</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>452</x>
+     <y>82</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>62</x>
+     <y>93</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>numHorizontalPages</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>fit</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>167</x>
+     <y>141</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>55</x>
+     <y>128</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

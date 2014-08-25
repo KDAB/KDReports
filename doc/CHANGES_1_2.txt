@@ -1,0 +1,68 @@
+What is new in KD Reports 1.2
+===============================
+
+Features:
+
+* A ReportViewer application, where you can open XML reports in order to preview them.
+ This can be particularly useful while writing the XML file.
+ ReportViewer lets you edit text values and reports to make the preview more realistic.
+
+* Export to HTML.
+
+* XmlElementHandler interface for dynamic changes to the report while loading an XML template.
+
+* Support for text and html elements whose text comes from a model. Example:
+     <text model="table1" row="1" column="0"/>
+     <html model="table1" row="1" column="1"/>
+
+* Support for merged cells in auto tables: specify the row/column span in the model's span() method.
+
+* Support for configurable column widths in tables, see AbstractTableElement::setColumnWidths.
+  This also leads to faster table breaking.
+
+* Improved error handling when parsing XML files. 
+  KDReports::Report::loadFromXML now takes an optional ErrorDetails pointer, 
+  which will be filled with the error message from the parser.
+
+* Support for changing named values with associateTextValue even after the report has been constructed.
+
+* Support for definition tab positions, most useful for aligning numbers along their decimal point.
+
+* Support for showing the icon after the text in auto-table cells and headers:
+ return Qt::AlignRight for the role KDReports::AutoTableElement::DecorationAlignmentRole.
+  Also, a space is inserted between the icon and the text, in table cells.
+
+* Support for creating a KDReports::Report and its elements from a non-GUI thread
+  (requires Qt >= 4.4). Charts and pixmaps cannot be used there.
+
+* Shortcuts for changing pages in the preview dialog: Ctrl+PageUp / Ctrl+PageDown
+
+* Support for being compiled as a framework, on the mac.
+
+Performance:
+
+* Printing and previewing is much faster than in previous KDReports releases
+(8 times faster for a 27-pages document, this improvement being even bigger for longer documents).
+
+* Calling pageCount() multiple times during report creation (for instance in order to
+build a table of contents in a table model) no longer slows down the report creation.
+
+Bugfixes:
+
+* <text id="...">fallback</text> and <html id="...">fallback</html> will now show
+  "fallback" if the id is not known, as this behavior was in the documentation already.
+
+* <text> </text> (whitespace-only text nodes) are now processed correctly.
+
+* Table breaking: fixed scaleTo(1, N) so that it scales the font down until everything fits, as expected.
+
+* Default font: the font set in the <report> element or with Report::setDefaultFont wasn't applied to auto tables nor to headers and footers.
+
+* Auto tables: the background color from the model now fills the entire cell.
+
+* Auto tables: support models with incremental data loading (fetchMore()), like QSqlTableModel.
+
+* Preview dialog: hide "Paper Size" and "Orientation" labels when setPageSizeChangeAllowed(false) is called.
+
+* Preserve page breaks after autotables when calling regenerateAutoTables().
+

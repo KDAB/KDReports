@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.kdab.com/kdreports" margin-top="40" margin-left="0" margin-right="20">
+
+  <header location="even">
+    <image file=":/kdab_small.jpg" width="40%" broken="yes"/>
+  </header>
+  <footer>
+    <text alignment="right" id="company_address"/>
+  </footer>
+
+  <text pointsize="18" alignment="hcenter">Tit</text>
+  <text inline="true">le</text>
+  <html>Test used by <i>XmlParser.cpp</i></html>
+  <text model="model1" row="0" column="0"/>
+  <html model="model1" row="0" column="1"/>
+
+  <table headerRowCount="2" cellpadding="3">
+    <cell row="0" column="0" colspan="2" background="#DADADA">
+      <text alignment="hcenter">TableElement example</text>
+    </cell>
+  </table>
+
+  <custom id="lastParagraph"/>
+
+  <table model="model1" verticalHeaderVisible="false" horizontalHeaderVisible="false"/>
+
+</report>

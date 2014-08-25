@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.kdab.com/kdreports">
+  <image file=":/logo.png"/>
+  <hr/>
+
+  <vspace size="20"/>
+  <text pointsize="15">Dear </text>
+  <text pointsize="15" bold="true" inline="true" model="members" column="0"/>
+  <text pointsize="15" inline="true" >,</text>
+
+  <vspace size="20"/>
+
+  <text pointsize="12" >We happily inform you that your membership subscription has been received and approved.</text>
+  <text inline="true" pointsize="12"> Now you will be able to keep up with exclusive releases, and bonus discounts from KDAB.</text>
+
+  <vspace size="20"/>
+
+  <text pointsize="12" align="center">Here is your account information:</text>
+
+  <vspace size="20"/>
+
+  <text pointsize="13" bold="true">Username: </text>
+  <text pointsize="13" inline="true" model="members" column="1"/>
+  <vspace size="10"/>
+  <text pointsize="13" bold="true">Password: </text>
+  <text pointsize="13" inline="true" model="members" column="2"/>
+  <vspace size="30"/>
+  <text pointsize="16" bold="true" align="center">Welcome to the club!</text>
+</report>
+

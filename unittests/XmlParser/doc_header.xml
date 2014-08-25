@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.kdab.com/kdreports" pointsize='16'>
+  <header font = 'Arial' pointsize='8'>
+   <text alignment='hcenter'>Page </text><variable type='pagenumber' inline=''/>
+   <text inline=''> of </text><variable type='pagecount' />
+  </header>
+</report>

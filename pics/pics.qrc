@@ -1,0 +1,12 @@
+<!DOCTYPE RCC>
+<RCC>
+  <qresource>
+    <file>zoom-.png</file>
+    <file>zoom+.png</file>
+    <file>1leftarrow.png</file>
+    <file>1rightarrow.png</file>
+    <file>2leftarrow.png</file>
+    <file>2rightarrow.png</file>
+  </qresource>
+</RCC>
+

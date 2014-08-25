@@ -1,0 +1,10 @@
+<!DOCTYPE RCC>
+<RCC>
+  <qresource>
+    <file alias="chart_model">ChartModel.csv</file>
+    <file alias="kdab_small.jpg">../PriceList/kdab_small.jpg</file>
+    <file alias="background.jpg">background.jpg</file>
+    <file alias="system.png">../PriceList/cr32-device-system.png</file>
+  </qresource>
+</RCC>
+

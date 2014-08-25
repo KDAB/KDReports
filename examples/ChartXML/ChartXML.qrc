@@ -1,0 +1,8 @@
+<!DOCTYPE RCC>
+<RCC>
+  <qresource>
+    <file>Chart.xml</file>
+    <file alias="chart_model">../ReferenceReport/ChartModel.csv</file>
+  </qresource>
+</RCC>
+

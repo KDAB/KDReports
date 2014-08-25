@@ -1,0 +1,61 @@
+KD Reports requires Qt 4.6 or later
+
+If you want KDChart support, please set KDCHARTDIR either as an environment variable or on the qmake command line:
+
+Windows:
+set KDCHARTDIR=C:\path\to\kdchart
+
+Unix:
+export KDCHARTDIR=/path/to/kdchart
+
+0) From the top directory of your KD Reports installation
+ run the "configure" scripts.
+
+   On Windows use depending on the kind of build one of the following;
+     configure.bat -shared -debug
+     configure.bat -shared -release
+
+   On Unix use depending on the kind of build one of the following;
+     ./configure.sh -shared -debug
+     ./configure.sh -shared -release
+
+   To define the install-location use for example;
+     configure.bat -shared -debug -prefix c:/kdreports
+     ./configure.sh -shared -debug -prefix /opt/kdreports
+
+
+
+1) Unix
+
+set your LD_LIBRARY_PATH to point to your KD Reports installation lib directory.
+
+If you do not have LD_LIBRARY_PATH set already then use this line:
+LD_LIBRARY_PATH=/path/to/kdreports/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH
+
+The above has to be added into your .bashrc or similar to remain. It may also of course be run from a shell just before building KD Reports, but in this case your settings will only be available for this shell.
+
+2) MacOS
+Proceed as described above, but using DYLD_LIBRARY_PATH instead
+of LD_LIBRARY_PATH
+
+3) Windows
+Add the path to the KD Reports dll (kdreports\bin) into your PATH environment variable (for running executables)
+and the path to the KD Reports lib (kdreports\lib) into your LIB environment variable (for development).
+
+Or run:
+set PATH=\path\to\kdreports\bin;%PATH%
+set LIB=\path\to\kdreports\lib;%LIB%
+
+4) Compile everything by typing:
+
+make    # Unix,
+nmake   # Windows
+
+On Windows you can also use the Qt integration into Visual Studio:
+open the toplevel kdreports.pro with "Qt / Open Solution from .pro file".
+You still need to adjust the PATH environment variable in order to run the examples.
+
+5) Install headers and libraries by typing:
+make install    # Unix
+nmake install   # Windows

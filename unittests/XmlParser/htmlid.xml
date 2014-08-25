@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.kdab.com/kdreports">
+  <html alignment="hcenter" id="1"/>
+  <html inline="true" id="2"/>
+  <html id="3">unused text</html>
+</report>

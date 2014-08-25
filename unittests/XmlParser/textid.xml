@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.kdab.com/kdreports">
+  <text pointsize="18" alignment="hcenter" id="1"/>
+  <ifdef id="2">
+    <text inline="true" id="2"/>
+    <text inline="true"> </text>
+    <text inline="true">.</text>
+  </ifdef>
+  <ifdef id="not set">
+    <text>ERROR, should not appear</text>
+  </ifdef>
+  <text id="3">unused text</text>
+  <text id="4"/>
+  <text id="5"/>
+</report>

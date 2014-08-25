@@ -1,0 +1,21 @@
+What is new in KD Reports 1.5
+===============================
+
+Features:
+---------
+* Add support for default page orientation in XML (KDRE-152)
+
+Bug fixes:
+----------
+* Fix "make install" installing the source files as well as the header files
+
+* Hide headers and footers when the page size is too small for them.
+
+* Fix assert when inserting a variable immediately after a resizable image
+(as the PriceList example does)  (KDRE-173)
+
+* Fix compilation with Qt 5 (KDRE-150)
+
+* Fix out of bounds crash in example code (TableModel) (KDCH-995)
+
+

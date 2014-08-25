@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.kdab.com/kdreports">
+  <tabs>
+    <tab type="center" position="page"/>
+    <tab type="right" position="page"/>
+  </tabs>
+  <text>Left&#x9;middle&#x9;right</text>
+  <tabs>
+    <tab position="100"/>
+    <tab position="200"/>
+  </tabs>
+  <paragraph-margins left="50"/>
+  <text>0&#x9;100&#x9;200</text>
+
+  <paragraph-margins left="0" right="50"/>
+  <text>Only a right margin</text>
+
+</report>
+

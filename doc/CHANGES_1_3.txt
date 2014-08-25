@@ -1,0 +1,42 @@
+What is new in KD Reports 1.3
+===============================
+
+Features:
+
+* Spreadsheet mode, for faster and more powerful printing of large tables.
+  The table can be broken across multiple pages horizontally and vertically, and
+  can be forced to fit into N*M pages, using a smaller font if necessary.
+  See Report::setReportMode for the difference betweeen the two modes.
+
+* New XML tag <hline/> to simplify the use of horizontal lines in XML.
+  Support for custom color, configurable thickness and margin.
+  XmlElementHandler has a new virtual method hLineElement, called upon parsing a
+  hline, but this new virtual is only enabled if KDReports is compiled with
+  the define KDREPORTS_ALLOW_BINARY_INCOMPATIBILITY.
+
+* New XML tag <ifdef id="..."> to skip sections of the XML template when a
+  text value is empty. Note: this is only evaluated at loading time, changing
+  the text value later on will not have an effect on the skipping of sections.
+
+* Support for configuring the charts: new constructor ChartElement(KDChart::Chart*)
+  for charts created in code, and setChart(KDChart::Chart*) for setting the
+  chart from the XmlElementHandler.
+
+* Improved charts rendering and printing by drawing charts at full resolution,
+  without the use of an intermediate pixmap.
+
+* New method setDefaultFont for all table elements.
+
+* Support for left-aligned, center-aligned, and right-aligned text on the same line,
+  automatically adjusting to the page width: Report::middleAlignedTab and
+  Report::rightAlignedTab.
+
+* Paragraph margins can now be adjusted.
+
+* Mail merge support (see examples/MailMergeXML).
+
+* Support for adding images from threads, with ImageElement(QImage).
+
+* Report::exportToImage() can now be used from a secondary thread.
+
+* Remove page breaks when exporting to an image or printing on an endless printer.

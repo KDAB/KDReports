@@ -1,0 +1,9 @@
+<!DOCTYPE RCC>
+<RCC>
+  <qresource>
+    <file>MailMerge.xml</file>
+    <file>members.csv</file>
+    <file>logo.png</file>
+  </qresource>
+</RCC>
+
