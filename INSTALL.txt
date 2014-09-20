@@ -1,14 +1,9 @@
 KD Reports requires Qt 4.6 or later
 
-If you want KDChart support, please set KDCHARTDIR either as an environment variable or on the qmake command line:
+If you are using sources from github (via a git clone or a generated zip file), jump
+to section 1-bis). Commercial users, start at section 1).
 
-Windows:
-set KDCHARTDIR=C:\path\to\kdchart
-
-Unix:
-export KDCHARTDIR=/path/to/kdchart
-
-0) From the top directory of your KD Reports installation
+1) From the top directory of your KD Reports installation
  run the "configure" scripts.
 
    On Windows use depending on the kind of build one of the following;
@@ -23,9 +18,36 @@ export KDCHARTDIR=/path/to/kdchart
      configure.bat -shared -debug -prefix c:/kdreports
      ./configure.sh -shared -debug -prefix /opt/kdreports
 
+1-bis) If you are building KD Reports from a github clone rather than a release tarball,
+the configure.bat/configure.sh script doesn't exist (it's generated at release time),
+you need to do this instead:
 
+   First, a working Python (version2) is required and must be found in your
+   execute path.  Either a 32-bit or 64-bit version of Python is fine, but run
+   python --version to make sure it is found and is python2 before continuing.
 
-1) Unix
+   Next, you need to checkout the autogen submodule from the git repository.
+   like so:
+     git submodule update --init
+
+   And now run autogen.py to create the configure tool.
+
+   On Windows:
+     python autogen.py [options]
+   On Linux:
+     ./autogen.py [options]
+
+Pass the same options to autogen.py as you would for configure.sh/configure.bat
+as shown above in step 1).
+
+After running autogen.py, a configure.sh/configure.bat script will exist and
+you can use that to re-configure later, as needed.  Then you can continue on
+to the platform-specific setup instructions in step 2, 3 or 4.
+
+2) Unix
+
+If you want KDChart support, please set KDCHARTDIR either as an environment variable or on the qmake command line:
+export KDCHARTDIR=/path/to/kdchart
 
 set your LD_LIBRARY_PATH to point to your KD Reports installation lib directory.
 
@@ -35,11 +57,16 @@ export LD_LIBRARY_PATH
 
 The above has to be added into your .bashrc or similar to remain. It may also of course be run from a shell just before building KD Reports, but in this case your settings will only be available for this shell.
 
-2) MacOS
+3) MacOS
+
 Proceed as described above, but using DYLD_LIBRARY_PATH instead
 of LD_LIBRARY_PATH
 
-3) Windows
+4) Windows
+
+If you want KDChart support, please set KDCHARTDIR either as an environment variable or on the qmake command line:
+set KDCHARTDIR=C:\path\to\kdchart
+
 Add the path to the KD Reports dll (kdreports\bin) into your PATH environment variable (for running executables)
 and the path to the KD Reports lib (kdreports\lib) into your LIB environment variable (for development).
 
@@ -47,7 +74,7 @@ Or run:
 set PATH=\path\to\kdreports\bin;%PATH%
 set LIB=\path\to\kdreports\lib;%LIB%
 
-4) Compile everything by typing:
+5) Compile everything by typing:
 
 make    # Unix,
 nmake   # Windows
