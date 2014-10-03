@@ -63,13 +63,16 @@ win32:test.commands=(cd unittests && $(MAKE) test)
 test.depends = $(TARGET)
 QMAKE_EXTRA_TARGETS += test
 
-# install licenses: 
+INSTALL_DOC_DIR = $$INSTALL_PREFIX/share/doc/KDReports
+
+# install licenses:
 licenses.files = LICENSE.txt LICENSE.US.txt LICENSE.LGPL.txt
-licenses.path = $$INSTALL_PREFIX
+licenses.path = $$INSTALL_DOC_DIR
 INSTALLS += licenses
 
+# install readme:
 readme.files = README.txt
-readme.path = $$INSTALL_PREFIX
+readme.path = $$INSTALL_DOC_DIR
 INSTALLS += readme
 
 # for qt-creator:
