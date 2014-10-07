@@ -810,6 +810,26 @@ public:
      */
     int currentPosition() const;
 
+    /**
+     * Indicates that the elements are about to be added to the report.
+     * This makes report generation much faster, since the report doesn't
+     * have to be relayouted until endEdit() is called.
+     * It is possible to nest calls to beginEdit()/endEdit(), in which case
+     * only the topmost pair of calls will have an effect.
+     *
+     * \since 1.6
+     */
+    void beginEdit();
+
+    /**
+     * Indicates that the end of a block of editing operations.
+     * It is possible to call beginEdit()/endEdit() again afterwards, for
+     * another block of editing operations.
+     *
+     * \since 1.6
+     */
+    void endEdit();
+
 private:
     friend class Test;
     friend class ::ReportData;

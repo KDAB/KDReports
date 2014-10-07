@@ -847,6 +847,16 @@ KDReports::TextDocument& KDReports::Report::doc() const
     return static_cast<TextDocReportLayout *>(d->m_layout)->textDocument();
 }
 
+void KDReports::Report::beginEdit()
+{
+    d->builder()->contentDocumentCursor().beginEditBlock();
+}
+
+void KDReports::Report::endEdit()
+{
+    d->builder()->contentDocumentCursor().endEditBlock();
+}
+
 void KDReports::Report::setWatermarkText( const QString& text,
                                           int rotation,
                                           const QColor& color,

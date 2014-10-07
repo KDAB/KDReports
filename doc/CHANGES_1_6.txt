@@ -1,0 +1,12 @@
+What is new in KD Reports 1.6
+===============================
+
+Performance:
+---------
+* Added KDReports::Report::beginEdit/endEdit. Call beginEdit before adding all your elements
+  and endEdit afterwards, so that no relayouting happens while adding the elements, thus
+  making report generation on long reports much faster.
+
+Bug fixes:
+----------
+
