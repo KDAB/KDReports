@@ -31,6 +31,7 @@
 #include <QTextTableCell>
 #include <QBitArray>
 #include <QVector>
+#include <QDateTime>
 #include <QDebug>
 
 class KDReports::AutoTableElement::Private
@@ -80,7 +81,7 @@ public:
         iconSize = iconSz;
         cellDecoration = tableModel->data( index, Qt::DecorationRole );
         cellFont = tableModel->data( index, Qt::FontRole );
-        cellText = tableModel->data( index, Qt::DisplayRole ).toString();
+        cellText = displayText( tableModel->data( index, Qt::DisplayRole ) );
         foreground = qvariant_cast<QColor>( tableModel->data( index, Qt::ForegroundRole ) );
         background = qvariant_cast<QColor>( tableModel->data( index, Qt::BackgroundRole ) );
         alignment = Qt::Alignment( tableModel->data( index, Qt::TextAlignmentRole ).toInt() );
@@ -92,6 +93,7 @@ public:
 private:
 
     void insertDecoration( KDReports::ReportBuilder& builder, QTextDocument& textDoc );
+    QString displayText( const QVariant& value ) const;
 
     QSize iconSize;
     QVariant cellDecoration;
@@ -180,6 +182,41 @@ void FillCellHelper::insertDecoration( KDReports::ReportBuilder& builder, QTextD
         builder.currentDocumentData().addResourceName( name );
         cellCursor.insertImage( name );
     }
+}
+
+QString FillCellHelper::displayText( const QVariant& value ) const
+{
+    QLocale locale; // in QStyledItemDelegate this is configurable, it comes from QWidget::locale()...
+    QString text;
+    switch (value.userType()) {
+    case QMetaType::Float:
+    case QVariant::Double:
+        text = locale.toString(value.toReal());
+        break;
+    case QVariant::Int:
+    case QVariant::LongLong:
+        text = locale.toString(value.toLongLong());
+        break;
+    case QVariant::UInt:
+    case QVariant::ULongLong:
+        text = locale.toString(value.toULongLong());
+        break;
+    case QVariant::Date:
+        text = locale.toString(value.toDate(), QLocale::ShortFormat);
+        break;
+    case QVariant::Time:
+        text = locale.toString(value.toTime(), QLocale::ShortFormat);
+        break;
+    case QVariant::DateTime:
+        text = locale.toString(value.toDateTime().date(), QLocale::ShortFormat);
+        text += QLatin1Char(' ');
+        text += locale.toString(value.toDateTime().time(), QLocale::ShortFormat);
+        break;
+    default:
+        text = value.toString();
+        break;
+    }
+    return text;
 }
 
 ////
