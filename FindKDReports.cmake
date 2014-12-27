@@ -5,7 +5,8 @@
 # KDReports_LIBRARIES	- Path to KDReports libraries.
 # KDReports_INCLUDE_DIR	- Path to the KDReports include directory.
 #
-# Copyright (C) 2007-2014 Klaralvdalens Datakonsult AB.
+# Copyright (C) 2007-2014 Klaralvdalens Datakonsult AB, a KDAB Group company, info@kdab.com"
+
 # Redistribution and use is allowed according to the terms of the BSD license
 
 include(FindPackageHandleStandardArgs)
