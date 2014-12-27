@@ -57,8 +57,8 @@ KDReports::PreviewDialog::PreviewDialog( KDReports::Report* report, QWidget *par
                                                         Qt::Horizontal,
                                                         this );
     bottomLayout->addWidget( buttonBox );
-    connect( buttonBox, SIGNAL( accepted() ), this, SLOT( accept() ) );
-    connect( buttonBox, SIGNAL( rejected() ), this, SLOT( reject() ) );
+    connect( buttonBox, SIGNAL(accepted()), this, SLOT(accept()) );
+    connect( buttonBox, SIGNAL(rejected()), this, SLOT(reject()) );
 
     QPushButton* okButton = buttonBox->button( QDialogButtonBox::Ok );
     okButton->setText(tr("&Print..."));
