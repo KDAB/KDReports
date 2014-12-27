@@ -20,14 +20,14 @@
 **
 **********************************************************************/
 
+#include "TableModel.h"
+
 #include <QtGlobal>
 #include <QtDebug>
 #include <QFile>
 #include <QByteArray>
 #include <QString>
 #include <QStringList>
-
-#include "TableModel.h"
 
 TableModel::TableModel ( QObject * parent )
     : QAbstractTableModel ( parent ),

@@ -20,14 +20,14 @@
 **
 **********************************************************************/
 
+#include "KDReportsHLineTextObject_p.h"
+
 #include <QTextDocument>
 #include <QTextFormat>
 #include <QTextFrame>
 #include <QPainter>
 #include <QRectF>
 #include <QColor>
-
-#include "KDReportsHLineTextObject_p.h"
 
 #include <QDebug>
 

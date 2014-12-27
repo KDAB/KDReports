@@ -20,15 +20,16 @@
 **
 **********************************************************************/
 
+#include "KDReportsPreviewDialog.h"
 #include "KDReportsReport.h"
 #include "KDReportsReport_p.h"
-#include "KDReportsPreviewDialog.h"
-#include <QPushButton>
 #include "KDReportsPreviewWidget.h"
-#include <QVBoxLayout>
-#include <QDialogButtonBox>
 #include "KDReportsTableBreakingSettingsDialog.h"
 #include "KDReportsLayoutHelper_p.h"
+
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 class KDReports::PreviewDialog::Private
 {
@@ -85,7 +86,7 @@ void KDReports::PreviewDialog::Private::_kd_slotTableBreakingDialog()
 
 void KDReports::PreviewDialog::setPageSizeChangeAllowed( bool b )
 {
-    d->m_previewWidget->setPageSizeChangeAllowed( b );    
+    d->m_previewWidget->setPageSizeChangeAllowed( b );
 }
 
 void KDReports::PreviewDialog::setShowTableSettingsDialog( bool b )
