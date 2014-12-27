@@ -21,7 +21,7 @@
 **********************************************************************/
 
 #include "KDReportsElement.h"
-#include <qbrush.h>
+#include <QBrush>
 
 class KDReports::Element::Private
 {
