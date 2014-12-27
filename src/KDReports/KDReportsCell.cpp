@@ -32,7 +32,7 @@ public:
           m_rowSpan( 1 )
     {}
     ~Private() {
-        foreach( const ElementData& ed, m_elements )
+        Q_FOREACH( const ElementData& ed, m_elements )
             delete ed.m_element;
     }
     struct ElementData
@@ -120,7 +120,7 @@ void KDReports::Cell::addVariable( VariableType variable )
 
 void KDReports::Cell::build( ReportBuilder& builder ) const
 {
-    foreach( const Private::ElementData& ed, d->m_elements )
+    Q_FOREACH( const Private::ElementData& ed, d->m_elements )
     {
         switch ( ed.m_type ) {
         case Private::ElementData::Inline:

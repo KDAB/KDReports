@@ -125,7 +125,7 @@ bool TableModel::setData ( const QModelIndex & index, const QVariant & value, in
     if ( role == Qt::EditRole )
     {
         m_rows[index.row()] [index.column()] = value;
-        emit dataChanged( index, index );
+        Q_EMIT dataChanged( index, index );
         return true;
     } else {
         return false;

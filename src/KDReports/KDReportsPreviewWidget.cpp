@@ -380,7 +380,7 @@ void KDReports::PreviewWidget::Private::_kd_slotPaperSizeActivated( int index )
         m_report->setPageSize( qPageSize );
     }
     pageCountChanged();
-    emit q->pageSizeChanged( qPageSize );
+    Q_EMIT q->pageSizeChanged( qPageSize );
 }
 
 void KDReports::PreviewWidget::Private::_kd_slotPaperOrientationActivated( int index )
@@ -388,7 +388,7 @@ void KDReports::PreviewWidget::Private::_kd_slotPaperOrientationActivated( int i
     m_printer.setOrientation( QPrinter::Orientation(paperOrientationCombo->itemData(index).toInt()) );
     m_report->setOrientation( m_printer.orientation() );
     pageCountChanged();
-    emit q->orientationChanged( m_printer.orientation() );
+    Q_EMIT q->orientationChanged( m_printer.orientation() );
 }
 
 void KDReports::PreviewWidget::Private::pageCountChanged()
