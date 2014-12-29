@@ -109,8 +109,6 @@ private:
     qreal m_bottomMargin;
     Report* m_report;
     bool m_first;
-    bool m_layoutDocFirst;
-    bool m_buildingLayoutDoc;
 };
 
 }

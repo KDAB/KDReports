@@ -37,8 +37,7 @@ KDReports::ReportBuilder::ReportBuilder( KDReports::TextDocumentData& contentDoc
       m_topMargin( 0 ),
       m_bottomMargin( 0 ),
       m_report( report ),
-      m_first( true ), m_layoutDocFirst( true ),
-      m_buildingLayoutDoc( false )
+      m_first( true )
 {
 }
 
