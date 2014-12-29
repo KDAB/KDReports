@@ -45,7 +45,7 @@ int main( int argc, char** argv ) {
     // Set the content of a text field - this shows how xml files can be used as templates for reports,
     // not only as complete (generated) reports.
     report.associateTextValue( "title_element", "Price list example" );
-    report.associateTextValue( "company_address", "Klar‰lvdalens Datakonsult AB\n"
+    report.associateTextValue( "company_address", "Klar√§lvdalens Datakonsult AB\n"
 "Rysktorp\n"
 "SE-68392 Hagfors\n"
 "Sweden" );
