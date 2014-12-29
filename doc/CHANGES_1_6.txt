@@ -11,3 +11,5 @@ Bug fixes:
 ----------
 * AutoTable: format numbers and dates the way QStyledItemDelegate does, using the locale.
   This makes the itemmodels in KDReports look the same way as in a QTableView.
+* KDReports::setDefaultFont now ensures that bitmap fonts aren't used, they are not made
+  for text documents / printed reports.
