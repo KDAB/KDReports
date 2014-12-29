@@ -13,3 +13,8 @@ Bug fixes:
   This makes the itemmodels in KDReports look the same way as in a QTableView.
 * KDReports::setDefaultFont now ensures that bitmap fonts aren't used, they are not made
   for text documents / printed reports.
+
+Installation:
+----------
+* Fix inconsistent installation directory (parts in 1.5.0 and parts in 1.4.99) in 1.5 release.
+* Install kdreports.pri file that applications can copy for their own use.

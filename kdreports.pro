@@ -75,6 +75,11 @@ readme.files = README.txt
 readme.path = $$INSTALL_DOC_DIR
 INSTALLS += readme
 
+# install qmake project includes
+prifiles.files = kdreports.pri
+prifiles.path = $$INSTALL_DOC_DIR
+INSTALLS += prifiles
+
 # for qt-creator:
 OTHER_FILES = \
     doc/CHANGES_1_1.txt \
