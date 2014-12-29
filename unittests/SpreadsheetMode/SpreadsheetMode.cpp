@@ -495,11 +495,7 @@ private slots:
         report.mainTable()->setAutoTableElement(tableElement);
         //report.exportToFile( "testWithHeaders.pdf" ); // for debugging
 #ifndef __APPLE__
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
         QCOMPARE(report.numberOfPages(), 2);
-#else
-        QCOMPARE(report.numberOfPages(), 1);
-#endif
 #endif
     }
 
