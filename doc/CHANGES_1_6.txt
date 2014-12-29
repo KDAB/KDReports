@@ -13,6 +13,7 @@ Bug fixes:
   This makes the itemmodels in KDReports look the same way as in a QTableView.
 * KDReports::setDefaultFont now ensures that bitmap fonts aren't used, they are not made
   for text documents / printed reports.
+* Fix small memory leak (and reduce memory usage slightly when creating multiple reports)
 
 Installation:
 ----------
