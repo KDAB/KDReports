@@ -176,10 +176,10 @@ private slots:
         FUZZYCOMPARE(initialWidth, 182.0); // DPI-dependent (fixed by initTestCase) and font-dependent...
 
         const qreal wantedWidth = 50;
-        const qreal wantedHFactor = wantedWidth / initialWidth;
-        scaler.setFactorForWidth(wantedHFactor, "text");
+        const qreal wantedHFactor = wantedWidth / initialWidth; // i.e. 0.274
+        scaler.setFactorForWidth(wantedHFactor, "Sample text");
         const qreal factor = scaler.scalingFactor();
-        QVERIFY2(factor > 0.27, qPrintable(QString::number(factor)));
+        QVERIFY2(factor > 0.25, qPrintable(QString::number(factor)));
         QVERIFY2(factor < 0.29, qPrintable(QString::number(factor)));
 
         {
