@@ -504,6 +504,35 @@ private slots:
         QCOMPARE( report.numberOfPages(), 1 );
     }
 
+    void testSetFontFullyQualified()
+    {
+        Report report;
+        TextElement elem1( QString::fromLatin1( "foo" ) );
+        elem1.setFont(QFont("Arial", 18));
+        report.addElement( elem1 );
+        QTextDocument& doc = report.doc().contentDocument();
+        QTextCursor c( &doc );
+        c.setPosition( 1 );
+        QCOMPARE( c.charFormat().font().pointSize(), 18 );
+    }
+
+    void testSetFontNeedsResolving()
+    {
+        Report report;
+        report.setDefaultFont(QFont("Arial", 18));
+        TextElement elem1( QString::fromLatin1( "foo" ) );
+        QFont font;
+        font.setBold(true);
+        elem1.setFont(font);
+        report.addElement( elem1 );
+        QTextDocument& doc = report.doc().contentDocument();
+        QTextCursor c( &doc );
+        c.setPosition( 1 );
+        QCOMPARE( c.charFormat().font().pointSize(), 18 );
+        QVERIFY( c.charFormat().font().bold() );
+    }
+
+
 private:
     static void setFontSizeHelper( QTextCursor& lastCursor, int endPosition, qreal pointSize, qreal factor )
     {

@@ -81,7 +81,13 @@ public:
     /// Set font attribute: size in points. Can be integer or decimal.
     void setPointSize( qreal size );
 
-    /// Set all font attributes with one call.
+    /**
+     * Set multiple font attributes with a single call.
+     *
+     * Note that (since KDReports 1.6), when Qt is 5.3 or more, the font attributes that are not
+     * explicitly specified in this font, will be resolved against the report's default font,
+     * rather than being resolved against the application's font.
+     */
     void setFont( const QFont& );
 
     /**
