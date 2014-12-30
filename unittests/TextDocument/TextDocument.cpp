@@ -357,12 +357,17 @@ private slots:
     void testAutoTable()
     {
         Report report;
+        report.setDefaultFont(QFont("Arial", 18));
         QStandardItemModel model(2, 2);
         QStandardItem* headerItem = new QStandardItem( QLatin1String( "Header1" ) );
         headerItem->setBackground( Qt::red );
         model.setHorizontalHeaderItem( 0, headerItem );
         model.setItem( 0, 0, new QStandardItem( QLatin1String( "TopLeft" ) ) );
-        model.setItem( 0, 1, new QStandardItem( QLatin1String( "TopRight" ) ) );
+        QStandardItem *topRight = new QStandardItem( QLatin1String( "TopRight" ) );
+        QFont font;
+        font.setBold(true);
+        topRight->setFont(font);
+        model.setItem( 0, 1, topRight );
         model.setItem( 1, 0, new QStandardItem( QLatin1String( "BottomLeft" ) ) );
         model.setItem( 1, 1, new QStandardItem( QLatin1String( "<html><b>BottomRight</b>" ) ) );
 
@@ -398,13 +403,22 @@ private slots:
         cc = topLeftCell.firstCursorPosition();
         QCOMPARE(cc.block().text(), QString::fromLatin1("TopLeft"));
 
+        QTextTableCell topRightCell = table->cellAt(1, 1);
+        QVERIFY(topRightCell.isValid());
+        cc = topRightCell.firstCursorPosition();
+        QCOMPARE(cc.block().text(), QString::fromLatin1("TopRight"));
+        QVERIFY(cc.charFormat().font().bold());
+        QCOMPARE(cc.charFormat().font().pointSize(), 18);
+
         QTextTableCell bottomRightCell = table->cellAt(2, 1);
         QVERIFY(bottomRightCell.isValid());
         cc = bottomRightCell.firstCursorPosition();
         QCOMPARE(cc.block().text(), QString::fromLatin1("BottomRight"));
 
         cc.movePosition( QTextCursor::NextCharacter );
-        QVERIFY(cc.charFormat().fontWeight() == QFont::Bold);
+        QCOMPARE(cc.charFormat().fontWeight(), int(QFont::Bold));
+        QVERIFY(cc.charFormat().font().bold());
+        QCOMPARE(cc.charFormat().font().pointSize(), 18);
 
         // Now check if we can regenerate the autotable
         model.setItem( 0, 0, new QStandardItem( QLatin1String( "MODIFIED" ) ) );
