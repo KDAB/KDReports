@@ -17,31 +17,31 @@ qrc_*.cpp
 .confqmake.cache
 .license.accepted
 
-kdreports/configure.sh
-kdreports/configure.bat
+configure.sh
+configure.bat
 
-kdreports/bin/
-kdreports/lib/
-kdreports/include/
-kdreports/unittests/ElementCopying/ElementCopying
-kdreports/unittests/Headers/Headers
-kdreports/unittests/InThread/InThread
-kdreports/unittests/ModelInfo/ModelInfo
-kdreports/unittests/PageLayout/PageLayout
-kdreports/unittests/SpreadsheetMode/SpreadsheetMode
-kdreports/unittests/TableBreakingLogic/TableBreakingLogic
-kdreports/unittests/TextDocument/TextDocument
-kdreports/unittests/XmlParser/XmlParser
-kdreports/ReportEditor/unittests/DocumentModification/DocumentModification
-kdreports/ReportEditor/unittests/IdAssociation/IdAssociation
-kdreports/ReportEditor/unittests/ModelAssociation/ModelAssociation
-kdreports/ReportEditor/unittests/ModelInfo/ModelInfo
-kdreports/ReportEditor/unittests/Paragraph/Paragraph
-kdreports/ReportEditor/unittests/Property/Property
-kdreports/ReportEditor/unittests/ReportObjectXmlHandler/ReportObjectXmlHandler
-kdreports/ReportEditor/unittests/ReportTextEditor/ReportTextEditor
-kdreports/ReportEditor/unittests/Table/Table
-kdreports/ReportEditor/unittests/XmlSaving/XmlSaving
+bin/
+lib/
+include/
+unittests/ElementCopying/ElementCopying
+unittests/Headers/Headers
+unittests/InThread/InThread
+unittests/ModelInfo/ModelInfo
+unittests/PageLayout/PageLayout
+unittests/SpreadsheetMode/SpreadsheetMode
+unittests/TableBreakingLogic/TableBreakingLogic
+unittests/TextDocument/TextDocument
+unittests/XmlParser/XmlParser
+ReportEditor/unittests/DocumentModification/DocumentModification
+ReportEditor/unittests/IdAssociation/IdAssociation
+ReportEditor/unittests/ModelAssociation/ModelAssociation
+ReportEditor/unittests/ModelInfo/ModelInfo
+ReportEditor/unittests/Paragraph/Paragraph
+ReportEditor/unittests/Property/Property
+ReportEditor/unittests/ReportObjectXmlHandler/ReportObjectXmlHandler
+ReportEditor/unittests/ReportTextEditor/ReportTextEditor
+ReportEditor/unittests/Table/Table
+ReportEditor/unittests/XmlSaving/XmlSaving
 
 Makefile*
 
