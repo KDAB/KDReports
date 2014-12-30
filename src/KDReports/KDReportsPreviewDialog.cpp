@@ -33,7 +33,7 @@
 class KDReports::PreviewDialog::Private
 {
 public:
-    Private( KDReports::PreviewDialog* q) : q( q ) {}
+    Private( KDReports::PreviewDialog* q) : q( q ), m_previewWidget( 0 ) {}
 
     void _kd_slotTableBreakingDialog();
 
@@ -85,7 +85,7 @@ void KDReports::PreviewDialog::Private::_kd_slotTableBreakingDialog()
 
 void KDReports::PreviewDialog::setPageSizeChangeAllowed( bool b )
 {
-    d->m_previewWidget->setPageSizeChangeAllowed( b );    
+    d->m_previewWidget->setPageSizeChangeAllowed( b );
 }
 
 void KDReports::PreviewDialog::setShowTableSettingsDialog( bool b )
