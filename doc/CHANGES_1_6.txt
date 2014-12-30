@@ -14,6 +14,7 @@ Bug fixes:
 * KDReports::setDefaultFont now ensures that bitmap fonts aren't used, they are not made
   for text documents / printed reports.
 * Fix small memory leak (and reduce memory usage slightly when creating multiple reports)
+* Fix compilation on Windows with self-compiled Qt (with no SSL support)
 
 Installation:
 ----------
