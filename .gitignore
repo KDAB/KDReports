@@ -17,6 +17,8 @@ qrc_*.cpp
 .confqmake.cache
 .license.accepted
 
+CPackConfig.cmake
+
 configure.sh
 configure.bat
 
