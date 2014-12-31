@@ -94,7 +94,7 @@ SOURCES = KDReports/KDReportsReport.cpp \
     KDReports/KDReportsXmlHelper.cpp
 DEFINES += KDREPORTS_BUILD_KDREPORTS_LIB
 
-target.path = $$INSTALL_PREFIX/lib
+target.path = $$INSTALL_PREFIX/lib$$LIB_SUFFIX
 INSTALLS += target
 
 # Translations
