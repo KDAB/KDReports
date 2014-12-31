@@ -62,12 +62,7 @@ void KDReports::TextElement::build( ReportBuilder& builder ) const
     QTextCursor& cursor = builder.cursor();
     const int charPosition = cursor.position();
     d->m_charFormat.setBackground( background() );
-    QTextCharFormat charFormat = d->m_charFormat;
-
-    QFont finalFont = charFormat.font().resolve( builder.report()->defaultFont() );
-    charFormat.setFont( finalFont );
-
-    cursor.setCharFormat( charFormat );
+    cursor.setCharFormat( d->m_charFormat );
     cursor.insertText( d->m_string );
     if ( !d->m_id.isEmpty() )
         builder.currentDocumentData().setTextValueMarker( charPosition, d->m_id, d->m_string.length(), false );
