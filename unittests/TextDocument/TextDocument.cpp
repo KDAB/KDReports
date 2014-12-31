@@ -408,7 +408,9 @@ private slots:
         cc = topRightCell.firstCursorPosition();
         QCOMPARE(cc.block().text(), QString::fromLatin1("TopRight"));
         QVERIFY(cc.charFormat().font().bold());
+#if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
         QCOMPARE(cc.charFormat().font().pointSize(), 18);
+#endif
 
         QTextTableCell bottomRightCell = table->cellAt(2, 1);
         QVERIFY(bottomRightCell.isValid());
@@ -528,7 +530,9 @@ private slots:
         QTextDocument& doc = report.doc().contentDocument();
         QTextCursor c( &doc );
         c.setPosition( 1 );
+#if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
         QCOMPARE( c.charFormat().font().pointSize(), 18 );
+#endif
         QVERIFY( c.charFormat().font().bold() );
     }
 
