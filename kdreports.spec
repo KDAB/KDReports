@@ -1,6 +1,6 @@
 Name:           kdreports
 Version:        1.5.99
-Release:        1
+Release:        2
 Summary:        A Qt library for creating printable reports
 Source:         %{name}-%{version}.tar.gz
 URL:            http://github.com/KDAB/KDReports
@@ -29,7 +29,7 @@ Authors:
 %define libname lib%{name}1
 %package -n %{libname}
 Summary:        %{summary}
-Group:          %{group}
+Group:          System/Libraries
 
 %description -n %{libname}
 KDAB's KD Reports is the Qt tool that lets you easily create printable reports
@@ -43,7 +43,7 @@ Authors:
 %package devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries/C and C++
-Requires:       %{name} = %{version}
+Requires:       %{libname} = %{version}
 
 %description devel
 This package contains header files and associated tools and libraries to
