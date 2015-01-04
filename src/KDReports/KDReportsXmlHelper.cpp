@@ -101,7 +101,7 @@ KDReports::HeaderLocations KDReports::XmlHelper::parseHeaderLocation( const QStr
         return KDReports::AllPages;
     KDReports::HeaderLocations loc;
     const QStringList tokens = xmlAttr.toLower().split( QLatin1Char( ',' ) );
-    foreach( const QString& s, tokens ) {
+    Q_FOREACH( const QString& s, tokens ) {
         QString token = s.trimmed();
         if ( token == QLatin1String( "first" ) )
             loc |= KDReports::FirstPage;

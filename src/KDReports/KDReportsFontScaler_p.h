@@ -49,7 +49,7 @@ namespace KDReports {
 class KDREPORTS_EXPORT FontScaler
 {
 public:
-    FontScaler( const QFont& initialFont );
+    explicit FontScaler( const QFont& initialFont );
 
     void setFontAndScalingFactor( const QFont& font, qreal scalingFactor );
 

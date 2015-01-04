@@ -14,14 +14,3 @@ our sorted example programs:        examples/
 
 For build instructions please read the file INSTALL.txt.
 
-In case of additional questions during evaluation or use of
-KD Reports please contact our technical support by mail:
-
-         kdreports-support@kdab.com
-
-We thank you for your interest in KD Reports and we are here
-to assist you if the documentation leaves open questions or
-if you just need some help with finding the best way in which
-to meet your reporting needs.
-
-The KDAB KD Reports Support Team.

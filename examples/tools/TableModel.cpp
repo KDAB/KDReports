@@ -20,14 +20,14 @@
 **
 **********************************************************************/
 
+#include "TableModel.h"
+
 #include <QtGlobal>
 #include <QtDebug>
 #include <QFile>
 #include <QByteArray>
 #include <QString>
 #include <QStringList>
-
-#include "TableModel.h"
 
 TableModel::TableModel ( QObject * parent )
     : QAbstractTableModel ( parent ),
@@ -125,7 +125,7 @@ bool TableModel::setData ( const QModelIndex & index, const QVariant & value, in
     if ( role == Qt::EditRole )
     {
         m_rows[index.row()] [index.column()] = value;
-        emit dataChanged( index, index );
+        Q_EMIT dataChanged( index, index );
         return true;
     } else {
         return false;

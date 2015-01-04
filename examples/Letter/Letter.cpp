@@ -58,6 +58,7 @@ int main( int argc, char** argv )
     // Add From: and To: information:
     KDReports::TextElement fromElement;
     fromElement << "From:\n"
+                << "Klarälvdalens Datakonsult AB\n"
                 << QString::fromUtf8("Klarälvdalens Datakonsult AB\n")
                 << "Rysktorp\n"
                 << "Sweden\n";

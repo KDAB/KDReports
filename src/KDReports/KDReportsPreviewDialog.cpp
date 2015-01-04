@@ -20,15 +20,16 @@
 **
 **********************************************************************/
 
+#include "KDReportsPreviewDialog.h"
 #include "KDReportsReport.h"
 #include "KDReportsReport_p.h"
-#include "KDReportsPreviewDialog.h"
-#include <QPushButton>
 #include "KDReportsPreviewWidget.h"
-#include <QVBoxLayout>
-#include <QDialogButtonBox>
 #include "KDReportsTableBreakingSettingsDialog.h"
 #include "KDReportsLayoutHelper_p.h"
+
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 class KDReports::PreviewDialog::Private
 {
@@ -57,8 +58,8 @@ KDReports::PreviewDialog::PreviewDialog( KDReports::Report* report, QWidget *par
                                                         Qt::Horizontal,
                                                         this );
     bottomLayout->addWidget( buttonBox );
-    connect( buttonBox, SIGNAL( accepted() ), this, SLOT( accept() ) );
-    connect( buttonBox, SIGNAL( rejected() ), this, SLOT( reject() ) );
+    connect( buttonBox, SIGNAL(accepted()), this, SLOT(accept()) );
+    connect( buttonBox, SIGNAL(rejected()), this, SLOT(reject()) );
 
     QPushButton* okButton = buttonBox->button( QDialogButtonBox::Ok );
     okButton->setText(tr("&Print..."));

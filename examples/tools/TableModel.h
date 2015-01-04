@@ -44,7 +44,7 @@ class TESTTOOLS_EXPORT TableModel : public QAbstractTableModel
 {
     Q_OBJECT
 public:
-    TableModel ( QObject * parent = 0 );
+    explicit TableModel ( QObject * parent = 0 );
     ~TableModel ();
 
     /** Return header data from the model.
