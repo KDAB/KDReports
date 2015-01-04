@@ -33,7 +33,7 @@ namespace KDReports
 class TextDocReportLayout : public AbstractReportLayout
 {
 public:
-    TextDocReportLayout(KDReports::Report* report);
+    explicit TextDocReportLayout(KDReports::Report* report);
 
     /// \reimp
     virtual void setLayoutDirty();

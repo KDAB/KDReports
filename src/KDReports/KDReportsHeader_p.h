@@ -58,7 +58,7 @@ QString variableValue( int pageNumber, KDReports::Report* report, VariableType t
 class HeaderReportBuilder : public KDReports::ReportBuilder
 {
 public:
-    HeaderReportBuilder( REPORTBUILDER_CTOR_ARGDEFS )
+    HeaderReportBuilder( REPORTBUILDER_CTOR_ARGDEFS )  //krazy:exclude=explicit
         : ReportBuilder( REPORTBUILDER_CTOR_ARGNAMES ) {}
 
     /*reimp*/ void addInlineElement( const KDReports::Element& element ) {

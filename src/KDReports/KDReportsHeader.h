@@ -99,11 +99,11 @@ public:
      * Those tabs will be set for any block element that is added from now on,
      * in this header.
      * For more details see Report::setTabPositions.
-     * 
+     *
      * \since 1.2
      */
     void setTabPositions( const QList<QTextOption::Tab>& tabs );
-    
+
     /**
      * \internal Returns the current builder cursor position.
      */
@@ -113,7 +113,7 @@ private:
     friend class XmlParser;
     friend class Report;
     friend class ReportPrivate;
-    Header( Report* report );
+    explicit Header( Report* report );
     ~Header();
     friend class Test;
     friend class HeaderMap;

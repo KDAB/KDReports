@@ -36,7 +36,7 @@ class MainTable;
 class SpreadsheetReportLayout : public AbstractReportLayout
 {
 public:
-    SpreadsheetReportLayout(KDReports::Report* report);
+    explicit SpreadsheetReportLayout(KDReports::Report* report);
 
     /// \reimp
     virtual void setLayoutDirty();

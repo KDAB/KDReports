@@ -114,7 +114,7 @@ public:
      * Constructs a report.
      * \param parent optional parent object, for memory management
      */
-    Report( QObject* parent = 0 );
+    explicit Report( QObject* parent = 0 );
     /**
      * Destroys the report.
      */
