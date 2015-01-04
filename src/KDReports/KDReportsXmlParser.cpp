@@ -348,11 +348,19 @@ bool KDReports::XmlParser::processNode( const QDomNode& node, KDReports::ReportB
 
         } else if ( name == QLatin1String( "tabs" ) ) {
 
-            parseTabs( builder, element );
+            if ( !builder ) {
+                error( QObject::tr( "<tabs> is only supported in WordProcessing mode" ) );
+            } else {
+                parseTabs( builder, element );
+            }
 
         } else if ( name == QLatin1String( "paragraph-margins" ) ) {
 
-            parseParagraphMargins( builder, element );
+            if ( !builder ) {
+                error( QObject::tr( "<paragraph-margins> is only supported in WordProcessing mode" ) );
+            } else {
+                parseParagraphMargins( builder, element );
+            }
 
         } else if( name == QLatin1String( "hr" ) ) {
             // Handle <hr> element

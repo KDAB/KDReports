@@ -144,8 +144,14 @@ void FillCellHelper::fill( QTextTable* textTable, KDReports::ReportBuilder& buil
     }
 
     QTextCharFormat charFormat = cellCursor.charFormat();
-    if ( cellFont.isValid() )
-        charFormat.setFont( qvariant_cast<QFont>( cellFont ) );
+    if ( cellFont.isValid() ) {
+        QFont cellQFont = qvariant_cast<QFont>( cellFont );
+#if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
+        charFormat.setFont( cellQFont, QTextCharFormat::FontPropertiesSpecifiedOnly );
+#else
+        charFormat.setFont( cellQFont );
+#endif
+    }
     if ( foreground.isValid() )
         charFormat.setForeground( foreground );
     cellCursor.setCharFormat( charFormat );

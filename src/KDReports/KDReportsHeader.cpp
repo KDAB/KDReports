@@ -147,7 +147,9 @@ void KDReports::Header::preparePaintingPage( int pageNumber )
 
 void KDReports::Header::setDefaultFont( const QFont& font )
 {
-    d->m_textDocument.contentDocument().setDefaultFont( font );
+    QFont f( font );
+    f.setStyleStrategy( QFont::ForceOutline ); // bitmap fonts look awful in printed documents
+    d->m_textDocument.contentDocument().setDefaultFont( f );
 }
 
 QFont KDReports::Header::defaultFont() const

@@ -111,7 +111,11 @@ void KDReports::TextElement::setPointSize( qreal size )
 
 void KDReports::TextElement::setFont( const QFont& font )
 {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
+    d->m_charFormat.setFont( font, QTextCharFormat::FontPropertiesSpecifiedOnly );
+#else
     d->m_charFormat.setFont( font );
+#endif
 }
 
 void KDReports::TextElement::setTextColor( const QColor& color )

@@ -31,10 +31,11 @@
 
 namespace KDReports {
 
+Q_GLOBAL_STATIC(ChartTextObject, globalChartInterface)
 
 void ChartTextObject::registerChartTextObjectHandler(QTextDocument *doc)
 {
-    ChartTextObject  *chartInterface = new ChartTextObject;
+    ChartTextObject *chartInterface = globalChartInterface();
 
      //This assert is here because a bad build environment can cause this to fail. There is a note
     // in the Qt source that indicates an error should be output, but there is no such output.

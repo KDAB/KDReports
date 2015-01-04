@@ -65,17 +65,21 @@ private slots:
         // Unfortunately, Qt on Mac OSX hardcodes 72 DPI, so we'll always have different results there.
     }
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
+#define SKIP_IF_FONT_NOT_FOUND \
+    if (!fontFound) \
+        QSKIP(QString("Font %1 not found").arg(s_fontName).toLatin1(), SkipAll);
+#else
+#define SKIP_IF_FONT_NOT_FOUND \
+    if (!fontFound) \
+        QSKIP(QString("Font %1 not found").arg(s_fontName).toLatin1());
+#endif
+
     // Tests
 
     void testOnePageLayout()
     {
-        if (!fontFound)
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-            QSKIP(QString("Font %1 not found").arg(s_fontName).toLatin1(), SkipAll);
-#else
-            QSKIP(QString("Font %1 not found").arg(s_fontName).toLatin1());
-#endif
-
+        SKIP_IF_FONT_NOT_FOUND
         fillModel(4, 8);
         Report report;
         report.setReportMode(Report::SpreadSheet);
@@ -88,12 +92,7 @@ private slots:
 
     void testFontScaling()
     {
-        if (!fontFound)
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-            QSKIP(QString("Font %1 not found").arg(s_fontName).toLatin1(), SkipAll);
-#else
-            QSKIP(QString("Font %1 not found").arg(s_fontName).toLatin1());
-#endif
+        SKIP_IF_FONT_NOT_FOUND
 
         fillModel(2, 25);
         Report report;
@@ -129,14 +128,9 @@ private slots:
     }
 
 #ifndef __APPLE__ // disabled on Mac due to a different DPI value. The code should be portable anyway :)
-    void testFontScaler()
+    void fontScalerShouldScaleForHeight()
     {
-        if (!fontFound)
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-            QSKIP(QString("Font %1 not found").arg(s_fontName).toLatin1(), SkipAll);
-#else
-            QSKIP(QString("Font %1 not found").arg(s_fontName).toLatin1());
-#endif
+        SKIP_IF_FONT_NOT_FOUND
 
         QFont f(s_fontName);
         f.setPixelSize(86);
@@ -146,34 +140,17 @@ private slots:
         const qreal initialHeight = fm.height();
         qDebug() << f << "height=" << initialHeight;
         FUZZYCOMPARE(initialHeight, 107.0); // DPI-dependent (fixed by initTestCase) and font-dependent...
-        const qreal initialWidth = fm.width(text);
-        FUZZYCOMPARE(initialWidth, 182.0); // DPI-dependent (fixed by initTestCase) and font-dependent...
 
         const qreal wantedHeight = 50;
         scaler.setFactorForHeight(wantedHeight);
-        qreal factor = scaler.scalingFactor();
-        //qDebug() << factor;
-        QVERIFY(factor > 0.42);
-        QVERIFY(factor < 0.49);
+        const qreal factor = scaler.scalingFactor();
+        QVERIFY2(factor > 0.42, qPrintable(QString::number(factor)));
+        QVERIFY2(factor < 0.49, qPrintable(QString::number(factor)));
 
         {
             const qreal scaledHeight = scaler.fontMetrics().height();
-            QVERIFY(scaledHeight <= wantedHeight);
-            QVERIFY(scaledHeight > wantedHeight - 6);
-        }
-
-        const qreal wantedWidth = 50;
-        const qreal wantedHFactor = wantedWidth / initialWidth;
-        scaler.setFactorForWidth(wantedHFactor, "text");
-        factor = scaler.scalingFactor();
-        //qDebug() << factor;
-        QVERIFY(factor < 0.29);
-        QVERIFY(factor > 0.27);
-
-        {
-            const qreal scaledWidth = scaler.fontMetrics().width(text);
-            QVERIFY(scaledWidth <= wantedWidth);
-            QVERIFY(scaledWidth > wantedWidth - 6);
+            QVERIFY2(scaledHeight <= wantedHeight, qPrintable(QString::number(scaledHeight)));
+            QVERIFY2(scaledHeight > wantedHeight - 6, qPrintable(QString::number(scaledHeight)));
         }
 
 #ifndef Q_OS_WIN
@@ -182,8 +159,34 @@ private slots:
         // Maybe because ascent=1, descent=1, height=1+1+1=3. Well, sometimes 4.
         // On Windows we can get 2, though.
         scaler.setFactorForHeight(2.9);
-        QVERIFY(scaler.fontMetrics().height() <= 4);
+        QVERIFY2(scaler.fontMetrics().height() <= 4, qPrintable(QString::number(scaler.fontMetrics().height())));
 #endif
+    }
+
+    void fontScalerShouldScaleForWidth()
+    {
+        SKIP_IF_FONT_NOT_FOUND
+
+        QFont f(s_fontName);
+        f.setPixelSize(86);
+        FontScaler scaler(f);
+        const QFontMetricsF fm(f);
+        const QString text = "hello";
+        const qreal initialWidth = fm.width(text);
+        FUZZYCOMPARE(initialWidth, 182.0); // DPI-dependent (fixed by initTestCase) and font-dependent...
+
+        const qreal wantedWidth = 50;
+        const qreal wantedHFactor = wantedWidth / initialWidth; // i.e. 0.274
+        scaler.setFactorForWidth(wantedHFactor, "Sample text");
+        const qreal factor = scaler.scalingFactor();
+        QVERIFY2(factor > 0.25, qPrintable(QString::number(factor)));
+        QVERIFY2(factor < 0.29, qPrintable(QString::number(factor)));
+
+        {
+            const qreal scaledWidth = scaler.fontMetrics().width(text);
+            QVERIFY2(scaledWidth <= wantedWidth, qPrintable(QString::number(scaledWidth)));
+            QVERIFY2(scaledWidth > wantedWidth - 6, qPrintable(QString::number(scaledWidth)));
+        }
     }
 
     void testFontScalerFontIssues()
@@ -217,12 +220,7 @@ private slots:
 
     void testSimpleScaleTo()
     {
-        if (!fontFound)
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-            QSKIP(QString("Font %1 not found").arg(s_fontName).toLatin1(), SkipAll);
-#else
-            QSKIP(QString("Font %1 not found").arg(s_fontName).toLatin1());
-#endif
+        SKIP_IF_FONT_NOT_FOUND
 
         fillModel(4, 8);
         Report report;
@@ -290,12 +288,7 @@ private slots:
 
     void testHorizForcedBreaking()
     {
-        if (!fontFound)
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-            QSKIP(QString("Font %1 not found").arg(s_fontName).toLatin1(), SkipAll);
-#else
-            QSKIP(QString("Font %1 not found").arg(s_fontName).toLatin1());
-#endif
+        SKIP_IF_FONT_NOT_FOUND
 
         // There would be room for a single page horizontally, but the user forced 2
         fillModel(2, 10);
@@ -312,12 +305,7 @@ private slots:
 
     void testScaleToHuge()
     {
-        if (!fontFound)
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-            QSKIP(QString("Font %1 not found").arg(s_fontName).toLatin1(), SkipAll);
-#else
-            QSKIP(QString("Font %1 not found").arg(s_fontName).toLatin1());
-#endif
+        SKIP_IF_FONT_NOT_FOUND
 
         fillModel(2, 2);
         Report report;

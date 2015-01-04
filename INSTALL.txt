@@ -57,6 +57,11 @@ export LD_LIBRARY_PATH
 
 The above has to be added into your .bashrc or similar to remain. It may also of course be run from a shell just before building KD Reports, but in this case your settings will only be available for this shell.
 
+If you want to install the libraries under the "lib64" folder then
+set the QMAKE_ARGS environment variable to "LIB_SUFFIX=64" like so:
+QMAKE_ARGS="LIB_SUFFIX=64"
+export QMAKE_ARGS
+
 3) MacOS
 
 Proceed as described above, but using DYLD_LIBRARY_PATH instead

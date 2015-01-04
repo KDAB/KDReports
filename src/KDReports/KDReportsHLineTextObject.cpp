@@ -33,9 +33,11 @@
 
 namespace KDReports {
 
+Q_GLOBAL_STATIC(HLineTextObject, globalHLineInterface)
+
 void HLineTextObject::registerHLineObjectHandler(QTextDocument *doc)
 {
-    HLineTextObject *hLineInterface = new HLineTextObject;
+    HLineTextObject *hLineInterface = globalHLineInterface();
 
      //This assert is here because a bad build environment can cause this to fail. There is a note
     // in the Qt source that indicates an error should be output, but there is no such output.

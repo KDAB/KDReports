@@ -59,6 +59,7 @@ int main( int argc, char** argv )
     KDReports::TextElement fromElement;
     fromElement << "From:\n"
                 << "Klarälvdalens Datakonsult AB\n"
+                << QString::fromUtf8("Klarälvdalens Datakonsult AB\n")
                 << "Rysktorp\n"
                 << "Sweden\n";
     report.addElement( fromElement );

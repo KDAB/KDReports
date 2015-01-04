@@ -34,12 +34,12 @@
 class KDReports::PreviewDialog::Private
 {
 public:
-    Private( KDReports::PreviewDialog* q) : q( q ) {}
+    Private( KDReports::PreviewDialog* q) : q( q ), m_previewWidget( 0 ) {}
 
     void _kd_slotTableBreakingDialog();
 
-    KDReports::PreviewWidget* m_previewWidget;
     KDReports::PreviewDialog* q;
+    KDReports::PreviewWidget* m_previewWidget;
 };
 
 KDReports::PreviewDialog::PreviewDialog( KDReports::Report* report, QWidget *parent )
