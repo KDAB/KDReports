@@ -26,11 +26,7 @@ you need to do this instead:
    execute path.  Either a 32-bit or 64-bit version of Python is fine, but run
    python --version to make sure it is found and is python2 before continuing.
 
-   Next, you need to checkout the autogen submodule from the git repository.
-   like so:
-     git submodule update --init
-
-   And now run autogen.py to create the configure tool.
+   Now run autogen.py to create the configure tool.
 
    On Windows:
      python autogen.py [options]
