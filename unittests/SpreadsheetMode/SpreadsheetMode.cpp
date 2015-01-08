@@ -105,7 +105,7 @@ private slots:
         QCOMPARE(report.numberOfPages(), 2);
         QCOMPARE(report.mainTable()->pageRects().count(), 2);
 
-#ifndef __APPLE__ // Somehow the mac gets different font size for the headers, even compared to linux with DPI 72.
+#ifndef Q_OS_MAC // Somehow the mac gets different font size for the headers, even compared to linux with DPI 72.
         const int rowsFirstPage = report.mainTable()->pageRects()[0].height();
         QVERIFY(rowsFirstPage <= 20);
         QVERIFY(rowsFirstPage >= 18);
@@ -127,7 +127,7 @@ private slots:
 #endif
     }
 
-#ifndef __APPLE__ // disabled on Mac due to a different DPI value. The code should be portable anyway :)
+#ifndef Q_OS_MAC // disabled on Mac due to a different DPI value. The code should be portable anyway :)
     void fontScalerShouldScaleForHeight()
     {
         SKIP_IF_FONT_NOT_FOUND
@@ -338,7 +338,7 @@ private slots:
         // With pixel sizes: 0.478, on both machines.
         // Autobuild on linux gets 37 rows instead of 43, though (taller font, by one pixel...)
         qDebug() << report.mainTable()->lastAutoFontScalingFactor();
-#ifdef __APPLE__
+#ifdef Q_OS_MAC
         // Bah, fonts change too much.
         return;
         QVERIFY(report.mainTable()->lastAutoFontScalingFactor() >= 0.37);
@@ -482,7 +482,7 @@ private slots:
         tableElement.setPadding(3);
         report.mainTable()->setAutoTableElement(tableElement);
         //report.exportToFile( "testWithHeaders.pdf" ); // for debugging
-#ifndef __APPLE__
+#ifndef Q_OS_MAC
         QCOMPARE(report.numberOfPages(), 2);
 #endif
     }
