@@ -20,8 +20,8 @@
 **
 **********************************************************************/
 
-#ifndef KDREPORTSHLINELEMENT_H
-#define KDREPORTSHLINELEMENT_H
+#ifndef KDREPORTSHLINEELEMENT_H
+#define KDREPORTSHLINEELEMENT_H
 
 #include "KDReportsElement.h"
 #include <QtCore/QString>
