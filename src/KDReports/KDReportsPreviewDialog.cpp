@@ -20,15 +20,16 @@
 **
 **********************************************************************/
 
+#include "KDReportsPreviewDialog.h"
 #include "KDReportsReport.h"
 #include "KDReportsReport_p.h"
-#include "KDReportsPreviewDialog.h"
-#include <QPushButton>
 #include "KDReportsPreviewWidget.h"
-#include <QVBoxLayout>
-#include <QDialogButtonBox>
 #include "KDReportsTableBreakingSettingsDialog.h"
 #include "KDReportsLayoutHelper_p.h"
+
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 class KDReports::PreviewDialog::Private
 {
