@@ -1,0 +1,17 @@
+CHECKSETS qt4,c++,foss
+
+#KDAB-specific checks
+EXTRA kdabcopyright
+
+#additional checks
+EXTRA defines,null
+EXTRA crud,camelcase,contractions,qmath,multiclasses
+
+#if you have a build subdir, skip it
+SKIP /build-
+#skip the combined header
+SKIP /src/KDReports/KDReports.h
+#skip autogen buildsystem
+SKIP /autogen/|/autogen.py|/genignore.py
+#skip generated headers
+SKIP /include/
