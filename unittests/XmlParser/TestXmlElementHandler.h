@@ -29,7 +29,7 @@
 class TestXmlElementHandler : public KDReports::XmlElementHandlerV2
 {
 public:
-    TestXmlElementHandler( KDReports::Report& report );
+    explicit TestXmlElementHandler( KDReports::Report& report );
     QStringList callbacks() const { return cb; }
 
     virtual bool startReport( KDReports::Report& report, QDomElement& xmlElement );

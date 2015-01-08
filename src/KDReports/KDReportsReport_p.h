@@ -94,7 +94,7 @@ public:
 class ReportPrivate // not Report::Private because of the friend decl in KDReportsHeader.h
 {
 public:
-    ReportPrivate( Report* report );
+    explicit ReportPrivate( Report* report );
     ~ReportPrivate();
 
     void setupPrinter( QPrinter* printer );
