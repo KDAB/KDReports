@@ -150,7 +150,7 @@ void KDReports::PreviewWidget::Private::init()
     connect( zoomCombo, SIGNAL(activated(QString)), q, SLOT(_kd_slotZoomChanged()) );
     connect( pageList, SIGNAL(currentRowChanged(int)), q, SLOT(_kd_slotCurrentPageChanged()) );
     connect( paperSizeCombo, SIGNAL(activated(int)), q, SLOT(_kd_slotPaperSizeActivated(int)) );
-    connect( paperOrientationCombo, SIGNAL(activated(int)), q, SLOT( _kd_slotPaperOrientationActivated(int)) );
+    connect( paperOrientationCombo, SIGNAL(activated(int)), q, SLOT(_kd_slotPaperOrientationActivated(int)) );
 
     QShortcut* nextPageShortcut = new QShortcut( q );
     nextPageShortcut->setKey( Qt::CTRL + Qt::Key_PageDown );
