@@ -28,7 +28,7 @@
 class KDReports::MainTable::Private
 {
 public:
-    Private() : m_element(NULL), m_layout(NULL) {}
+    Private() : m_element(0), m_layout(0) {}
     AutoTableElement* m_element;
     SpreadsheetReportLayout* m_layout;
 };
