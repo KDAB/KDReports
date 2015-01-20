@@ -5,7 +5,9 @@ EXTRA kdabcopyright
 
 #additional checks
 EXTRA defines,null
-EXTRA crud,camelcase,contractions,qmath,multiclasses
+EXTRA camelcase,contractions,qmath,multiclasses
+#requires updated krazy on CI
+#EXTRA crud
 
 #if you have a build subdir, skip it
 SKIP /build-
