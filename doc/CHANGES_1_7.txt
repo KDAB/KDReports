@@ -1,0 +1,10 @@
+What is new in KD Reports 1.6
+===============================
+
+Performance:
+---------
+
+Bug fixes:
+----------
+* Setting the report to Landscape and then using KDReports::PreviewDialog now sets the print to Landscape.
+

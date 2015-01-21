@@ -649,6 +649,7 @@ void KDReports::PreviewWidget::Private::setReport( KDReports::Report* report )
     tableBreakingButton->setVisible(m_report->reportMode() == KDReports::Report::SpreadSheet);
 
     m_printer.setPageSize( m_report->pageSize() );
+    m_printer.setOrientation( m_report->orientation() );
     pageCountChanged();
     if (!pageList->currentItem()) {
         // No page selected yet - select the first one
