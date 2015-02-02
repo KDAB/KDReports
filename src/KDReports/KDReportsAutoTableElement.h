@@ -153,7 +153,8 @@ public:
     Element* clone() const;
 
     enum {
-        DecorationAlignmentRole = 0x2D535FB1 ///< This model role allows to specify whether the icon should go before the text (Qt::AlignLeft) or after the text (Qt::AlignRight).
+        DecorationAlignmentRole = 0x2D535FB1, ///< This model role allows to specify whether the icon should go before the text (Qt::AlignLeft) or after the text (Qt::AlignRight).
+        NonBreakableLinesRole = 0x2D535FB2 ///< This model role allows to specify that line-breaking is not allowed in this table cell. \since 1.7.
     };
 
 private:

@@ -74,6 +74,7 @@ public:
         background = qvariant_cast<QColor>( tableModel->headerData( section, orientation, Qt::BackgroundRole ) );
         alignment = Qt::Alignment( tableModel->headerData( section, orientation, Qt::TextAlignmentRole ).toInt() );
         decorationAlignment = tableModel->headerData( section, orientation, KDReports::AutoTableElement::DecorationAlignmentRole );
+        nonBreakableLines = tableModel->headerData( section, orientation, KDReports::AutoTableElement::NonBreakableLinesRole ).toBool();
         span = QSize( 1, 1 );
     }
     FillCellHelper( QAbstractItemModel* tableModel, const QModelIndex& index, const QSize& _span, const QSize& iconSz )
@@ -86,6 +87,7 @@ public:
         background = qvariant_cast<QColor>( tableModel->data( index, Qt::BackgroundRole ) );
         alignment = Qt::Alignment( tableModel->data( index, Qt::TextAlignmentRole ).toInt() );
         decorationAlignment = tableModel->data( index, KDReports::AutoTableElement::DecorationAlignmentRole );
+        nonBreakableLines = tableModel->data( index, KDReports::AutoTableElement::NonBreakableLinesRole ).toBool();
         span = _span;
     }
     void fill( QTextTable* textTable, KDReports::ReportBuilder& builder, QTextDocument& textDoc, QTextTableCell& cell );
@@ -103,6 +105,7 @@ private:
     QColor background;
     Qt::Alignment alignment;
     QVariant decorationAlignment;
+    bool nonBreakableLines;
     QSize span;
 
     QTextCursor cellCursor;
@@ -133,6 +136,7 @@ void FillCellHelper::fill( QTextTable* textTable, KDReports::ReportBuilder& buil
 
     QTextBlockFormat blockFormat = cellCursor.blockFormat();
     blockFormat.setAlignment( alignment );
+    blockFormat.setNonBreakableLines( nonBreakableLines );
     builder.setupBlockFormat( blockFormat );
 
     cellCursor.setBlockFormat( blockFormat );

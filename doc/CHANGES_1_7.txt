@@ -1,6 +1,10 @@
 What is new in KD Reports 1.6
 ===============================
 
+Features:
+---------
+* AutoTableElement::NonBreakableLinesRole to forbid word-wrapping in individual table cells
+
 Performance:
 ---------
 
