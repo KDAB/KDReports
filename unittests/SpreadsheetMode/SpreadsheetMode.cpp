@@ -579,7 +579,8 @@ private slots:
         bool ok = report.exportToImage( size, filename, "PNG" );
         QVERIFY(ok);
         QVERIFY(QFile::exists(filename));
-        QPixmap pix(filename);
+        QPixmap pix;
+        QVERIFY(pix.load(filename));
         QCOMPARE(pix.size(), size);
 
         QCOMPARE(report.mainTable()->pageRects()[0], QRect(0,0,1,40));
