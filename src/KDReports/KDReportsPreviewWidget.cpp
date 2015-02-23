@@ -109,7 +109,7 @@ public:
     KDReports::PreviewWidget* q;
 };
 
-KDReports::PreviewWidget::Private::Private( KDReports::PreviewWidget* q )
+KDReports::PreviewWidget::Private::Private( KDReports::PreviewWidget* w )
     : m_previewWidget( new PagePreviewWidget ),
       m_printer(),
       m_eatPageNumberClick(false),
@@ -118,7 +118,7 @@ KDReports::PreviewWidget::Private::Private( KDReports::PreviewWidget* q )
       m_endlessPrinterWidth( 114.0 ),
       m_report( 0 ),
       m_firstDirtyPreviewItem( -1 ),
-      q( q )
+      q( w )
 {
     connect( &m_previewTimer, SIGNAL(timeout()), q, SLOT(_kd_previewNextItems()) );
 }
