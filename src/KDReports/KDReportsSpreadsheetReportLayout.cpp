@@ -28,6 +28,7 @@
 #include <QAbstractItemModel>
 #include <QDebug>
 #include <QIcon>
+#include <QBitArray>
 #include <qmath.h> // qCeil
 
 KDReports::SpreadsheetReportLayout::SpreadsheetReportLayout(KDReports::Report *report)
@@ -68,6 +69,7 @@ qreal KDReports::SpreadsheetReportLayout::paintTableVerticalHeader( qreal x, qre
 
     painter.setFont( m_tableLayout.verticalHeaderScaledFont() );
     painter.fillRect( cellRect, m_tableSettings.m_headerBackground );
+    drawBorder( cellRect, painter );
 
     const QColor foreground = qvariant_cast<QColor>( model->headerData( row, Qt::Vertical, Qt::ForegroundRole ) );
     if ( foreground.isValid() )
@@ -97,6 +99,7 @@ void KDReports::SpreadsheetReportLayout::paintTableHorizontalHeader( const QRect
     painter.setFont( m_tableLayout.horizontalHeaderScaledFont() );
     // adjust rect so that it's really under the lines; we get some white space otherwise, sometimes
     painter.fillRect( cellRect.adjusted( -0.5, -0.5, -0.5, -0.5 ), m_tableSettings.m_headerBackground );
+    drawBorder( cellRect, painter );
 
     const QColor foreground = qvariant_cast<QColor>( model->headerData( col, Qt::Horizontal, Qt::ForegroundRole ) );
     if ( foreground.isValid() )
@@ -186,6 +189,19 @@ void KDReports::SpreadsheetReportLayout::paintTextAndIcon( QPainter& painter, co
 }
 
 
+void KDReports::SpreadsheetReportLayout::drawBorder( const QRectF cellRect, QPainter &painter )
+{
+    if ( m_tableSettings.m_border > 0 ) {
+        const QPen oldPen = painter.pen();
+        // QTextDocumentLayoutPrivate::drawBorder draws 4 rects using a brush
+        // But that's more work, and it doesn't always look good anyway.
+        // So we just use it as a color for now.
+        painter.setPen( QPen( m_tableSettings.m_borderBrush.color(), m_tableSettings.m_border ) );
+        painter.drawRect( cellRect );
+        painter.setPen( oldPen );
+    }
+}
+
 void KDReports::SpreadsheetReportLayout::paintPageContent(int pageNumber, QPainter &painter)
 {
     //qDebug() << "painting with" << m_tableLayout.scaledFont();
@@ -209,9 +225,19 @@ void KDReports::SpreadsheetReportLayout::paintPageContent(int pageNumber, QPaint
         }
         y += m_tableLayout.hHeaderHeight();
     }
-    qreal lastX = 0;
 
-    for ( int row = cellCoords.top(); row <= cellCoords.bottom(); ++row )
+    const int firstRow = cellCoords.top();
+    const int firstColumn = cellCoords.left();
+    const int numRows = cellCoords.height();
+    const int numColumns = cellCoords.width();
+
+    // This won't work across page breaks....
+    QVector<QBitArray> coveredCells;
+    coveredCells.resize( numRows );
+    for ( int row = firstRow; row <= cellCoords.bottom(); ++row )
+        coveredCells[row - firstRow].resize( numColumns );
+
+    for ( int row = firstRow; row <= cellCoords.bottom(); ++row )
     {
         qreal x = 0 /*m_leftMargin*/;
         if ( m_tableLayout.m_verticalHeaderVisible ) {
@@ -220,11 +246,26 @@ void KDReports::SpreadsheetReportLayout::paintPageContent(int pageNumber, QPaint
         painter.setFont( m_tableLayout.scaledFont() );
         for ( int col = cellCoords.left(); col <= cellCoords.right(); ++col )
         {
-            const QRectF cellRect( x, y, m_tableLayout.m_columnWidths[ col ], rowHeight );
+            if (coveredCells[row - firstRow].testBit(col - firstColumn)) {
+                x += m_tableLayout.m_columnWidths[ col ];
+                continue;
+            }
+
+            const QModelIndex index = model->index( row, col );
+
+            const QSize span = model->span( index );
+            if (span.isValid()) {
+                for (int r = row; r < row + span.height() && r < numRows; ++r) {
+                    for (int c = col; c < col + span.width() && c < numColumns; ++c) {
+                        coveredCells[r - firstRow].setBit(c - firstColumn);
+                    }
+                }
+            }
+
+            const QRectF cellRect( x, y, cellWidth( col, span.width() ), qMax(1, span.height()) * rowHeight );
             const QRectF cellContentsRect = cellRect.adjusted( padding, padding, -padding, -padding );
             //qDebug() << "cell" << row << col << "rect=" << cellRect;
 
-            const QModelIndex index = model->index( row, col );
             const QString cellText = model->data( index, Qt::DisplayRole ).toString();
             const QColor foreground = qvariant_cast<QColor>( model->data( index, Qt::ForegroundRole ) );
             const QColor background = qvariant_cast<QColor>( model->data( index, Qt::BackgroundRole ) );
@@ -234,9 +275,10 @@ void KDReports::SpreadsheetReportLayout::paintPageContent(int pageNumber, QPaint
 
             if ( background.isValid() ) {
                 painter.fillRect( cellRect, QBrush( background ) );
-            } else {
-                //painter.setBrush( Qt::NoBrush );
+            } else if ( span.isValid() ) {
+                painter.fillRect( cellRect, Qt::white );
             }
+            drawBorder(cellRect, painter);
 
             // Per-cell font is not supported, on purpose. All rows use the same font,
             // otherwise the calculations for making things fit into a number of pages
@@ -255,41 +297,9 @@ void KDReports::SpreadsheetReportLayout::paintPageContent(int pageNumber, QPaint
             if ( foreground.isValid() )
                 painter.setPen( Qt::black );
 
-            x += cellRect.width();
-        }
-        y += rowHeight;
-        lastX = x;
-    }
-
-    // Now draw the grid
-    if ( m_tableSettings.m_border > 0 ) {
-        painter.setPen( QPen( Qt::black, m_tableSettings.m_border ) );
-
-        // Draw all the horizontal lines
-        qreal y = 0 /*m_topMargin*/;
-        if ( m_tableLayout.m_horizontalHeaderVisible ) {
-            painter.drawLine( 0 /*m_leftMargin*/, y, lastX, y );
-            y += m_tableLayout.hHeaderHeight();
-        }
-        for ( int row = cellCoords.top(); row <= cellCoords.bottom(); ++row )
-        {
-            painter.drawLine( 0 /*m_leftMargin*/, y, lastX, y );
-            y += rowHeight;
-        }
-        painter.drawLine( 0 /*m_leftMargin*/, y, lastX, y );
-
-        // Draw all the vertical lines
-        qreal x = 0 /*m_leftMargin*/;
-        if ( m_tableLayout.m_verticalHeaderVisible ) {
-            painter.drawLine( x, 0 /*m_topMargin*/, x, y );
-            x += m_tableLayout.vHeaderWidth();
-        }
-        for ( int col = cellCoords.left(); col <= cellCoords.right(); ++col )
-        {
-            painter.drawLine( x, 0 /*m_topMargin*/, x, y );
             x += m_tableLayout.m_columnWidths[ col ];
         }
-        painter.drawLine( x, 0 /*m_topMargin*/, x, y );
+        y += rowHeight;
     }
 }
 
@@ -322,6 +332,15 @@ qreal KDReports::SpreadsheetReportLayout::totalWidth() const
     if (m_tableLayout.m_verticalHeaderVisible)
         totalWidth += m_tableLayout.vHeaderWidth();
     return totalWidth;
+}
+
+qreal KDReports::SpreadsheetReportLayout::cellWidth(int col, int horizSpan) const
+{
+    qreal cellWidth = m_tableLayout.m_columnWidths[ col ];
+    for ( int extraCol = 1; extraCol < horizSpan; ++extraCol ) {
+        cellWidth += m_tableLayout.m_columnWidths[ col + extraCol ];
+    }
+    return cellWidth;
 }
 
 void KDReports::SpreadsheetReportLayout::setPageContentSize(const QSizeF &size)
@@ -627,4 +646,15 @@ void KDReports::SpreadsheetReportLayout::setCellPadding(qreal padding)
 void KDReports::SpreadsheetReportLayout::setIconSize(const QSize& iconSize)
 {
     m_tableLayout.m_iconSize = iconSize;
+}
+
+void KDReports::SpreadsheetReportLayout::setCellBorder(qreal border, const QBrush &borderBrush)
+{
+    m_tableSettings.m_border = border;
+    m_tableSettings.m_borderBrush = borderBrush;
+}
+
+void KDReports::SpreadsheetReportLayout::setHeaderBackground(const QBrush &headerBackground)
+{
+    m_tableSettings.m_headerBackground = headerBackground;
 }

@@ -54,7 +54,8 @@ void KDReports::MainTable::setAutoTableElement(const AutoTableElement &element)
     d->m_layout->setHorizontalHeaderVisible(element.isHorizontalHeaderVisible());
     d->m_layout->setCellPadding(element.padding()); // in mm
     d->m_layout->setIconSize(element.iconSize());
-    // TODO border, borderBrush, headerBackground...
+    d->m_layout->setCellBorder(element.border(), element.borderBrush());
+    d->m_layout->setHeaderBackground(element.headerBackground());
 }
 
 KDReports::AutoTableElement* KDReports::MainTable::autoTableElement() const

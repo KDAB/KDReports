@@ -5,6 +5,10 @@ Features:
 ---------
 * AutoTableElement::NonBreakableLinesRole to forbid word-wrapping in individual table cells
 
+* Spreadsheet mode: added support for cells spanning multiple rows or columns.
+
+* Spreadsheet mode: honour the settings for border size, border color and header background brush.
+
 Performance:
 ---------
 

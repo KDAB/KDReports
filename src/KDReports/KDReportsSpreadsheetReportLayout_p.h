@@ -78,6 +78,8 @@ public:
     void setHorizontalHeaderVisible(bool visible);
     void setCellPadding(qreal padding);
     void setIconSize(const QSize& iconSize);
+    void setCellBorder(qreal border, const QBrush &borderBrush);
+    void setHeaderBackground(const QBrush &headerBackground);
 
     KDReports::Report::TableBreakingPageOrder tableBreakingPageOrder() const { return m_tableBreakingPageOrder; }
     void setTableBreakingPageOrder(KDReports::Report::TableBreakingPageOrder order);
@@ -85,9 +87,11 @@ public:
     void setVerticalHeaderFont(const QFont& font);
 
 private:
+    void drawBorder(const QRectF cellRect, QPainter &painter);
     void breakHorizontally();
     // Return sum of m_tableLayout.m_columnWidths; caller must ensure updateColumnWidths was called before.
     qreal totalWidth() const;
+    qreal cellWidth( int col, int horizSpan ) const;
     qreal paintTableVerticalHeader( qreal x, qreal y, QPainter& painter, int row );
     void paintTableHorizontalHeader( const QRectF& cellRect, QPainter& painter, int col );
     void paintIcon( QPainter& painter, const QRectF& cellContentsRect, const QVariant& cellDecoration ) const;
@@ -106,10 +110,12 @@ private:
     {
         TableSettings()
             : m_border( 1.0 ),
+              m_borderBrush( Qt::gray ),
               m_headerBackground( Qt::gray )
         {
         }
         qreal m_border;
+        QBrush m_borderBrush;
         QBrush m_headerBackground;
     };
     TableSettings m_tableSettings;

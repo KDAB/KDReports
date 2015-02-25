@@ -103,6 +103,13 @@ void TableLayout::updateColumnWidths()
         for ( int row = 0; row < rowCount; ++row )
         {
             const QModelIndex index = m_model->index( row, col );
+            if ( m_model->span(index).width() > 1 ) {
+                // Ignore spanned cells. Not ideal of course, but we'll have to assume
+                // the other cells determine width, and this one just has to fit in.
+                // I guess a two-pass algorithm is needed otherwise, checking every spanned cell
+                // after the initial column width distribution? Urgh.
+                continue;
+            }
             const QString cellText = m_model->data( index, Qt::DisplayRole ).toString();
             const qreal textWidth = fm.width(cellText);
             const qreal width = addIconWidth( textWidth, m_model->data( index, Qt::DecorationRole ) );

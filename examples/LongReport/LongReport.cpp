@@ -22,6 +22,7 @@
 
 #include <QTableView>
 #include <QStandardItemModel>
+#include <QIdentityProxyModel>
 #include <QApplication>
 
 #include <KDReports>
@@ -36,6 +37,25 @@ static const int numRows = 300;
 
 
 #ifdef USE_AUTO_TABLE
+
+class ProxyModel : public QIdentityProxyModel
+{
+public:
+    QSize span(const QModelIndex & index) const {
+        // Row 2 Column 4 should span over 3 rows and 4 columns.
+        if (index.row() == 1 && index.column() == 3) {
+            return QSize(4,3);
+        }
+        return QSize();
+    }
+    QVariant data(const QModelIndex &proxyIndex, int role) const {
+        if (proxyIndex.row() == 1 && proxyIndex.column() == 3 && role == Qt::DisplayRole)
+            return "This cell spans multiple columns!";
+        return QIdentityProxyModel::data(proxyIndex, role);
+    }
+};
+ProxyModel proxyModel;
+
 static KDReports::AutoTableElement largeAutoTable()
 {
 
@@ -87,11 +107,13 @@ static KDReports::AutoTableElement largeAutoTable()
         model.setVerticalHeaderItem( i, item );
     }
 
-    KDReports::AutoTableElement tableElement( &model );
+    proxyModel.setSourceModel( &model );
+    KDReports::AutoTableElement tableElement( &proxyModel );
     tableElement.setHorizontalHeaderVisible( true );
     tableElement.setVerticalHeaderVisible( true );
     tableElement.setPadding( 2 );
     tableElement.setIconSize( QSize( 16, 16 ) );
+    //tableElement.setBorder( 1 );
     return tableElement;
 }
 
