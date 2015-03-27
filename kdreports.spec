@@ -18,6 +18,10 @@ BuildRequires:  libqt4-devel
 BuildRequires:  gcc-c++ qt-devel desktop-file-utils
 %endif
 
+%if %{defined rhel}
+BuildRequires:  gcc-c++ qt-devel desktop-file-utils
+%endif
+
 %description
 KDAB's KD Reports is the Qt tool that lets you easily create printable reports
 by providing all of the necessary features for a variety of applications.
