@@ -1,4 +1,4 @@
-What is new in KD Reports 1.6
+What is new in KD Reports 1.7
 ===============================
 
 Features:
