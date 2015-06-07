@@ -1,6 +1,6 @@
 Name:           kdreports
 Version:        1.6.0
-Release:        1
+Release:        2
 Summary:        A Qt library for creating printable reports
 Source:         %{name}-%{version}.tar.gz
 URL:            http://github.com/KDAB/KDReports
