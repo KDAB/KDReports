@@ -3,10 +3,11 @@
   NORMAL_CXXFLAGS = \
 	-Wnon-virtual-dtor -Wundef -Wcast-align \
 	-Wchar-subscripts -Wpointer-arith \
-	-Wwrite-strings -Wpacked -Wformat-security \
+	-Wwrite-strings -Wformat-security \
         -Wmissing-format-attribute -Woverloaded-virtual
 
   # -Wconversion gives too many warnings from Qt-4.4.3 with gcc-4.3.2 (was fine with gcc-4.2.4), so removing it
+  # -Wpacked gives warnings with Qt 4.8, removed
 
   NORMAL_CFLAGS += -pedantic
 
