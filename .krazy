@@ -15,3 +15,6 @@ SKIP /src/KDReports/KDReports.h
 SKIP /autogen/|/autogen.py|/genignore.py
 #skip generated headers
 SKIP /include/
+#skip the borrowed code in the cmake subdir
+
+SKIP /cmake/InstallLocation.cmake|/cmake/Qt5Portability.cmake|/cmake/ECMGenerateHeaders.cmake
