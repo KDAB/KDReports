@@ -66,7 +66,7 @@ QMAKE_EXTRA_TARGETS += test
 INSTALL_DOC_DIR = $$INSTALL_PREFIX/share/doc/KDReports
 
 # install licenses:
-licenses.files = LICENSE.txt LICENSE.US.txt LICENSE.LGPL.txt
+licenses.files = LICENSE.txt LICENSE.US.txt LICENSE.GPL.txt LICENSE.LGPL.txt
 licenses.path = $$INSTALL_DOC_DIR
 INSTALLS += licenses
 
