@@ -1,0 +1,5 @@
+
+set(KDSoap_INCLUDE_DIRS "@INSTALL_INCLUDE_DIR@")
+
+include("${CMAKE_CURRENT_LIST_DIR}/KDSoapTargets.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/KDSoapMacros.cmake")
