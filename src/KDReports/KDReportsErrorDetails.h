@@ -67,10 +67,10 @@ public:
 
     bool hasError() const;
 
-    inline void swap( ErrorDetails & other );
+    inline void swap( ErrorDetails & other ); //krazy:exclude=inline
 private:
     friend class XmlElementHandler;
-    ErrorDetailsPrivate* d;
+    ErrorDetailsPrivate* d; //krazy:exclude=dpointer make this const
 };
 
 void ErrorDetails::swap( ErrorDetails & other )
@@ -94,4 +94,3 @@ template <> inline void qSwap( KDReports::ErrorDetails & lhs, KDReports::ErrorDe
 }
 
 #endif /* KDREPORTSERRORDETAILS_H */
-

@@ -80,7 +80,7 @@ class Cell;
  *   report.setXmlElementHandler( handler );
  * </code>
  */
-class KDREPORTS_EXPORT XmlElementHandler
+class KDREPORTS_EXPORT XmlElementHandler //krazy:exclude=dpointer TODO fix this
 {
 public:
     XmlElementHandler();

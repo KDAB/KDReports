@@ -30,7 +30,7 @@
 
 namespace KDReports {
 
-class KDREPORTS_EXPORT XmlHelper
+class KDREPORTS_EXPORT XmlHelper //krazy:exclude=dpointer
 {
 public:
     static Qt::AlignmentFlag stringToAlignment(const QString &str);

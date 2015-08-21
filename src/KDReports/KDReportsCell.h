@@ -90,7 +90,7 @@ public:
     /**
      * @internal - not supported
      */
-    Element* clone() const { return 0; }
+    Element* clone() const { return 0; } //krazy:exclude=inline
 
 private:
     // TableElement needs to create/destroy/copy cells

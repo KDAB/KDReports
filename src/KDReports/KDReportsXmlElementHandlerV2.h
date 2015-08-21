@@ -36,7 +36,7 @@ class HLineElement;
   * @see KDReports::XmlElementHandler
   * \since  1.4
   */
-class KDREPORTS_EXPORT XmlElementHandlerV2 : public XmlElementHandler
+class KDREPORTS_EXPORT XmlElementHandlerV2 : public XmlElementHandler //krazy:exclude=dpointer
 {
 public:
     XmlElementHandlerV2();
