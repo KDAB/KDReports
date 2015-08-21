@@ -45,7 +45,8 @@ add_subdirectory(Headers)
 add_subdirectory(PageLayout)
 add_subdirectory(XmlParser)
 add_subdirectory(TableBreakingLogic)
-add_subdirectory(SpreadsheetMode)
+#TODO: fix the moc problem
+#add_subdirectory(SpreadsheetMode)
 add_subdirectory(InThread)
 
  
