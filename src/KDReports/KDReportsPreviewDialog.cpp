@@ -37,9 +37,14 @@ public:
     Private( KDReports::PreviewDialog* q) : q( q ), m_previewWidget( 0 ) {}
 
     void _kd_slotTableBreakingDialog();
+    void _kd_slotPrintWithDialog();
+    void _kd_slotQuickPrint();
 
     KDReports::PreviewDialog* q;
     KDReports::PreviewWidget* m_previewWidget;
+    QDialogButtonBox *m_buttonBox;
+    QPushButton *m_quickPrintButton;
+    QString m_quickPrinterName;
 };
 
 KDReports::PreviewDialog::PreviewDialog( KDReports::Report* report, QWidget *parent )
@@ -54,21 +59,38 @@ KDReports::PreviewDialog::PreviewDialog( KDReports::Report* report, QWidget *par
 
     connect( d->m_previewWidget, SIGNAL(tableSettingsClicked()), this, SLOT(_kd_slotTableBreakingDialog()) );
 
-    QDialogButtonBox* buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
-                                                        Qt::Horizontal,
-                                                        this );
-    bottomLayout->addWidget( buttonBox );
-    connect( buttonBox, SIGNAL(accepted()), this, SLOT(accept()) );
-    connect( buttonBox, SIGNAL(rejected()), this, SLOT(reject()) );
+    d->m_buttonBox = new QDialogButtonBox( Qt::Horizontal, this );
+    bottomLayout->addWidget( d->m_buttonBox );
 
-    QPushButton* okButton = buttonBox->button( QDialogButtonBox::Ok );
-    okButton->setText(tr("&Print..."));
+    QPushButton* printWithDialogButton = new QPushButton( tr("&Print..."), this );
+    d->m_buttonBox->addButton( printWithDialogButton, QDialogButtonBox::ActionRole );
+    connect( printWithDialogButton, SIGNAL(clicked()), this, SLOT(_kd_slotPrintWithDialog()) );
 
+    d->m_quickPrintButton = new QPushButton( this ); // create it here for the ordering
+    d->m_quickPrintButton->hide();
+    d->m_buttonBox->addButton( d->m_quickPrintButton, QDialogButtonBox::ActionRole );
+
+    QPushButton* cancelButton = new QPushButton( tr("Cancel"), this );
+    d->m_buttonBox->addButton( cancelButton, QDialogButtonBox::RejectRole );
+    connect( cancelButton, SIGNAL(clicked()), this, SLOT(reject()) );
 }
 
 KDReports::PreviewDialog::~PreviewDialog()
 {
     delete d;
+}
+
+void KDReports::PreviewDialog::setQuickPrinterName( const QString &printerName )
+{
+    if ( !printerName.isEmpty() ) {
+        // QPrinter::setPrinterName has no effect on the QPrintDialog which uses the CUPS default printer anyway...
+        // So we only use this for the separate Print button.
+        // This is why it's not called setDefaultPrinterName.
+        d->m_quickPrinterName = printerName;
+        d->m_quickPrintButton->setText( tr("Print &with %1").arg(printerName) );
+        d->m_quickPrintButton->show();
+        connect( d->m_quickPrintButton, SIGNAL(clicked()), this, SLOT(_kd_slotQuickPrint()) );
+    }
 }
 
 bool KDReports::PreviewDialog::showTableSettingsDialog( KDReports::Report* report )
@@ -82,6 +104,25 @@ void KDReports::PreviewDialog::Private::_kd_slotTableBreakingDialog()
     if ( q->showTableSettingsDialog( m_previewWidget->report() ) ) {
         m_previewWidget->repaint();
     }
+}
+
+void KDReports::PreviewDialog::Private::_kd_slotPrintWithDialog()
+{
+    if ( m_previewWidget->printWithDialog() ) {
+        q->accept();
+    }
+}
+
+void KDReports::PreviewDialog::Private::_kd_slotQuickPrint()
+{
+    KDReports::Report *report = m_previewWidget->report();
+    QPrinter printer;
+    printer.setFullPage( true );
+    printer.setPrinterName( m_quickPrinterName );
+    printer.setPageSize( report->pageSize() );
+    printer.setOrientation( report->orientation() );
+    report->print( &printer, q );
+    q->accept();
 }
 
 void KDReports::PreviewDialog::setPageSizeChangeAllowed( bool b )
@@ -106,9 +147,7 @@ bool KDReports::PreviewDialog::isSelected( int pageNumber ) const
 
 void KDReports::PreviewDialog::accept()
 {
-    if ( d->m_previewWidget->printWithDialog() ) {
-        QDialog::accept();
-    }
+    QDialog::accept();
 }
 
 void KDReports::PreviewDialog::reject()

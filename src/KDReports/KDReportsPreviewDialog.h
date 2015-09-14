@@ -48,6 +48,15 @@ public:
     ~PreviewDialog();
 
     /**
+     * Shows a [Print on <printer>] button, for quick printing without the print dialog
+     * \param printerName the name of the printer for the quick print button to use.
+     * Setting an empty printer name has no effect.
+     *
+     * \since 1.7
+     */
+    void setQuickPrinterName( const QString &printerName );
+
+    /**
      * Return true if the page has been selected (checked) by the user.
      */
     bool isSelected( int pageNumber ) const;
@@ -106,6 +115,8 @@ private Q_SLOTS:
 
 private:
     Q_PRIVATE_SLOT( d, void _kd_slotTableBreakingDialog() )
+    Q_PRIVATE_SLOT( d, void _kd_slotPrintWithDialog() )
+    Q_PRIVATE_SLOT( d, void _kd_slotQuickPrint() )
     class Private;
     friend class Private;
     Private* const d;

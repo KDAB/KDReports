@@ -5,6 +5,9 @@ Features:
 ---------
 * AutoTableElement::NonBreakableLinesRole to forbid word-wrapping in individual table cells
 
+* Preview dialog: added setQuickPrinterName(QString), which shows a new button saying
+"Print with [printerName]" for quick printing without the print dialog.
+
 * Spreadsheet mode: added support for cells spanning multiple rows or columns.
 
 * Spreadsheet mode: honour the settings for border size, border color and header background brush.
