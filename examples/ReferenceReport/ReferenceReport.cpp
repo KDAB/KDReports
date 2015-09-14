@@ -30,7 +30,7 @@
 #include <KDChartPieDiagram>
 #include <KDChartPolarCoordinatePlane>
 #endif
-#include <KDReports>
+#include <KDReports.h>
 #include <QDebug>
 #include <QPainter>
 #include <QMessageBox>
