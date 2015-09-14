@@ -28,6 +28,7 @@
 #include "KDReportsLayoutHelper_p.h"
 
 #include <QDialogButtonBox>
+#include <QFileDialog>
 #include <QPushButton>
 #include <QVBoxLayout>
 
@@ -39,6 +40,7 @@ public:
     void _kd_slotTableBreakingDialog();
     void _kd_slotPrintWithDialog();
     void _kd_slotQuickPrint();
+    void _kd_slotSave();
 
     KDReports::PreviewDialog* q;
     KDReports::PreviewWidget* m_previewWidget;
@@ -69,6 +71,10 @@ KDReports::PreviewDialog::PreviewDialog( KDReports::Report* report, QWidget *par
     d->m_quickPrintButton = new QPushButton( this ); // create it here for the ordering
     d->m_quickPrintButton->hide();
     d->m_buttonBox->addButton( d->m_quickPrintButton, QDialogButtonBox::ActionRole );
+
+    QPushButton* saveButton = new QPushButton( tr("&Save..."), this );
+    d->m_buttonBox->addButton( saveButton, QDialogButtonBox::ActionRole );
+    connect( saveButton, SIGNAL(clicked()), this, SLOT(_kd_slotSave()) );
 
     QPushButton* cancelButton = new QPushButton( tr("Cancel"), this );
     d->m_buttonBox->addButton( cancelButton, QDialogButtonBox::RejectRole );
@@ -121,6 +127,20 @@ void KDReports::PreviewDialogPrivate::_kd_slotQuickPrint()
     printer.setPrinterName( m_quickPrinterName );
     report->print( &printer, q );
     q->accept();
+}
+
+void KDReports::PreviewDialogPrivate::_kd_slotSave()
+{
+    const QString file = QFileDialog::getSaveFileName(q, q->tr("Save Report as PDF"), QString(), q->tr("PDF Files (*.pdf)"));
+    if (!file.isEmpty()) {
+        KDReports::Report *report = m_previewWidget->report();
+        QPrinter printer;
+        report->setupPrinter( &printer );
+        printer.setOutputFormat( QPrinter::PdfFormat );
+        printer.setOutputFileName( file );
+        report->print( &printer, q );
+        q->accept();
+    }
 }
 
 void KDReports::PreviewDialog::setPageSizeChangeAllowed( bool b )
