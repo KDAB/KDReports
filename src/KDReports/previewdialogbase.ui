@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>PreviewWidgetBase</class>
- <widget class="QWidget" name="PreviewWidgetBase" >
-  <property name="geometry" >
+ <widget class="QWidget" name="PreviewWidgetBase">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,211 +10,211 @@
     <height>629</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Print Preview</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" >
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QWidget" native="1" name="actionBar" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Maximum" hsizetype="Preferred" >
+    <widget class="QWidget" name="actionBar" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout" >
-      <property name="sizeConstraint" >
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="sizeConstraint">
        <enum>QLayout::SetDefaultConstraint</enum>
       </property>
-      <property name="margin" >
+      <property name="margin">
        <number>0</number>
       </property>
       <item>
-       <widget class="QToolButton" name="firstPage" >
-        <property name="toolTip" >
+       <widget class="QToolButton" name="firstPage">
+        <property name="toolTip">
          <string>First Page</string>
         </property>
-        <property name="whatsThis" >
+        <property name="whatsThis">
          <string>Goes to the first page</string>
         </property>
-        <property name="text" >
+        <property name="text">
          <string>...</string>
         </property>
-        <property name="icon" >
-         <iconset resource="../pics/pics.qrc" >
+        <property name="icon">
+         <iconset resource="../../pics/pics.qrc">
           <normaloff>:/2leftarrow.png</normaloff>:/2leftarrow.png</iconset>
         </property>
-        <property name="iconSize" >
+        <property name="iconSize">
          <size>
           <width>22</width>
           <height>22</height>
          </size>
         </property>
-        <property name="autoRaise" >
+        <property name="autoRaise">
          <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="prevPage" >
-        <property name="toolTip" >
+       <widget class="QToolButton" name="prevPage">
+        <property name="toolTip">
          <string>Previous Page</string>
         </property>
-        <property name="whatsThis" >
+        <property name="whatsThis">
          <string>Goes to the previous page</string>
         </property>
-        <property name="text" >
+        <property name="text">
          <string>...</string>
         </property>
-        <property name="icon" >
-         <iconset resource="../pics/pics.qrc" >
+        <property name="icon">
+         <iconset resource="../../pics/pics.qrc">
           <normaloff>:/1leftarrow.png</normaloff>:/1leftarrow.png</iconset>
         </property>
-        <property name="iconSize" >
+        <property name="iconSize">
          <size>
           <width>22</width>
           <height>22</height>
          </size>
         </property>
-        <property name="autoRaise" >
+        <property name="autoRaise">
          <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="pageNumber" >
-        <property name="text" >
+       <widget class="QLineEdit" name="pageNumber">
+        <property name="text">
          <string>1</string>
         </property>
-        <property name="maxLength" >
+        <property name="maxLength">
          <number>10</number>
         </property>
-        <property name="alignment" >
+        <property name="alignment">
          <set>Qt::AlignHCenter</set>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="pageCount" >
-        <property name="text" >
+       <widget class="QLabel" name="pageCount">
+        <property name="text">
          <string>/ 10</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="nextPage" >
-        <property name="toolTip" >
+       <widget class="QToolButton" name="nextPage">
+        <property name="toolTip">
          <string>Next Page</string>
         </property>
-        <property name="whatsThis" >
+        <property name="whatsThis">
          <string>Goes to the next page</string>
         </property>
-        <property name="text" >
+        <property name="text">
          <string>...</string>
         </property>
-        <property name="icon" >
-         <iconset resource="../pics/pics.qrc" >
+        <property name="icon">
+         <iconset resource="../../pics/pics.qrc">
           <normaloff>:/1rightarrow.png</normaloff>:/1rightarrow.png</iconset>
         </property>
-        <property name="iconSize" >
+        <property name="iconSize">
          <size>
           <width>22</width>
           <height>22</height>
          </size>
         </property>
-        <property name="autoRaise" >
+        <property name="autoRaise">
          <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="lastPage" >
-        <property name="toolTip" >
+       <widget class="QToolButton" name="lastPage">
+        <property name="toolTip">
          <string>Last Page</string>
         </property>
-        <property name="whatsThis" >
+        <property name="whatsThis">
          <string>Goes to the last page</string>
         </property>
-        <property name="text" >
+        <property name="text">
          <string>...</string>
         </property>
-        <property name="icon" >
-         <iconset resource="../pics/pics.qrc" >
+        <property name="icon">
+         <iconset resource="../../pics/pics.qrc">
           <normaloff>:/2rightarrow.png</normaloff>:/2rightarrow.png</iconset>
         </property>
-        <property name="iconSize" >
+        <property name="iconSize">
          <size>
           <width>22</width>
           <height>22</height>
          </size>
         </property>
-        <property name="autoRaise" >
+        <property name="autoRaise">
          <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="Line" name="line" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Minimum" hsizetype="Fixed" >
+       <widget class="Line" name="line">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="orientation" >
+        <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="zoomIn" >
-        <property name="text" >
+       <widget class="QToolButton" name="zoomIn">
+        <property name="text">
          <string>...</string>
         </property>
-        <property name="icon" >
-         <iconset resource="../pics/pics.qrc" >
+        <property name="icon">
+         <iconset resource="../../pics/pics.qrc">
           <normaloff>:/zoom+.png</normaloff>:/zoom+.png</iconset>
         </property>
-        <property name="iconSize" >
+        <property name="iconSize">
          <size>
           <width>22</width>
           <height>22</height>
          </size>
         </property>
-        <property name="autoRaise" >
+        <property name="autoRaise">
          <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="zoomCombo" />
+       <widget class="QComboBox" name="zoomCombo"/>
       </item>
       <item>
-       <widget class="QToolButton" name="zoomOut" >
-        <property name="text" >
+       <widget class="QToolButton" name="zoomOut">
+        <property name="text">
          <string>...</string>
         </property>
-        <property name="icon" >
-         <iconset resource="../pics/pics.qrc" >
+        <property name="icon">
+         <iconset resource="../../pics/pics.qrc">
           <normaloff>:/zoom-.png</normaloff>:/zoom-.png</iconset>
         </property>
-        <property name="iconSize" >
+        <property name="iconSize">
          <size>
           <width>22</width>
           <height>22</height>
          </size>
         </property>
-        <property name="autoRaise" >
+        <property name="autoRaise">
          <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
        <spacer>
-        <property name="orientation" >
+        <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" stdset="0" >
+        <property name="sizeHint" stdset="0">
          <size>
           <width>40</width>
           <height>20</height>
@@ -222,19 +223,19 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="labelPaperSize" >
-        <property name="text" >
+       <widget class="QLabel" name="labelPaperSize">
+        <property name="text">
          <string>&amp;Paper Size:</string>
         </property>
-        <property name="buddy" >
+        <property name="buddy">
          <cstring>paperSizeCombo</cstring>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="paperSizeCombo" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
+       <widget class="QComboBox" name="paperSizeCombo">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -242,19 +243,19 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="labelOrientation" >
-        <property name="text" >
+       <widget class="QLabel" name="labelOrientation">
+        <property name="text">
          <string>&amp;Orientation:</string>
         </property>
-        <property name="buddy" >
+        <property name="buddy">
          <cstring>paperOrientationCombo</cstring>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="paperOrientationCombo" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
+       <widget class="QComboBox" name="paperOrientationCombo">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -263,10 +264,10 @@
       </item>
       <item>
        <spacer>
-        <property name="orientation" >
+        <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" stdset="0" >
+        <property name="sizeHint" stdset="0">
          <size>
           <width>101</width>
           <height>20</height>
@@ -275,8 +276,8 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="tableBreakingButton" >
-        <property name="text" >
+       <widget class="QPushButton" name="tableBreakingButton">
+        <property name="text">
          <string>Table Settings / Font Scaling...</string>
         </property>
        </widget>
@@ -285,14 +286,14 @@
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2" >
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QListWidget" name="pageList" />
+      <widget class="QListWidget" name="pageList"/>
      </item>
      <item>
-      <widget class="QScrollArea" name="previewArea" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+      <widget class="QScrollArea" name="previewArea">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>1</horstretch>
          <verstretch>1</verstretch>
         </sizepolicy>
@@ -304,7 +305,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../pics/pics.qrc" />
+  <include location="../../pics/pics.qrc"/>
  </resources>
  <connections/>
 </ui>
