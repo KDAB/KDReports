@@ -70,7 +70,6 @@ KDReports::PreviewDialog::PreviewDialog( KDReports::Report* report, QWidget *par
     connect( printWithDialogButton, SIGNAL(clicked()), this, SLOT(_kd_slotPrintWithDialog()) );
 
     d->m_quickPrintButton = new QPushButton( this ); // create it here for the ordering
-    d->m_quickPrintButton->hide();
     d->m_buttonBox->addButton( d->m_quickPrintButton, QDialogButtonBox::ActionRole );
 
     QPushButton* saveButton = new QPushButton( tr("&Save..."), this );
@@ -80,6 +79,8 @@ KDReports::PreviewDialog::PreviewDialog( KDReports::Report* report, QWidget *par
     QPushButton* cancelButton = new QPushButton( tr("Cancel"), this );
     d->m_buttonBox->addButton( cancelButton, QDialogButtonBox::RejectRole );
     connect( cancelButton, SIGNAL(clicked()), this, SLOT(reject()) );
+
+    d->m_quickPrintButton->hide();
 }
 
 KDReports::PreviewDialog::~PreviewDialog()
