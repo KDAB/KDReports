@@ -28,6 +28,7 @@
 class QBrush;
 namespace KDReports {
 class ReportBuilder;
+class ElementPrivate;
 
 /**
  * The KDReports::Element class is the base for all elements.
@@ -80,8 +81,7 @@ protected:
     Element &operator=(const Element &other);
 
 private:
-    class Private;
-    Private* const d;
+    ElementPrivate* const d;
 };
 
 }

@@ -26,10 +26,10 @@
 #include <QTextTableFormat>
 #include <QTextCursor>
 
-class KDReports::AbstractTableElement::Private
+class KDReports::AbstractTableElementPrivate
 {
 public:
-    Private() : m_border( 1.0 ), m_borderBrush( Qt::darkGray /*like Qt does*/ ),
+    AbstractTableElementPrivate() : m_border( 1.0 ), m_borderBrush( Qt::darkGray /*like Qt does*/ ),
                 m_padding( 0.5 ), m_width( 0 ), m_unit( KDReports::Millimeters ),
                 m_fontSpecified( false ) {}
     qreal m_border;
@@ -42,12 +42,12 @@ public:
 };
 
 KDReports::AbstractTableElement::AbstractTableElement()
-    : Element(), d( new Private )
+    : Element(), d( new AbstractTableElementPrivate )
 {
 }
 
 KDReports::AbstractTableElement::AbstractTableElement(const AbstractTableElement &other)
-    : Element( other ), d( new Private( *other.d ) )
+    : Element( other ), d( new AbstractTableElementPrivate( *other.d ) )
 {
 }
 

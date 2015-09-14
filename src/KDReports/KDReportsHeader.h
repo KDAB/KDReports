@@ -35,6 +35,7 @@ class HeaderData;
 
 namespace KDReports {
 
+class HeaderPrivate;
 class XmlParser;
 class Element;
 class HeaderMap;
@@ -123,8 +124,7 @@ private:
 
     Q_DISABLE_COPY( Header )
 
-    class Private;
-    Private* const d;
+    HeaderPrivate* const d;
 };
 
 typedef Header Footer;

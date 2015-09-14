@@ -23,19 +23,19 @@
 #include "KDReportsElement.h"
 #include <QBrush>
 
-class KDReports::Element::Private
+class KDReports::ElementPrivate
 {
 public:
     QBrush m_background;
 };
 
 KDReports::Element::Element()
-    : d( new Private )
+    : d( new ElementPrivate )
 {
 }
 
 KDReports::Element::Element(const Element &other)
-    : d( new Private( *other.d ) )
+    : d( new ElementPrivate( *other.d ) )
 {
 }
 

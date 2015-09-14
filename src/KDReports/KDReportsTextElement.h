@@ -31,6 +31,7 @@ class QColor;
 class QFont;
 
 namespace KDReports {
+class TextElementPrivate;
 
 /**
  * The KDReports::TextElement class represents text in the report.
@@ -142,11 +143,9 @@ private:
     friend class ReportBuilder;
     void setCharFormat( const QTextCharFormat& format );
 
-    class Private;
-    Private* const d;
+    TextElementPrivate* const d;
 };
 
 }
 
 #endif /* KDREPORTSTEXTELEMENT_H */
-

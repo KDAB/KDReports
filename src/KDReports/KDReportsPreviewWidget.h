@@ -29,6 +29,7 @@
 
 namespace KDReports {
 class Report;
+class PreviewWidgetPrivate;
 
 /**
  * The PreviewWidget class provides a widget showing the report to the user,
@@ -135,9 +136,7 @@ private:
     Q_PRIVATE_SLOT( d, void _kd_slotZoomChanged() )
     Q_PRIVATE_SLOT( d, void _kd_previewNextItems() )
 
-    class Private;
-    friend class Private;
-    Private* const d;
+    PreviewWidgetPrivate* const d;
 };
 
 }

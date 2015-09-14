@@ -91,7 +91,7 @@ public:
     KDReports::HeaderLocations headerLocation(Header *header) const;
 };
 
-class ReportPrivate // not Report::Private because of the friend decl in KDReportsHeader.h
+class ReportPrivate
 {
 public:
     explicit ReportPrivate( Report* report );

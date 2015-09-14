@@ -31,6 +31,7 @@ class AutoTableElement;
 class Report;
 class Test;
 class SpreadsheetReportLayout;
+class MainTablePrivate;
 
 /**
  * The MainTable class represents the main table of a report
@@ -102,8 +103,7 @@ private:
     qreal lastAutoFontScalingFactor() const; // for unittests
 
     Q_DISABLE_COPY(MainTable)
-    class Private;
-    Private* const d;
+    MainTablePrivate* const d;
 };
 
 }

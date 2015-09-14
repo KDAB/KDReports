@@ -31,6 +31,7 @@ class QFont;
 class QTextDocument;
 
 namespace KDReports {
+class HLineElementPrivate;
 
 /**
  * The KDReports::HLineElement class represents an horizontal line in the report.
@@ -96,9 +97,8 @@ public:
     Element* clone() const;
 
 private:
-    class Private;
 
-    Private* const d;
+    HLineElementPrivate* const d;
 };
 
 }

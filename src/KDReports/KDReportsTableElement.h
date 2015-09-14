@@ -27,6 +27,7 @@
 
 namespace KDReports {
 class Cell;
+class TableElementPrivate;
 
 /**
  * The KDReports::TableElement class represents a table in the report.
@@ -107,8 +108,7 @@ public:
     Element* clone() const;
 
 private:
-    class Private;
-    Private* const d;
+    TableElementPrivate* const d;
 };
 
 }

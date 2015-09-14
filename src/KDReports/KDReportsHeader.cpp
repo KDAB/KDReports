@@ -33,7 +33,7 @@
 #include <QTextBlock>
 
 KDReports::Header::Header( KDReports::Report* report )
-    : d( new Private( report ) )
+    : d( new HeaderPrivate( report ) )
 {
     d->m_textDocument.contentDocument().setDefaultFont( report->d->m_layout->defaultFont() );
 }

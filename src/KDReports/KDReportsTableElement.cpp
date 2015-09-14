@@ -49,14 +49,14 @@ public:
 };
 }
 
-class KDReports::TableElement::Private
+class KDReports::TableElementPrivate
 {
 public:
-    Private()
+    TableElementPrivate()
         : m_headerRowCount( 0 ),
           m_headerColumnCount( 0 )
     {}
-    ~Private() {}
+    ~TableElementPrivate() {}
 
     KDReports::CellContentMap m_cellContentMap;
     int m_headerRowCount;
@@ -66,12 +66,12 @@ public:
 ////
 
 KDReports::TableElement::TableElement()
-    : d( new Private )
+    : d( new TableElementPrivate )
 {
 }
 
 KDReports::TableElement::TableElement(const TableElement &other)
-    : AbstractTableElement( other ), d( new Private( *other.d ) )
+    : AbstractTableElement( other ), d( new TableElementPrivate( *other.d ) )
 {
 }
 

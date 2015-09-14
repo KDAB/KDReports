@@ -27,6 +27,7 @@
 #include <QtCore/QString>
 
 namespace KDReports {
+class HtmlElementPrivate;
 
 /**
  * The KDReports::HtmlElement class represents any part of the report that can be expressed in HTML.
@@ -95,8 +96,7 @@ public:
     Element* clone() const;
 
 private:
-    class Private;
-    Private* const d;
+    HtmlElementPrivate* const d;
 };
 
 }

@@ -64,10 +64,10 @@ private:
 };
 
 
-class KDReports::PreviewWidget::Private : public Ui::PreviewWidgetBase
+class KDReports::PreviewWidgetPrivate : public Ui::PreviewWidgetBase
 {
 public:
-    Private( KDReports::PreviewWidget* q );
+    PreviewWidgetPrivate( KDReports::PreviewWidget* q );
 
     // not in ctor because the init calls q->slotFoo which uses d->, so d must be set first.
     void init();
@@ -109,7 +109,7 @@ public:
     bool m_eatPageNumberClick;
 };
 
-KDReports::PreviewWidget::Private::Private( KDReports::PreviewWidget* w )
+KDReports::PreviewWidgetPrivate::PreviewWidgetPrivate( KDReports::PreviewWidget* w )
     : m_previewWidget( new PagePreviewWidget ),
       m_printer(),
       m_zoomFactor( 1.0 ),
@@ -120,10 +120,10 @@ KDReports::PreviewWidget::Private::Private( KDReports::PreviewWidget* w )
       m_firstDirtyPreviewItem( -1 ),
       m_eatPageNumberClick( false )
 {
-    connect( &m_previewTimer, SIGNAL(timeout()), q, SLOT(_kd_previewNextItems()) );
+    QObject::connect( &m_previewTimer, SIGNAL(timeout()), q, SLOT(_kd_previewNextItems()) );
 }
 
-void KDReports::PreviewWidget::Private::init()
+void KDReports::PreviewWidgetPrivate::init()
 {
     setupUi( q );
     actionBar->setEnabled(false );
@@ -139,31 +139,31 @@ void KDReports::PreviewWidget::Private::init()
     fillZoomCombo();
 
     //m_tableBreakingButton = buttonBox->addButton( tr("Table Breaking / Font Scaling..." ), QDialogButtonBox::ActionRole );
-    connect( tableBreakingButton, SIGNAL(clicked()), q, SIGNAL(tableSettingsClicked()) );
+    QObject::connect( tableBreakingButton, SIGNAL(clicked()), q, SIGNAL(tableSettingsClicked()) );
 
-    connect( firstPage, SIGNAL(clicked()), q, SLOT(_kd_slotFirstPage()) );
-    connect( prevPage, SIGNAL(clicked()), q, SLOT(_kd_slotPrevPage()) );
-    connect( nextPage, SIGNAL(clicked()), q, SLOT(_kd_slotNextPage()) );
-    connect( lastPage, SIGNAL(clicked()), q, SLOT(_kd_slotLastPage()) );
-    connect( zoomIn, SIGNAL(clicked()), q, SLOT(_kd_slotZoomIn()) );
-    connect( zoomOut, SIGNAL(clicked()), q, SLOT(_kd_slotZoomOut()) );
-    connect( zoomCombo, SIGNAL(activated(QString)), q, SLOT(_kd_slotZoomChanged()) );
-    connect( pageList, SIGNAL(currentRowChanged(int)), q, SLOT(_kd_slotCurrentPageChanged()) );
-    connect( paperSizeCombo, SIGNAL(activated(int)), q, SLOT(_kd_slotPaperSizeActivated(int)) );
-    connect( paperOrientationCombo, SIGNAL(activated(int)), q, SLOT(_kd_slotPaperOrientationActivated(int)) );
+    QObject::connect( firstPage, SIGNAL(clicked()), q, SLOT(_kd_slotFirstPage()) );
+    QObject::connect( prevPage, SIGNAL(clicked()), q, SLOT(_kd_slotPrevPage()) );
+    QObject::connect( nextPage, SIGNAL(clicked()), q, SLOT(_kd_slotNextPage()) );
+    QObject::connect( lastPage, SIGNAL(clicked()), q, SLOT(_kd_slotLastPage()) );
+    QObject::connect( zoomIn, SIGNAL(clicked()), q, SLOT(_kd_slotZoomIn()) );
+    QObject::connect( zoomOut, SIGNAL(clicked()), q, SLOT(_kd_slotZoomOut()) );
+    QObject::connect( zoomCombo, SIGNAL(activated(QString)), q, SLOT(_kd_slotZoomChanged()) );
+    QObject::connect( pageList, SIGNAL(currentRowChanged(int)), q, SLOT(_kd_slotCurrentPageChanged()) );
+    QObject::connect( paperSizeCombo, SIGNAL(activated(int)), q, SLOT(_kd_slotPaperSizeActivated(int)) );
+    QObject::connect( paperOrientationCombo, SIGNAL(activated(int)), q, SLOT(_kd_slotPaperOrientationActivated(int)) );
 
     QShortcut* nextPageShortcut = new QShortcut( q );
     nextPageShortcut->setKey( Qt::CTRL + Qt::Key_PageDown );
-    connect( nextPageShortcut, SIGNAL(activated()), q, SLOT(_kd_slotNextPage()) );
+    QObject::connect( nextPageShortcut, SIGNAL(activated()), q, SLOT(_kd_slotNextPage()) );
     QShortcut* prevPageShortcut = new QShortcut( q );
     prevPageShortcut->setKey( Qt::CTRL + Qt::Key_PageUp );
-    connect( prevPageShortcut, SIGNAL(activated()), q, SLOT(_kd_slotPrevPage()) );
+    QObject::connect( prevPageShortcut, SIGNAL(activated()), q, SLOT(_kd_slotPrevPage()) );
 
     pageNumber->setValidator( new QIntValidator( 1, 100000, pageNumber ) );
     pageNumber->installEventFilter(q);
 }
 
-void KDReports::PreviewWidget::Private::paintItem( QListWidgetItem *item, int index )
+void KDReports::PreviewWidgetPrivate::paintItem( QListWidgetItem *item, int index )
 {
     //qDebug() << "paintItem" << index;
 
@@ -190,7 +190,7 @@ void KDReports::PreviewWidget::Private::paintItem( QListWidgetItem *item, int in
     item->setIcon( QIcon(QPixmap::fromImage(img)) );
 }
 
-void KDReports::PreviewWidget::Private::_kd_previewNextItems()
+void KDReports::PreviewWidgetPrivate::_kd_previewNextItems()
 {
     if ( m_firstDirtyPreviewItem == -1 || m_firstDirtyPreviewItem >= m_pageCount ) {
         m_previewTimer.stop();
@@ -202,7 +202,7 @@ void KDReports::PreviewWidget::Private::_kd_previewNextItems()
     }
 }
 
-QPixmap KDReports::PreviewWidget::Private::paintPreview( int index )
+QPixmap KDReports::PreviewWidgetPrivate::paintPreview( int index )
 {
     const QSizeF paperSize = m_report->paperSize();
     const int width = qCeil( paperSize.width() * m_zoomFactor );
@@ -225,7 +225,7 @@ QPixmap KDReports::PreviewWidget::Private::paintPreview( int index )
     return pixmap;
 }
 
-void KDReports::PreviewWidget::Private::printSelectedPages()
+void KDReports::PreviewWidgetPrivate::printSelectedPages()
 {
     // Well, the user can modify the page size in the printer dialog too - ensure layout matches
     //qDebug() << "pageSize: " << m_printer.pageSize();
@@ -271,58 +271,58 @@ void KDReports::PreviewWidget::Private::printSelectedPages()
     painter.end();
 }
 
-void KDReports::PreviewWidget::Private::setupComboBoxes()
+void KDReports::PreviewWidgetPrivate::setupComboBoxes()
 {
-    paperSizeCombo->addItem(tr("A0 (841 x 1189 mm)"), QPrinter::A0);
-    paperSizeCombo->addItem(tr("A1 (594 x 841 mm)"), QPrinter::A1);
-    paperSizeCombo->addItem(tr("A2 (420 x 594 mm)"), QPrinter::A2);
-    paperSizeCombo->addItem(tr("A3 (297 x 420 mm)"), QPrinter::A3);
-    paperSizeCombo->addItem(tr("A4 (210 x 297 mm)"), QPrinter::A4);
-    paperSizeCombo->addItem(tr("A5 (148 x 210 mm)"), QPrinter::A5);
-    paperSizeCombo->addItem(tr("A6 (105 x 148 mm)"), QPrinter::A6);
-    paperSizeCombo->addItem(tr("A7 (74 x 105 mm)"), QPrinter::A7);
-    paperSizeCombo->addItem(tr("A8 (52 x 74 mm)"), QPrinter::A8);
-    //paperSizeCombo->addItem(tr("A9 (37 x 52 mm)"), QPrinter::A9);
-    paperSizeCombo->addItem(tr("B0 (1000 x 1414 mm)"), QPrinter::B0);
-    paperSizeCombo->addItem(tr("B1 (707 x 1000 mm)"), QPrinter::B1);
-    paperSizeCombo->addItem(tr("B2 (500 x 707 mm)"), QPrinter::B2);
-    paperSizeCombo->addItem(tr("B3 (353 x 500 mm)"), QPrinter::B3);
-    paperSizeCombo->addItem(tr("B4 (250 x 353 mm)"), QPrinter::B4);
-    paperSizeCombo->addItem(tr("B5 (176 x 250 mm)"), QPrinter::B5);
-    paperSizeCombo->addItem(tr("B6 (125 x 176 mm)"), QPrinter::B6);
-    paperSizeCombo->addItem(tr("B7 (88 x 125 mm)"), QPrinter::B7);
-    paperSizeCombo->addItem(tr("B8 (62 x 88 mm)"), QPrinter::B8);
-    //paperSizeCombo->addItem(tr("B9 (44 x 62 mm)"), QPrinter::B9);
-    //paperSizeCombo->addItem(tr("B10 (31 x 44 mm)"), QPrinter::B10);
-    paperSizeCombo->addItem(tr("C5E (163 x 229 mm)"), QPrinter::C5E);
-    paperSizeCombo->addItem(tr("DLE (110 x 220 mm)"), QPrinter::DLE);
-    paperSizeCombo->addItem(tr("Executive (7.5 x 10 inches)"), QPrinter::Executive);
-    paperSizeCombo->addItem(tr("Folio (210 x 330 mm)"), QPrinter::Folio);
-    paperSizeCombo->addItem(tr("Ledger (432 x 279 mm)"), QPrinter::Ledger);
-    paperSizeCombo->addItem(tr("Legal (8.5 x 14 inches)"), QPrinter::Legal);
-    paperSizeCombo->addItem(tr("Letter (8.5 x 11 inches)"), QPrinter::Letter);
-    paperSizeCombo->addItem(tr("Tabloid (279 x 432 mm)"), QPrinter::Tabloid);
-    paperSizeCombo->addItem(tr("US #10 Envelope (105 x 241 mm)"), QPrinter::Comm10E);
-    paperSizeCombo->addItem(tr("Endless printer (%1 mm wide)").arg(m_endlessPrinterWidth), QPrinter::Custom);
+    paperSizeCombo->addItem(q->tr("A0 (841 x 1189 mm)"), QPrinter::A0);
+    paperSizeCombo->addItem(q->tr("A1 (594 x 841 mm)"), QPrinter::A1);
+    paperSizeCombo->addItem(q->tr("A2 (420 x 594 mm)"), QPrinter::A2);
+    paperSizeCombo->addItem(q->tr("A3 (297 x 420 mm)"), QPrinter::A3);
+    paperSizeCombo->addItem(q->tr("A4 (210 x 297 mm)"), QPrinter::A4);
+    paperSizeCombo->addItem(q->tr("A5 (148 x 210 mm)"), QPrinter::A5);
+    paperSizeCombo->addItem(q->tr("A6 (105 x 148 mm)"), QPrinter::A6);
+    paperSizeCombo->addItem(q->tr("A7 (74 x 105 mm)"), QPrinter::A7);
+    paperSizeCombo->addItem(q->tr("A8 (52 x 74 mm)"), QPrinter::A8);
+    //paperSizeCombo->addItem(q->tr("A9 (37 x 52 mm)"), QPrinter::A9);
+    paperSizeCombo->addItem(q->tr("B0 (1000 x 1414 mm)"), QPrinter::B0);
+    paperSizeCombo->addItem(q->tr("B1 (707 x 1000 mm)"), QPrinter::B1);
+    paperSizeCombo->addItem(q->tr("B2 (500 x 707 mm)"), QPrinter::B2);
+    paperSizeCombo->addItem(q->tr("B3 (353 x 500 mm)"), QPrinter::B3);
+    paperSizeCombo->addItem(q->tr("B4 (250 x 353 mm)"), QPrinter::B4);
+    paperSizeCombo->addItem(q->tr("B5 (176 x 250 mm)"), QPrinter::B5);
+    paperSizeCombo->addItem(q->tr("B6 (125 x 176 mm)"), QPrinter::B6);
+    paperSizeCombo->addItem(q->tr("B7 (88 x 125 mm)"), QPrinter::B7);
+    paperSizeCombo->addItem(q->tr("B8 (62 x 88 mm)"), QPrinter::B8);
+    //paperSizeCombo->addItem(q->tr("B9 (44 x 62 mm)"), QPrinter::B9);
+    //paperSizeCombo->addItem(q->tr("B10 (31 x 44 mm)"), QPrinter::B10);
+    paperSizeCombo->addItem(q->tr("C5E (163 x 229 mm)"), QPrinter::C5E);
+    paperSizeCombo->addItem(q->tr("DLE (110 x 220 mm)"), QPrinter::DLE);
+    paperSizeCombo->addItem(q->tr("Executive (7.5 x 10 inches)"), QPrinter::Executive);
+    paperSizeCombo->addItem(q->tr("Folio (210 x 330 mm)"), QPrinter::Folio);
+    paperSizeCombo->addItem(q->tr("Ledger (432 x 279 mm)"), QPrinter::Ledger);
+    paperSizeCombo->addItem(q->tr("Legal (8.5 x 14 inches)"), QPrinter::Legal);
+    paperSizeCombo->addItem(q->tr("Letter (8.5 x 11 inches)"), QPrinter::Letter);
+    paperSizeCombo->addItem(q->tr("Tabloid (279 x 432 mm)"), QPrinter::Tabloid);
+    paperSizeCombo->addItem(q->tr("US #10 Envelope (105 x 241 mm)"), QPrinter::Comm10E);
+    paperSizeCombo->addItem(q->tr("Endless printer (%1 mm wide)").arg(m_endlessPrinterWidth), QPrinter::Custom);
 
-    paperOrientationCombo->addItem(tr("Portrait"), QPrinter::Portrait);
-    paperOrientationCombo->addItem(tr("Landscape"), QPrinter::Landscape);
+    paperOrientationCombo->addItem(q->tr("Portrait"), QPrinter::Portrait);
+    paperOrientationCombo->addItem(q->tr("Landscape"), QPrinter::Landscape);
 }
 
-void KDReports::PreviewWidget::Private::_kd_slotCurrentPageChanged()
+void KDReports::PreviewWidgetPrivate::_kd_slotCurrentPageChanged()
 {
     updatePreview();
     updatePageButtons();
 }
 
-void KDReports::PreviewWidget::Private::updatePageButtons()
+void KDReports::PreviewWidgetPrivate::updatePageButtons()
 {
     prevPage->setEnabled( pageList->currentRow() > 0 );
     nextPage->setEnabled( pageList->currentRow() < pageList->count() - 1 );
     pageNumber->setText( QString::number( pageList->currentRow() + 1 ) );
 }
 
-void KDReports::PreviewWidget::Private::updatePreview()
+void KDReports::PreviewWidgetPrivate::updatePreview()
 {
     if ( !pageList->currentItem() )
         return;
@@ -334,7 +334,7 @@ void KDReports::PreviewWidget::Private::updatePreview()
     }
 }
 
-void KDReports::PreviewWidget::Private::pageNumberReturnPressed()
+void KDReports::PreviewWidgetPrivate::pageNumberReturnPressed()
 {
     bool ok;
     const int newPageNumber = pageNumber->text().toInt(&ok) - 1;
@@ -343,33 +343,33 @@ void KDReports::PreviewWidget::Private::pageNumberReturnPressed()
     pageList->setCurrentRow( newPageNumber );
 }
 
-void KDReports::PreviewWidget::Private::_kd_slotFirstPage()
+void KDReports::PreviewWidgetPrivate::_kd_slotFirstPage()
 {
     pageList->setCurrentRow( 0 );
 }
 
-void KDReports::PreviewWidget::Private::_kd_slotPrevPage()
+void KDReports::PreviewWidgetPrivate::_kd_slotPrevPage()
 {
     if ( !pageList->currentItem() || pageList->currentRow() == 0 )
         return;
     pageList->setCurrentRow( pageList->currentRow() - 1 );
 }
 
-void KDReports::PreviewWidget::Private::_kd_slotNextPage()
+void KDReports::PreviewWidgetPrivate::_kd_slotNextPage()
 {
     if ( !pageList->currentItem() || pageList->currentRow() >= pageList->count() - 1 )
         return;
     pageList->setCurrentRow( pageList->currentRow() + 1 );
 }
 
-void KDReports::PreviewWidget::Private::_kd_slotLastPage()
+void KDReports::PreviewWidgetPrivate::_kd_slotLastPage()
 {
     if ( pageList->count() == 0 ) // can't happen
         return;
     pageList->setCurrentRow( pageList->count() - 1 );
 }
 
-void KDReports::PreviewWidget::Private::_kd_slotPaperSizeActivated( int index )
+void KDReports::PreviewWidgetPrivate::_kd_slotPaperSizeActivated( int index )
 {
     QPrinter::PageSize qPageSize( static_cast<QPrinter::PageSize>( paperSizeCombo->itemData(index).toInt() ) );
     m_printer.setPageSize( qPageSize );
@@ -383,7 +383,7 @@ void KDReports::PreviewWidget::Private::_kd_slotPaperSizeActivated( int index )
     emit q->pageSizeChanged( qPageSize );
 }
 
-void KDReports::PreviewWidget::Private::_kd_slotPaperOrientationActivated( int index )
+void KDReports::PreviewWidgetPrivate::_kd_slotPaperOrientationActivated( int index )
 {
     m_printer.setOrientation( QPrinter::Orientation(paperOrientationCombo->itemData(index).toInt()) );
     m_report->setOrientation( m_printer.orientation() );
@@ -391,7 +391,7 @@ void KDReports::PreviewWidget::Private::_kd_slotPaperOrientationActivated( int i
     emit q->orientationChanged( m_printer.orientation() );
 }
 
-void KDReports::PreviewWidget::Private::pageCountChanged()
+void KDReports::PreviewWidgetPrivate::pageCountChanged()
 {
     qApp->setOverrideCursor( Qt::WaitCursor ); // layouting could take a long time
     if ( m_printer.pageSize() == QPrinter::Custom ) {
@@ -451,7 +451,7 @@ void KDReports::PreviewWidget::Private::pageCountChanged()
     qApp->restoreOverrideCursor();
 }
 
-void KDReports::PreviewWidget::Private::centerPreview()
+void KDReports::PreviewWidgetPrivate::centerPreview()
 {
 #if 0 // extreme flicker, due to QScrollArea doing a move(0,0) every time (issue N152085)
     // TT suggested as workaround to use QAbstractScrollArea instead, didn't try yet.
@@ -466,7 +466,7 @@ void KDReports::PreviewWidget::Private::centerPreview()
     m_previewWidget->resize( width, height );
 }
 
-void KDReports::PreviewWidget::Private::_kd_slotZoomIn()
+void KDReports::PreviewWidgetPrivate::_kd_slotZoomIn()
 {
     if ( m_zoomFactor > 1.99 )
         m_zoomFactor = qMin<qreal>( 4.0, m_zoomFactor + 0.5 );
@@ -478,7 +478,7 @@ void KDReports::PreviewWidget::Private::_kd_slotZoomIn()
     zoomChanged();
 }
 
-void KDReports::PreviewWidget::Private::_kd_slotZoomOut()
+void KDReports::PreviewWidgetPrivate::_kd_slotZoomOut()
 {
     if ( m_zoomFactor > 1.99 )
         m_zoomFactor -= 0.5;
@@ -490,21 +490,21 @@ void KDReports::PreviewWidget::Private::_kd_slotZoomOut()
     zoomChanged();
 }
 
-void KDReports::PreviewWidget::Private::_kd_slotZoomChanged()
+void KDReports::PreviewWidgetPrivate::_kd_slotZoomChanged()
 {
     QString str = zoomCombo->currentText();
     m_zoomFactor = str.remove( str.indexOf( QChar::fromLatin1('%') ), 1 ).toDouble() / 100.0;
     zoomChanged();
 }
 
-void KDReports::PreviewWidget::Private::zoomChanged()
+void KDReports::PreviewWidgetPrivate::zoomChanged()
 {
     //qDebug() << m_zoomFactor;
     updatePreview();
     centerPreview();
 }
 
-void KDReports::PreviewWidget::Private::fillZoomCombo()
+void KDReports::PreviewWidgetPrivate::fillZoomCombo()
 {
     static const double s_zoomFactors[] = {
         0.125, 0.25, 0.333, 0.5, 0.667, 0.75, 1, 1.25, 1.50, 2, 4, 0 /*end*/ };
@@ -530,7 +530,7 @@ void KDReports::PreviewWidget::Private::fillZoomCombo()
 
 KDReports::PreviewWidget::PreviewWidget( QWidget *parent)
     : QWidget( parent ),
-      d( new Private( this ) )
+      d( new PreviewWidgetPrivate( this ) )
 {
     d->init();
 }
@@ -636,7 +636,7 @@ void KDReports::PreviewWidget::setReport( KDReports::Report* report )
     d->setReport( report );
 }
 
-void KDReports::PreviewWidget::Private::setReport( KDReports::Report* report )
+void KDReports::PreviewWidgetPrivate::setReport( KDReports::Report* report )
 {
     Q_ASSERT(report);
     m_report = report;

@@ -24,7 +24,7 @@
 #include "KDReportsReportBuilder_p.h"
 #include <QDebug>
 
-class KDReports::TextElement::Private
+class KDReports::TextElementPrivate
 {
 public:
     QString m_string;
@@ -33,13 +33,13 @@ public:
 };
 
 KDReports::TextElement::TextElement( const QString& string )
-    : Element(), d( new Private )
+    : Element(), d( new TextElementPrivate )
 {
     d->m_string = string;
 }
 
 KDReports::TextElement::TextElement( const TextElement &other )
-    : Element(other), d( new Private( *other.d ) )
+    : Element(other), d( new TextElementPrivate( *other.d ) )
 {
 }
 

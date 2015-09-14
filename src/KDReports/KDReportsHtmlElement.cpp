@@ -24,7 +24,7 @@
 #include "KDReportsReportBuilder_p.h"
 #include <QDebug>
 
-class KDReports::HtmlElement::Private
+class KDReports::HtmlElementPrivate
 {
 public:
     QString m_html;
@@ -32,13 +32,13 @@ public:
 };
 
 KDReports::HtmlElement::HtmlElement( const QString& html )
-    : Element(), d( new Private )
+    : Element(), d( new HtmlElementPrivate )
 {
     d->m_html = html;
 }
 
 KDReports::HtmlElement::HtmlElement( const HtmlElement &other )
-    : Element(other), d( new Private( *other.d ) )
+    : Element(other), d( new HtmlElementPrivate( *other.d ) )
 {
 }
 

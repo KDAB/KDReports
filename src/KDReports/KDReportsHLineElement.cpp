@@ -26,7 +26,7 @@
 #include "KDReportsLayoutHelper_p.h" // mmToPixels
 #include <QDebug>
 
-class KDReports::HLineElement::Private
+class KDReports::HLineElementPrivate
 {
 public:
 
@@ -38,7 +38,7 @@ public:
 };
 
 KDReports::HLineElement::HLineElement()
-    : Element(), d( new Private )
+    : Element(), d( new HLineElementPrivate )
 {
     d->m_color = Qt::gray;
     d->m_thickness = 2;
@@ -46,7 +46,7 @@ KDReports::HLineElement::HLineElement()
 }
 
 KDReports::HLineElement::HLineElement( const HLineElement &other )
-    : Element(other), d( new Private( *other.d ) )
+    : Element(other), d( new HLineElementPrivate( *other.d ) )
 {
 }
 

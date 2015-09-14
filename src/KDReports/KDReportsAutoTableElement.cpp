@@ -34,16 +34,16 @@
 #include <QDateTime>
 #include <QDebug>
 
-class KDReports::AutoTableElement::Private
+class KDReports::AutoTableElementPrivate
 {
 public:
-    Private() : m_tableModel( 0 ),
+    AutoTableElementPrivate() : m_tableModel( 0 ),
                 m_verticalHeaderVisible( true ),
                 m_horizontalHeaderVisible( true ),
                 m_headerBackground( QColor( "#DADADA" ) ),
                 m_iconSize( 32, 32 )
     {}
-    ~Private() {}
+    ~AutoTableElementPrivate() {}
 
     void fillCellFromHeaderData( int section, Qt::Orientation orientation,
                                  QTextTableCell& cell, QTextDocument& textDoc,
@@ -232,20 +232,20 @@ QString FillCellHelper::displayText( const QVariant& value ) const
 ////
 
 KDReports::AutoTableElement::AutoTableElement( QAbstractItemModel* tableModel )
-    : d( new Private )
+    : d( new AutoTableElementPrivate )
 {
     d->m_tableModel = tableModel;
 }
 
 KDReports::AutoTableElement::AutoTableElement( const QString& modelKey )
-    : d( new Private )
+    : d( new AutoTableElementPrivate )
 {
     d->m_tableModel = KDReports::modelForKey( modelKey );
 }
 
 
 KDReports::AutoTableElement::AutoTableElement(const AutoTableElement &other)
-    : AbstractTableElement( other ), d( new Private( *other.d ) )
+    : AbstractTableElement( other ), d( new AutoTableElementPrivate( *other.d ) )
 {
 }
 
@@ -263,13 +263,13 @@ KDReports::AutoTableElement::~AutoTableElement()
     delete d;
 }
 
-void KDReports::AutoTableElement::Private::fillCellFromHeaderData( int section, Qt::Orientation orientation, QTextTableCell& cell, QTextDocument& textDoc, QTextTable* textTable, ReportBuilder& builder ) const
+void KDReports::AutoTableElementPrivate::fillCellFromHeaderData( int section, Qt::Orientation orientation, QTextTableCell& cell, QTextDocument& textDoc, QTextTable* textTable, ReportBuilder& builder ) const
 {
     FillCellHelper helper( m_tableModel, section, orientation, m_iconSize );
     helper.fill( textTable, builder, textDoc, cell );
 }
 
-QSize KDReports::AutoTableElement::Private::fillTableCell( int row, int column, QTextTableCell& cell, QTextDocument& textDoc, QTextTable* textTable, ReportBuilder& builder ) const
+QSize KDReports::AutoTableElementPrivate::fillTableCell( int row, int column, QTextTableCell& cell, QTextDocument& textDoc, QTextTable* textTable, ReportBuilder& builder ) const
 {
     const QModelIndex index = m_tableModel->index( row, column );
     const QSize span = m_tableModel->span( index );

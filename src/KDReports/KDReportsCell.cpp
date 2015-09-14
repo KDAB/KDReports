@@ -24,14 +24,14 @@
 #include "KDReportsReportBuilder_p.h"
 #include "KDReportsElement.h"
 
-class KDReports::Cell::Private
+class KDReports::CellPrivate
 {
 public:
-    Private()
+    CellPrivate()
         : m_columnSpan( 1 ),
           m_rowSpan( 1 )
     {}
-    ~Private() {
+    ~CellPrivate() {
         foreach( const ElementData& ed, m_elements )
             delete ed.m_element;
     }
@@ -60,12 +60,12 @@ public:
 };
 
 KDReports::Cell::Cell()
-    : d( new Private )
+    : d( new CellPrivate )
 {
 }
 
 KDReports::Cell::Cell(const Cell &other)
-    : Element( other ), d( new Private( *other.d ) )
+    : Element( other ), d( new CellPrivate( *other.d ) )
 {
 }
 
@@ -105,31 +105,31 @@ int KDReports::Cell::rowSpan() const
 
 void KDReports::Cell::addInlineElement( const Element& element )
 {
-    d->m_elements.append( Private::ElementData( element.clone() ) );
+    d->m_elements.append( CellPrivate::ElementData( element.clone() ) );
 }
 
 void KDReports::Cell::addElement( const Element& element, Qt::AlignmentFlag horizontalAlignment )
 {
-    d->m_elements.append( Private::ElementData( element.clone(), horizontalAlignment ) );
+    d->m_elements.append( CellPrivate::ElementData( element.clone(), horizontalAlignment ) );
 }
 
 void KDReports::Cell::addVariable( VariableType variable )
 {
-    d->m_elements.append( Private::ElementData( variable ) );
+    d->m_elements.append( CellPrivate::ElementData( variable ) );
 }
 
 void KDReports::Cell::build( ReportBuilder& builder ) const
 {
-    foreach( const Private::ElementData& ed, d->m_elements )
+    foreach( const CellPrivate::ElementData& ed, d->m_elements )
     {
         switch ( ed.m_type ) {
-        case Private::ElementData::Inline:
+        case CellPrivate::ElementData::Inline:
             builder.addInlineElement( *ed.m_element );
             break;
-        case Private::ElementData::Block:
+        case CellPrivate::ElementData::Block:
             builder.addBlockElement( *ed.m_element, ed.m_align );
             break;
-        case Private::ElementData::Variable:
+        case CellPrivate::ElementData::Variable:
             builder.addVariable( ed.m_variableType );
             break;
         }

@@ -27,10 +27,10 @@
 #include "KDReportsTextDocument_p.h"
 #include "ui_tablebreakingdialogbase.h"
 
-class KDReports::TableBreakingSettingsDialog::Private : public Ui::TableBreakingSettingsDialog
+class KDReports::TableBreakingSettingsDialogPrivate : public Ui::TableBreakingSettingsDialog
 {
 public:
-    Private( KDReports::Report* report )
+    TableBreakingSettingsDialogPrivate( KDReports::Report* report )
         : m_report( report )
     {
     }
@@ -46,7 +46,7 @@ public:
 };
 
 KDReports::TableBreakingSettingsDialog::TableBreakingSettingsDialog( KDReports::Report* report, QWidget *parent )
-    : QDialog( parent ), d( new Private( report ) )
+    : QDialog( parent ), d( new TableBreakingSettingsDialogPrivate( report ) )
 {
     d->setupUi( this );
 

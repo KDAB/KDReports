@@ -30,6 +30,7 @@ class QPixmap;
 class QImage;
 
 namespace KDReports {
+class ImageElementPrivate;
 
 /**
  * The KDReports::ImageElement class represents an image in the report.
@@ -174,8 +175,7 @@ public:
     Element* clone() const;
 
 private:
-    class Private;
-    Private* const d;
+    ImageElementPrivate* const d;
 };
 
 }

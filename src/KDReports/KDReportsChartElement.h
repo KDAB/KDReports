@@ -33,6 +33,7 @@ class QAbstractItemModel;
 namespace KDChart { class Chart; }
 
 namespace KDReports {
+class ChartElementPrivate;
 
 /**
  * The KDReports::ChartElement class represents a chart in the report.
@@ -136,8 +137,7 @@ public:
     Element* clone() const;
 
 private:
-    class Private;
-    QSharedDataPointer<Private> d;
+    QSharedDataPointer<ChartElementPrivate> d;
 };
 
 }

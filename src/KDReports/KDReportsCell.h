@@ -35,6 +35,7 @@ class ReportBuilder;
 class Element;
 class CellContentMap;
 class TableElement;
+class CellPrivate;
 
 /**
  * This class presents a cell in a table.
@@ -105,8 +106,7 @@ private:
     Cell(const Cell &other);
     Cell &operator=(const Cell &other);
 
-    class Private;
-    Private* const d;
+    CellPrivate* const d;
 };
 
 }

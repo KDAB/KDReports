@@ -25,16 +25,16 @@
 #include "KDReportsSpreadsheetReportLayout_p.h"
 #include <QDebug>
 
-class KDReports::MainTable::Private
+class KDReports::MainTablePrivate
 {
 public:
-    Private() : m_element(0), m_layout(0) {}
+    MainTablePrivate() : m_element(0), m_layout(0) {}
     AutoTableElement* m_element;
     SpreadsheetReportLayout* m_layout;
 };
 
 KDReports::MainTable::MainTable()
-    : d(new Private)
+    : d(new MainTablePrivate)
 {
 }
 

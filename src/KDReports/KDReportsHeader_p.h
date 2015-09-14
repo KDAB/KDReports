@@ -78,10 +78,10 @@ public:
 /**
  * @internal
  */
-class Header::Private
+class HeaderPrivate
 {
 public:
-    Private( KDReports::Report* report )
+    HeaderPrivate( KDReports::Report* report )
         : m_textDocument(),
           m_builder( m_textDocument.contentDocumentData(),
                      QTextCursor( &m_textDocument.contentDocument() ),

@@ -31,10 +31,10 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 
-class KDReports::PreviewDialog::Private
+class KDReports::PreviewDialogPrivate
 {
 public:
-    Private( KDReports::PreviewDialog* q) : q( q ), m_previewWidget( 0 ) {}
+    PreviewDialogPrivate( KDReports::PreviewDialog* q) : q( q ), m_previewWidget( 0 ) {}
 
     void _kd_slotTableBreakingDialog();
     void _kd_slotPrintWithDialog();
@@ -48,7 +48,7 @@ public:
 };
 
 KDReports::PreviewDialog::PreviewDialog( KDReports::Report* report, QWidget *parent )
-    : QDialog( parent ), d( new Private( this ) )
+    : QDialog( parent ), d( new PreviewDialogPrivate( this ) )
 {
     d->m_previewWidget = new KDReports::PreviewWidget( this );
     d->m_previewWidget->setReport( report );
@@ -99,21 +99,21 @@ bool KDReports::PreviewDialog::showTableSettingsDialog( KDReports::Report* repor
     return dialog.exec();
 }
 
-void KDReports::PreviewDialog::Private::_kd_slotTableBreakingDialog()
+void KDReports::PreviewDialogPrivate::_kd_slotTableBreakingDialog()
 {
     if ( q->showTableSettingsDialog( m_previewWidget->report() ) ) {
         m_previewWidget->repaint();
     }
 }
 
-void KDReports::PreviewDialog::Private::_kd_slotPrintWithDialog()
+void KDReports::PreviewDialogPrivate::_kd_slotPrintWithDialog()
 {
     if ( m_previewWidget->printWithDialog() ) {
         q->accept();
     }
 }
 
-void KDReports::PreviewDialog::Private::_kd_slotQuickPrint()
+void KDReports::PreviewDialogPrivate::_kd_slotQuickPrint()
 {
     KDReports::Report *report = m_previewWidget->report();
     QPrinter printer;

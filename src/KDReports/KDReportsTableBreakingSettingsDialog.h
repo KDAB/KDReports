@@ -27,6 +27,7 @@
 #include <QDialog>
 
 namespace KDReports {
+class TableBreakingSettingsDialogPrivate;
 class Report;
 
 /**
@@ -59,8 +60,7 @@ private Q_SLOTS:
 
 private:
     Q_PRIVATE_SLOT(d, void _kd_slotBreakTablesToggled(bool))
-    class Private;
-    Private* const d;
+    TableBreakingSettingsDialogPrivate* const d;
 };
 
 }

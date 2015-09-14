@@ -39,16 +39,16 @@
 #include <QUrl>
 #include <QLabel>
 
-class KDReports::ChartElement::Private : public QSharedData
+class KDReports::ChartElementPrivate : public QSharedData
 {
 public:
-    Private() : m_tableModel( 0 ), m_size( 100, 100 ), m_unit( KDReports::Millimeters ),
+    ChartElementPrivate() : m_tableModel( 0 ), m_size( 100, 100 ), m_unit( KDReports::Millimeters ),
 #ifdef HAVE_KDCHART
                 m_chart( 0 ),
 #endif
                 m_deleteChart( false ) {}
 
-    ~Private()
+    ~ChartElementPrivate()
     {
 #ifdef HAVE_KDCHART
         if ( m_deleteChart )
@@ -65,20 +65,20 @@ public:
 };
 
 KDReports::ChartElement::ChartElement( QAbstractItemModel* tableModel )
-    : d( new Private )
+    : d( new ChartElementPrivate )
 {
     d->m_tableModel = tableModel;
 }
 
 KDReports::ChartElement::ChartElement( const QString& modelKey ) :
-    d( new Private )
+    d( new ChartElementPrivate )
 {
     if ( !modelKey.isEmpty() )
         d->m_tableModel = KDReports::modelForKey( modelKey );
 }
 
 KDReports::ChartElement::ChartElement( KDChart::Chart* chart ) :
-    d( new Private )
+    d( new ChartElementPrivate )
 {
     d->m_tableModel = 0;
 #ifdef HAVE_KDCHART

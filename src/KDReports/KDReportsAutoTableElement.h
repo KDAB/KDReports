@@ -31,6 +31,7 @@ class QTextTableCell;
 class QAbstractItemModel;
 
 namespace KDReports {
+class AutoTableElementPrivate;
 
 /**
  * The KDReports::AutoTableElement class represents a table in the report,
@@ -158,8 +159,7 @@ public:
     };
 
 private:
-    class Private;
-    Private* const d;
+    AutoTableElementPrivate* const d;
 };
 
 }

@@ -30,6 +30,7 @@
 namespace KDReports {
 class Report;
 class PreviewWidget;
+class PreviewDialogPrivate;
 
 /**
  * The PreviewDialog class provides a dialog showing the report to the user,
@@ -107,7 +108,7 @@ Q_SIGNALS:
     /// Emitted when the user changes the page orientation.
     void orientationChanged( QPrinter::Orientation orientation );
 
-private Q_SLOTS:
+public Q_SLOTS:
     /// \reimp
     void accept();
     /// \reimp
@@ -117,9 +118,7 @@ private:
     Q_PRIVATE_SLOT( d, void _kd_slotTableBreakingDialog() )
     Q_PRIVATE_SLOT( d, void _kd_slotPrintWithDialog() )
     Q_PRIVATE_SLOT( d, void _kd_slotQuickPrint() )
-    class Private;
-    friend class Private;
-    Private* const d;
+    PreviewDialogPrivate* const d;
 };
 
 }

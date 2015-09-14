@@ -31,6 +31,7 @@ class QFont;
 class QTextTableFormat;
 class QTextCursor;
 namespace KDReports {
+class AbstractTableElementPrivate;
 
 /**
  * Base class for TableElement and AutoTableElement.
@@ -133,8 +134,7 @@ protected:
     void fillTableFormat( QTextTableFormat& tableFormat, QTextCursor& textDocCursor ) const;
 
 private:
-    class Private;
-    Private* const d;
+    AbstractTableElementPrivate* const d;
 };
 
 }

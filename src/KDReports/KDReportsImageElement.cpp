@@ -30,10 +30,10 @@
 #include <QTextDocument>
 #include <QUrl>
 
-class KDReports::ImageElement::Private
+class KDReports::ImageElementPrivate
 {
 public:
-    Private() : m_width(0), m_height(0),
+    ImageElementPrivate() : m_width(0), m_height(0),
                 m_fitToPage(false),
                 m_unit(KDReports::Millimeters)
     {}
@@ -49,19 +49,19 @@ public:
 };
 
 KDReports::ImageElement::ImageElement( const QPixmap& pixmap )
-    : d( new Private )
+    : d( new ImageElementPrivate )
 {
     setPixmap( pixmap );
 }
 
 KDReports::ImageElement::ImageElement( const QImage& image )
-    : d( new Private )
+    : d( new ImageElementPrivate )
 {
     setImage( image );
 }
 
 KDReports::ImageElement::ImageElement(const ImageElement &other)
-    : Element(other), d( new Private( *other.d ) )
+    : Element(other), d( new ImageElementPrivate( *other.d ) )
 {
 }
 
