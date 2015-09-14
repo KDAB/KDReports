@@ -29,13 +29,19 @@
 
 #include <QDialogButtonBox>
 #include <QFileDialog>
+#include <QInputDialog>
+#include <QMessageBox>
 #include <QPushButton>
 #include <QVBoxLayout>
 
 class KDReports::PreviewDialogPrivate
 {
 public:
-    PreviewDialogPrivate( KDReports::PreviewDialog* q) : q( q ), m_previewWidget( 0 ) {}
+    PreviewDialogPrivate( KDReports::PreviewDialog* q)
+        : q( q ),
+          m_previewWidget( 0 ),
+          m_dirBrowsingEnabled( true )
+    {}
 
     void _kd_slotTableBreakingDialog();
     void _kd_slotPrintWithDialog();
@@ -48,6 +54,7 @@ public:
     QPushButton *m_quickPrintButton;
     QString m_quickPrinterName;
     QString m_defaultSaveDirectory;
+    bool m_dirBrowsingEnabled;
 };
 
 KDReports::PreviewDialog::PreviewDialog( KDReports::Report* report, QWidget *parent )
@@ -106,6 +113,11 @@ void KDReports::PreviewDialog::setDefaultSaveDirectory( const QString &path )
     d->m_defaultSaveDirectory = path;
 }
 
+void KDReports::PreviewDialog::setDirectoryBrowsingEnabled(bool allowed)
+{
+    d->m_dirBrowsingEnabled = allowed;
+}
+
 bool KDReports::PreviewDialog::showTableSettingsDialog( KDReports::Report* report )
 {
     KDReports::TableBreakingSettingsDialog dialog( report );
@@ -138,9 +150,31 @@ void KDReports::PreviewDialogPrivate::_kd_slotQuickPrint()
 
 void KDReports::PreviewDialogPrivate::_kd_slotSave()
 {
-    const QString file = QFileDialog::getSaveFileName(q, q->tr("Save Report as PDF"), m_defaultSaveDirectory, q->tr("PDF Files (*.pdf)"));
-    if (!file.isEmpty()) {
-        KDReports::Report *report = m_previewWidget->report();
+    KDReports::Report *report = m_previewWidget->report();
+    QString file;
+    if (m_dirBrowsingEnabled) {
+        file = QFileDialog::getSaveFileName(q, q->tr("Save Report as PDF"), m_defaultSaveDirectory, q->tr("PDF Files (*.pdf)"));
+    } else {
+        bool ok;
+        Q_FOREVER {
+            const QString text = q->tr("Saving as PDF in %1\n\nEnter the file name:").arg(m_defaultSaveDirectory);
+            const QString fileName = QInputDialog::getText(q, q->tr("Save Report as PDF"), text,
+                                                           QLineEdit::Normal, report->documentName() + QLatin1String(".pdf"), &ok);
+            if ( !ok || fileName.isEmpty() )
+                return;
+            file = m_defaultSaveDirectory + QLatin1Char('/') + fileName;
+            if ( QFile::exists(file) ) {
+                const QString msg = q->tr("%1 already exists. Do you want to replace it?").arg(fileName);
+                if ( QMessageBox::warning(q, q->tr("Overwrite?"), msg, QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes ) {
+                    break; // overwrite
+                }
+            } else {
+                // All OK
+                break;
+            }
+        }
+    }
+    if ( !file.isEmpty() ) {
         QPrinter printer;
         report->setupPrinter( &printer );
         printer.setOutputFormat( QPrinter::PdfFormat );

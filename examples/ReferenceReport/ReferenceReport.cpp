@@ -245,6 +245,7 @@ int main( int argc, char** argv ) {
     KDReports::PreviewDialog preview( &report );
     //preview.setQuickPrinterName( "hp-LaserJet-1300" );
     preview.setDefaultSaveDirectory( QDir::homePath() );
+    //preview.setDirectoryBrowsingEnabled( false );
 
     return preview.exec();
 }

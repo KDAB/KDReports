@@ -66,6 +66,16 @@ public:
     void setDefaultSaveDirectory( const QString &path );
 
     /**
+     * Allows or forbids the user from choosing the save directory.
+     * If allowed (the default) the Save button shows a file dialog.
+     * If forbidden, the Save button shows a text input field for choosing only the filename,
+     *  and the directory will be the one set by setDefaultSaveDirectory().
+     *
+     * \since 1.7
+     */
+    void setDirectoryBrowsingEnabled( bool allowed );
+
+    /**
      * Return true if the page has been selected (checked) by the user.
      */
     bool isSelected( int pageNumber ) const;
