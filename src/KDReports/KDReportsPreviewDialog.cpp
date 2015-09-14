@@ -47,6 +47,7 @@ public:
     QDialogButtonBox *m_buttonBox;
     QPushButton *m_quickPrintButton;
     QString m_quickPrinterName;
+    QString m_defaultSaveDirectory;
 };
 
 KDReports::PreviewDialog::PreviewDialog( KDReports::Report* report, QWidget *parent )
@@ -99,6 +100,11 @@ void KDReports::PreviewDialog::setQuickPrinterName( const QString &printerName )
     }
 }
 
+void KDReports::PreviewDialog::setDefaultSaveDirectory( const QString &path )
+{
+    d->m_defaultSaveDirectory = path;
+}
+
 bool KDReports::PreviewDialog::showTableSettingsDialog( KDReports::Report* report )
 {
     KDReports::TableBreakingSettingsDialog dialog( report );
@@ -131,7 +137,7 @@ void KDReports::PreviewDialogPrivate::_kd_slotQuickPrint()
 
 void KDReports::PreviewDialogPrivate::_kd_slotSave()
 {
-    const QString file = QFileDialog::getSaveFileName(q, q->tr("Save Report as PDF"), QString(), q->tr("PDF Files (*.pdf)"));
+    const QString file = QFileDialog::getSaveFileName(q, q->tr("Save Report as PDF"), m_defaultSaveDirectory, q->tr("PDF Files (*.pdf)"));
     if (!file.isEmpty()) {
         KDReports::Report *report = m_previewWidget->report();
         QPrinter printer;

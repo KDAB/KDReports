@@ -34,6 +34,7 @@
 #include <QDebug>
 #include <QPainter>
 #include <QMessageBox>
+#include <QDir>
 
 static void fillEvenPagesHeader(KDReports::Header& evenPagesHeader)
 {
@@ -242,5 +243,8 @@ int main( int argc, char** argv ) {
     //report.exportToHtml( "out.html" );
 
     KDReports::PreviewDialog preview( &report );
+    //preview.setQuickPrinterName( "hp-LaserJet-1300" );
+    preview.setDefaultSaveDirectory( QDir::homePath() );
+
     return preview.exec();
 }

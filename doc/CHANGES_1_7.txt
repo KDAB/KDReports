@@ -8,6 +8,7 @@ Features:
 * AutoTableElement::NonBreakableLinesRole to forbid word-wrapping in individual table cells
 
 * Preview dialog: added a "Save..." button, which brings up a file dialog for saving as PDF.
+  Added setDefaultSaveDirectory() to set the initial directory for that file dialog.
 
 * Preview dialog: added setQuickPrinterName(QString), which shows a new button saying
 "Print with [printerName]" for quick printing without the print dialog.

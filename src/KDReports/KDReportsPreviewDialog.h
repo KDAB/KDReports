@@ -58,6 +58,14 @@ public:
     void setQuickPrinterName( const QString &printerName );
 
     /**
+     * Sets the initial directory for the save dialog.
+     * \param path the initial directory
+     *
+     * \since 1.7
+     */
+    void setDefaultSaveDirectory( const QString &path );
+
+    /**
      * Return true if the page has been selected (checked) by the user.
      */
     bool isSelected( int pageNumber ) const;
