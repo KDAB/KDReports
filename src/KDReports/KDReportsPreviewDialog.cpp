@@ -117,10 +117,8 @@ void KDReports::PreviewDialogPrivate::_kd_slotQuickPrint()
 {
     KDReports::Report *report = m_previewWidget->report();
     QPrinter printer;
-    printer.setFullPage( true );
+    report->setupPrinter( &printer );
     printer.setPrinterName( m_quickPrinterName );
-    printer.setPageSize( report->pageSize() );
-    printer.setOrientation( report->orientation() );
     report->print( &printer, q );
     q->accept();
 }

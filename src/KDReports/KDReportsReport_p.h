@@ -97,7 +97,6 @@ public:
     explicit ReportPrivate( Report* report );
     ~ReportPrivate();
 
-    void setupPrinter( QPrinter* printer );
     void setPaperSizeFromPrinter( const QSizeF& paperSize );
     void ensureLayouted();
     QSizeF paperSize() const;
@@ -123,6 +122,7 @@ public:
     mutable QSizeF m_paperSize; // in pixels
     QPrinter::Orientation m_orientation;
     QPrinter::PageSize m_pageSize;
+    QString m_documentName;
     qreal m_marginTop;
     qreal m_marginLeft;
     qreal m_marginBottom;
@@ -153,6 +153,7 @@ public:
     KDReports::Report::ReportMode m_reportMode;
     KDReports::AbstractReportLayout* m_layout;
     MainTable* m_mainTable;
+    KDReports::Report *q;
 };
 
 }

@@ -56,6 +56,7 @@ int main( int argc, char** argv ) {
     QApplication app( argc, argv );
 
     KDReports::Report report;
+    report.setDocumentName( "Reference report" );
 
     report.setWatermarkPixmap( QPixmap( ":/background.jpg" ) );
     report.setWatermarkText( QString() );
