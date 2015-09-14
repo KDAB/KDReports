@@ -235,6 +235,9 @@ int main( int argc, char** argv ) {
     report.addElement(chartElement);
 #endif
 
+    // Hyperlink test
+    report.addElement( KDReports::HtmlElement("<a href=\"http://www.kdab.com\">click here to open http://www.kdab.com</a>") );
+
     //report.exportToHtml( "out.html" );
 
     KDReports::PreviewDialog preview( &report );
