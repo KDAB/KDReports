@@ -136,6 +136,7 @@ private:
     Q_PRIVATE_SLOT( d, void _kd_slotZoomChanged() )
     Q_PRIVATE_SLOT( d, void _kd_previewNextItems() )
 
+    friend class PreviewWidgetPrivate;
     PreviewWidgetPrivate* const d;
 };
 
