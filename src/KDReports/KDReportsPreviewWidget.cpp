@@ -99,26 +99,26 @@ public:
 
     PagePreviewWidget* m_previewWidget;
     QPrinter m_printer;
-    bool m_eatPageNumberClick;
-    int m_pageCount;
     qreal m_zoomFactor;
     qreal m_endlessPrinterWidth;
     KDReports::Report* m_report;
     QTimer m_previewTimer;
-    int m_firstDirtyPreviewItem;
     KDReports::PreviewWidget* q;
+    int m_pageCount;
+    int m_firstDirtyPreviewItem;
+    bool m_eatPageNumberClick;
 };
 
 KDReports::PreviewWidget::Private::Private( KDReports::PreviewWidget* w )
     : m_previewWidget( new PagePreviewWidget ),
       m_printer(),
-      m_eatPageNumberClick(false),
-      m_pageCount( 0 ),
       m_zoomFactor( 1.0 ),
       m_endlessPrinterWidth( 114.0 ),
       m_report( 0 ),
+      q( w ),
+      m_pageCount( 0 ),
       m_firstDirtyPreviewItem( -1 ),
-      q( w )
+      m_eatPageNumberClick( false )
 {
     connect( &m_previewTimer, SIGNAL(timeout()), q, SLOT(_kd_previewNextItems()) );
 }
