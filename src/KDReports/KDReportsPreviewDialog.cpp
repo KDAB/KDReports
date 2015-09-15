@@ -40,6 +40,8 @@ public:
     PreviewDialogPrivate( KDReports::PreviewDialog* q)
         : q( q ),
           m_previewWidget( 0 ),
+          m_buttonBox( 0 ),
+          m_quickPrintButton( 0 ),
           m_dirBrowsingEnabled( true )
     {}
 

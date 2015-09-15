@@ -81,7 +81,7 @@ public:
 class HeaderPrivate
 {
 public:
-    HeaderPrivate( KDReports::Report* report )
+    explicit HeaderPrivate( KDReports::Report* report )
         : m_textDocument(),
           m_builder( m_textDocument.contentDocumentData(),
                      QTextCursor( &m_textDocument.contentDocument() ),
