@@ -49,6 +49,7 @@ ecm_generate_headers(kdreports_HEADERS
         KDReportsPreviewWidget
         KDReportsHeader
         KDReportsCell
+        KDReportsFrame
         KDReportsGlobal
         KDReportsXmlElementHandler
         KDReportsXmlElementHandlerV2
@@ -83,6 +84,7 @@ install(FILES
     KDReports/KDReportsPreviewWidget.h
     KDReports/KDReportsHeader.h
     KDReports/KDReportsCell.h
+    KDReports/KDReportsFrame.h
     KDReports/KDReportsGlobal.h
     KDReports/KDReportsXmlElementHandler.h
     KDReports/KDReportsXmlElementHandlerV2.h
@@ -115,6 +117,7 @@ set(SOURCES
     KDReports/KDReportsTextDocument.cpp
     KDReports/KDReportsTextDocumentData.cpp
     KDReports/KDReportsCell.cpp
+    KDReports/KDReportsFrame.cpp
     KDReports/KDReportsXmlParser.cpp
     KDReports/KDReportsTableBreakingSettingsDialog.cpp
     KDReports/KDReportsXmlElementHandler.cpp

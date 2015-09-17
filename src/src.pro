@@ -35,6 +35,7 @@ PUBLICHEADERS = KDReports/KDReportsReport.h \
     KDReports/KDReportsPreviewWidget.h \
     KDReports/KDReportsHeader.h \
     KDReports/KDReportsCell.h \
+    KDReports/KDReportsFrame.h \
     KDReports/KDReportsGlobal.h \
     KDReports/KDReportsXmlElementHandler.h \
     KDReports/KDReportsXmlElementHandlerV2.h \
@@ -76,6 +77,7 @@ SOURCES = KDReports/KDReportsReport.cpp \
     KDReports/KDReportsTextDocument.cpp \
     KDReports/KDReportsTextDocumentData.cpp \
     KDReports/KDReportsCell.cpp \
+    KDReports/KDReportsFrame.cpp \
     KDReports/KDReportsXmlParser.cpp \
     KDReports/KDReportsTableBreakingSettingsDialog.cpp \
     KDReports/KDReportsXmlElementHandler.cpp \

@@ -23,6 +23,7 @@
 #include "KDReportsCell.h"
 #include "KDReportsReportBuilder_p.h"
 #include "KDReportsElement.h"
+#include "KDReportsElementData_p.h"
 
 class KDReports::CellPrivate
 {
@@ -32,28 +33,7 @@ public:
           m_rowSpan( 1 )
     {}
     ~CellPrivate() {
-        foreach( const ElementData& ed, m_elements )
-            delete ed.m_element;
     }
-    struct ElementData
-    {
-        enum Type { Inline, Block, Variable };
-        // inline
-        ElementData( Element* elem )
-            : m_element( elem ), m_type( Inline ) {} // m_align not used
-        // block
-        ElementData( Element* elem, Qt::AlignmentFlag a )
-            : m_element( elem ), m_type( Block ), m_align( a ) {}
-        // inline variable
-        ElementData( KDReports::VariableType variable )
-            : m_element( 0 ), m_type( Variable ), m_variableType( variable ) {}
-        Element* m_element;
-        Type m_type : 3;
-        union {
-            KDReports::VariableType m_variableType;
-            Qt::AlignmentFlag m_align;
-        };
-    };
     QList<ElementData> m_elements;
     int m_columnSpan;
     int m_rowSpan;
@@ -105,31 +85,31 @@ int KDReports::Cell::rowSpan() const
 
 void KDReports::Cell::addInlineElement( const Element& element )
 {
-    d->m_elements.append( CellPrivate::ElementData( element.clone() ) );
+    d->m_elements.append( KDReports::ElementData( element.clone() ) );
 }
 
 void KDReports::Cell::addElement( const Element& element, Qt::AlignmentFlag horizontalAlignment )
 {
-    d->m_elements.append( CellPrivate::ElementData( element.clone(), horizontalAlignment ) );
+    d->m_elements.append( KDReports::ElementData( element.clone(), horizontalAlignment ) );
 }
 
 void KDReports::Cell::addVariable( VariableType variable )
 {
-    d->m_elements.append( CellPrivate::ElementData( variable ) );
+    d->m_elements.append( KDReports::ElementData( variable ) );
 }
 
 void KDReports::Cell::build( ReportBuilder& builder ) const
 {
-    foreach( const CellPrivate::ElementData& ed, d->m_elements )
+    foreach( const KDReports::ElementData& ed, d->m_elements )
     {
         switch ( ed.m_type ) {
-        case CellPrivate::ElementData::Inline:
+        case KDReports::ElementData::Inline:
             builder.addInlineElement( *ed.m_element );
             break;
-        case CellPrivate::ElementData::Block:
+        case KDReports::ElementData::Block:
             builder.addBlockElement( *ed.m_element, ed.m_align );
             break;
-        case CellPrivate::ElementData::Variable:
+        case KDReports::ElementData::Variable:
             builder.addVariable( ed.m_variableType );
             break;
         }
