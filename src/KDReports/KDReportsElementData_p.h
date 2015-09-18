@@ -61,7 +61,7 @@ namespace KDReports {
             operator=(other);
         }
         ElementData &operator=(const ElementData &other) {
-            m_element = other.m_element->clone();
+            m_element = other.m_element ? other.m_element->clone() : 0;
             m_type = other.m_type;
             m_variableType = other.m_variableType;
             m_align = other.m_align;
