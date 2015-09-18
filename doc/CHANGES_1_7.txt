@@ -3,6 +3,8 @@ What is new in KD Reports 1.7
 
 Features:
 ---------
+* Added Frame element.
+
 * Added Report::setDocumentName(), to be able to set a name for the print job.
 
 * AutoTableElement::NonBreakableLinesRole to forbid word-wrapping in individual table cells
