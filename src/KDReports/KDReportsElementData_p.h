@@ -20,8 +20,8 @@
 **
 **********************************************************************/
 
-#ifndef KDREPORTSXMLELEMENTDATA_P_H
-#define KDREPORTSXMLELEMENTDATA_P_H
+#ifndef KDREPORTSELEMENTDATA_P_H
+#define KDREPORTSELEMENTDATA_P_H
 
 //
 //  W A R N I N G
