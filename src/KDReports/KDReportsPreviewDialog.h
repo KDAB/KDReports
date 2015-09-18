@@ -120,6 +120,17 @@ public:
      */
     KDReports::PreviewWidget* previewWidget();
 
+    /**
+     * The Result enum describes result code accessible with QDialog::result()
+     */
+    enum Result { Printed, SavedSuccessfully, SaveError };
+
+    /**
+     * The location where the report was saved, if the user saved it
+     * Only set after exec returns.
+     */
+    QString savedFileName() const;
+
 Q_SIGNALS:
     /// Emitted when the user changes the page size.
     void pageSizeChanged( QPrinter::PageSize pageSize );

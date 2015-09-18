@@ -56,6 +56,7 @@ public:
     QPushButton *m_quickPrintButton;
     QString m_quickPrinterName;
     QString m_defaultSaveDirectory;
+    QString m_savedFileName;
     bool m_dirBrowsingEnabled;
 };
 
@@ -136,6 +137,7 @@ void KDReports::PreviewDialogPrivate::_kd_slotTableBreakingDialog()
 void KDReports::PreviewDialogPrivate::_kd_slotPrintWithDialog()
 {
     if ( m_previewWidget->printWithDialog() ) {
+        q->setResult( KDReports::PreviewDialog::Printed );
         q->accept();
     }
 }
@@ -147,6 +149,7 @@ void KDReports::PreviewDialogPrivate::_kd_slotQuickPrint()
     report->setupPrinter( &printer );
     printer.setPrinterName( m_quickPrinterName );
     report->print( &printer, q );
+    q->setResult( KDReports::PreviewDialog::Printed );
     q->accept();
 }
 
@@ -181,7 +184,13 @@ void KDReports::PreviewDialogPrivate::_kd_slotSave()
         report->setupPrinter( &printer );
         printer.setOutputFormat( QPrinter::PdfFormat );
         printer.setOutputFileName( file );
+        m_savedFileName = file;
         report->print( &printer, q );
+        if ( QFile::exists(file) ) {
+            q->setResult( KDReports::PreviewDialog::SavedSuccessfully );
+        } else {
+            q->setResult( KDReports::PreviewDialog::SaveError );
+        }
         q->accept();
     }
 }
@@ -219,6 +228,11 @@ void KDReports::PreviewDialog::reject()
 KDReports::PreviewWidget * KDReports::PreviewDialog::previewWidget()
 {
     return d->m_previewWidget;
+}
+
+QString KDReports::PreviewDialog::savedFileName() const
+{
+    return d->m_savedFileName;
 }
 
 #include "moc_KDReportsPreviewDialog.cpp"

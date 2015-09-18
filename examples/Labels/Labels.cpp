@@ -32,6 +32,7 @@
 #include <KDReportsCell.h>
 #include <KDReportsPreviewDialog.h>
 #include <QPrintDialog>
+#include <QMessageBox>
 
 static qreal inchToMM(qreal inch) { return inch * 25.4; }
 
@@ -98,6 +99,18 @@ int main( int argc, char** argv )
 
     // To show a print preview:
     KDReports::PreviewDialog preview( &report );
-    return preview.exec();
+    if (preview.exec()) {
+        switch (preview.result()) {
+        case KDReports::PreviewDialog::SavedSuccessfully:
+            QMessageBox::information(0, QString("Report saved"), QString("Success saving to %1").arg(preview.savedFileName()));
+            break;
+        case KDReports::PreviewDialog::SaveError:
+            QMessageBox::information(0, QString("Error"), QString("Error while saving to %1").arg(preview.savedFileName()));
+            break;
+        default:
+            break;
+        }
+    }
+    return 0;
 }
 
