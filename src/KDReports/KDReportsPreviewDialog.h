@@ -123,7 +123,7 @@ public:
     /**
      * The Result enum describes result code accessible with QDialog::result()
      */
-    enum Result { Printed, SavedSuccessfully, SaveError };
+    enum Result { Printed = 10, SavedSuccessfully, SaveError };
 
     /**
      * The location where the report was saved, if the user saved it
