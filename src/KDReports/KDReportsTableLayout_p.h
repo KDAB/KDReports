@@ -72,6 +72,7 @@ public:
     // All measurements below are in pixels
     qreal m_cellPadding;
     QVector<qreal> m_columnWidths;
+    qreal m_fixedRowHeight;
 
     QVector<QString> m_widestTextPerColumn;
 

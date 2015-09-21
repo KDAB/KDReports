@@ -61,6 +61,8 @@ public:
     /// \reimp
     virtual bool scaleTo( int numPagesHorizontally, int numPagesVertically );
     /// \reimp
+    virtual void setFixedRowHeight(qreal height);
+    /// \reimp
     virtual int maximumNumberOfPagesForHorizontalScaling() const;
     /// \reimp
     virtual int maximumNumberOfPagesForVerticalScaling() const;

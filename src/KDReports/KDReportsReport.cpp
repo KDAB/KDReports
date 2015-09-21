@@ -989,6 +989,11 @@ int KDReports::Report::maximumNumberOfPagesForVerticalScaling() const
     return d->m_layout->maximumNumberOfPagesForVerticalScaling();
 }
 
+void KDReports::Report::setFixedRowHeight(qreal mm)
+{
+    d->m_layout->setFixedRowHeight( mmToPixels(mm) );
+}
+
 void KDReports::Report::setFontScalingFactor( qreal factor )
 {
     d->m_layout->setUserRequestedFontScalingFactor(factor);

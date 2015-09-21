@@ -36,6 +36,7 @@ TableLayout::TableLayout()
       m_horizontalHeaderVisible( true ),
       m_verticalHeaderVisible( true ),
       m_cellPadding( KDReports::mmToPixels( 0.5 ) ),
+      m_fixedRowHeight( 0 ),
       m_iconSize( 32, 32 ),
       m_rowHeight( 0 ),
       m_vHeaderWidth( 0 ),
@@ -63,6 +64,10 @@ void TableLayout::setInitialFontScalingFactor( qreal fontScalingFactor )
 
 void TableLayout::updateRowHeight()
 {
+    if (m_fixedRowHeight > 0) {
+        m_rowHeight = m_fixedRowHeight;
+        return;
+    }
     m_rowHeight = m_cellFontScaler.fontMetrics().height() + 2.0 * scaledCellPadding();
     if ( m_horizontalHeaderVisible ) {
         m_hHeaderHeight = m_horizontalHeaderFontScaler.fontMetrics().height() + 2.0 * scaledCellPadding();
@@ -110,9 +115,15 @@ void TableLayout::updateColumnWidths()
                 // after the initial column width distribution? Urgh.
                 continue;
             }
+            qreal width;
             const QString cellText = m_model->data( index, Qt::DisplayRole ).toString();
-            const qreal textWidth = fm.width(cellText);
-            const qreal width = addIconWidth( textWidth, m_model->data( index, Qt::DecorationRole ) );
+            const QSizeF cellSize = m_model->data( index, Qt::SizeHintRole ).toSizeF();
+            if (cellSize.isValid()) {
+                width = mmToPixels(cellSize.width());
+            } else {
+                const qreal textWidth = fm.size(0 /*flags*/, cellText).width();
+                width = addIconWidth( textWidth, m_model->data( index, Qt::DecorationRole ) );
+            }
             if (width > m_columnWidths[col]) {
                 m_columnWidths[col] = width;
                 m_widestTextPerColumn[col] = cellText;

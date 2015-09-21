@@ -178,7 +178,7 @@ void KDReports::SpreadsheetReportLayout::paintTextAndIcon( QPainter& painter, co
     }
 
     //qDebug() << "Drawing text in" << textRect;
-    painter.drawText( textRect, alignment | Qt::TextSingleLine, cellText );
+    painter.drawText( textRect, alignment, cellText );
 
     if ( hasIcon && iconAfterText ) {
         QRectF iconRect = cellContentsRect;
@@ -576,6 +576,11 @@ bool KDReports::SpreadsheetReportLayout::scaleTo(int numPagesHorizontally, int n
     m_numVerticalPages = numPagesVertically;
     setLayoutDirty();
     return true;
+}
+
+void KDReports::SpreadsheetReportLayout::setFixedRowHeight(qreal height)
+{
+    m_tableLayout.m_fixedRowHeight = height;
 }
 
 int KDReports::SpreadsheetReportLayout::maximumNumberOfPagesForHorizontalScaling() const

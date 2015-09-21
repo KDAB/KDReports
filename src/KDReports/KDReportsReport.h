@@ -696,6 +696,13 @@ public:
     int maximumNumberOfPagesForVerticalScaling() const;
 
     /**
+     * Sets a fixed row height. Only available in spreadsheet mode.
+     * The main use case is printing of fixed size labels.
+     * \since 1.7
+     */
+    void setFixedRowHeight( qreal mm );
+
+    /**
      * Returns a list of the auto-table elements that were used to create this report.
      * You wouldn't normally need this method; this is only to be able to change some
      * settings like showing table headers or table borders at runtime.

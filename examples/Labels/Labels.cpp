@@ -21,7 +21,7 @@
 **********************************************************************/
 
 #include <QApplication>
-#include <QStandardItemModel>
+#include <QAbstractTableModel>
 #include <QDebug>
 #include <KDReportsFrame.h>
 
@@ -33,27 +33,67 @@
 #include <KDReportsPreviewDialog.h>
 #include <QPrintDialog>
 #include <QMessageBox>
+#include <KDReportsMainTable.h>
+#include <KDReportsAutoTableElement.h>
 
 static qreal inchToMM(qreal inch) { return inch * 25.4; }
+
+class LabelModel : public QAbstractTableModel
+{
+public:
+    /**
+     * @brief Creates a LabelModel
+     * @param cellWidth the width of the label, in mm
+     * @param cellHeight the height of the label, in mm
+     * @param parent
+     */
+    LabelModel(qreal cellWidth, qreal cellHeight, QObject *parent = 0)
+        : QAbstractTableModel(parent),
+          m_cellWidth(cellWidth),
+          m_cellHeight(cellHeight)
+    {}
+
+    int rowCount(const QModelIndex &parent) const {
+        if (parent.isValid())
+            return 0;
+        return 10;
+    }
+
+    int columnCount(const QModelIndex &parent) const {
+        if (parent.isValid())
+            return 0;
+        return 3;
+    }
+
+    QVariant data(const QModelIndex &index, int role) const {
+        Q_UNUSED(index);
+        switch (role) {
+        case Qt::DisplayRole:
+            return QString::fromUtf8("Klarälvdalens Datakonsult AB\n")
+                    + "Rysktorp\n"
+                    + "Sweden\n";
+        case Qt::SizeHintRole:
+            return QSizeF(m_cellWidth, m_cellHeight);
+        case Qt::TextAlignmentRole:
+            return Qt::AlignCenter;
+        default:
+            break;
+        }
+        return QVariant();
+    }
+private:
+    qreal m_cellWidth;
+    qreal m_cellHeight;
+};
 
 int main( int argc, char** argv )
 {
     QApplication app( argc, argv );
 
-    // Create a report
-    KDReports::Report report;
-
-    QFont font;
-    font.setPointSize(10);
-    report.setDefaultFont(font);
-
     // This example shows how to print address labels
     // on the popular Avery label size of 2.625 in x 1 in which is the white label #5160.
     // It is available as 30 labels per page and is used for addressing and mailing
     // purposes.
-
-    // These labels fit in a Letter (8.5 in x 11 in) format like this:
-    // 0.31 + 2.625 * 3 + 0.31 =~ 8.5 horizontally
 
     const qreal pageWidth = inchToMM(8.5);
     const qreal pageHeight = inchToMM(11);
@@ -61,41 +101,35 @@ int main( int argc, char** argv )
     const qreal cellHeight = inchToMM(1); // = 25.4 mm
     const int rowCount = 10;
     const int columnCount = 3;
-    const qreal verticalPageMargin = (pageHeight - cellHeight * rowCount) / 2; // the 0.31 above
-    const qreal horizontalPageMargin = (pageWidth - cellWidth * columnCount) / 2;
+
+    KDReports::Report report;
+    report.setReportMode(KDReports::Report::SpreadSheet);
+    report.setPageSize( QPrinter::Letter );
+    KDReports::MainTable *mainTable = report.mainTable();
+
+    LabelModel model(cellWidth, cellHeight);
+    KDReports::AutoTableElement autoTable(&model);
+    autoTable.setHorizontalHeaderVisible(false);
+    autoTable.setVerticalHeaderVisible(false);
+    autoTable.setBorder(0);
+    mainTable->setAutoTableElement(autoTable);
+
+    QFont font;
+    font.setPointSize(10);
+    report.setDefaultFont(font);
+
+    // Margins calculation
+    // These labels fit in a Letter (8.5 in x 11 in) format like this:
+    // 0.31 + 2.625 * 3 + 0.31 =~ 8.5 horizontally
+    const qreal verticalPageMargin = (pageHeight - cellHeight * rowCount) / 2 - 0.01;
+    const qreal horizontalPageMargin = (pageWidth - cellWidth * columnCount) / 2;  // the 0.31" above
     report.setMargins( verticalPageMargin, horizontalPageMargin, verticalPageMargin, horizontalPageMargin );
+    report.setFixedRowHeight( cellHeight );
 
-    KDReports::TableElement table;
-    table.setWidth( 100, KDReports::Percent );
-    table.setBorder( 0 );
-
+//    qDebug() << "verticalPageMargin=" << verticalPageMargin;
 //    qDebug() << "cell size" << cellWidth << "x" << cellHeight << "mm";
 //    qDebug() << "table width" << cellWidth * columnCount << "mm";
 //    qDebug() << "table height" << cellHeight * rowCount << "mm. Page height=" << inchToMM(11);
-
-    for (int row = 0; row < rowCount; ++row) {
-        for (int column = 0; column < columnCount; ++column) {
-
-            KDReports::Cell &cell = table.cell(row, column);
-
-            KDReports::TextElement address;
-            address  << QString::fromUtf8("Klarälvdalens Datakonsult AB\n")
-                     << "Rysktorp\n"
-                     << "Sweden\n";
-
-            KDReports::Frame frame;
-            //frame.setWidth( cellWidth ); // width comes from table column widths
-            frame.setHeight( cellHeight );
-            frame.setPadding( 0 );
-            frame.setBorder( 0 );
-            frame.addElement( address, Qt::AlignCenter );
-
-            cell.addElement( frame, Qt::AlignCenter );
-        }
-    }
-
-    report.addElement( table );
-    report.setPageSize( QPrinter::Letter );
 
     // To show a print preview:
     KDReports::PreviewDialog preview( &report );

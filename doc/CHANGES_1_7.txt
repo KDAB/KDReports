@@ -20,6 +20,10 @@ Features:
 
 * Spreadsheet mode: honour the settings for border size, border color and header background brush.
 
+* Spreadsheet mode: add support for multiline text (with explicit '\n')
+
+* Spreadsheet mode: add support for fixed row heights (see example Labels)
+
 Performance:
 ---------
 

@@ -51,6 +51,7 @@ public:
     virtual void setPageContentSize(const QSizeF& size) = 0;
     virtual qreal layoutAsOnePage(qreal width) = 0;
     virtual bool scaleTo( int numPagesHorizontally, int numPagesVertically ) = 0;
+    virtual void setFixedRowHeight(qreal height) = 0;
     virtual int maximumNumberOfPagesForHorizontalScaling() const = 0;
     virtual int maximumNumberOfPagesForVerticalScaling() const = 0;
     virtual void ensureLayouted() = 0;
