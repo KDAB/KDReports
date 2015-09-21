@@ -129,6 +129,12 @@ static const float kdr_paperSizes[][2] = {
     {279.4f, 431.8f} // Tabloid
 };
 
+// "raw" because it does not swap for Landscape
+static QSizeF rawPaperSize(QPrinter::PageSize pageSize) {
+    return QSizeF(KDReports::mmToPixels(kdr_paperSizes[pageSize][0]),
+                  KDReports::mmToPixels(kdr_paperSizes[pageSize][1]));
+}
+
 QSizeF KDReports::ReportPrivate::paperSize() const
 {
     // determine m_paperSize from m_pageSize if needed
@@ -1160,7 +1166,7 @@ void KDReports::Report::setupPrinter( QPrinter* printer )
 {
     printer->setFullPage( true );
     printer->setOrientation( d->m_orientation );
-    printer->setPaperSize( d->paperSize(), QPrinter::DevicePixel );
+    printer->setPaperSize( rawPaperSize(d->m_pageSize), QPrinter::DevicePixel );
     printer->setDocName( d->m_documentName );
 }
 
