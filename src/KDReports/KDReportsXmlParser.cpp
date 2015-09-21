@@ -527,12 +527,14 @@ bool KDReports::XmlParser::processNode( const QDomNode& node, KDReports::ReportB
                 return false;
             }
             Q_ASSERT( builder );
-            const QString type = element.attribute( QLatin1String( "type" ) );
-            KDReports::VariableType vt = KDReports::XmlHelper::stringToVariableType( type );
-            XmlElementHandlerV2* v2 = dynamic_cast<XmlElementHandlerV2 *>(m_xmlElementHandler);
-            if (v2  && !v2->variable(vt, element))
-                continue;
-            builder->addVariablePublic( vt );
+            if ( builder ) {
+                const QString type = element.attribute( QLatin1String( "type" ) );
+                KDReports::VariableType vt = KDReports::XmlHelper::stringToVariableType( type );
+                XmlElementHandlerV2* v2 = dynamic_cast<XmlElementHandlerV2 *>(m_xmlElementHandler);
+                if (v2  && !v2->variable(vt, element))
+                    continue;
+                builder->addVariablePublic( vt );
+            }
         } else if ( name == QLatin1String( "page-break" ) ) {
             if ( m_xmlElementHandler && !m_xmlElementHandler->pageBreak( element ) )
                 continue;
@@ -621,7 +623,7 @@ void KDReports::XmlParser::parseTabs( KDReports::ReportBuilder *builder, const Q
               tab.position = pos;
               tabs.append( tab );
           }
-    }   
+    }
     XmlElementHandlerV2* v2 = dynamic_cast<XmlElementHandlerV2 *>(m_xmlElementHandler);
     if (!v2 || v2->tabs(tabs, tabsElement))
         builder->setTabPositions( tabs );
