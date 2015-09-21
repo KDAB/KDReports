@@ -2,7 +2,7 @@ TEMPLATE = subdirs
 SUBDIRS  = src examples include
 unittests: SUBDIRS += unittests
 CONFIG   += ordered
-VERSION  = 1.6.0
+VERSION  = 1.6.98
 MAJOR_VERSION = 1
 
 unix:DEFAULT_INSTALL_PREFIX = /usr/local/KDAB/KDReports-$$VERSION
