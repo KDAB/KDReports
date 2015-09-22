@@ -12,9 +12,9 @@
     LIBS += -L$$KDREPORTSDIR/lib
     win32* {
       CONFIG(debug, debug|release) {
-        LIBS += -lkdreportsd
+        LIBS += -lkdreportsd1
       } else {
-        LIBS += -lkdreports
+        LIBS += -lkdreports1
       }
     } else {
       !isEmpty(QMAKE_RPATH):LIBS += $$QMAKE_RPATH$$KDREPORTSDIR/lib
