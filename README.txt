@@ -1,3 +1,4 @@
+# <a name="title"></a> KD Reports [(https://github.com/KDAB/KDReports/blob/master/images/kdreports.svg)]
 Introduction
 ============
 KD Reports is a Qt tool that lets you easily create printable reports by
