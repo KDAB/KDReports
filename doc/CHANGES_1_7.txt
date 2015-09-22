@@ -3,6 +3,9 @@ What is new in KD Reports 1.7
 
 Features:
 ---------
+* Comes with a fully functioning CMake buildsystem (see INSTALL-cmake.txt)
+  (for those who like using CMake instead of qmake)
+
 * Added Frame element.
 
 * Added Report::setDocumentName(), to be able to set a name for the print job.
