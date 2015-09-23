@@ -163,8 +163,11 @@ void KDReports::PreviewDialogPrivate::_kd_slotSave()
         bool ok;
         Q_FOREVER {
             const QString text = q->tr("Saving as PDF in %1\n\nEnter the file name:").arg(m_defaultSaveDirectory);
-            const QString fileName = QInputDialog::getText(q, q->tr("Save Report as PDF"), text,
-                                                           QLineEdit::Normal, report->documentName() + QLatin1String(".pdf"), &ok);
+            QString fileName = QInputDialog::getText(q, q->tr("Save Report as PDF"), text,
+                    QLineEdit::Normal, report->documentName() + QLatin1String(".pdf"), &ok);
+            if (!fileName.endsWith(QLatin1String(".pdf"), Qt::CaseInsensitive)) {
+                fileName += QLatin1String(".pdf");
+            }
             if ( !ok || fileName.isEmpty() )
                 return;
             file = m_defaultSaveDirectory + QLatin1Char('/') + fileName;
