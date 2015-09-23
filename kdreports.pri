@@ -10,7 +10,7 @@
     unix:!exists( $$KDREPORTSDIR/include/KDReports ):error( "Cannot find KDReports in $KDREPORTSDIR/include/KDReports" )
 
     LIBS += -L$$KDREPORTSDIR/lib
-    win32* {
+    win32*:!static {
       CONFIG(debug, debug|release) {
         LIBS += -lkdreportsd1
       } else {
