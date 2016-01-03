@@ -48,7 +48,7 @@ https://github.com/KDAB/KDReports
 
 License
 =======
-KD Reports is (C) 2007-2015, Klaralvdalens Datakonsult AB, and is available
+KD Reports is (C) 2007-2016, Klaralvdalens Datakonsult AB, and is available
 under the terms of:
 * the LGPL (see LICENSE.LGPL.txt for details)
 * the GPL (see LICENSE.GPL.txt for details)
