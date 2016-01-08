@@ -48,14 +48,14 @@ https://github.com/KDAB/KDReports
 
 License
 =======
-KD Reports is (C) 2007-2016, Klaralvdalens Datakonsult AB, and is available
-under the terms of:
+The KD Reports Software is (C) 2007-2016 Klarälvdalens Datakonsult AB (KDAB),
+and is available under the terms of:
 * the LGPL (see LICENSE.LGPL.txt for details)
 * the GPL (see LICENSE.GPL.txt for details)
-* the KDAB commercial license, provided that you buy a license, see
-http://www.kdab.com/kdab-products/prices/
+* the KDAB commercial license, provided that you buy a license.
+  please contact sales@kdab.com if you are interested in buying commercial licenses.
 
-Commercial use is described in ReadMe-commercial.txt.
+Commercial use is described in README-commercial.txt.
 
 About KDAB
 ==========
@@ -67,6 +67,7 @@ frameworks to Qt. We continue to help develop parts of Qt and are one
 of the major contributors to the Qt Project. We can give advanced or
 standard trainings anywhere around the globe.
 
+Please visit http://www.kdab.com to meet the people who write code like this.
 
 
 KD REPORTS and the KD REPORTS logo are registered trademarks of Klaralvdalens Datakonsult AB
