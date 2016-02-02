@@ -1,5 +1,5 @@
 Name:           kdreports
-Version:        1.6.0
+Version:        1.7.0
 Release:        1
 Summary:        A Qt library for creating printable reports
 Source:         %{name}-%{version}.tar.gz
@@ -86,9 +86,9 @@ QMAKE_ARGS="LIB_SUFFIX=64" ./configure.sh -shared -release -prefix %{buildroot}/
 %{_libdir}/libkdreports.so
 
 %changelog
+* Thu Oct 08 2015 Allen Winter <allen.winter@kdab.com> 1.7.0
+  1.7.0 final
 * Thu Jan 08 2015 Allen Winter <allen.winter@kdab.com> 1.6.0
   1.6.0 final
 * Wed Dec 31 2014 Allen Winter <allen.winter@kdab.com> 1.5.99
   1.6.0 RC
-
-
