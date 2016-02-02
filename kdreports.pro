@@ -20,7 +20,7 @@ equals( KDREPORTS_INSTALL_PREFIX, $$DEFAULT_INSTALL_PREFIX ){
     unix:message( "No install prefix given, using default of" $$DEFAULT_INSTALL_PREFIX (use configure.sh -prefix DIR to specify))
     !unix:message( "No install prefix given, using default of" $$DEFAULT_INSTALL_PREFIX (use configure -prefix DIR to specify))
 } else {
-    INSTALL_PREFIX=\"$$KDREPORTS_INSTALL_PREFIX\"
+    INSTALL_PREFIX=$$KDREPORTS_INSTALL_PREFIX
 }
 
 DEBUG_SUFFIX=""
