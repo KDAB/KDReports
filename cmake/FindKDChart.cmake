@@ -12,10 +12,13 @@
 include(FindPackageHandleStandardArgs)
 
 find_library(KDChart_LIBRARIES
-        NAMES KDChart kdchart
-        PATH_SUFFIXES lib)
+    NAMES KDChart kdchart kdchart2
+    HINTS ${KDChart_DIR}/lib $ENV{KDChart_DIR}/lib
+    PATH_SUFFIXES lib)
 find_path(KDChart_INCLUDE_DIR
-        NAMES KDChartGlobal.h)
+    NAMES KDChartGlobal.h
+    HINTS ${KDChart_DIR}/include $ENV{KDChart_DIR}/include
+    PATH_SUFFIXES KDChart)
 
 mark_as_advanced(KDChart_LIBRARIES KDChart_INCLUDE_DIR)
 
