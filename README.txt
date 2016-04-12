@@ -41,7 +41,7 @@ Get Involved
 ============
 KDAB will happily accept external contributions, but substantial
 contributions will require a signed Copyright Assignment Agreement.
-Contact support@kdab.com for more information.
+Contact info@kdab.com for more information.
 
 Please submit your contributions or issue reports from our GitHub space at
 https://github.com/KDAB/KDReports
