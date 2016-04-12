@@ -11,7 +11,7 @@ Contributing
 ============
 KDAB will happily accept external contributions, but substantial
 contributions will require a signed Copyright Assignment Agreement.
-Contact support@kdab.com for more information.
+Contact info@kdab.com for more information.
 
 Licensing
 =========
