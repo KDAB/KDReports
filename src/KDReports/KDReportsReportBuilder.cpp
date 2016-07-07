@@ -101,19 +101,20 @@ void KDReports::ReportBuilder::addVariable( KDReports::VariableType variable )
                           : variableValue( 0 /*pageNumber*/, m_report, variable );
     KDReports::TextElement element( value );
 
+    const QTextCharFormat origCharFormat = cursor().charFormat();
+
     // Keep the current font (KDRE-91).
-    // Can't use cursor().charFormat() for that, addInlineElement resets it to default.
     QTextCursor docCursor( &currentDocument() );
     docCursor.setPosition( charPosition );
-    element.setCharFormat( docCursor.charFormat() );
+    cursor().setCharFormat( docCursor.charFormat() );
 
     cursor().beginEditBlock();
-    const QTextCharFormat origCharFormat = cursor().charFormat();
     element.build( *this );
-    cursor().setCharFormat( origCharFormat ); // restore the orig format
     cursor().endEditBlock();
 
     setVariableMarker( currentDocument(), charPosition, variable, value.length() );
+
+    cursor().setCharFormat( origCharFormat ); // restore the orig format
 }
 
 void KDReports::ReportBuilder::addVerticalSpacing( qreal space )

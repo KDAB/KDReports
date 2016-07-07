@@ -137,6 +137,7 @@ void KDReports::TableElement::build( ReportBuilder& builder ) const
     tableFormat.setAlignment( textDocCursor.blockFormat().alignment() );
     tableFormat.setBackground(background());
     fillTableFormat( tableFormat, textDocCursor );
+    QTextCharFormat charFormat = textDocCursor.charFormat();
 
     QTextTable* textTable = textDocCursor.insertTable( rowCount, columnCount,
                                                        tableFormat );
@@ -151,7 +152,7 @@ void KDReports::TableElement::build( ReportBuilder& builder ) const
         QTextTableCell tableCell = textTable->cellAt( row, column );
         Q_ASSERT( tableCell.isValid() );
         QTextCursor cellCursor = tableCell.firstCursorPosition();
-        QTextCharFormat tableCellFormat;
+        QTextCharFormat tableCellFormat = charFormat;
         tableCellFormat.setBackground( cell.background() );
         tableCellFormat.setTableCellColumnSpan( cell.columnSpan() );
         tableCellFormat.setTableCellRowSpan( cell.rowSpan() );

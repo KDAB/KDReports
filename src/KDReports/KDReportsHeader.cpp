@@ -110,6 +110,13 @@ void KDReports::setVariableMarker( QTextDocument& textDoc, int pos, KDReports::V
     c.setCharFormat( charFormat );
 }
 
+void KDReports::cleanupVariableProperties( QTextCharFormat &charFormat )
+{
+    charFormat.setProperty( ResizableImageProperty, QVariant() );
+    charFormat.setProperty( VariableTypeProperty, QVariant() );
+    charFormat.setProperty( VariableLengthProperty, QVariant() );
+}
+
 void KDReports::Header::addVariable( VariableType variable )
 {
     d->m_builder.addVariablePublic( variable );
@@ -122,7 +129,7 @@ void KDReports::Header::addVerticalSpacing( qreal space )
 
 void KDReports::Header::preparePaintingPage( int pageNumber )
 {
-    //qDebug() << "preparePaintingPage" << pageNumber << d->m_textDocument.toPlainText();
+    //qDebug() << "preparePaintingPage" << pageNumber;
     QTextCursor c( &d->m_textDocument.contentDocument() );
     do {
         c.movePosition( QTextCursor::NextCharacter );

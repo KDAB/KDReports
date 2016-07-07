@@ -51,6 +51,10 @@ void setVariableMarker( QTextDocument& textDoc, int pos, KDReports::VariableType
  * @internal
  */
 QString variableValue( int pageNumber, KDReports::Report* report, VariableType type );
+/**
+ * @internal
+ */
+void cleanupVariableProperties( QTextCharFormat &charFormat );
 
 /**
  * @internal

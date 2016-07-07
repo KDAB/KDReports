@@ -27,6 +27,7 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlTableModel>
+#include <QTextTableCell>
 
 using namespace KDReports;
 namespace KDReports { class Test; }
@@ -131,6 +132,35 @@ private slots:
         QCOMPARE( report.numberOfPages(), 1 );
     }
 
+    void testTableFont()
+    {
+        KDReports::Report report;
+        int rows = 2;
+        int columns = 2;
+        const QString cellText = QString::fromLatin1( "HELLO WORLD table %1x%2" )
+            .arg( rows ).arg( columns );
+        TableElement tableElement;
+        tableElement.setDefaultFont(QFont("Arial", 11));
+        tableElement.setBorder( 1 );
+        for ( int row = 0; row < rows; ++row ) {
+            for ( int column = 0; column < columns; ++column ) {
+                tableElement.cell(0, column).addElement( KDReports::TextElement( cellText ) );
+            }
+        }
+        report.addElement( tableElement );
+        // trigger a layout
+        QCOMPARE( report.numberOfPages(), 1 );
+        QTextCursor c( &report.doc().contentDocument() );
+        c.movePosition( QTextCursor::NextCharacter );
+        QTextTable* table = c.currentTable();
+        QVERIFY(table);
+
+        QTextTableCell firstCell = table->cellAt(0, 0);
+        QVERIFY(firstCell.isValid());
+        QTextCursor cc = firstCell.firstCursorPosition();
+        QCOMPARE(cc.charFormat().font().pointSize(), 11);
+    }
+
 #if 0 // not available in WordProcessingMode anymore
     void testScaleNoTables()
     {
@@ -160,42 +190,6 @@ private slots:
         QCOMPARE( report.numberOfPages(), 1 );
     }
 #endif
-
-private: // helpers
-    static void addTable( KDReports::Report& report, int rows, int columns )
-    {
-        const QString cellText = QString::fromLatin1( "HELLO WORLD table %1x%2" )
-                                 .arg( rows ).arg( columns );
-        TableElement table;
-        table.setBorder( 1 );
-        for ( int row = 0; row < rows; ++row ) {
-            for ( int column = 0; column < columns; ++column ) {
-                table.cell(0, column).addElement( KDReports::TextElement( cellText ) );
-            }
-        }
-        report.addElement( table );
-    }
-
-    static void makeSimpleTable( KDReports::Report& report )
-    {
-        // Test for setTableBreakingEnabled
-        // This also tests that the cell rect is correctly determined, not
-        // just from the bounding rect of the first paragraph of the cell.
-        QFont defaultFont( QLatin1String( "Helvetica" ), 48 );
-        report.setDefaultFont( defaultFont );
-        TableElement table;
-        table.setBorder( 1 );
-        int rows = 1;
-        int columns = 4;
-        for ( int row = 0; row < rows; ++row ) {
-            for ( int column = 0; column < columns; ++column ) {
-                KDReports::Cell& cell = table.cell(0, column);
-                cell.addElement( KDReports::TextElement( "a" ) ); // a short first line
-                cell.addElement( KDReports::TextElement( "HELLO WORLD" ) ); // a long second line
-            }
-        }
-        report.addElement( table );
-    }
 
 };
 
