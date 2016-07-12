@@ -624,7 +624,6 @@ private:
         const QString cellText = QString::fromLatin1( "HELLO WORLD table %1x%2" )
                                  .arg( rows ).arg( columns );
         TableElement table;
-        tableElement.setDefaultFont(QFont("Arial", 11));
         table.setBorder( 1 );
         for ( int row = 0; row < rows; ++row ) {
             for ( int column = 0; column < columns; ++column ) {
