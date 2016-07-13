@@ -155,6 +155,8 @@ void FillCellHelper::fill( QTextTable* textTable, KDReports::ReportBuilder& buil
 #else
         charFormat.setFont( cellQFont );
 #endif
+    } else {
+        charFormat.setFont( builder.defaultFont() );
     }
     if ( foreground.isValid() )
         charFormat.setForeground( foreground );

@@ -8,4 +8,5 @@ Bug fixes:
 ----------
 * TableElement::setDefaultFont() now works as advertised. Each TextElement was forcing its full character format
 even if it didn't have a font set. Now each TextElement only sets the parts of the character format that have
-been explicitly set.
+been explicitly set, and the default font for every block comes from the report's default font or the table's
+default font (in tables).

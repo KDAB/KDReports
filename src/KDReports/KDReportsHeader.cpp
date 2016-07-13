@@ -157,6 +157,7 @@ void KDReports::Header::setDefaultFont( const QFont& font )
     QFont f( font );
     f.setStyleStrategy( QFont::ForceOutline ); // bitmap fonts look awful in printed documents
     d->m_textDocument.contentDocument().setDefaultFont( f );
+    d->m_builder.setDefaultFont( f );
 }
 
 QFont KDReports::Header::defaultFont() const

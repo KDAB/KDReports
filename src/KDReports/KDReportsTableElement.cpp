@@ -161,6 +161,7 @@ void KDReports::TableElement::build( ReportBuilder& builder ) const
         ReportBuilder cellBuilder( builder.currentDocumentData(),
                                    cellCursor, builder.report() );
         cellBuilder.copyStateFrom( builder );
+        cellBuilder.setDefaultFont( charFormat.font() );
         cell.build( cellBuilder );
     }
 

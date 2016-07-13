@@ -111,10 +111,16 @@ KDReports::Unit KDReports::AbstractTableElement::unit() const
     return d->m_unit;
 }
 
-void KDReports::AbstractTableElement::setDefaultFont(const QFont &font)
+void KDReports::AbstractTableElement::setDefaultFont( const QFont &font )
 {
     d->m_defaultFont = font;
     d->m_fontSpecified = true;
+}
+
+QFont KDReports::AbstractTableElement::defaultFont( bool *isSet ) const
+{
+    *isSet = d->m_fontSpecified;
+    return d->m_defaultFont;
 }
 
 void KDReports::AbstractTableElement::fillTableFormat( QTextTableFormat& tableFormat, QTextCursor& textDocCursor ) const

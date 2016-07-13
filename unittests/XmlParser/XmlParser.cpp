@@ -116,6 +116,7 @@ private slots:
         QFile file( ":/fonts.xml" );
         QVERIFY( file.open( QIODevice::ReadOnly ) );
         Report report;
+        report.setDefaultFont(QFont("Fixed", 18));
         // Prepare model
         QStandardItemModel model;
         model.setItem( 0, 0, new QStandardItem( "0,0" ) );
@@ -136,7 +137,8 @@ private slots:
         QCOMPARE( block.charFormat().fontFamily(), QString() );
         QTextCursor cursor( block );
         while ( !cursor.atBlockEnd() ) {
-            QCOMPARE( cursor.charFormat().fontFamily(), QString() );
+            QCOMPARE( cursor.charFormat().fontFamily(), QString("Arial") );
+            QCOMPARE( cursor.charFormat().font().pointSize(), 8 );
             cursor.movePosition( QTextCursor::Right );
         }
         // Check the footer's font
@@ -144,13 +146,14 @@ private slots:
         const QTextDocument& footerDoc = theFooter.doc().contentDocument();
         QCOMPARE( footerDoc.blockCount(), 1 );
         QCOMPARE( footerDoc.toPlainText(), QString("footer") );
-        // TODO QCOMPARE( footerDoc.defaultFont().pointSize(), 16 );
+        QCOMPARE( footerDoc.defaultFont().pointSize(), 16 );
         // Check the document's default font
         QCOMPARE( report.doc().contentDocument().defaultFont().pointSize(), 16 );
         // Check the document's actual font (for each char, including the autotable)
         cursor = QTextCursor( report.doc().contentDocument().begin() );
         while ( !cursor.atEnd() ) {
-            QCOMPARE( cursor.charFormat().fontPointSize(), (qreal)0 );
+            int fontSize = cursor.charFormat().fontPointSize();
+            QVERIFY(fontSize == 0 || fontSize == 16); // 0 gets resolved against the document font, so that's fine
             cursor.movePosition( QTextCursor::Right );
         }
     }

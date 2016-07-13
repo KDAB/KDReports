@@ -82,6 +82,16 @@ public:
         return currentDocumentData().document();
     }
 
+    // Store default font in builder, so that toplevel text elements use the report's default font
+    // but table cells use the table's default font (if any)
+    void setDefaultFont( const QFont &font ) {
+        m_defaultFont = font;
+    }
+
+    QFont defaultFont() const {
+        return m_defaultFont;
+    }
+
     // should not be used directly, apart for creating another builder (e.g. cell builder)
     TextDocumentData& contentDocumentData() {
         return m_contentDocument;
@@ -108,6 +118,7 @@ private:
     qreal m_topMargin;
     qreal m_bottomMargin;
     Report* m_report;
+    QFont m_defaultFont;
     bool m_first;
 };
 

@@ -380,6 +380,11 @@ void KDReports::TextDocumentData::regenerateOneTable( const KDReports::AutoTable
 
     ReportBuilder builder( *this,
                            cursor, 0 /* hack - assumes Report is not needed */ );
+    bool isSet;
+    QFont font = tableElement.defaultFont( &isSet );
+    if ( isSet ) {
+        builder.setDefaultFont( font );
+    }
     tableElement.build( builder ); // this calls registerTable again
 
     cursor.setBlockFormat( blockFormat );

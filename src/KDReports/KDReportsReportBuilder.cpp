@@ -66,7 +66,11 @@ void KDReports::ReportBuilder::addBlockElement( const Element& element, Qt::Alig
         m_first = false;
     }
 
-    const QTextCharFormat origCharFormat = cursor.charFormat();
+    // Set the default font again, the previous block should have no effect on this one
+    QTextCharFormat charFormat = cursor.charFormat();
+    charFormat.setFont( m_defaultFont );
+    cursor.setCharFormat( charFormat );
+
     QTextBlockFormat blockFormat;
     blockFormat.setAlignment( horizontalAlignment );
     setupBlockFormat( blockFormat );
@@ -78,7 +82,6 @@ void KDReports::ReportBuilder::addBlockElement( const Element& element, Qt::Alig
 
     element.build( *this );
 
-    cursor.setCharFormat( origCharFormat );
     cursor.endEditBlock();
 
 #if 0 // DEBUG CODE for tab positions
@@ -190,6 +193,7 @@ void KDReports::ReportBuilder::copyStateFrom( ReportBuilder& parentBuilder )
     m_rightMargin = parentBuilder.m_rightMargin;
     m_topMargin = parentBuilder.m_topMargin;
     m_bottomMargin = parentBuilder.m_bottomMargin;
+    m_defaultFont = parentBuilder.m_defaultFont;
 }
 
 QDebug operator <<(QDebug &dbg, const QTextOption::Tab &tab)

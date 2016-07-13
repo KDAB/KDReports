@@ -292,11 +292,18 @@ private slots:
     void testAddVerticalSpacing()
     {
         Report report;
+        report.setDefaultFont(QFont("Arial", 18));
         report.addVerticalSpacing( 1 );
         report.addElement( TextElement( "foo" ) );
         report.addVerticalSpacing( 10 );
         report.addElement( TextElement( "bar" ) );
         // We can't QCOMPARE anything here, but at least we checked that it doesn't crash
+
+        // Check that the "point size 1" used for that block doesn't affect the next block
+        report.addElement( TextElement("Some text") );
+        QTextCursor cursor( &report.doc().contentDocument() );
+        cursor.setPosition( 10 );
+        QCOMPARE( cursor.charFormat().font().pointSize(), 18 );
     }
 
     void testVariableInHeader()

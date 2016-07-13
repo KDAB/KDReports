@@ -119,6 +119,7 @@ void KDReports::TextDocReportLayout::finishHtmlExport()
 void KDReports::TextDocReportLayout::setDefaultFont(const QFont &font)
 {
     m_textDocument.contentDocument().setDefaultFont( font );
+    m_builder.setDefaultFont( font );
 }
 
 QFont KDReports::TextDocReportLayout::defaultFont() const

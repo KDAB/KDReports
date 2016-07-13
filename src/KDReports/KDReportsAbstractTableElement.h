@@ -108,6 +108,13 @@ public:
     void setDefaultFont( const QFont& font );
 
     /**
+     * \return the default font set by setDefaultFont(), if any
+     * \param isSet set to true if a default font was set, false otherwise
+     * \since 1.8
+     */
+    QFont defaultFont( bool *isSet ) const;
+
+    /**
      * Copies a table element.
      * The model and settings (and cell elements, when using addElement) are copied over.
      */
