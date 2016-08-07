@@ -2,7 +2,7 @@ Source: kdreports
 Section: Miscellaneous
 Priority: optional
 Maintainer: Allen Winter <allen.winter@kdab.com>
-Build-Depends: debhelper (>= 4.1.16), cdbs, libqt4-dev
+Build-Depends: debhelper (>= 4.1.16), cdbs, cmake, libqt4-dev
 
 Package: kdreports
 Architecture: any
