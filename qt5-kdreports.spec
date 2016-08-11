@@ -1,4 +1,4 @@
-Name:           kdreports
+Name:           qt5-kdreports
 Version:        1.7.1
 Release:        1
 Summary:        A Qt library for creating printable reports
@@ -11,15 +11,15 @@ Vendor:         Klaralvdalens Datakonsult AB (KDAB)
 Packager:       Klaralvdalens Datakonsult AB (KDAB) <info@kdab.com>
 
 %if %{defined suse_version}
-BuildRequires:  libqt4-devel
+BuildRequires:  libqt5-qtbase-devel
 %endif
 
 %if %{defined fedora}
-BuildRequires:  gcc-c++ qt-devel desktop-file-utils
+BuildRequires:  gcc-c++ qt5-qtbase-devel desktop-file-utils
 %endif
 
 %if %{defined rhel}
-BuildRequires:  gcc-c++ qt-devel desktop-file-utils
+BuildRequires:  gcc-c++ qt5-qtbase-devel desktop-file-utils
 %endif
 
 %description
@@ -30,7 +30,7 @@ Authors:
 --------
       Klaralvdalens Datakonsult AB (KDAB) <info@kdab.com>
 
-%define libname lib%{name}1
+%define libname libreports1
 %package -n %{libname}
 Summary:        %{summary}
 Group:          System/Libraries
@@ -45,13 +45,13 @@ Authors:
 
 
 %package devel
-Summary:        Development files for %{name}
+Summary:        Development files for kdreports
 Group:          Development/Libraries/C and C++
 Requires:       %{libname} = %{version}
 
 %description devel
 This package contains header files and associated tools and libraries to
-develop programs using %{name}.
+develop programs using kdreports.
 
 %prep
 %setup -q
@@ -86,11 +86,5 @@ QMAKE_ARGS="LIB_SUFFIX=64" ./configure.sh -shared -release -prefix %{buildroot}/
 %{_libdir}/libkdreports.so
 
 %changelog
-* Thu Oct 11 2016 Allen Winter <allen.winter@kdab.com> 1.7.1
+* Thu Aug 11 2016 Allen Winter <allen.winter@kdab.com> 1.7.1
   1.7.1 final
-* Thu Oct 08 2015 Allen Winter <allen.winter@kdab.com> 1.7.0
-  1.7.0 final
-* Thu Jan 08 2015 Allen Winter <allen.winter@kdab.com> 1.6.0
-  1.6.0 final
-* Wed Dec 31 2014 Allen Winter <allen.winter@kdab.com> 1.5.99
-  1.6.0 RC

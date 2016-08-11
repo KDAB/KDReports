@@ -2,7 +2,7 @@
 from autogen.autogen import autogen
 
 project = "KDReports"
-version = "1.7.0"
+version = "1.7.1"
 subprojects = ["KDReports"]
 prefixed = True
 
