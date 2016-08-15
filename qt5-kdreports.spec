@@ -10,6 +10,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Vendor:         Klaralvdalens Datakonsult AB (KDAB)
 Packager:       Klaralvdalens Datakonsult AB (KDAB) <info@kdab.com>
 
+BuildRequires: cmake
 %if %{defined suse_version}
 BuildRequires:  libqt5-qtbase-devel
 %endif
@@ -30,7 +31,7 @@ Authors:
 --------
       Klaralvdalens Datakonsult AB (KDAB) <info@kdab.com>
 
-%define libname libreports1
+%define libname libkdreports1_7_1
 %package -n %{libname}
 Summary:        %{summary}
 Group:          System/Libraries
@@ -58,11 +59,7 @@ develop programs using kdreports.
 
 %build
 touch .license.accepted
-%if "%{_lib}"=="lib64"
-QMAKE_ARGS="LIB_SUFFIX=64" ./configure.sh -shared -release -prefix %{buildroot}/usr
-%else
-./configure.sh -shared -release -prefix %{buildroot}/usr
-%endif
+cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
 %__make %{?_smp_mflags}
 
 %post -n %{libname} -p /sbin/ldconfig
@@ -81,8 +78,10 @@ QMAKE_ARGS="LIB_SUFFIX=64" ./configure.sh -shared -release -prefix %{buildroot}/
 
 %files devel
 %defattr(-,root,root,-)
-%{_includedir}/KDReports
-%attr(0644, root, root) %{_includedir}/KDReports/KDReports
+%dir %{_includedir}/KDReports
+%{_includedir}/KDReports/*
+%dir %{_libdir}/cmake/KDReports
+%{_libdir}/cmake/KDReports/*
 %{_libdir}/libkdreports.so
 
 %changelog
