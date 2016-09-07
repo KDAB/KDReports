@@ -1,5 +1,5 @@
 *-g++* {
-  NORMAL_CFLAGS = -Wno-long-long -ansi
+  NORMAL_CFLAGS = -Wno-long-long
   NORMAL_CXXFLAGS = \
 	-Wnon-virtual-dtor -Wundef -Wcast-align \
 	-Wchar-subscripts -Wpointer-arith \
