@@ -1,0 +1,13 @@
+Source: kdreports
+Section: Miscellaneous
+Priority: optional
+Maintainer: Allen Winter <allen.winter@kdab.com>
+Standards-Version: 3.9.6
+Homepage: https://github.com/KDAB/KDReports
+
+Package: qt5-kdreports
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: KDAB's KD Reports is a Qt toolkit that lets you easily
+ create printable reports by providing all of the necessary features
+ for a variety of applications.
