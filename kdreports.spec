@@ -10,6 +10,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Vendor:         Klaralvdalens Datakonsult AB (KDAB)
 Packager:       Klaralvdalens Datakonsult AB (KDAB) <info@kdab.com>
 
+BuildRequires:  cmake
 %if %{defined suse_version}
 BuildRequires:  libqt4-devel
 %endif
@@ -44,11 +45,7 @@ develop programs using kdreports.
 
 %build
 touch .license.accepted
-%if "%{_lib}"=="lib64"
-QMAKE_ARGS="LIB_SUFFIX=64" ./configure.sh -shared -release -prefix %{buildroot}/usr
-%else
-./configure.sh -shared -release -prefix %{buildroot}/usr
-%endif
+cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
 %__make %{?_smp_mflags}
 
 %post -p /sbin/ldconfig
@@ -67,11 +64,15 @@ QMAKE_ARGS="LIB_SUFFIX=64" ./configure.sh -shared -release -prefix %{buildroot}/
 
 %files devel
 %defattr(-,root,root,-)
-%{_includedir}/KDReports
-%attr(0644, root, root) %{_includedir}/KDReports/KDReports
+%dir %{_includedir}/KDReports
+%{_includedir}/KDReports/*
+%dir %{_libdir}/cmake/KDReports
+%{_libdir}/cmake/KDReports/*
 %{_libdir}/libkdreports.so
 
 %changelog
+* Thu Aug 11 2016 Allen Winter <allen.winter@kdab.com> 1.7.1
+  1.7.1 final
 * Thu Oct 08 2015 Allen Winter <allen.winter@kdab.com> 1.7.0
   1.7.0 final
 * Thu Jan 08 2015 Allen Winter <allen.winter@kdab.com> 1.6.0
