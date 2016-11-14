@@ -1,6 +1,6 @@
 Name:           kdreports
-Version:        1.7.0
-Release:        1
+Version:        1.7.1
+Release:        3
 Summary:        A Qt library for creating printable reports
 Source:         %{name}-%{version}.tar.gz
 URL:            http://github.com/KDAB/KDReports
@@ -30,28 +30,14 @@ Authors:
 --------
       Klaralvdalens Datakonsult AB (KDAB) <info@kdab.com>
 
-%define libname lib%{name}1
-%package -n %{libname}
-Summary:        %{summary}
-Group:          System/Libraries
-
-%description -n %{libname}
-KDAB's KD Reports is the Qt tool that lets you easily create printable reports
-by providing all of the necessary features for a variety of applications.
-
-Authors:
---------
-      Klaralvdalens Datakonsult AB (KDAB) <info@kdab.com>
-
-
 %package devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries/C and C++
-Requires:       %{libname} = %{version}
+Requires:       %{name} = %{version}
 
 %description devel
 This package contains header files and associated tools and libraries to
-develop programs using %{name}.
+develop programs using kdreports.
 
 %prep
 %setup -q
@@ -65,8 +51,8 @@ QMAKE_ARGS="LIB_SUFFIX=64" ./configure.sh -shared -release -prefix %{buildroot}/
 %endif
 %__make %{?_smp_mflags}
 
-%post -n %{libname} -p /sbin/ldconfig
-%postun -n %{libname} -p /sbin/ldconfig
+%post -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %install
 %make_install
@@ -74,7 +60,7 @@ QMAKE_ARGS="LIB_SUFFIX=64" ./configure.sh -shared -release -prefix %{buildroot}/
 %clean
 %__rm -rf "%{buildroot}"
 
-%files -n %{libname}
+%files
 %defattr(-,root,root)
 %{_prefix}/share/doc/KDReports
 %{_libdir}/libkdreports.so.*
