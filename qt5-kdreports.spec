@@ -31,24 +31,10 @@ Authors:
 --------
       Klaralvdalens Datakonsult AB (KDAB) <info@kdab.com>
 
-%define libname libkdreports1_7_1
-%package -n %{libname}
-Summary:        %{summary}
-Group:          System/Libraries
-
-%description -n %{libname}
-KDAB's KD Reports is the Qt tool that lets you easily create printable reports
-by providing all of the necessary features for a variety of applications.
-
-Authors:
---------
-      Klaralvdalens Datakonsult AB (KDAB) <info@kdab.com>
-
-
 %package devel
-Summary:        Development files for kdreports
+Summary:        Development files for %{name}
 Group:          Development/Libraries/C and C++
-Requires:       %{libname} = %{version}
+Requires:       %{name} = %{version}
 
 %description devel
 This package contains header files and associated tools and libraries to
@@ -62,8 +48,8 @@ touch .license.accepted
 cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
 %__make %{?_smp_mflags}
 
-%post -n %{libname} -p /sbin/ldconfig
-%postun -n %{libname} -p /sbin/ldconfig
+%post -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %install
 %make_install
@@ -71,7 +57,7 @@ cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
 %clean
 %__rm -rf "%{buildroot}"
 
-%files -n %{libname}
+%files
 %defattr(-,root,root)
 %{_prefix}/share/doc/KDReports
 %{_libdir}/libkdreports.so.*
