@@ -31,3 +31,9 @@ qreal KDReports::mmToPixels( qreal mm )
     return mm * 0.039370147 // mm to inch
         * qt_defaultDpi();  // inch to pixels
 }
+
+qreal KDReports::mmToPixels( qreal mm, double dpi )
+{
+    return mm * 0.039370147 // mm to inch
+        * dpi;  // inch to pixels
+}

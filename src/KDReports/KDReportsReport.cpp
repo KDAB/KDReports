@@ -130,9 +130,9 @@ static const float kdr_paperSizes[][2] = {
 };
 
 // "raw" because it does not swap for Landscape
-static QSizeF rawPaperSize(QPrinter::PageSize pageSize) {
-    return QSizeF(KDReports::mmToPixels(kdr_paperSizes[pageSize][0]),
-                  KDReports::mmToPixels(kdr_paperSizes[pageSize][1]));
+static QSizeF rawPaperSize(QPrinter::PageSize pageSize, QPrinter* printer) {
+    return QSizeF(KDReports::mmToPixels(kdr_paperSizes[pageSize][0], printer->logicalDpiX()),
+                  KDReports::mmToPixels(kdr_paperSizes[pageSize][1], printer->logicalDpiY()));
 }
 
 QSizeF KDReports::ReportPrivate::paperSize() const
@@ -715,8 +715,8 @@ bool KDReports::Report::exportToFile( const QString& fileName, QWidget* parent )
 {
     d->ensureLayouted();
     QPrinter printer;
+    printer.setOutputFileName( fileName ); // must be done before setupPrinter, since it affects DPI
     setupPrinter( &printer );
-    printer.setOutputFileName( fileName );
     const bool ret = d->doPrint( &printer, parent );
     printer.setOutputFileName( QString() );
     return ret;
@@ -1166,7 +1166,7 @@ void KDReports::Report::setupPrinter( QPrinter* printer )
 {
     printer->setFullPage( true );
     printer->setOrientation( d->m_orientation );
-    printer->setPaperSize( rawPaperSize(d->m_pageSize), QPrinter::DevicePixel );
+    printer->setPaperSize( rawPaperSize(d->m_pageSize, printer), QPrinter::DevicePixel );
     printer->setDocName( d->m_documentName );
 }
 
