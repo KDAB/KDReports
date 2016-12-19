@@ -24,6 +24,7 @@
 #include <QPainter>
 #include <QDebug>
 #include <QTextBlock>
+#include <QAbstractTextDocumentLayout>
 
 KDReports::TextDocReportLayout::TextDocReportLayout(KDReports::Report* report)
     : m_textDocument(),
@@ -43,7 +44,14 @@ void KDReports::TextDocReportLayout::paintPageContent(int pageNumber, QPainter &
 {
     painter.translate( 0, - pageNumber * m_textDocument.contentDocument().pageSize().height() );
 
-    m_textDocument.contentDocument().drawContents(&painter, painter.clipRegion().boundingRect());
+    // Instead of using drawContents directly, we have to fork it in order to fix the palette (to avoid white-on-white in dark color schemes)
+    // m_textDocument.contentDocument().drawContents(&painter, painter.clipRegion().boundingRect());
+    // This even allows us to optimize it a bit (painter clip rect already set)
+
+    QAbstractTextDocumentLayout::PaintContext ctx;
+    ctx.clip = painter.clipRegion().boundingRect();
+    ctx.palette.setColor(QPalette::Text, Qt::black);
+    m_textDocument.contentDocument().documentLayout()->draw(&painter, ctx);
 }
 
 int KDReports::TextDocReportLayout::numberOfPages()

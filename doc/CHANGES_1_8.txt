@@ -10,3 +10,8 @@ Bug fixes:
 even if it didn't have a font set. Now each TextElement only sets the parts of the character format that have
 been explicitly set, and the default font for every block comes from the report's default font or the table's
 default font (in tables).
+
+* The print preview dialog no longer uses the system palette for the default text color (but black instead).
+This fixes white-on-white previews when using a dark color scheme. Since it's a print preview, black text
+on white background is expected, rather than the system colors.
+
