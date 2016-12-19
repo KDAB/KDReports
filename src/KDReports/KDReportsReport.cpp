@@ -39,6 +39,7 @@
 #include <QDomDocument>
 #include <QDomElement>
 #include <QMap>
+#include <QAbstractTextDocumentLayout>
 #include <QApplication>
 #include <QPointer>
 #include <QStyle>
@@ -357,16 +358,20 @@ void KDReports::ReportPrivate::paintPage( int pageNumber, QPainter& painter )
     m_layout->paintPageContent( pageNumber, painter );
     painter.restore();
 
+    QAbstractTextDocumentLayout::PaintContext ctx;
+    ctx.palette.setColor(QPalette::Text, Qt::black);
     if ( header && !skipHeadersFooters ) {
         painter.save();
         painter.translate( left, top );
-        header->doc().contentDocument().drawContents( &painter, painter.clipRegion().boundingRect() );
+        ctx.clip = painter.clipRegion().boundingRect();
+        header->doc().contentDocument().documentLayout()->draw(&painter, ctx);
         painter.restore();
     }
     if ( footer && !skipHeadersFooters ) {
         painter.save();
         painter.translate( left, m_paperSize.height() - bottom - footerHeight );
-        footer->doc().contentDocument().drawContents( &painter, painter.clipRegion().boundingRect() );
+        ctx.clip = painter.clipRegion().boundingRect();
+        footer->doc().contentDocument().documentLayout()->draw(&painter, ctx);
         painter.restore();
     }
 }
