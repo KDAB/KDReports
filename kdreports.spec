@@ -3,6 +3,7 @@ Version:        1.7.1
 Release:        3
 Summary:        A Qt library for creating printable reports
 Source:         %{name}-%{version}.tar.gz
+Source1:        %{name}-rpmlintrc
 URL:            http://github.com/KDAB/KDReports
 Group:          System/Libraries
 License:        GPL-2.0+
