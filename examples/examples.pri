@@ -25,7 +25,9 @@ DEPENDPATH += \
 LIBS        += -L$${TOP_BUILD_DIR}/lib -l$$KDREPORTSLIB -l$$KDREPORTSTESTTOOLSLIB
 !isEmpty(QMAKE_LFLAGS_RPATH):LIBS += $$QMAKE_LFLAGS_RPATH$${TOP_BUILD_DIR}/lib
 
-DESTDIR = $${TOP_BUILD_DIR}/bin
+!mac {
+    DESTDIR = $${TOP_BUILD_DIR}/bin
+}
 
 # The dependencies need to be linked explicitly, at least on Mac OS X, for instance libkdchart.
 # This is all done by kdchart.pri
