@@ -11,8 +11,8 @@ QT += xml
 solaris-cc:DEFINES += SUN7
 
 win32-msvc*:QMAKE_CXXFLAGS += /GR /EHsc /wd4251
-
 unix:!macx:QMAKE_LFLAGS += -Wl,-no-undefined
+macx:QMAKE_SONAME_PREFIX = @rpath
 
 CONFIG += depend_includepath
 
