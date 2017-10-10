@@ -37,5 +37,5 @@ standard trainings anywhere around the globe.
 
 
 KD REPORTS and the KD REPORTS logo are registered trademarks of Klaralvdalens Datakonsult AB
-in the European Union, the Unites States, and/or other countries.  Other product and
+in the European Union, the United States, and/or other countries.  Other product and
 company names and logos may be trademarks or registered trademarks of their respective companies.
