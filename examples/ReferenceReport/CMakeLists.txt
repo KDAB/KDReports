@@ -2,7 +2,7 @@ set(SOURCES
     ReferenceReport.cpp
     ResultModel.cpp
 )
-qt5_add_resources(SOURCES
+qt4_add_resources(SOURCES
     ReferenceReport.qrc
 )
 
