@@ -45,7 +45,7 @@ develop programs using kdreports.
 
 %build
 touch .license.accepted
-cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+cmake . -DCMAKE_INSTALL_PREFIX=/usr
 %__make %{?_smp_mflags}
 
 %post -p /sbin/ldconfig
