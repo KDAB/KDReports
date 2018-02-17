@@ -26,9 +26,6 @@ macro(add_unittest _source)
     list(REMOVE_AT ARGN_COPY 0)
   endforeach()
 
-  qt4_wrap_cpp(_mocs ${_srcs})
-  set_property(SOURCE ${_srcs} PROPERTY OBJECT_DEPENDS ${_mocs})
-
   if(_resource)
     qt4_add_resources(_srcs ${_resource})
   endif()
@@ -48,5 +45,3 @@ add_subdirectory(TableBreakingLogic)
 #TODO: fix the moc problem
 #add_subdirectory(SpreadsheetMode)
 add_subdirectory(InThread)
-
- 
