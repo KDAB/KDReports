@@ -63,7 +63,7 @@ def checkVCS( sourceDirectory ):
 
 	return ( repositoryRevision, isTagged )
 
-def autogen(project, version, subprojects, prefixed, forwardHeaderMap = {}, steps=["generate-cpack", "generate-configure", "generate-forward-headers"], installPrefix="$$INSTALL_PREFIX", policyVersion = 1):
+def autogen(project, version, subprojects, prefixed, forwardHeaderMap = {}, steps = ["generate-cpack", "generate-configure", "generate-forward-headers"], installPrefix="$$INSTALL_PREFIX", policyVersion = 1):
 	global __policyVersion
 	__policyVersion = policyVersion
 	sourceDirectory = os.path.abspath( os.path.dirname( os.path.dirname( __file__ ) ) )
@@ -95,7 +95,7 @@ def autogen(project, version, subprojects, prefixed, forwardHeaderMap = {}, step
 	includePath = os.path.join( sourceDirectory, "include" )
 	srcPath = os.path.join( sourceDirectory, "src" )
 
-	if subprojects and "generate-cpack" in steps:
+	if subprojects and "generate-forward-headers" in steps:
 		forwardHeaderGenerator = ForwardHeaderGenerator( 
 			copy = True, path = sourceDirectory, includepath = includePath, srcpath = srcPath,
 			project = project, subprojects = subprojects, prefix = installPrefix, prefixed = prefixed,
@@ -108,6 +108,10 @@ def autogen(project, version, subprojects, prefixed, forwardHeaderMap = {}, step
 	with file( ".license.accepted", 'a' ):
 		os.utime( ".license.accepted", None )
 	print( "-- License marked as accepted." )
+
+	if steps == ["generate-forward-headers"]:
+		sys.stdout.flush()
+		return
 
 	print( "-- Wrote build files to: {0}".format( buildDirectory ) )
 	print( "-- Now running configure script." )

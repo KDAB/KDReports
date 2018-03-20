@@ -1,5 +1,7 @@
 TEMPLATE = subdirs
-SUBDIRS  = src examples include
+system($$system_path(./gen-forward-headers.py))|error("Can't generate forward headers, please ensure python is available from this shell.")
+SUBDIRS  = include src
+!no_examples: SUBDIRS += examples
 unittests: SUBDIRS += unittests
 CONFIG   += ordered
 VERSION  = 1.8.0
