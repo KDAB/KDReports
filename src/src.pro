@@ -1,10 +1,5 @@
 TEMPLATE = lib
-
-# Use the filename "kdreportsd1.dll" (or "kdreportsd1.lib") on Windows
-# to avoid name clashes between debug/non-debug versions of the
-# KD Reports library:
-TARGET = kdreports
-CONFIG(debug, debug|release):!unix:TARGET = $${TARGET}d
+TARGET = $${KDREPORTSLIB}
 
 WARN_IF_NOT_FOUND = 1
 include($${TOP_SOURCE_DIR}/kdchart.pri)

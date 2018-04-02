@@ -12,7 +12,7 @@
     LIBS += -L$$KDREPORTSDIR/lib
     win32*:!static {
       CONFIG(debug, debug|release) {
-        LIBS += -lkdreportsd1
+        LIBS += -lkdreports1d
       } else {
         LIBS += -lkdreports1
       }

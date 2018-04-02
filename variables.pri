@@ -36,7 +36,11 @@ static {
     win32 {
       DLLDESTDIR = $${TOP_BUILD_DIR}/bin
       CONFIG += dll
-    }
+ #skip_target_version_ext was introduced in Qt5.3 so we can't use it for Qt4.8 builds
+#so fallback to setting the empty VERSION trick.
+      VERSION=
+#      CONFIG += skip_target_version_ext
+   }
   }
 }
 

@@ -30,8 +30,8 @@ CONFIG(debug, debug|release) {
 }
 !unix:!mac:!static:VERSION_SUFFIX=$$MAJOR_VERSION
 
-KDREPORTSLIB = kdreports$$DEBUG_SUFFIX$$VERSION_SUFFIX
-KDREPORTSTESTTOOLSLIB = kdreporttesttools$$DEBUG_SUFFIX$$VERSION_SUFFIX
+KDREPORTSLIB = kdreports$$VERSION_SUFFIX$$DEBUG_SUFFIX
+KDREPORTSTESTTOOLSLIB = kdreporttesttools$$VERSION_SUFFIX$$DEBUG_SUFFIX
 message(Install prefix is $$INSTALL_PREFIX)
 message(This is KD Reports version $$VERSION)
 
@@ -80,10 +80,4 @@ prifiles.files = kdreports.pri
 prifiles.path = $$INSTALL_DOC_DIR
 INSTALLS += prifiles
 
-# for qt-creator:
-OTHER_FILES = \
-    doc/CHANGES_1_1.txt \
-    doc/CHANGES_1_2.txt \
-    doc/CHANGES_1_3.txt \
-    doc/CHANGES_1_4.txt \
-    Install.rc
+OTHER_FILES += configure.sh configure.bat kdreports.pri doc/CHANGES*

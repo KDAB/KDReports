@@ -2,11 +2,7 @@ TEMPLATE = lib
 
 include(../../variables.pri)
 
-TARGET = kdreporttesttools
-
-CONFIG(debug, debug|release) {
-    !unix: TARGET = $${TARGET}d
-}
+TARGET = $${KDREPORTSTESTTOOLSLIB}
 
 # TESTTOOLS_STATICLIB needs to be defined for tools_export.h
 staticlib {
