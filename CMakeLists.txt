@@ -12,8 +12,8 @@ option(${PROJECT_NAME}_STATIC "Build statically" OFF)
 option(${PROJECT_NAME}_TESTS "Build the tests" ON)
 
 set(${PROJECT_NAME}_VERSION_MAJOR 1)
-set(${PROJECT_NAME}_VERSION_MINOR 7)
-set(${PROJECT_NAME}_VERSION_PATCH 50)
+set(${PROJECT_NAME}_VERSION_MINOR 8)
+set(${PROJECT_NAME}_VERSION_PATCH 0)
 set(${PROJECT_NAME}_VERSION ${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH})
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
@@ -113,12 +113,11 @@ endif()
 add_subdirectory(src)
 
 if(${PROJECT_NAME}_IS_ROOT_PROJECT)
-
   export(TARGETS kdreports NAMESPACE KDReports::
     FILE "${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReportsTargets.cmake"
   )
 
-#   add_subdirectory(features)
+  # add_subdirectory(features)
   if(${PROJECT_NAME}_TESTS)
     enable_testing()
     add_subdirectory(unittests)
