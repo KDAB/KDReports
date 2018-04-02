@@ -1,6 +1,12 @@
 What is new in KD Reports 1.8
 ===============================
 
+NOTE:
+-----
+* To follow convention, the name of the debug libraries on Windows has been changed from
+  "kdreportsd1" to "kdreports1d".  Both the qmake and CMake build systems have been
+  adapted accordingly.
+
 Features:
 ---------
 
@@ -14,4 +20,3 @@ default font (in tables).
 * The print preview dialog no longer uses the system palette for the default text color (but black instead).
 This fixes white-on-white previews when using a dark color scheme. Since it's a print preview, black text
 on white background is expected, rather than the system colors.
-
