@@ -12,7 +12,7 @@ SKIP /build-
 #skip the combined header
 SKIP /src/KDReports/KDReports.h
 #skip autogen buildsystem
-SKIP /autogen/|/autogen.py|/genignore.py
+SKIP /autogen/|/autogen.py|/genignore.py|/gen-forward-headers.py
 #skip generated headers
 SKIP /include/
 #skip generated cmake
