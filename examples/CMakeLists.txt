@@ -22,7 +22,6 @@ add_subdirectory(BigImage)
 add_subdirectory(MailMergeXML)
 add_subdirectory(ReportSection)
 
-find_package(KDChart)
-if(KDCHART_FOUND)
+if(KDChart_FOUND)
 add_subdirectory(ChartXML)
 endif()

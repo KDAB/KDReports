@@ -43,6 +43,12 @@ else()
   find_package(Qt4 4.7 QUIET REQUIRED QtCore QtMain QtGui)
 endif()
 
+find_package(KDChart) # not required
+if (KDChart_FOUND)
+    message(STATUS "Enabling KDChart support")
+    add_definitions(-DHAVE_KDCHART)
+endif()
+
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 set(CMAKE_AUTOMOC TRUE)
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
