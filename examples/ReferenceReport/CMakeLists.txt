@@ -8,4 +8,4 @@ qt4_add_resources(SOURCES
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../src/KDReports)
 add_executable(ReferenceReport ${SOURCES})
-target_link_libraries(ReferenceReport ${QT_LIBRARIES} kdreports)
+target_link_libraries(ReferenceReport ${QT_LIBRARIES} kdreports kdreporttesttools)
