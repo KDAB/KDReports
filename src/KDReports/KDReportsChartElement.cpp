@@ -85,6 +85,7 @@ KDReports::ChartElement::ChartElement( KDChart::Chart* chart ) :
     d->m_chart = chart;
 #else
     Q_UNUSED( chart );
+    qWarning("ChartElement: cannot use chart, KD Reports was compiled without KD Chart support");
 #endif
 }
 
