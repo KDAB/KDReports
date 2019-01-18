@@ -127,9 +127,9 @@ private slots:
 #endif
     }
 
-#ifndef Q_OS_MAC // disabled on Mac due to a different DPI value. The code should be portable anyway :)
     void fontScalerShouldScaleForHeight()
     {
+#ifndef Q_OS_MAC // disabled on Mac due to a different DPI value. The code should be portable anyway :)
         SKIP_IF_FONT_NOT_FOUND
 
         QFont f(s_fontName);
@@ -161,10 +161,12 @@ private slots:
         scaler.setFactorForHeight(2.9);
         QVERIFY2(scaler.fontMetrics().height() <= 4, qPrintable(QString::number(scaler.fontMetrics().height())));
 #endif
+#endif
     }
 
     void fontScalerShouldScaleForWidth()
     {
+#ifndef Q_OS_MAC // disabled on Mac due to a different DPI value. The code should be portable anyway :)
         SKIP_IF_FONT_NOT_FOUND
 
         QFont f(s_fontName);
@@ -187,10 +189,12 @@ private slots:
             QVERIFY2(scaledWidth <= wantedWidth, qPrintable(QString::number(scaledWidth)));
             QVERIFY2(scaledWidth > wantedWidth - 6, qPrintable(QString::number(scaledWidth)));
         }
+#endif
     }
 
     void testFontScalerFontIssues()
     {
+#ifndef Q_OS_MAC // disabled on Mac due to a different DPI value. The code should be portable anyway :)
         QFont f(s_fontName, 8);
         FontScaler scaler(f);
         QFontMetricsF fm(f);
@@ -202,9 +206,9 @@ private slots:
         fm = scaler.fontMetrics();
         const qreal finalWidth = fm.width(text);
         QVERIFY2(finalWidth <= expectedWidth, QString("finalWidth=%1 bigger than expectedWidth=%2").arg(finalWidth).arg(expectedWidth).toLatin1().constData());
+#endif
     }
 
-#endif
 
     // Test that we don't hit an infinite loop when trying to use setFactorForWidth
     // with a very small number.
