@@ -9,7 +9,7 @@ set(SOURCES
     TableModel.cpp
 )
 
-add_library(kdreporttesttools ${KDReports_LIBRARY_MODE} ${SOURCES})
+add_library(kdreporttesttools STATIC ${KDReports_LIBRARY_MODE} ${SOURCES})
 target_link_libraries(kdreporttesttools ${QT_LIBRARIES})
 set_target_properties(kdreporttesttools PROPERTIES DEFINE_SYMBOL KDREPORT_BUILD_TESTTOOLS_LIB)
 set_target_properties(kdreporttesttools PROPERTIES VERSION ${${PROJECT_NAME}_VERSION})
