@@ -25,6 +25,7 @@ qt4_wrap_ui(KDREPORTS_UI ${FORMS})
 set(RESOURCES ${CMAKE_SOURCE_DIR}/pics/pics.qrc)
 
 if(Qt5Core_FOUND)
+    find_package(Qt5QuickCompiler REQUIRED)
     qtquick_compiler_add_resources(KDREPORTS_RES ${RESOURCES})
 else()
     qt4_add_resources(KDREPORTS_RES ${RESOURCES})
