@@ -23,7 +23,12 @@ set(FORMS
 qt4_wrap_ui(KDREPORTS_UI ${FORMS})
 
 set(RESOURCES ${CMAKE_SOURCE_DIR}/pics/pics.qrc)
-qt4_add_resources(KDREPORTS_RES ${RESOURCES})
+
+if(Qt5Core_FOUND)
+    qtquick_compiler_add_resources(KDREPORTS_RES ${RESOURCES})
+else()
+    qt4_add_resources(KDREPORTS_RES ${RESOURCES})
+endif()
 
 if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/KDReports)
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/KDReports)
