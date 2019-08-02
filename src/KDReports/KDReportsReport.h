@@ -118,7 +118,7 @@ public:
     /**
      * Destroys the report.
      */
-    ~Report();
+    ~Report() override;
 
     enum ReportMode {
         WordProcessing = 0,

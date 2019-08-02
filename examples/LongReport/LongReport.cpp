@@ -41,14 +41,14 @@ static const int numRows = 300;
 class ProxyModel : public QIdentityProxyModel
 {
 public:
-    QSize span(const QModelIndex & index) const {
+    QSize span(const QModelIndex & index) const override {
         // Row 2 Column 4 should span over 3 rows and 4 columns.
         if (index.row() == 1 && index.column() == 3) {
             return QSize(4,3);
         }
         return QSize();
     }
-    QVariant data(const QModelIndex &proxyIndex, int role) const {
+    QVariant data(const QModelIndex &proxyIndex, int role) const override {
         if (proxyIndex.row() == 1 && proxyIndex.column() == 3 && role == Qt::DisplayRole)
             return "This cell spans multiple columns!";
         return QIdentityProxyModel::data(proxyIndex, role);

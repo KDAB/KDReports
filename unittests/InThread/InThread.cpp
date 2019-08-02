@@ -33,17 +33,17 @@
 class HelloWorldTableModel : public QAbstractTableModel
 {
 public:
-    int columnCount( const QModelIndex& parent = QModelIndex() ) const {
+    int columnCount( const QModelIndex& parent = QModelIndex() ) const override {
         Q_UNUSED( parent );
         return 3;
     }
 
-    int rowCount( const QModelIndex& parent = QModelIndex() ) const {
+    int rowCount( const QModelIndex& parent = QModelIndex() ) const override {
         Q_UNUSED( parent );
         return 8;
     }
 
-    QVariant data( const QModelIndex& index, int role = Qt::DisplayRole ) const
+    QVariant data( const QModelIndex& index, int role = Qt::DisplayRole ) const override
     {
         if ( role == Qt::DisplayRole )
             return QString::number( (index.row()+1) * (index.column()+1) );
@@ -51,7 +51,7 @@ public:
             return QVariant();
     }
 
-    QVariant headerData( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const
+    QVariant headerData( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const override
     {
         if( orientation == Qt::Horizontal && role == Qt::DisplayRole )
             return QString( "Column %1" ).arg( section+1 );
@@ -63,7 +63,7 @@ public:
 
 class Thread : public QThread
 {
-    virtual void run() {
+    void run() override {
 
         // Create a report
         KDReports::Report report;
@@ -124,7 +124,7 @@ class Thread : public QThread
 
 class XmlThread : public QThread
 {
-    virtual void run() {
+    void run() override {
         KDReports::Report report;
         report.associateTextValue( "title_element", "Price list example" );
         report.associateImageValue( "image_system", QImage( ":/system.png" ) );

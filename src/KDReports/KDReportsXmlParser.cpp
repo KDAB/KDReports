@@ -51,18 +51,18 @@ public:
     CellReportBuilder( KDReports::Cell& cell, REPORTBUILDER_CTOR_ARGDEFS )
         : ReportBuilder( REPORTBUILDER_CTOR_ARGNAMES ), m_cell( cell ) {}
 
-    /*reimp*/ void addInlineElementPublic( const KDReports::Element& element ) {
+    /*reimp*/ void addInlineElementPublic( const KDReports::Element& element ) override {
         m_cell.addInlineElement( element );
     }
-    /*reimp*/ void addBlockElementPublic( const KDReports::Element& element, Qt::AlignmentFlag horizontalAlignment, const QColor& color = QColor() ) {
+    /*reimp*/ void addBlockElementPublic( const KDReports::Element& element, Qt::AlignmentFlag horizontalAlignment, const QColor& color = QColor() ) override {
         Q_UNUSED( color );
         m_cell.addElement( element, horizontalAlignment );
 
     }
-    /*reimp*/ void addVariablePublic( KDReports::VariableType variable ) {
+    /*reimp*/ void addVariablePublic( KDReports::VariableType variable ) override {
         m_cell.addVariable( variable );
     }
-    /*reimp*/ void addVerticalSpacingPublic( qreal space ) {
+    /*reimp*/ void addVerticalSpacingPublic( qreal space ) override {
         Q_UNUSED( space );
         qWarning( "Unexpected vspace inside cell!" );
     }

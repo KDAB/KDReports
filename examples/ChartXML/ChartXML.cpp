@@ -42,7 +42,7 @@ public:
     MyXmlElementHandler( KDChart::Chart* chart )
         : m_chart( chart )
     {}
-    virtual bool chartElement( KDReports::ChartElement& chartElement, QDomElement& xmlElement )
+    bool chartElement( KDReports::ChartElement& chartElement, QDomElement& xmlElement ) override
     {
         qDebug() << "chartElement called";
         Q_UNUSED( xmlElement );

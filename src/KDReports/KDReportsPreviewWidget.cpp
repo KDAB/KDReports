@@ -52,7 +52,7 @@ public:
     QSize pixmapSize() const { return m_pixmap.size(); }
 
 protected:
-    void paintEvent( QPaintEvent * ) {
+    void paintEvent( QPaintEvent * ) override {
         QPainter painter(this);
         const QPoint offset( ( width() - m_pixmap.width() ) / 2,
                              ( height() - m_pixmap.height() ) / 2 );

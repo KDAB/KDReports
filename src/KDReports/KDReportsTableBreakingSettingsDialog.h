@@ -50,13 +50,13 @@ public:
      */
     explicit TableBreakingSettingsDialog( KDReports::Report* report, QWidget *parent = 0 );
 
-    ~TableBreakingSettingsDialog();
+    ~TableBreakingSettingsDialog() override;
 
 private Q_SLOTS:
     /// \reimp
-    void accept();
+    void accept() override;
     /// \reimp
-    void reject();
+    void reject() override;
 
 private:
     Q_PRIVATE_SLOT(d, void _kd_slotBreakTablesToggled(bool))

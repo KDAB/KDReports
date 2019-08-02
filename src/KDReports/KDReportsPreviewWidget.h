@@ -47,7 +47,7 @@ public:
      */
     explicit PreviewWidget( QWidget *parent = 0 );
 
-    ~PreviewWidget();
+    ~PreviewWidget() override;
 
     /**
      * Show a different report in the preview widget
@@ -107,7 +107,7 @@ public:
     /**
      * \reimp
      */
-    QSize sizeHint() const;
+    QSize sizeHint() const override;
 
 Q_SIGNALS:
     /// Emitted when the user changes the page size.
@@ -119,9 +119,9 @@ Q_SIGNALS:
 
 protected:
     /// \reimp
-    void resizeEvent(QResizeEvent *);
+    void resizeEvent(QResizeEvent *) override;
     /// \reimp
-    bool eventFilter(QObject*, QEvent*);
+    bool eventFilter(QObject*, QEvent*) override;
 
 private:
     Q_PRIVATE_SLOT( d, void _kd_slotCurrentPageChanged() )

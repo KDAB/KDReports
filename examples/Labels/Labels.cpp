@@ -53,19 +53,19 @@ public:
           m_cellHeight(cellHeight)
     {}
 
-    int rowCount(const QModelIndex &parent) const {
+    int rowCount(const QModelIndex &parent) const override {
         if (parent.isValid())
             return 0;
         return 10;
     }
 
-    int columnCount(const QModelIndex &parent) const {
+    int columnCount(const QModelIndex &parent) const override {
         if (parent.isValid())
             return 0;
         return 3;
     }
 
-    QVariant data(const QModelIndex &index, int role) const {
+    QVariant data(const QModelIndex &index, int role) const override {
         Q_UNUSED(index);
         switch (role) {
         case Qt::DisplayRole:

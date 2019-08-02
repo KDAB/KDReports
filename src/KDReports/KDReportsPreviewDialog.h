@@ -46,7 +46,7 @@ public:
      */
     explicit PreviewDialog( KDReports::Report* report, QWidget *parent = 0 );
 
-    ~PreviewDialog();
+    ~PreviewDialog() override;
 
     /**
      * Shows a [Print on <printer>] button, for quick printing without the print dialog
@@ -139,9 +139,9 @@ Q_SIGNALS:
 
 public Q_SLOTS:
     /// \reimp
-    void accept();
+    void accept() override;
     /// \reimp
-    void reject();
+    void reject() override;
 
 private:
     Q_PRIVATE_SLOT( d, void _kd_slotTableBreakingDialog() )
