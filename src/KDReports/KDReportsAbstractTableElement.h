@@ -133,7 +133,7 @@ protected:
     /**
      * Destructor. Deletes internal data.
      */
-    ~AbstractTableElement();
+    ~AbstractTableElement() override;
 
     /**
      * @internal for derived classes only.

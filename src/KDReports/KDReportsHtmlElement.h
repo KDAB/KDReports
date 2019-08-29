@@ -44,7 +44,7 @@ public:
     /**
      * Destroys this element.
      */
-    virtual ~HtmlElement();
+    ~HtmlElement() override;
 
     /**
      * Copies an HTML element.
@@ -88,12 +88,12 @@ public:
      * @internal
      * @reimp
      */
-    void build( ReportBuilder& builder ) const;
+    void build( ReportBuilder& builder ) const override;
     /**
      * @internal
      * @reimp
      */
-    Element* clone() const;
+    Element* clone() const override;
 
 private:
     HtmlElementPrivate* const d;

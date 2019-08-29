@@ -86,17 +86,17 @@ public:
      * @internal
      * @reimp
      */
-    void build( ReportBuilder& builder ) const;
+    void build( ReportBuilder& builder ) const override;
 
     /**
      * @internal - not supported
      */
-    Element* clone() const { return 0; } //krazy:exclude=inline
+    Element* clone() const override { return 0; } //krazy:exclude=inline
 
     /**
      * @internal - do not call
      */
-    ~Cell(); // public for QMap
+    ~Cell() override; // public for QMap
 
 private:
     // TableElement needs to create/copy cells

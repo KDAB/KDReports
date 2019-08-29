@@ -32,26 +32,26 @@ public:
     explicit TestXmlElementHandlerV1( KDReports::Report& report );
     QStringList callbacks() const { return cb; }
 
-    virtual bool startReport( KDReports::Report& report, QDomElement& xmlElement );
-    virtual bool startHeader( KDReports::Header& header, QDomElement& xmlElement );
-    virtual void endHeader( KDReports::Header& header, const QDomElement& xmlElement );
-    virtual bool startFooter( KDReports::Footer& footer, QDomElement& xmlElement );
-    virtual void endFooter( KDReports::Footer& footer, const QDomElement& xmlElement );
-    virtual bool textElement( KDReports::TextElement& textElement, QDomElement& xmlElement );
-    virtual bool htmlElement( KDReports::HtmlElement& htmlElement, QDomElement& xmlElement );
-    virtual bool startTableElement( KDReports::TableElement& tableElement, QDomElement& xmlElement );
-    virtual bool endTableElement( KDReports::TableElement& tableElement, QDomElement& xmlElement );
-    virtual bool startCell( KDReports::Cell& cell, QDomElement& xmlElement );
-    virtual bool endCell( KDReports::Cell& cell, QDomElement& xmlElement );
-    virtual bool autoTableElement( KDReports::AutoTableElement& tableElement, QDomElement& xmlElement );
-    virtual bool chartElement( KDReports::ChartElement& chartElement, QDomElement& xmlElement );
-    virtual bool imageElement( KDReports::ImageElement& imageElement, QDomElement& xmlElement );
-    virtual bool pageBreak( QDomElement& xmlElement );
+    bool startReport( KDReports::Report& report, QDomElement& xmlElement ) override;
+    bool startHeader( KDReports::Header& header, QDomElement& xmlElement ) override;
+    void endHeader( KDReports::Header& header, const QDomElement& xmlElement ) override;
+    bool startFooter( KDReports::Footer& footer, QDomElement& xmlElement ) override;
+    void endFooter( KDReports::Footer& footer, const QDomElement& xmlElement ) override;
+    bool textElement( KDReports::TextElement& textElement, QDomElement& xmlElement ) override;
+    bool htmlElement( KDReports::HtmlElement& htmlElement, QDomElement& xmlElement ) override;
+    bool startTableElement( KDReports::TableElement& tableElement, QDomElement& xmlElement ) override;
+    bool endTableElement( KDReports::TableElement& tableElement, QDomElement& xmlElement ) override;
+    bool startCell( KDReports::Cell& cell, QDomElement& xmlElement ) override;
+    bool endCell( KDReports::Cell& cell, QDomElement& xmlElement ) override;
+    bool autoTableElement( KDReports::AutoTableElement& tableElement, QDomElement& xmlElement ) override;
+    bool chartElement( KDReports::ChartElement& chartElement, QDomElement& xmlElement ) override;
+    bool imageElement( KDReports::ImageElement& imageElement, QDomElement& xmlElement ) override;
+    bool pageBreak( QDomElement& xmlElement ) override;
 #ifdef KDREPORTS_ALLOW_BINARY_INCOMPATIBILITY
     virtual bool hLineElement( KDReports::HLineElement& textElement, QDomElement& xmlElement );
 #endif
-    virtual void customElement( const QDomElement& xmlElement );
-    virtual void endReport( KDReports::Report& report, const QDomElement& xmlElement );
+    void customElement( const QDomElement& xmlElement ) override;
+    void endReport( KDReports::Report& report, const QDomElement& xmlElement ) override;
 private:
     QStringList cb;
     KDReports::Report& mReport;

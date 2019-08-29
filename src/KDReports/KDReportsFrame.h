@@ -51,7 +51,7 @@ public:
     /**
      * Destroys this frame.
      */
-    virtual ~Frame();
+    ~Frame() override;
 
     /**
      * Copies a frame.
@@ -118,13 +118,13 @@ public:
      * @internal
      * @reimp
      */
-    void build( ReportBuilder& builder ) const;
+    void build( ReportBuilder& builder ) const override;
 
     /**
      * @internal
      * @reimp
      */
-    Element* clone() const;
+    Element* clone() const override;
 
 private:
 

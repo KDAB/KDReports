@@ -58,7 +58,7 @@ public:
     /**
      * Destructor. Deletes internal data.
      */
-    ~AutoTableElement();
+    ~AutoTableElement() override;
 
     /**
      * Copies a table element.
@@ -146,12 +146,12 @@ public:
      * @internal
      * @reimp
      */
-    void build( ReportBuilder& ) const;
+    void build( ReportBuilder& ) const override;
     /**
      * @internal
      * @reimp
      */
-    Element* clone() const;
+    Element* clone() const override;
 
     enum {
         DecorationAlignmentRole = 0x2D535FB1, ///< This model role allows to specify whether the icon should go before the text (Qt::AlignLeft) or after the text (Qt::AlignRight).

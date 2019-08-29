@@ -67,7 +67,7 @@ public:
     /**
      * Destroys this chart element.
      */
-    virtual ~ChartElement();
+    ~ChartElement() override;
 
     /**
      * Copies a chart element.
@@ -129,12 +129,12 @@ public:
      * @internal
      * @reimp
      */
-    void build( ReportBuilder& ) const;
+    void build( ReportBuilder& ) const override;
     /**
      * @internal
      * @reimp
      */
-    Element* clone() const;
+    Element* clone() const override;
 
 private:
     QSharedDataPointer<ChartElementPrivate> d;

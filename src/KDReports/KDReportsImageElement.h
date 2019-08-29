@@ -52,7 +52,7 @@ public:
     /**
      * Destroys this image element.
      */
-    virtual ~ImageElement();
+    ~ImageElement() override;
 
     /**
      * Sets the pixmap for this image element.
@@ -167,12 +167,12 @@ public:
      * @internal
      * @reimp
      */
-    void build( ReportBuilder& ) const;
+    void build( ReportBuilder& ) const override;
     /**
      * @internal
      * @reimp
      */
-    Element* clone() const;
+    Element* clone() const override;
 
 private:
     ImageElementPrivate* const d;

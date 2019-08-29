@@ -47,7 +47,7 @@ public:
     /**
      * Destroys this hline element.
      */
-    virtual ~HLineElement();
+    ~HLineElement() override;
 
     /**
      * Copies a hline element.
@@ -89,12 +89,12 @@ public:
      */
     int margin() const;
 
-    void build( ReportBuilder& builder ) const;
+    void build( ReportBuilder& builder ) const override;
     /**
      * @internal
      * @reimp
      */
-    Element* clone() const;
+    Element* clone() const override;
 
 private:
 

@@ -47,7 +47,7 @@ public:
     /**
      * Destroys this text element.
      */
-    virtual ~TextElement();
+    ~TextElement() override;
 
     /**
      * Copies a text element.
@@ -131,12 +131,12 @@ public:
      * @internal
      * @reimp
      */
-    void build( ReportBuilder& builder ) const;
+    void build( ReportBuilder& builder ) const override;
     /**
      * @internal
      * @reimp
      */
-    Element* clone() const;
+    Element* clone() const override;
 
 private:
 

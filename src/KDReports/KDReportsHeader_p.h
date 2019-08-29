@@ -65,15 +65,15 @@ public:
     HeaderReportBuilder( REPORTBUILDER_CTOR_ARGDEFS )  //krazy:exclude=explicit
         : ReportBuilder( REPORTBUILDER_CTOR_ARGNAMES ) {}
 
-    /*reimp*/ void addInlineElement( const KDReports::Element& element ) {
+    /*reimp*/ void addInlineElement( const KDReports::Element& element ) override {
         ReportBuilder::addInlineElement( element );
         report()->d->headerChanged();
     }
-    /*reimp*/ void addBlockElement( const KDReports::Element& element, Qt::AlignmentFlag horizontalAlignment, const QColor& background = QColor() ) {
+    /*reimp*/ void addBlockElement( const KDReports::Element& element, Qt::AlignmentFlag horizontalAlignment, const QColor& background = QColor() ) override {
         ReportBuilder::addBlockElement( element, horizontalAlignment, background );
         report()->d->headerChanged();
     }
-    /*reimp*/ void addVerticalSpacing( qreal space ) {
+    /*reimp*/ void addVerticalSpacing( qreal space ) override {
         ReportBuilder::addVerticalSpacing( space );
         report()->d->headerChanged();
     }

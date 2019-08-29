@@ -36,41 +36,41 @@ public:
     explicit TextDocReportLayout(KDReports::Report* report);
 
     /// \reimp
-    virtual void setLayoutDirty();
+    void setLayoutDirty() override;
     /// \reimp
-    virtual void setDefaultFont(const QFont& font);
+    void setDefaultFont(const QFont& font) override;
     /// \reimp
-    virtual QFont defaultFont() const;
+    QFont defaultFont() const override;
     /// \reimp
-    virtual void paintPageContent(int pageNumber, QPainter& painter);
+    void paintPageContent(int pageNumber, QPainter& painter) override;
     /// \reimp
-    virtual int numberOfPages(); // not const, since it can trigger a layout
+    int numberOfPages() override; // not const, since it can trigger a layout
     /// \reimp
-    virtual qreal idealWidth();
+    qreal idealWidth() override;
     /// \reimp
-    virtual void setPageContentSize(const QSizeF& size);
+    void setPageContentSize(const QSizeF& size) override;
     /// \reimp
-    virtual void ensureLayouted();
+    void ensureLayouted() override;
     /// \reimp
-    virtual void updateTextValue( const QString& id, const QString& newValue );
+    void updateTextValue( const QString& id, const QString& newValue ) override;
     /// \reimp
-    virtual qreal layoutAsOnePage(qreal width);
+    qreal layoutAsOnePage(qreal width) override;
     /// \reimp
-    virtual bool scaleTo( int numPagesHorizontally, int numPagesVertically );
+    bool scaleTo( int numPagesHorizontally, int numPagesVertically ) override;
     /// \reimp
-    virtual void setFixedRowHeight(qreal height);
+    void setFixedRowHeight(qreal height) override;
     /// \reimp
-    virtual int maximumNumberOfPagesForHorizontalScaling() const;
+    int maximumNumberOfPagesForHorizontalScaling() const override;
     /// \reimp
-    virtual int maximumNumberOfPagesForVerticalScaling() const;
+    int maximumNumberOfPagesForVerticalScaling() const override;
     /// \reimp
-    virtual void setUserRequestedFontScalingFactor(qreal factor);
+    void setUserRequestedFontScalingFactor(qreal factor) override;
     /// \reimp
-    virtual qreal userRequestedFontScalingFactor() const;
+    qreal userRequestedFontScalingFactor() const override;
     /// \reimp
-    virtual QString toHtml() const;
+    QString toHtml() const override;
     /// \reimp
-    virtual void finishHtmlExport();
+    void finishHtmlExport() override;
 
     // for unittests only
     TextDocument& textDocument() { return m_textDocument; }

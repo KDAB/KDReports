@@ -40,7 +40,7 @@ class KDREPORTS_EXPORT XmlElementHandlerV2 : public XmlElementHandler //krazy:ex
 {
 public:
     XmlElementHandlerV2();
-    virtual ~XmlElementHandlerV2();
+    ~XmlElementHandlerV2() override;
 
     /**
      * Called after parsing "variable".

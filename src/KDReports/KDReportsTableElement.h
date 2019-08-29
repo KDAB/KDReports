@@ -49,7 +49,7 @@ public:
     /**
      * Destructor. Deletes internal data.
      */
-    ~TableElement();
+    ~TableElement() override;
 
     /**
      * Copies a table element.
@@ -100,12 +100,12 @@ public:
      * @internal
      * @reimp
      */
-    void build( ReportBuilder& ) const;
+    void build( ReportBuilder& ) const override;
     /**
      * @internal
      * @reimp
      */
-    Element* clone() const;
+    Element* clone() const override;
 
 private:
     TableElementPrivate* const d;
