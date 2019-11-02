@@ -1,4 +1,14 @@
-project(KDReports)
+cmake_minimum_required(VERSION 2.8.12)
+cmake_policy(SET CMP0020 NEW)
+cmake_policy(SET CMP0025 NEW)
+
+if("${CMAKE_INSTALL_PREFIX}" STREQUAL "")
+  set(USE_DEFAULT_INSTALL_LOCATION True)
+else()
+  set(USE_DEFAULT_INSTALL_LOCATION False)
+endif()
+
+project(KDReports CXX)
 
 option(
   ${PROJECT_NAME}_ENFORCE_QT4_BUILD
