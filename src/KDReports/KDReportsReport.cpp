@@ -823,7 +823,7 @@ bool KDReports::Report::loadFromXML( QIODevice* iodevice, ErrorDetails* details 
     QXmlSimpleReader reader;
     reader.setFeature( QLatin1String( "http://xml.org/sax/features/namespaces" ), false );
     reader.setFeature( QLatin1String( "http://xml.org/sax/features/namespace-prefixes" ), true );
-    reader.setFeature( QLatin1String( "http://trolltech.com/xml/features/report-whitespace-only-CharData" ), true );
+    reader.setFeature( QLatin1String( "http://qt-project.org/xml/features/report-whitespace-only-CharData" ), true ); //krazy:exclude=insecurenet
 
     QString errorMsg;
     int errorLine = 0, errorColumn = 0;

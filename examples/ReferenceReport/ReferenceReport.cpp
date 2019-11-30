@@ -238,7 +238,7 @@ int main( int argc, char** argv ) {
 #endif
 
     // Hyperlink test
-    report.addElement( KDReports::HtmlElement("<a href=\"http://www.kdab.com\">click here to open http://www.kdab.com</a>") );
+    report.addElement( KDReports::HtmlElement("<a href=\"https://www.kdab.com\">click here to open https://www.kdab.com</a>") );
 
     //report.exportToHtml( "out.html" );
 
