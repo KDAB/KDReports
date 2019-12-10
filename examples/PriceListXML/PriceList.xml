@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<report xmlns="http://www.kdab.com/kdreports" header-body-spacing="10" footer-body-spacing="10" pointsize="10">
+<report xmlns="https://www.kdab.com/kdreports" header-body-spacing="10" footer-body-spacing="10" pointsize="10">
   <header location="odd">
     <tabs>
        <tab type="center" position="page"/>

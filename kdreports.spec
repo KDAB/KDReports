@@ -3,7 +3,7 @@ Version:        1.8.0
 Release:        1
 Summary:        A Qt library for creating printable reports
 Source:         %{name}-%{version}.tar.gz
-URL:            http://github.com/KDAB/KDReports
+URL:            https://github.com/KDAB/KDReports
 Group:          System/Libraries
 License:        GPL-2.0+
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
