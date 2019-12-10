@@ -41,8 +41,10 @@
 #include <QtCore/QHash>
 #include <QPixmap>
 
+QT_BEGIN_NAMESPACE
 class QDomDocument;
 class QDomNode;
+QT_END_NAMESPACE
 
 namespace KDReports {
 class TableElement;

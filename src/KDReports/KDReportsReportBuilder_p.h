@@ -26,7 +26,10 @@
 #include <QTextCursor>
 #include "KDReportsVariableType.h"
 #include "KDReportsTextDocumentData_p.h"
+
+QT_BEGIN_NAMESPACE
 class QTextDocument;
+QT_END_NAMESPACE
 
 namespace KDReports {
 class Element;

@@ -24,10 +24,13 @@
 #define KDREPORTSABSTRACTREPORTLAYOUT_H
 
 #include <QString>
+
+QT_BEGIN_NAMESPACE
 class QPainter;
 class QSizeF;
 class QWidget;
 class QFont;
+QT_END_NAMESPACE
 
 namespace KDReports
 {

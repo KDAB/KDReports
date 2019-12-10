@@ -25,10 +25,12 @@
 
 #include <QTextObjectInterface>
 
+QT_BEGIN_NAMESPACE
 class QTextDocument;
 class QTextFormat;
 class QPainter;
 class QRectF;
+QT_END_NAMESPACE
 
 namespace KDReports {
 

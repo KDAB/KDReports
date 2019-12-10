@@ -26,8 +26,11 @@
 #include "KDReportsElement.h"
 #include "KDReportsUnit.h"
 #include <QtCore/QtGlobal> // qreal
+
+QT_BEGIN_NAMESPACE
 class QPixmap;
 class QImage;
+QT_END_NAMESPACE
 
 namespace KDReports {
 class ImageElementPrivate;

@@ -25,7 +25,10 @@
 
 #include "KDReportsGlobal.h"
 
+QT_BEGIN_NAMESPACE
 class QBrush;
+QT_END_NAMESPACE
+
 namespace KDReports {
 class ReportBuilder;
 class ElementPrivate;

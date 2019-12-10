@@ -26,9 +26,11 @@
 #include "KDReportsAbstractTableElement.h"
 #include <QtCore/QSize>
 
+QT_BEGIN_NAMESPACE
 class QTextDocument;
 class QTextTableCell;
 class QAbstractItemModel;
+QT_END_NAMESPACE
 
 namespace KDReports {
 class AutoTableElementPrivate;

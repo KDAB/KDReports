@@ -28,10 +28,12 @@
 #include <QtCore/Qt>
 #include <QTextOption>
 
+QT_BEGIN_NAMESPACE
 template<class T> class QList;
 class QFont;
 class QTextDocument;
 class HeaderData;
+QT_END_NAMESPACE
 
 namespace KDReports {
 

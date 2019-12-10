@@ -26,7 +26,10 @@
 #include "KDReportsFontScaler_p.h"
 #include <QVector>
 #include <QFont>
+
+QT_BEGIN_NAMESPACE
 class QAbstractItemModel;
+QT_END_NAMESPACE
 
 namespace KDReports {
 
