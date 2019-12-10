@@ -1,5 +1,5 @@
 
- The KD Reports Library is Copyright (C) 2007-2018 Klaralvdalens Datakonsult AB.
+ The KD Reports Library is Copyright (C) 2007-2019 Klaralvdalens Datakonsult AB.
 
  You may use, distribute and copy the KD Reports Library under the terms of
  GNU Lesser General Public License version 2.1 or under the terms of GNU
