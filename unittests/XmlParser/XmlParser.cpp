@@ -193,9 +193,9 @@ private slots:
         KDReports::ErrorDetails details;
         QVERIFY( !report.loadFromXML( &file, &details ) );
         QCOMPARE( details.line(), 2 );
-        QCOMPARE( details.column(), 46 );
+        QCOMPARE( details.column(), 47 );
         QCOMPARE( details.driverMessage(), QString("error occurred while parsing element"));
-        QCOMPARE( details.message(), QString("Error on line 2, column 46: error occurred while parsing element") );
+        QCOMPARE( details.message(), QString("Error on line 2, column 47: error occurred while parsing element") );
     }
 
     void wrongTopElement()
