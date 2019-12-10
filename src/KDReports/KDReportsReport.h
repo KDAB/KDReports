@@ -36,6 +36,7 @@
 #include <QPrinter>
 #endif
 
+QT_BEGIN_NAMESPACE
 class QDomDocument;
 class QTextDocumentFragment;
 class QTextDocument;
@@ -47,6 +48,7 @@ class QRect;
 class QPainter;
 class ReportData;
 class EditorData;
+QT_END_NAMESPACE
 
 namespace KDReports {
 

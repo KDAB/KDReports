@@ -88,9 +88,11 @@ ErrorDetails& ErrorDetails::operator=( const ErrorDetails& other )
 
 } // namespace KDReports
 
+QT_BEGIN_NAMESPACE
 template <> inline void qSwap( KDReports::ErrorDetails & lhs, KDReports::ErrorDetails & rhs )
 {
     lhs.swap( rhs );
 }
+QT_END_NAMESPACE
 
 #endif /* KDREPORTSERRORDETAILS_H */

@@ -1,4 +1,4 @@
-# <a name="title"></a> KD Reports [![Logo](https://github.com/KDAB/KDReports/blob/master/images/kdreports-medium.png)](http://www.kdab.com/products/kd-reports)
+# <a name="title"></a> KD Reports [![Logo](https://github.com/KDAB/KDReports/blob/master/images/kdreports-medium.png)](https://www.kdab.com/products/kd-reports)
 Introduction
 ============
 KD Reports is a Qt tool that lets you easily create printable reports by
@@ -8,13 +8,13 @@ can be data-driven, creating reports from XML or SQL data sources complete with
 watermarks, headers and footers. Reports can be previewed manually, sent
 directly to a printer, or saved as PDF files.
 
-Additionally, using KDAB's KD Chart (http://www.kdab.com/products/kd-chart)
+Additionally, using KDAB's KD Chart (https://www.kdab.com/products/kd-chart)
 package together with KD Reports allows reports to be garnished with the myriad
 of chart types supported by KD Chart.
 
 KD Reports targets C++ programmers who use Qt in their applications.
 
-For more information, see http://www.kdab.com/kdab-products/kd-reports
+For more information, see https://www.kdab.com/kdab-products/kd-reports
 
 Using KD Reports
 ================
@@ -27,14 +27,14 @@ After reading the introductory overview files in doc/
 you will find more information at three places:
 
   detailed browsable API reference:   doc/refman/index.html
-                                or:   http://docs.kdab.com/kdreports
+                                or:   https://docs.kdab.com/kdreports
   programmers manual with examples:   doc/manual/kdreports.pdf
   our sorted example programs:        examples/
 
 Contact
 =======
 * Join our mailing list: https://mail.kdab.com/mailman/listinfo/kdreports-interest
-* See our official home page: http://www.kdab.com/products/kd-reports
+* See our official home page: https://www.kdab.com/products/kd-reports
 * Visit us on GitHub: https://github.com/KDAB/KDReports
 
 Get Involved
@@ -67,7 +67,7 @@ frameworks to Qt. We continue to help develop parts of Qt and are one
 of the major contributors to the Qt Project. We can give advanced or
 standard trainings anywhere around the globe.
 
-Please visit http://www.kdab.com to meet the people who write code like this.
+Please visit https://www.kdab.com to meet the people who write code like this.
 
 
 KD REPORTS and the KD REPORTS logo are registered trademarks of Klaralvdalens Datakonsult AB

@@ -26,10 +26,13 @@
 #include "KDReportsElement.h"
 #include "KDReportsUnit.h"
 
+QT_BEGIN_NAMESPACE
 template <typename T> class QList;
 class QFont;
 class QTextTableFormat;
 class QTextCursor;
+QT_END_NAMESPACE
+
 namespace KDReports {
 class AbstractTableElementPrivate;
 

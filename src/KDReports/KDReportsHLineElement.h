@@ -26,9 +26,11 @@
 #include "KDReportsElement.h"
 #include <QtCore/QString>
 
+QT_BEGIN_NAMESPACE
 class QColor;
 class QFont;
 class QTextDocument;
+QT_END_NAMESPACE
 
 namespace KDReports {
 class HLineElementPrivate;

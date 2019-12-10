@@ -45,8 +45,10 @@
 #include "KDReportsReport.h"
 #include <QFont>
 
+QT_BEGIN_NAMESPACE
 class QTextImageFormat;
 class QTextTable;
+QT_END_NAMESPACE
 
 namespace KDReports
 {

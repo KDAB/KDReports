@@ -27,8 +27,10 @@
 #include <QtCore/QString>
 #include <QTextCharFormat>
 
+QT_BEGIN_NAMESPACE
 class QColor;
 class QFont;
+QT_END_NAMESPACE
 
 namespace KDReports {
 class TextElementPrivate;

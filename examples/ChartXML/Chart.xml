@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<report xmlns="http://www.kdab.com/kdreports">
+<report xmlns="https://www.kdab.com/kdreports">
   <text pointsize="18" alignment="hcenter">Hello World!</text>
   <vspace size="20"/>
   <text>This is a report generated with KD Reports from an XML source.</text>
