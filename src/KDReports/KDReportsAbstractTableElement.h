@@ -127,6 +127,17 @@ public:
      */
     AbstractTableElement &operator=(const AbstractTableElement &other);
 
+    struct ColumnConstraint {
+        qreal width;
+        Unit unit;
+    };
+    /**
+     * Sets constraints on the column widths (fixed or proportional)
+     * \param constraints vector of constraints
+     * \since 1.9
+     */
+    void setColumnConstraints( const QVector<ColumnConstraint> &constraints );
+
 protected:
     /**
      * Protected constructor, for derived classes only.

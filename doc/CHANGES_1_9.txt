@@ -3,7 +3,8 @@ What is new in KD Reports 1.9
 
 Features:
 ---------
-* Fix build against Qt namespace
+* Added AbstractTableElement::setColumnConstraints to control the widths of the columns
 
 Bug fixes:
 ----------
+* Fixed build against namespaced Qt

@@ -39,6 +39,7 @@ public:
     KDReports::Unit m_unit;
     QFont m_defaultFont;
     bool m_fontSpecified;
+    QVector<KDReports::AbstractTableElement::ColumnConstraint> m_constraints;
 };
 
 KDReports::AbstractTableElement::AbstractTableElement()
@@ -58,6 +59,11 @@ KDReports::AbstractTableElement & KDReports::AbstractTableElement::operator=(con
     Element::operator=( other );
     *d = *other.d;
     return *this;
+}
+
+void KDReports::AbstractTableElement::setColumnConstraints(const QVector<KDReports::AbstractTableElement::ColumnConstraint> &constraints)
+{
+    d->m_constraints = constraints;
 }
 
 KDReports::AbstractTableElement::~AbstractTableElement()
@@ -131,6 +137,21 @@ void KDReports::AbstractTableElement::fillTableFormat( QTextTableFormat& tableFo
         } else {
             tableFormat.setWidth( QTextLength( QTextLength::PercentageLength, d->m_width ) );
         }
+    }
+
+    if ( !d->m_constraints.isEmpty() ) {
+        QVector<QTextLength> constraints;
+        constraints.reserve(d->m_constraints.size());
+        for ( const auto &c : d->m_constraints ) {
+            QTextLength length;
+            if ( c.unit == Millimeters ) {
+                length = QTextLength( QTextLength::FixedLength, mmToPixels( c.width ) );
+            } else {
+                length = QTextLength( QTextLength::PercentageLength, c.width );
+            }
+            constraints.append( length );
+        }
+        tableFormat.setColumnWidthConstraints( constraints );
     }
 
     tableFormat.setBorder( border() );
