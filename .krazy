@@ -7,7 +7,7 @@ EXTRA kdabcopyright
 EXTRA defines,null
 EXTRA camelcase,contractions,qmath,multiclasses
 
-#exclude checks to investigate later
+#checks to exclude for now
 EXCLUDE style
 
 #if you have a build subdir, skip it
