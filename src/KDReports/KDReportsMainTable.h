@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (C) 2007-2019 Klaralvdalens Datakonsult AB.  All rights reserved.
+** Copyright (C) 2007-2020 Klaralvdalens Datakonsult AB.  All rights reserved.
 **
 ** This file is part of the KD Reports library.
 **
