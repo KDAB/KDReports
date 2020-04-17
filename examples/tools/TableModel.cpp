@@ -139,6 +139,7 @@ bool TableModel::loadFromCSV ( const QString& filename )
 
     if ( file.exists() && file.open ( QIODevice::ReadOnly )  )
     {
+        beginResetModel();
         while ( !file.atEnd() )
         {
             QString line = QString::fromUtf8( file.readLine() );
@@ -206,7 +207,6 @@ bool TableModel::loadFromCSV ( const QString& filename )
             m_rows.resize ( 0 );
         }
 
-        reset();
         if ( m_rows.size () > 0 )
         {
 //             qDebug() << "TableModel::loadFromCSV: table loaded, "
@@ -216,6 +216,7 @@ bool TableModel::loadFromCSV ( const QString& filename )
             qDebug() << "TableModel::loadFromCSV: table loaded, but no "
                 "model data found." << endl;
         }
+        endResetModel();
         return true;
     } else {
         qDebug() << "TableModel::loadFromCSV: file" << filename
@@ -226,6 +227,7 @@ bool TableModel::loadFromCSV ( const QString& filename )
 
 void TableModel::clear()
 {
+    beginResetModel();
     m_rows.resize( 0 );
-    reset();
+    endResetModel();
 }
