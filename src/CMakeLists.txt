@@ -1,9 +1,3 @@
-# QT += xml
-#
-# contains( $$list($$[QT_VERSION]), 5.* ): QT += widgets printsupport
-#
-# include(../variables.pri)
-#
 set(QT_USE_QTXML TRUE)
 include(${QT_USE_FILE})
 

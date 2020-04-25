@@ -1,6 +1,31 @@
+# This is the top-level CMakeLists.txt file for the KDReports project.
+#
+# Pass the following variables to cmake to control the build:
+# (See INSTALL-cmake.txt for more information)
+#
+# -DKDReports_ENFORCE_QT4_BUILD=[true|false]
+#  Force building against Qt4, even if Qt5 is found.
+#  Default=false
+#
+# -DKDReports_STATIC=[true|false]
+#  Build static libraries
+#  Default=false
+#
+# -DKDReports_TESTS=[true|false]
+#  Build the test harness.
+#  Default=false
+#
+# -DKDReports_EXAMPLES=[true|false]
+#  Build the examples.
+#  Default=true
+#
 cmake_minimum_required(VERSION 2.8.12)
-cmake_policy(SET CMP0020 NEW)
-cmake_policy(SET CMP0025 NEW)
+if(POLICY CMP0020)
+  cmake_policy(SET CMP0020 NEW)
+endif()
+if(POLICY CMP0025)
+  cmake_policy(SET CMP0025 NEW)
+endif()
 
 if("${CMAKE_INSTALL_PREFIX}" STREQUAL "")
   set(USE_DEFAULT_INSTALL_LOCATION True)
@@ -15,8 +40,6 @@ option(
   "Enable if you want to enforce a build with Qt4"
   OFF
 )
-
-cmake_minimum_required(VERSION 2.8.12)
 
 option(${PROJECT_NAME}_STATIC "Build statically" OFF)
 option(${PROJECT_NAME}_TESTS "Build the tests" ON)
@@ -65,6 +88,9 @@ set(CMAKE_AUTOMOC TRUE)
 
 add_definitions(-DQT_NO_CAST_TO_ASCII -DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_FROM_BYTEARRAY)
 add_definitions(-DUSE_EXCEPTIONS -DQT_FATAL_ASSERT)
+if(MSVC)
+  add_definitions(-D_SCL_SECURE_NO_WARNINGS)
+endif()
 
 if(${PROJECT_NAME}_STATIC)
   set(${PROJECT_NAME}_LIBRARY_MODE "STATIC")
@@ -133,7 +159,6 @@ if(${PROJECT_NAME}_IS_ROOT_PROJECT)
     FILE "${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReportsTargets.cmake"
   )
 
-  # add_subdirectory(features)
   if(${PROJECT_NAME}_TESTS)
     enable_testing()
     add_subdirectory(unittests)
