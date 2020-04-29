@@ -23,4 +23,4 @@ SKIP KDReportsConfig\.cmake\.in
 
 #skip the borrowed code in the cmake subdir
 
-SKIP /cmake/InstallLocation.cmake|/cmake/Qt5Portability.cmake|/cmake/ECMGenerateHeaders.cmake
+SKIP /cmake/InstallLocation.cmake|/cmake/Qt5Portability.cmake|/cmake/ECMGenerateHeaders.cmake|/cmake/ECMGeneratePriFile.cmake|/cmake/ECMQueryQmake.cmake
