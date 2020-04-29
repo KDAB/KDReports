@@ -155,6 +155,15 @@ if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
   install(EXPORT KDReportsTargets NAMESPACE KDReports::
     DESTINATION "${INSTALL_LIBRARY_DIR}/cmake/KDReports"
   )
+
+  # Generate .pri file for qmake users
+  include(ECMGeneratePriFile)
+  set(PROJECT_VERSION_STRING ${${PROJECT_NAME}_VERSION})
+  ecm_generate_pri_file(BASE_NAME KDReports
+                        LIB_NAME KDReports
+                        # DEPS "${PRI_DEPS}" # TODO for kdchart
+                        FILENAME_VAR pri_filename)
+  install(FILES ${pri_filename} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
 endif()
 
 add_subdirectory(src)
