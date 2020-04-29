@@ -77,10 +77,15 @@ else()
   find_package(Qt4 4.7 QUIET REQUIRED QtCore QtMain QtGui)
 endif()
 
-find_package(KDChart) # not required
+find_package(KDChart CONFIG) # First try the cmake file provided by kdchart, ideal solution
+if (NOT KDChart_FOUND)
+   find_package(KDChart MODULE) # use FindKDChart.cmake in case kdchart was built with qmake
+endif()
 if (KDChart_FOUND)
     message(STATUS "Enabling KDChart support")
     add_definitions(-DHAVE_KDCHART)
+    # Hack for kdchart versions < kdchart-2.7.1 (when built with cmake)
+    find_package(Qt5Svg CONFIG REQUIRED)
 endif()
 
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)

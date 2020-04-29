@@ -131,7 +131,7 @@ set(SOURCES
 add_library(kdreports ${KDReports_LIBRARY_MODE} ${SOURCES} ${KDREPORTS_UI} ${KDREPORTS_RES})
 target_link_libraries(kdreports ${QT_LIBRARIES})
 if (KDChart_FOUND)
-    target_link_libraries(kdreports KDChart)
+    target_link_libraries(kdreports KDChart::kdchart)
 endif()
 set_target_properties(kdreports PROPERTIES DEFINE_SYMBOL KDREPORTS_BUILD_KDREPORTS_LIB)
 set_target_properties(kdreports PROPERTIES VERSION ${${PROJECT_NAME}_VERSION})
