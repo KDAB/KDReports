@@ -8,3 +8,7 @@ Features:
 Bug fixes:
 ----------
 * Fixed build against namespaced Qt
+
+CMake buildsystem:
+------------------
+* Generates .pri files for qmake users
