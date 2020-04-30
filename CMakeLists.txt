@@ -79,13 +79,19 @@ endif()
 
 find_package(KDChart CONFIG) # First try the cmake file provided by kdchart, ideal solution
 if (NOT KDChart_FOUND)
-   find_package(KDChart MODULE) # use FindKDChart.cmake in case kdchart was built with qmake
+  find_package(KDChart MODULE) # use FindKDChart.cmake in case kdchart was built with qmake
 endif()
 if (KDChart_FOUND)
-    message(STATUS "Enabling KDChart support")
-    add_definitions(-DHAVE_KDCHART)
-    # Hack for kdchart versions < kdchart-2.7.1 (when built with cmake)
-    find_package(Qt5Svg CONFIG REQUIRED)
+  message(STATUS "Enabling KDChart support")
+  add_definitions(-DHAVE_KDCHART)
+  # Hack for kdchart versions < kdchart-2.7.1 (when built with cmake)
+  find_package(Qt5Svg CONFIG REQUIRED)
+  if (NOT TARGET KDChart::kdchart)
+    add_library(KDChart::kdchart SHARED IMPORTED)
+    set_target_properties(KDChart::kdchart PROPERTIES
+      IMPORTED_LOCATION "${KDChart_LIBRARIES}"
+      INTERFACE_INCLUDE_DIRECTORIES "${KDChart_INCLUDE_DIR}")
+  endif()
 endif()
 
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
