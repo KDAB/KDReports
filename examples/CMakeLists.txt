@@ -2,6 +2,11 @@ set(QT_USE_QTXML TRUE)
 set(QT_USE_QTSQL TRUE)
 include(${QT_USE_FILE})
 
+if(KDReports_STATIC)
+  add_definitions(-DKDREPORTS_STATICLIB)
+  add_definitions(-DTESTTOOLS_STATICLIB)
+endif()
+
 remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 
@@ -22,6 +27,7 @@ add_subdirectory(BigImage)
 add_subdirectory(MailMergeXML)
 add_subdirectory(ReportSection)
 
-if(KDChart_FOUND)
-add_subdirectory(ChartXML)
+find_package(KDChart)
+if(KDCHART_FOUND)
+  add_subdirectory(ChartXML)
 endif()
