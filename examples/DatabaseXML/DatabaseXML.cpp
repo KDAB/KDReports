@@ -44,7 +44,7 @@ int main( int argc, char** argv ) {
     if( !db.open() ) {
         QMessageBox::critical(0, QObject::tr("Cannot open database"),
                               QObject::tr("Cannot create connection to the requested database. Your Qt is probably lacking the QSQLITE driver. Please check your Qt installation." ), QMessageBox::Cancel );
-        return false;
+        return -1;
     }
 
     // fill the DB with some test data
