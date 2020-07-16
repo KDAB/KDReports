@@ -19,12 +19,17 @@
 #  Build the examples.
 #  Default=true
 #
+
 cmake_minimum_required(VERSION 2.8.12)
 if(POLICY CMP0020)
   cmake_policy(SET CMP0020 NEW)
 endif()
 if(POLICY CMP0025)
   cmake_policy(SET CMP0025 NEW)
+endif()
+if(POLICY CMP0074)
+  # Since 3.12 tells find_package to look for <Package>_ROOT variables.
+  cmake_policy(SET CMP0074 NEW)
 endif()
 
 if("${CMAKE_INSTALL_PREFIX}" STREQUAL "")
