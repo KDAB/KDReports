@@ -558,9 +558,9 @@ public:
 
     /**
      * Export the whole report to an image file.
-     * \param size size of the image in pixels
+     * \param size the size of the image in pixels
      * \param fileName the name of the image file
-     * \param format format of the image, for instance: BMP, JPG, PNG.
+     * \param format the format of the image, for instance: BMP, JPG, PNG.
      */
     bool exportToImage( const QSize& size, const QString& fileName, const char* format );
 

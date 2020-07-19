@@ -44,7 +44,7 @@ int main( int argc, char** argv ) {
     // add 20 mm of vertical space:
     report.addVerticalSpacing( 20 );
 
-    // add many many paragraphs of text
+    // add many, many paragraphs of text
     QElapsedTimer timer; timer.start();
     report.beginEdit();
     for (int i = 0 ; i < 10000 ; ++i) {
