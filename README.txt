@@ -40,9 +40,7 @@ Contact
 Get Involved
 ============
 KDAB will happily accept external contributions, but substantial
-contributions will require a signed Copyright Assignment Agreement
-(see doc/KDReports-CopyrightAssignmentForm.docx).
-
+contributions will require a signed Copyright Assignment Agreement.
 Contact info@kdab.com for more information.
 
 Please submit your contributions or issue reports from our GitHub space at
@@ -57,20 +55,17 @@ and is available under the terms of:
 * the KDAB commercial license, provided that you buy a license.
   please contact sales@kdab.com if you are interested in buying commercial licenses.
 
-Commercial licensing terms are available in the included file LICENSE.txt.
+Commercial use is described in README-commercial.txt.
 
 About KDAB
 ==========
 KD Reports is supported and maintained by Klarälvdalens Datakonsult AB (KDAB).
 
-The KDAB Group is the global No.1 software consultancy for Qt, C++ and
-OpenGL applications across desktop, embedded and mobile platforms.
-
-The KDAB Group provides consulting and mentoring for developing Qt applications
-from scratch and in porting from all popular and legacy frameworks to Qt.
-We continue to help develop parts of Qt and are one of the major contributors
-to the Qt Project. We can give advanced or standard trainings anywhere
-around the globe on Qt as well as C++, OpenGL, 3D and more.
+KDAB, the Qt experts, provide consulting and mentoring for developing
+Qt applications from scratch and in porting from all popular and legacy
+frameworks to Qt. We continue to help develop parts of Qt and are one
+of the major contributors to the Qt Project. We can give advanced or
+standard trainings anywhere around the globe.
 
 Please visit https://www.kdab.com to meet the people who write code like this.
 
