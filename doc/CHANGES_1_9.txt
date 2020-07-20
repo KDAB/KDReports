@@ -1,9 +1,0 @@
-What is new in KD Reports 1.9
-===============================
-
-Features:
----------
-* Fixed build against namespaced Qt
-
-Bug fixes:
-----------
