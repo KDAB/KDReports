@@ -36,6 +36,7 @@ Contact
 * Join our mailing list: https://mail.kdab.com/mailman/listinfo/kdreports-interest
 * See our official home page: https://www.kdab.com/products/kd-reports
 * Visit us on GitHub: https://github.com/KDAB/KDReports
+* Send a mail to info@kdab.com for questions about copyright, licensing or commercial support.
 
 Get Involved
 ============
@@ -43,7 +44,8 @@ KDAB will happily accept external contributions, but substantial
 contributions will require a signed Copyright Assignment Agreement
 (see doc/KDReports-CopyrightAssignmentForm.docx).
 
-Contact info@kdab.com for more information.
+Contact info@kdab.com for more information about the Copyright Assignment
+Agreement.
 
 Please submit your contributions or issue reports from our GitHub space at
 https://github.com/KDAB/KDReports
@@ -57,7 +59,7 @@ and is available under the terms of:
 * the KDAB commercial license, provided that you buy a license.
   please contact sales@kdab.com if you are interested in buying commercial licenses.
 
-Commercial licensing terms are available in the included file LICENSE.txt.
+Commercial use is described in README-commercial.txt.
 
 About KDAB
 ==========
