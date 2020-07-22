@@ -5,8 +5,6 @@
  GNU Lesser General Public License version 2.1 or under the terms of GNU
  Lesser General Public License version 3 both of which are displayed below.
 
- For the server-side library, see LICENSE.AGPL3-modified.txt
-
 -------------------------------------------------------------------------
 
                   GNU LESSER GENERAL PUBLIC LICENSE
