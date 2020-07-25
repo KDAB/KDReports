@@ -14,7 +14,7 @@ of chart types supported by KD Chart.
 
 KD Reports targets C++ programmers who use Qt in their applications.
 
-For more information, see https://www.kdab.com/kdab-products/kd-reports
+For more information, see https://www.kdab.com/products/kd-reports
 
 Using KD Reports
 ================
@@ -57,7 +57,7 @@ and is available under the terms of:
 * the LGPL (see LICENSE.LGPL.txt for details)
 * the GPL (see LICENSE.GPL.txt for details)
 * the KDAB commercial license, provided that you buy a license.
-  please contact sales@kdab.com if you are interested in buying commercial licenses.
+  please contact info@kdab.com if you are interested in buying commercial licenses.
 
 Commercial use is described in README-commercial.txt.
 
