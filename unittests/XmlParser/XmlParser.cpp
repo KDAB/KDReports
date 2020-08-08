@@ -189,6 +189,7 @@ private slots:
     void brokenXML()
     {
         QFile file(":/broken.xml" );
+        QVERIFY( file.open( QIODevice::ReadOnly ) );
         Report report;
         KDReports::ErrorDetails details;
         QVERIFY( !report.loadFromXML( &file, &details ) );
@@ -201,6 +202,7 @@ private slots:
     void wrongTopElement()
     {
         QFile file(":/wrongTopElement.xml" );
+        QVERIFY( file.open( QIODevice::ReadOnly ) );
         Report report;
         KDReports::ErrorDetails details;
         QVERIFY( !report.loadFromXML( &file, &details ) );
@@ -213,6 +215,7 @@ private slots:
     void vspaceInHeader()
     {
         QFile file(":/vspaceInHeader.xml" );
+        QVERIFY( file.open( QIODevice::ReadOnly ) );
         Report report;
         KDReports::ErrorDetails details;
         QVERIFY( !report.loadFromXML( &file, &details ) );

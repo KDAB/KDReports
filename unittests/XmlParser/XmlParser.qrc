@@ -15,6 +15,7 @@
     <file>textid.xml</file>
     <file>vspaceInHeader.xml</file>
     <file>wrongTopElement.xml</file>
+    <file alias="kdab_small.jpg">../../examples/PriceList/kdab_small.jpg</file>
 </qresource>
 </RCC>
 
