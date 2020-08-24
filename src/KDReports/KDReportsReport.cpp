@@ -819,6 +819,8 @@ bool KDReports::Report::loadFromXML( QIODevice* iodevice, ErrorDetails* details 
     // elements in the rest of the document, watch out for that.
     if (iodevice->isOpen())
         iodevice->reset(); //need to do that to allow consecutive calls of loadFromXML()
+    else
+        iodevice->open(QIODevice::ReadOnly);
     QXmlInputSource source( iodevice );
     QXmlSimpleReader reader;
     reader.setFeature( QLatin1String( "http://xml.org/sax/features/namespaces" ), false );

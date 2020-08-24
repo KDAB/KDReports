@@ -189,6 +189,9 @@ private slots:
     void brokenXML()
     {
         QFile file(":/broken.xml" );
+        
+        // Do not open file on purpose to test Report's loadFromXML when file is in closed state.
+        
         Report report;
         KDReports::ErrorDetails details;
         QVERIFY( !report.loadFromXML( &file, &details ) );
@@ -201,6 +204,7 @@ private slots:
     void wrongTopElement()
     {
         QFile file(":/wrongTopElement.xml" );
+        QVERIFY( file.open( QIODevice::ReadOnly ) );
         Report report;
         KDReports::ErrorDetails details;
         QVERIFY( !report.loadFromXML( &file, &details ) );
@@ -213,6 +217,7 @@ private slots:
     void vspaceInHeader()
     {
         QFile file(":/vspaceInHeader.xml" );
+        QVERIFY( file.open( QIODevice::ReadOnly ) );
         Report report;
         KDReports::ErrorDetails details;
         QVERIFY( !report.loadFromXML( &file, &details ) );
