@@ -30,6 +30,7 @@
 #include <QDebug>
 #include <QDate>
 #include <QTime>
+#include <QLocale>
 #include <QTextBlock>
 
 KDReports::Header::Header( KDReports::Report* report )
@@ -75,22 +76,21 @@ QString variableValue( int pageNumber, KDReports::Report* report, VariableType t
         return QDate::currentDate().toString( Qt::TextDate );
     case ISODate:
         return QDate::currentDate().toString( Qt::ISODate );
-    case LocaleDate:
-        return QDate::currentDate().toString( Qt::LocaleDate );
     case SystemLocaleShortDate:
-        return QDate::currentDate().toString( Qt::SystemLocaleShortDate );
+        return QLocale::system().toString(QDate::currentDate(), QLocale::ShortFormat);
     case SystemLocaleLongDate:
-        return QDate::currentDate().toString( Qt::SystemLocaleLongDate );
+        return QLocale::system().toString(QDate::currentDate(), QLocale::LongFormat);
+    case LocaleDate:
     case DefaultLocaleShortDate:
-        return QDate::currentDate().toString( Qt::DefaultLocaleShortDate );
+        return QLocale().toString(QDate::currentDate(), QLocale::ShortFormat);
     case DefaultLocaleLongDate:
-        return QDate::currentDate().toString( Qt::DefaultLocaleLongDate );
+        return QLocale().toString(QDate::currentDate(), QLocale::LongFormat);
     case TextTime:
         return QTime::currentTime().toString( Qt::TextDate );
     case ISOTime:
         return QTime::currentTime().toString( Qt::ISODate );
     case LocaleTime:
-        return QTime::currentTime().toString( Qt::LocaleDate );
+        return QLocale().toString(QTime::currentTime(), QLocale::ShortFormat);
     default:
         qWarning() << "Program error, variable" << type << "not implemented";
     }

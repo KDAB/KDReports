@@ -402,7 +402,11 @@ void KDReports::PreviewWidgetPrivate::pageCountChanged()
         //qDebug() << "Report has" << m_pageCount << "pages";
     }
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 11, 0)
     int numberWidth = 20 + pageNumber->fontMetrics().width( QString::number( m_pageCount ) );
+#else
+    int numberWidth = 20 + pageNumber->fontMetrics().horizontalAdvance( QString::number( m_pageCount ) );
+#endif
     pageNumber->setMinimumWidth( numberWidth );
     pageNumber->setMaximumWidth( numberWidth );
     pageCount->setText( QString::fromLatin1( " / " ) + QString::number( m_pageCount ) );
