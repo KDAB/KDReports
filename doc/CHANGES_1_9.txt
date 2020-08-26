@@ -1,6 +1,10 @@
 What is new in KD Reports 1.9
 ===============================
 
+General:
+--------
+* No longer supporting Qt 4
+
 Features:
 ---------
 * Added AbstractTableElement::setColumnConstraints to control the widths of the columns

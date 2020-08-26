@@ -1,9 +1,7 @@
 These are the instructions for installing KD Reports using the CMake buildsystem.
 CMake version 2.8.12 or higher is required.
 
-KD Reports requires a Qt version >= 4.6.
-
-The same source code compiles with either Qt 4 or Qt 5.
+KD Reports requires a Qt version >= 5.0.
 
 1) From the top directory of your KD Reports installation create a build directory:
 
@@ -69,22 +67,10 @@ nmake install  # Windows
    For Windows that is: C:\KDAB\KDReports-VERSION\
 
 
-8) Symbian (Qt4 only)
-
-A CMake build is not available for Symbian platforms.  Refer to the INSTALL.txt
-file for instructions on using autotools for a Symbian install.
-
-
-9) Have a look at the examples applications. They will get you started with KD Reports.
+8) Have a look at the examples applications. They will get you started with KD Reports.
 
 == Testing ==
 To build the testing harness, pass -DKDReports_TESTS=true to CMake, like so:
   % cmake -DKDReports_TESTS=true
 
 Then run 'make test' to run the unit tests.
-
-== Force a Qt4 build ==
-On systems with both Qt4 and Qt5 available, the CMake buildsystem will always
-attempt to use Qt5. To force a Qt build, pass -DKDReports_ENFORCE_QT4_BUILD=true
-to CMake, as in:
-  % cmake -DKDReports_ENFORCE_QT4_BUILD=true

@@ -3,10 +3,6 @@
 # Pass the following variables to cmake to control the build:
 # (See INSTALL-cmake.txt for more information)
 #
-# -DKDReports_ENFORCE_QT4_BUILD=[true|false]
-#  Force building against Qt4, even if Qt5 is found.
-#  Default=false
-#
 # -DKDReports_STATIC=[true|false]
 #  Build static libraries
 #  Default=false
@@ -40,12 +36,6 @@ endif()
 
 project(KDReports CXX)
 
-option(
-  ${PROJECT_NAME}_ENFORCE_QT4_BUILD
-  "Enable if you want to enforce a build with Qt4"
-  OFF
-)
-
 option(${PROJECT_NAME}_STATIC "Build statically" OFF)
 option(${PROJECT_NAME}_TESTS "Build the tests" ON)
 option(${PROJECT_NAME}_EXAMPLES "Build the examples" ON)
@@ -59,10 +49,7 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 # setup default install locations
 include(InstallLocation)
 
-# try Qt5 first, and prefer that (if found), but only if not disabled via option
-if(NOT ${PROJECT_NAME}_ENFORCE_QT4_BUILD)
-  find_package(Qt5Core QUIET)
-endif()
+find_package(Qt5Core QUIET)
 
 if(Qt5Core_FOUND)
   find_package(Qt5 COMPONENTS Widgets PrintSupport Sql Xml REQUIRED)
@@ -78,8 +65,6 @@ if(Qt5Core_FOUND)
       set(CMAKE_POSITION_INDEPENDENT_CODE ON)
     endif()
   endif()
-else()
-  find_package(Qt4 4.7 QUIET REQUIRED QtCore QtMain QtGui)
 endif()
 
 find_package(KDChart CONFIG) # First try the cmake file provided by kdchart, ideal solution

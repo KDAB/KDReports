@@ -1,4 +1,4 @@
-KD Reports requires Qt 4.6 or later
+KD Reports requires Qt 5.0 or later
 
 If you are using sources from github (via a git clone or a generated zip file), jump
 to section 1-bis). Commercial users, start at section 1).
