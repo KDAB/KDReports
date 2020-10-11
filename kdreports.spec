@@ -3,9 +3,11 @@ Version:        1.8.0
 Release:        1
 Summary:        A Qt library for creating printable reports
 Source:         %{name}-%{version}.tar.gz
+Source1:        %{name}-rpmlintrc
+Source2:        %{name}-%{version}.tar.gz.asc
 URL:            https://github.com/KDAB/KDReports
 Group:          System/Libraries
-License:        GPL-2.0+
+License:        (LGPL-2.1-only OR LGPL-3.0-only) AND (GPL-2.0-only OR GPL-3.0-only)
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Vendor:         Klaralvdalens Datakonsult AB (KDAB)
 Packager:       Klaralvdalens Datakonsult AB (KDAB) <info@kdab.com>
