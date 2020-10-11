@@ -9,6 +9,12 @@ NOTE:
   "kdreportsd1" to "kdreports1d".  Both the qmake and CMake build systems have been
   adapted accordingly.
 
+In release 1.8.1:
+-----------------
+* Fix compiling against a Qt namespace build
+* Fix static linking examples and unittests in the CMake buildsystem
+* small buildsystem improvements
+
 Features:
 ---------
 
