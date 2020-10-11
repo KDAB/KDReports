@@ -1,4 +1,4 @@
-# <a name="title"></a> KD Reports [![Logo](https://github.com/KDAB/KDReports/blob/master/images/kdreports-medium.png)](https://www.kdab.com/products/kd-reports)
+# <a name="title"></a> KD Reports [![Logo](https://github.com/KDAB/KDReports/blob/master/images/kdreports-medium.png)](https://www.kdab.com/development-resources/qt-tools/kd-reports)
 Introduction
 ============
 KD Reports is a Qt tool that lets you easily create printable reports by
@@ -8,58 +8,55 @@ can be data-driven, creating reports from XML or SQL data sources complete with
 watermarks, headers and footers. Reports can be previewed manually, sent
 directly to a printer, or saved as PDF files.
 
-Additionally, using KDAB's KD Chart (https://www.kdab.com/products/kd-chart)
+Additionally, using KDAB's [KD Chart](https://www.kdab.com/development-resources/qt-tools/kd-chart)
 package together with KD Reports allows reports to be garnished with the myriad
 of chart types supported by KD Chart.
 
 KD Reports targets C++ programmers who use Qt in their applications.
 
-For more information, see https://www.kdab.com/products/kd-reports
+For more information, see https://www.kdab.com/development-resources/qt-tools/kd-reports
 
 Using KD Reports
 ================
 KD Reports requires Qt 5.0 or newer.
 
-See INSTALL.txt or INSTALL-cmake.txt for installation instructions.
-(Note that the qmake and CMake buildsystems are fully supported)
+See [INSTALL.txt](INSTALL.txt) or [INSTALL-cmake.txt](INSTALL-cmake.txt)
+for installation instructions. (CMake and qmake and buildsystems supported)
 
 After reading the introductory overview files in doc/
-you will find more information at three places:
+you will find more information at these places:
 
-  detailed browsable API reference:   doc/refman/index.html
-                                or:   https://docs.kdab.com/kdreports
-  programmers manual with examples:   doc/manual/kdreports.pdf
-  our sorted example programs:        examples/
+ * [detailed browsable API reference](https://docs.kdab.com/kdreports)
+ * [programmers manual with examples](doc/manual/kdreports.pdf)
+ * [our sorted example programs](examples/)
 
 Contact
 =======
 * Join our mailing list: https://mail.kdab.com/mailman/listinfo/kdreports-interest
-* See our official home page: https://www.kdab.com/products/kd-reports
+* See our official home page: https://www.kdab.com/development-resources/qt-tools/kd-reports
 * Visit us on GitHub: https://github.com/KDAB/KDReports
-* Send a mail to info@kdab.com for questions about copyright, licensing or commercial support.
+* Email info@kdab.com for questions about copyright, licensing or commercial support.
 
 Get Involved
 ============
-KDAB will happily accept external contributions, but substantial
-contributions will require a signed Copyright Assignment Agreement
-(see doc/KDReports-CopyrightAssignmentForm.docx).
+KDAB will happily accept external contributions, but substantial contributions require
+a signed [Copyright Assignment Agreement](doc/KDReports-CopyrightAssignmentForm.docx).
 
-Contact info@kdab.com for more information about the Copyright Assignment
-Agreement.
+Contact info@kdab.com for more information about the Copyright Assignment Agreement.
 
 Please submit your contributions or issue reports from our GitHub space at
 https://github.com/KDAB/KDReports
 
 License
 =======
-The KD Reports Software is (C) 2007-2020 Klarälvdalens Datakonsult AB (KDAB),
-and is available under the terms of:
-* the LGPL (see LICENSE.LGPL.txt for details)
-* the GPL (see LICENSE.GPL.txt for details)
+The KD Reports Software is (C) 2007-2020 Klarälvdalens Datakonsult AB (KDAB), and is available
+under the terms of:
+* the [LGPL](LICENSE.LGPL.txt)
+* the [GPL](LICENSE.GPL.txt)
 * the KDAB commercial license, provided that you buy a license.
   please contact info@kdab.com if you are interested in buying commercial licenses.
 
-Commercial use is described in README-commercial.txt.
+Commercial licensing terms are available in the included file [LICENSE.txt](LICENSE.txt).
 
 About KDAB
 ==========

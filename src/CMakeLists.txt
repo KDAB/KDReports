@@ -1,12 +1,6 @@
 set(QT_USE_QTXML TRUE)
 include(${QT_USE_FILE})
 
-if(KDReports_STATIC)
-  add_definitions(-DKDREPORTS_STATICLIB)
-else()
-  add_definitions(-DKDREPORTS_BUILD_KDREPORTS_LIB)
-endif()
-
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(FORMS
@@ -129,17 +123,26 @@ set(SOURCES
 )
 
 add_library(kdreports ${KDReports_LIBRARY_MODE} ${SOURCES} ${KDREPORTS_UI} ${KDREPORTS_RES})
+if(${PROJECT_NAME}_STATIC)
+  target_compile_definitions(kdreports PUBLIC KDREPORTS_STATICLIB)
+else()
+  target_compile_definitions(kdreports PRIVATE -DKDREPORTS_BUILD_KDREPORTS_LIB)
+endif()
+
 target_link_libraries(kdreports ${QT_LIBRARIES})
 if (KDChart_FOUND)
     target_link_libraries(kdreports KDChart::kdchart)
 endif()
 set_target_properties(kdreports PROPERTIES DEFINE_SYMBOL KDREPORTS_BUILD_KDREPORTS_LIB)
-set_target_properties(kdreports PROPERTIES VERSION ${${PROJECT_NAME}_VERSION})
+set_target_properties(kdreports PROPERTIES
+  SOVERSION ${${PROJECT_NAME}_SOVERSION}
+  VERSION ${${PROJECT_NAME}_VERSION}
+)
 target_include_directories(kdreports INTERFACE "$<INSTALL_INTERFACE:${INSTALL_INCLUDE_DIR}/KDReports/>")
 
 #version libraries on Windows
 if(WIN32)
-  set(postfix ${${PROJECT_NAME}_VERSION_MAJOR})
+  set(postfix $${${PROJECT_NAME}_SOVERSION})
   set(CMAKE_RELEASE_POSTFIX ${postfix})
   set_target_properties(kdreports PROPERTIES RELEASE_POSTFIX ${CMAKE_RELEASE_POSTFIX})
   #append 'd' to debug libraries

@@ -1,6 +1,8 @@
 What is new in KD Reports 1.8
 ===============================
 
+** Qt4 is still supported, but this is the last release with support for Qt4. **
+
 NOTE:
 -----
 * To follow convention, the name of the debug libraries on Windows has been changed from
