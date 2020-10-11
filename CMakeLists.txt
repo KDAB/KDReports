@@ -1,6 +1,23 @@
+# This is the top-level CMakeLists.txt file for the KDReports project.
+#
+# Pass the following variables to cmake to control the build:
+# (See INSTALL-cmake.txt for more information)
+#
+# -DKDReports_STATIC=[true|false]
+#  Build static libraries-#  Default=false
+#
+# -DKDReports_TESTS=[true|false]
+#  Build the test harness.
+#  Default=false
+#
+
 cmake_minimum_required(VERSION 2.8.12)
-cmake_policy(SET CMP0020 NEW)
-cmake_policy(SET CMP0025 NEW)
+if(POLICY CMP0020)
+  cmake_policy(SET CMP0020 NEW)
+endif()
+if(POLICY CMP0025)
+  cmake_policy(SET CMP0025 NEW)
+endif()
 
 if("${CMAKE_INSTALL_PREFIX}" STREQUAL "")
   set(USE_DEFAULT_INSTALL_LOCATION True)
@@ -15,8 +32,6 @@ option(
   "Enable if you want to enforce a build with Qt4"
   OFF
 )
-
-cmake_minimum_required(VERSION 2.8.12)
 
 option(${PROJECT_NAME}_STATIC "Build statically" OFF)
 option(${PROJECT_NAME}_TESTS "Build the tests" ON)
