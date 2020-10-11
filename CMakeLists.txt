@@ -4,7 +4,8 @@
 # (See INSTALL-cmake.txt for more information)
 #
 # -DKDReports_STATIC=[true|false]
-#  Build static libraries-#  Default=false
+#  Build static libraries
+#  Default=false
 #
 # -DKDReports_TESTS=[true|false]
 #  Build the test harness.
