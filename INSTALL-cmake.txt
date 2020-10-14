@@ -63,7 +63,6 @@ location by passing the option -DCMAKE_INSTALL_PREFIX=/install/path to cmake.
 
 7) (optionally:) Install KD Reports:
 
-
    From your top-level KD Reports directory run:
 
    % make install   # Unix, Mac
