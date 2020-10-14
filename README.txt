@@ -21,7 +21,7 @@ Using KD Reports
 KD Reports requires Qt 5.0 or newer.
 
 See [INSTALL.txt](INSTALL.txt) or [INSTALL-cmake.txt](INSTALL-cmake.txt)
-for installation instructions. (CMake and qmake and buildsystems supported)
+for installation instructions (CMake and qmake and buildsystems supported).
 
 After reading the introductory overview files in doc/
 you will find more information at these places:
@@ -49,14 +49,16 @@ https://github.com/KDAB/KDReports
 
 License
 =======
-The KD Reports Software is (C) 2007-2020 Klarälvdalens Datakonsult AB (KDAB), and is available
-under the terms of:
+The KD Reports Software is Copyright 2007-2020 Klarälvdalens Datakonsult AB (KDAB),
+and is available under the terms of:
+
 * the [LGPL](LICENSE.LGPL.txt)
 * the [GPL](LICENSE.GPL.txt)
 * the KDAB commercial license, provided that you buy a license.
   please contact info@kdab.com if you are interested in buying commercial licenses.
 
-Commercial licensing terms are available in the included file [LICENSE.txt](LICENSE.txt).
+Commercial licensing terms are available in the included files [LICENSE.txt](LICENSE.txt),
+[LICENSE.US.txt](LICENSE.US.txt) and [README-commercial.txt](README-commercial.txt).
 
 About KDAB
 ==========

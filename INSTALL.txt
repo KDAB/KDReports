@@ -10,13 +10,17 @@ to section 1-bis). Commercial users, start at section 1).
      configure.bat -shared -debug
      configure.bat -shared -release
 
-   On Unix use depending on the kind of build one of the following;
+   On Unix or Mac use depending on the kind of build one of the following;
      ./configure.sh -shared -debug
      ./configure.sh -shared -release
 
    To define the install-location use for example;
      configure.bat -shared -debug -prefix c:/kdreports
      ./configure.sh -shared -debug -prefix /opt/kdreports
+
+   NOTE: Don't use relative paths for the prefix, they will not work.
+
+   If this succeeded, jump to step 2.
 
 1-bis) If you are building KD Reports from a github clone rather than a release tarball,
    the configure.bat/configure.sh script doesn't exist (it's generated at release time),
@@ -26,7 +30,7 @@ to section 1-bis). Commercial users, start at section 1).
    execute path.  Either a 32-bit or 64-bit version of Python is fine, but run
    python --version to make sure it is found and is python2 before continuing.
 
-   Now run autogen.py to create the configure tool.
+   Now run autogen.py to create the configure tool:
 
    On Windows:
      c:\python27\python autogen.py [options]
@@ -94,3 +98,11 @@ to section 1-bis). Commercial users, start at section 1).
 
    % make install   # Unix, Mac
    % nmake install  # Windows
+   This will copy the necessary files into the sub-directories of your installation path:
+   For Unix/Linux, Mac this is /usr/local/KDAB/KDReports-VERSION/
+   For Windows this is: C:\KDAB\KDReports-VERSION\
+
+   UNIX,Mac Note): Admin rights may be required for installing to /usr/local.
+         Run "sudo make install", to install with admin rights.
+
+7) Have a look at the example applications to get you started with the KD Reports.
