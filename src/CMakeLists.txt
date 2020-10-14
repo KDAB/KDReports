@@ -145,7 +145,7 @@ target_include_directories(kdreports INTERFACE "$<INSTALL_INTERFACE:${INSTALL_IN
 
 #version libraries on Windows
 if(WIN32)
-  set(postfix $${${PROJECT_NAME}_SOVERSION})
+  set(postfix ${${PROJECT_NAME}_SOVERSION})
   set(CMAKE_RELEASE_POSTFIX ${postfix})
   set_target_properties(kdreports PROPERTIES RELEASE_POSTFIX ${CMAKE_RELEASE_POSTFIX})
   #append 'd' to debug libraries
