@@ -32,10 +32,14 @@ you will find more information at these places:
 
 Contact
 =======
-* Join our mailing list: https://mail.kdab.com/mailman/listinfo/kdreports-interest
 * See our official home page: https://www.kdab.com/development-resources/qt-tools/kd-reports
 * Visit us on GitHub: https://github.com/KDAB/KDReports
 * Email info@kdab.com for questions about copyright, licensing or commercial support.
+
+Keep up-to-date with KDAB product announcements:
+
+* [KDAB Newsletter](https://news.kdab.com)
+* [KDAB Blogs](https://www.kdab.com/category/blogs)
 
 Get Involved
 ============
