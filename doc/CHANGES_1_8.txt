@@ -10,7 +10,7 @@ NOTE:
   adapted accordingly.
 
 In release 1.8.2:
-----------------
+-----------------
 * Fix installed library name on Windows
 
 In release 1.8.1:
