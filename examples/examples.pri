@@ -8,9 +8,6 @@ static {
     DEFINES += TESTTOOLS_STATICLIB
 }
 
-# For more qt4/qt5 compatibility
-DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x000000
-
 contains( $$list($$[QT_VERSION]), 5.* ): QT += widgets printsupport
 
 # The src/KDReports include path is only for the use of private classes in unittests

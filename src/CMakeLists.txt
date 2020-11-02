@@ -1,5 +1,4 @@
 set(QT_USE_QTXML TRUE)
-include(${QT_USE_FILE})
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -8,10 +7,10 @@ set(FORMS
   KDReports/tablebreakingdialogbase.ui
 )
 
-qt4_wrap_ui(KDREPORTS_UI ${FORMS})
+qt5_wrap_ui(KDREPORTS_UI ${FORMS})
 
 set(RESOURCES ${CMAKE_CURRENT_SOURCE_DIR}/../pics/pics.qrc)
-qt4_add_resources(KDREPORTS_RES ${RESOURCES})
+qt5_add_resources(KDREPORTS_RES ${RESOURCES})
 
 if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/KDReports)
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/KDReports)

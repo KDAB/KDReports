@@ -56,7 +56,10 @@ include(InstallLocation)
 find_package(Qt5Core QUIET)
 
 if(Qt5Core_FOUND)
-  find_package(Qt5 COMPONENTS Widgets PrintSupport Sql Xml REQUIRED)
+  find_package(Qt5 COMPONENTS Widgets PrintSupport Sql Xml Test REQUIRED)
+  if(${PROJECT_NAME}_TESTS)
+    find_package(Qt5 COMPONENTS Test REQUIRED)
+  endif()
   set(QT_LIBRARIES Qt5::Core Qt5::PrintSupport Qt5::Sql Qt5::Xml)
   set(QT_USE_FILE "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Qt5Portability.cmake")
 

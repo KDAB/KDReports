@@ -3,8 +3,6 @@ set(QT_USE_QTXML TRUE)
 set(QT_USE_QTSQL TRUE)
 set(QT_USE_QTTEST TRUE)
 
-include(${QT_USE_FILE})
-
 include_directories(../src/KDReports ${CMAKE_CURRENT_BINARY_DIR}/../src/KDReports)
 
 remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
@@ -27,17 +25,13 @@ macro(add_unittest _source)
   endforeach()
 
   if(_resource)
-    if(TARGET Qt5::Core)
-      qt5_add_resources(_srcs ${_resource})
-    else()
-      qt4_add_resources(_srcs ${_resource})
-    endif()
+    qt5_add_resources(_srcs ${_resource})
   endif()
 
   add_executable(${_name} ${_srcs})
 
   add_test(NAME kdreports-${_name} COMMAND ${_name})
-  target_link_libraries(${_name} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_LIBRARIES} kdreports)
+  target_link_libraries(${_name} ${QT_LIBRARIES} Qt5::Test kdreports)
 endmacro()
 
 add_subdirectory(ElementCopying)

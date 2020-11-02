@@ -1,6 +1,5 @@
 set(QT_USE_QTXML TRUE)
 set(QT_USE_QTSQL TRUE)
-include(${QT_USE_FILE})
 
 remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
