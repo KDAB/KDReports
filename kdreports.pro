@@ -12,6 +12,13 @@
 ## Contact info@kdab.com if any conditions of this licensing are not clear to you.
 ##
 
+system('echo ==================================================================================')
+system('echo The QMake Buildsystem is deprecated and will be removed in the next major release.')
+system('echo Please consider migrating to the CMake Buildsystem at your earliest opportunity.')
+system('echo Instructions can be found in INSTALL-cmake.txt')
+system('echo ==================================================================================')
+system('echo')
+
 TEMPLATE = subdirs
 system($$system_path(./gen-forward-headers.py))|error("Can't generate forward headers, please ensure python is available from this shell.")
 SUBDIRS  = include src
