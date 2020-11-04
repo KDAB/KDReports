@@ -74,14 +74,8 @@ private slots:
         QVERIFY( c.charFormat().hasProperty( VariableTypeProperty ) );
         QVERIFY( c.charFormat().hasProperty( VariableLengthProperty ) );
         c.setPosition( 0 );
-#if QT_VERSION < 0x040300
-        // This was the behavior in Qt-4.2.2, but it changed in Qt-4.3.0
-        QVERIFY( !c.charFormat().hasProperty( VariableTypeProperty ) );
-        QVERIFY( !c.charFormat().hasProperty( VariableLengthProperty ) );
-#else
         QVERIFY( c.charFormat().hasProperty( VariableTypeProperty ) );
         QVERIFY( c.charFormat().hasProperty( VariableLengthProperty ) );
-#endif
     }
     void testEmptyVariable()
     {
@@ -168,10 +162,6 @@ private slots:
             int i = 0;
             Q_FOREVER {
                 //qDebug() << i << cursor.charFormat().fontPointSize();
-#if QT_VERSION < 0x040300
-                // Skip checking position 0 with Qt-4.2, it worked differently then
-                if ( i > 0 )
-#endif
                 QCOMPARE( cursor.charFormat().fontPointSize(), initialPointSizes[i] * 1.2 );
                 if ( cursor.atEnd() )
                     break;
@@ -194,10 +184,6 @@ private slots:
             int i = 0;
             Q_FOREVER {
                 //qDebug() << i << cursor.charFormat().fontPointSize();
-#if QT_VERSION < 0x040300
-                // Skip checking position 0 with Qt-4.2, it worked differently then
-                if ( i > 0 )
-#endif
                 QCOMPARE( cursor.charFormat().fontPointSize(), initialPointSizes[i] * 1.2 );
                 if ( cursor.atEnd() )
                     break;

@@ -86,10 +86,8 @@ void KDReports::TextDocument::preciseDump()
             if ( flags & QTextFormat::PageBreak_AlwaysAfter )
                 qDebug() << "  block" << currentBlock << "says: BREAK AFTER";
         }
-#if QT_VERSION >= 0x040500
         const QChar ch = m_contentDocument.characterAt( i );
         qDebug() << " char" << i << ch << ch.unicode(); // 8233 == paragraph separator
-#endif
 
         if ( cursor.atEnd() ) {
             qDebug() << " document ends at" << cursor.position();

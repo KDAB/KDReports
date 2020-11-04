@@ -24,11 +24,7 @@
 #include <QFont>
 #include <QTextOption>
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5,0,0))
 #include <QtPrintSupport/QPrinter>
-#else
-#include <QPrinter>
-#endif
 
 QT_BEGIN_NAMESPACE
 class QDomDocument;

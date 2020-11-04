@@ -21,19 +21,6 @@
 
 #include <QTextObjectInterface>
 
-#if (QT_VERSION < QT_VERSION_CHECK(5,0,0))
-/* QMetaType must be told about
- * the existence of KDChart::Chart*
- * type in order to allow its usage
- * with QVariants
- */
-namespace KDChart {
-    class Chart;
-}
-
-Q_DECLARE_METATYPE(KDChart::Chart*)
-#endif
-
 namespace KDReports {
 
 class ChartTextObject : public QObject, public QTextObjectInterface

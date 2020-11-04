@@ -74,12 +74,6 @@ qreal KDReports::TextDocReportLayout::layoutAsOnePage(qreal docWidth)
     m_textDocument.layoutWithTextWidth(docWidth);
     qreal docHeight = m_textDocument.contentDocument().size().height();
 
-#if QT_VERSION <= 0x040300
-    // Qt-4.2 bug, fixed in Qt-4.3:  QTextDocumentLayout::dynamicPageCount()
-    // returns docheight/pageheight + 1. So if the doc is just as high as the page, I get 2 pages.
-    docHeight += 1;
-#endif
-
     // We need to get rid of all page breaks...
     // Unittest: PageLayout::testEndlessPrinterWithPageBreaks()
     QTextCursor c(&m_textDocument.contentDocument());

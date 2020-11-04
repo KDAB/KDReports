@@ -43,14 +43,7 @@ private slots:
     {
         // Force the DPI do the same value as on Windows
         // (mostly for testFontScaling)
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
         qApp->setAttribute(Qt::AA_Use96Dpi, true);
-#else
-#ifdef Q_WS_X11
-        QX11Info::setAppDpiX(0, 96);
-        QX11Info::setAppDpiY(0, 96);
-#endif
-#endif
         QFont font( s_fontName, 48 );
         QFontInfo info( font );
         fontFound = (info.family() == s_fontName);
@@ -59,15 +52,9 @@ private slots:
         // Unfortunately, Qt on Mac OSX hardcodes 72 DPI, so we'll always have different results there.
     }
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-#define SKIP_IF_FONT_NOT_FOUND \
-    if (!fontFound) \
-        QSKIP(QString("Font %1 not found").arg(s_fontName).toLatin1(), SkipAll);
-#else
 #define SKIP_IF_FONT_NOT_FOUND \
     if (!fontFound) \
         QSKIP(QString("Font %1 not found").arg(s_fontName).toLatin1());
-#endif
 
     // Tests
 

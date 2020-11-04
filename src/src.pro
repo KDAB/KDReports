@@ -23,7 +23,7 @@ DESTDIR = $${TOP_BUILD_DIR}/lib
 win32:DLLDESTDIR = $${TOP_BUILD_DIR}/bin
 QT += xml
 
-contains( $$list($$[QT_VERSION]), 5.* ): QT += widgets printsupport
+QT += widgets printsupport
 
 include(../variables.pri)
 

@@ -96,10 +96,8 @@ private:
     // TableElement needs to create/copy cells
     friend class TableElement;
     friend class QMap<QPair<int, int>, Cell>;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     friend struct QMapData<QPair<int, int>, Cell>;
     friend struct QMapNode<QPair<int, int>, Cell>;
-#endif
     Cell();
     Cell(const Cell &other);
     Cell &operator=(const Cell &other);

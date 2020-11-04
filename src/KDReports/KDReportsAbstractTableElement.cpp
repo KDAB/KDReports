@@ -149,9 +149,7 @@ void KDReports::AbstractTableElement::fillTableFormat( QTextTableFormat& tableFo
     }
 
     tableFormat.setBorder( border() );
-#if QT_VERSION >= 0x040300
     tableFormat.setBorderBrush( borderBrush() );
-#endif
     tableFormat.setCellPadding( mmToPixels( padding() ) );
     tableFormat.setCellSpacing( 0 ); // HTML-like table borders look so old century
     if ( d->m_fontSpecified ) {

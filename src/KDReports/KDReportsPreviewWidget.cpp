@@ -602,10 +602,8 @@ KDReports::Report* KDReports::PreviewWidget::report() const
 bool KDReports::PreviewWidget::printWithDialog()
 {
     QPointer<QPrintDialog> dialog = new QPrintDialog( &d->m_printer, this );
-#if QT_VERSION >= 0x040500
     dialog->setOption( QAbstractPrintDialog::PrintSelection, true );
     dialog->setOption( QAbstractPrintDialog::PrintPageRange, true );
-#endif
     bool ok = false;
     if ( dialog->exec() == QDialog::Accepted && dialog ) {
         if ( dialog->printRange() == QAbstractPrintDialog::AllPages ) {

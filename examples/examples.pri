@@ -22,7 +22,7 @@ static {
     DEFINES += TESTTOOLS_STATICLIB
 }
 
-contains( $$list($$[QT_VERSION]), 5.* ): QT += widgets printsupport
+QT += widgets printsupport
 
 # The src/KDReports include path is only for the use of private classes in unittests
 INCLUDEPATH += \

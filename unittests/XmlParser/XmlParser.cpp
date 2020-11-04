@@ -50,7 +50,6 @@ private slots:
         report.associateTextValue( "3", "textid.xml" );
         QVERIFY( report.loadFromXML( &file ) );
         QCOMPARE( report.doc().contentDocument().blockCount(), 4 );
-#if QT_VERSION >= 0x040300   // broken in Qt-4.2.3
         QCOMPARE( report.doc().contentDocument().toPlainText(), QString("Title .\ntextid.xml\n\n") );
 
         // Now test changing text values -after- loading.
@@ -67,7 +66,6 @@ private slots:
 
         report.associateTextValue( "4", "works" );
         QCOMPARE( report.doc().contentDocument().toPlainText(), QString("Newer Title .\nchanged\nworks\nwell") );
-#endif
     }
 
     void testHtmlId()
@@ -83,9 +81,7 @@ private slots:
         QCOMPARE( doc.blockCount(), 2 );
         QCOMPARE( doc.toPlainText(), QString("Title\nhtmlid.xml") );
         QTextCursor c( &doc );
-#if QT_VERSION >= 0x040300   // broken in Qt-4.2.3
         QVERIFY( c.charFormat().fontWeight() == QFont::Bold );
-#endif
     }
 
     void testMargins()
