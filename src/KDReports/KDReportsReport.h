@@ -269,7 +269,6 @@ public:
 
     /**
      * Sets a custom paper size for the report.
-     * This feature requires Qt 4.4 or newer.
      * Supported units are DevicePixel, Millimeter, Point and Inch.
      */
     void setPaperSize( const QSizeF & paperSize, QPrinter::Unit unit );
