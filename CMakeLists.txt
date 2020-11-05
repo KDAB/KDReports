@@ -30,7 +30,7 @@
 #  Default=true
 #
 
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.1)
 if(POLICY CMP0020)
   cmake_policy(SET CMP0020 NEW)
 endif()
@@ -78,12 +78,8 @@ if(Qt5Core_FOUND)
   set(QT_USE_FILE "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Qt5Portability.cmake")
 
   if(Qt5_POSITION_INDEPENDENT_CODE)
-    if(NOT CMAKE_VERSION VERSION_LESS 2.8.11)
-      if(Qt5Core_VERSION VERSION_LESS 5.1)
-        set_property(TARGET Qt5::Core PROPERTY INTERFACE_POSITION_INDEPENDENT_CODE ON)
-      endif()
-    else()
-      set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+    if(Qt5Core_VERSION VERSION_LESS 5.1)
+      set_property(TARGET Qt5::Core PROPERTY INTERFACE_POSITION_INDEPENDENT_CODE ON)
     endif()
   endif()
 endif()

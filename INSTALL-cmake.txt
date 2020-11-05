@@ -1,5 +1,5 @@
 These are the instructions for installing KD Reports using the CMake buildsystem.
-CMake version 2.8.12 or higher is required.
+CMake version 3.1 or higher is required.
 
 KD Reports requires a Qt version >= 5.0.
 

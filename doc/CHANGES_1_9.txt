@@ -4,6 +4,7 @@ What is new in KD Reports 1.9
 General:
 --------
 * No longer supporting Qt 4
+* Minimum CMake version is 3.1
 * New installing file for Conan (WIP - see conan folder)
 * The qmake buildsystem is deprecated.
 
