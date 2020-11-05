@@ -5,6 +5,7 @@ General:
 --------
 * No longer supporting Qt 4
 * New installing file for Conan (WIP - see conan folder)
+* The qmake buildsystem is deprecated.
 
 Features:
 ---------
