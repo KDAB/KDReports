@@ -49,7 +49,6 @@ develop programs using kdreports.
 %setup -q
 
 %build
-touch .license.accepted
 cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
 %__make %{?_smp_mflags}
 
@@ -74,7 +73,6 @@ cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
 %dir %{_libdir}/cmake/KDReports
 %{_libdir}/cmake/KDReports/*
 %{_libdir}/libkdreports.so
-%{_prefix}/share/mkspecs
 %if %{defined fedora}
 %if 0%{?fedora} > 28
 %{_libdir}/qt5/mkspecs/modules/*
@@ -83,6 +81,8 @@ cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
 %dir %{_prefix}/mkspecs/modules/
 %{_prefix}/mkspecs/modules/*.pri
 %endif
+%else
+%{_libdir}/qt5/mkspecs/modules/*
 %endif
 
 %changelog
