@@ -38,9 +38,7 @@ PROJECT_NAME           = "KD Reports"
 # could be handy for archiving the generated documentation or if some version
 # control system is used.
 
-# Using the PROJECT_BRIEF tag one can provide an optional one line description
-# for a project that appears at the top of each page and should give viewer a
-# quick idea about the purpose of the project. Keep the description short.
+PROJECT_NUMBER         = 1.9
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer a
@@ -217,7 +215,7 @@ QT_AUTOBRIEF           = NO
 # not recognized any more.
 # The default value is: NO.
 
-QT_AUTOBRIEF           = NO
+MULTILINE_CPP_IS_BRIEF = NO
 
 # By default Python docstrings are displayed as preformatted text and doxygen's
 # special commands cannot be used. By setting PYTHON_DOCSTRING to NO the
@@ -802,7 +800,7 @@ WARN_IF_DOC_ERROR      = YES
 # EXTRACT_ALL is set to YES then this flag will automatically be disabled.
 # The default value is: NO.
 
-WARN_AS_ERROR          = NO
+WARN_NO_PARAMDOC       = NO
 
 # If the WARN_AS_ERROR tag is set to YES then doxygen will immediately stop when
 # a warning is encountered.
@@ -1220,7 +1218,9 @@ HTML_EXTRA_STYLESHEET  =
 # files will be copied as-is; there are no commands or markers available.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_FILES       = images/kdab-small.png images/kdreports-small.png images/kdreports-medium.png
+HTML_EXTRA_FILES       = images/kdab-small.png \
+                         images/kdreports-small.png \
+                         images/kdreports-medium.png
 
 # The HTML_COLORSTYLE_HUE tag controls the color of the HTML output. Doxygen
 # will adjust the colors in the style sheet and background images according to
@@ -1490,7 +1490,7 @@ ECLIPSE_DOC_ID         = org.doxygen.Project
 # The default value is: NO.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-GENERATE_QHP           = NO
+DISABLE_INDEX          = NO
 
 # The GENERATE_TREEVIEW tag is used to specify whether a tree-like index
 # structure should be generated to display hierarchical information. If the tag
