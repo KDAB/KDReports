@@ -105,9 +105,9 @@ def autogen(project, version, subprojects, prefixed, forwardHeaderMap = {}, step
 
 	print( "-- Auto-generation done." )
 
-	with file( ".license.accepted", 'a' ):
-		os.utime( ".license.accepted", None )
-	print( "-- License marked as accepted." )
+	#with file( ".license.accepted", 'a' ):
+	#	os.utime( ".license.accepted", None )
+	#print( "-- License marked as accepted." )
 
 	if steps == ["generate-forward-headers"]:
 		sys.stdout.flush()
