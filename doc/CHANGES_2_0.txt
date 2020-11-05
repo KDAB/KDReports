@@ -1,0 +1,7 @@
+What is new in KD Reports 2.0
+=============================
+
+Goals (not implemented yet):
+ * Qt6 support
+ * Remove qmake buildsystem
+

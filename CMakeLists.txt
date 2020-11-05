@@ -12,8 +12,6 @@
 ## Contact info@kdab.com if any conditions of this licensing are not clear to you.
 ##
 
-# This is the top-level CMakeLists.txt file for the KDReports project.
-#
 # Pass the following variables to cmake to control the build:
 # (See INSTALL-cmake.txt for more information)
 #
@@ -58,7 +56,7 @@ option(${PROJECT_NAME}_EXAMPLES "Build the examples" ON)
 
 set(${PROJECT_NAME}_VERSION_MAJOR 1)
 set(${PROJECT_NAME}_VERSION_MINOR 9)
-set(${PROJECT_NAME}_VERSION_PATCH 0)
+set(${PROJECT_NAME}_VERSION_PATCH 50)
 set(${PROJECT_NAME}_VERSION ${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH})
 set(${PROJECT_NAME}_SOVERSION ${${PROJECT_NAME}_VERSION_MAJOR})
 

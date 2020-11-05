@@ -25,7 +25,7 @@ SUBDIRS  = include src
 !no_examples: SUBDIRS += examples
 unittests: SUBDIRS += unittests
 CONFIG   += ordered
-VERSION  = 1.9.0
+VERSION  = 1.9.50
 MAJOR_VERSION = 1
 
 unix:DEFAULT_INSTALL_PREFIX = /usr/local/KDAB/KDReports-$$VERSION
