@@ -74,6 +74,7 @@ cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
 %dir %{_libdir}/cmake/KDReports
 %{_libdir}/cmake/KDReports/*
 %{_libdir}/libkdreports.so
+%{_libdir}/qt5/mkspecs/modules/*
 
 %changelog
 * Thu Nov 04 2020 Allen Winter <allen.winter@kdab.com> 1.9.0
