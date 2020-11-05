@@ -49,7 +49,6 @@ develop programs using kdreports.
 %setup -q
 
 %build
-touch .license.accepted
 cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
 %__make %{?_smp_mflags}
 
@@ -74,10 +73,20 @@ cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
 %dir %{_libdir}/cmake/KDReports
 %{_libdir}/cmake/KDReports/*
 %{_libdir}/libkdreports.so
+%if %{defined fedora}
+%if 0%{?fedora} > 28
 %{_libdir}/qt5/mkspecs/modules/*
+%else
+%dir %{_prefix}/mkspecs/
+%dir %{_prefix}/mkspecs/modules/
+%{_prefix}/mkspecs/modules/*.pri
+%endif
+%else
+%{_libdir}/qt5/mkspecs/modules/*
+%endif
 
 %changelog
-* Thu Nov 04 2020 Allen Winter <allen.winter@kdab.com> 1.9.0
+* Wed Nov 04 2020 Allen Winter <allen.winter@kdab.com> 1.9.0
   1.9.0 final
 * Thu Oct 15 2020 Allen Winter <allen.winter@kdab.com> 1.8.2
   1.8.2 final

@@ -9,12 +9,12 @@ class ConfigureScriptGenerator():
 		autogen_dir = os.path.dirname( __file__ )
 		self.__winTemplate = os.path.abspath( autogen_dir + "/configure.bat.in" )
 		self.__unixTemplate = os.path.abspath( autogen_dir + "/configure.sh.in" )
-		if not os.path.exists( self.__path + "/LICENSE.GPL.txt") and not os.path.exists( self.__path + "/LICENSE.LGPL.txt" ):
-			print "no free license (LICENSE.GPL.txt or LICENSE.LGPL.txt) exists"
-			sys.exit( 1 )
-		self.__freeLicense = "LGPL" if os.path.exists( self.__path + "/LICENSE.LGPL.txt" ) else "GPL"
-		self.__licenseName = { 'GPL': 'GNU General Public License',
-                               'LGPL': 'GNU Lesser General Public License' }
+#		if not os.path.exists( self.__path + "/LICENSE.GPL.txt") and not os.path.exists( self.__path + "/LICENSE.LGPL.txt" ):
+#			print "no free license (LICENSE.GPL.txt or LICENSE.LGPL.txt) exists"
+#			sys.exit( 1 )
+#		self.__freeLicense = "LGPL" if os.path.exists( self.__path + "/LICENSE.LGPL.txt" ) else "GPL"
+#		self.__licenseName = { 'GPL': 'GNU General Public License',
+#                               'LGPL': 'GNU Lesser General Public License' }
 
 	def run( self ):
 		self.__generateFile( self.__unixTemplate, os.path.abspath( self.__path + "/configure.sh" ), "unix" )
@@ -32,8 +32,8 @@ class ConfigureScriptGenerator():
 		value = value.replace( "@PRODUCT_LOWERCASE@", self.__project.lower() )
 		value = value.replace( "@PRODUCT_MIXEDCASE@", self.__project )
 		value = value.replace( "@PRODUCT_MIXEDCASE_SPACED@", mixedname )
-		value = value.replace( "@PRODUCT_LICENSE_FREE@", self.__freeLicense )
-		value = value.replace( "@PRODUCT_LICENSE_FREE_NAME@", self.__licenseName[self.__freeLicense] )
+#		value = value.replace( "@PRODUCT_LICENSE_FREE@", self.__freeLicense )
+#		value = value.replace( "@PRODUCT_LICENSE_FREE_NAME@", self.__licenseName[self.__freeLicense] )
 		return value
 
 	def __generateFile( self, templateFile, outputFile, platformString ):
