@@ -5,7 +5,7 @@
 # KDReports_LIBRARIES   - Path to KDReports libraries.
 # KDReports_INCLUDE_DIR - Path to the KDReports include directory.
 #
-# SPDX-FileCopyrightText: 2007-2020 Klarälvdalens Datakonsult AB, a KDAB Group company <info@kdab.com>
+# SPDX-FileCopyrightText: 2007-2021 Klarälvdalens Datakonsult AB, a KDAB Group company <info@kdab.com>
 #
 # SPDX-License-Identifier: BSD-3-Clause
 #

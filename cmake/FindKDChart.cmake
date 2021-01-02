@@ -5,7 +5,7 @@
 # KDChart_LIBRARIES   - Path to KDChart libraries.
 # KDChart_INCLUDE_DIR - Path to the KDChart include directory.
 #
-# SPDX-FileCopyrightText: 2015-2020 Klarälvdalens Datakonsult AB, a KDAB Group company <info@kdab.com>
+# SPDX-FileCopyrightText: 2015-2021 Klarälvdalens Datakonsult AB, a KDAB Group company <info@kdab.com>
 #
 # SPDX-License-Identifier: BSD-3-Clause
 #

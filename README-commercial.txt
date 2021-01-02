@@ -15,7 +15,7 @@ Contact info@kdab.com for more information.
 
 Licensing
 =========
-Copyright (C) 2007-2020 Klarälvdalens Datakonsult AB, a KDAB Group company, <info@kdab.com>
+Copyright (C) 2007-2021 Klarälvdalens Datakonsult AB, a KDAB Group company, <info@kdab.com>
 
 Commercial licensing terms are available in the included file
         LICENSES/LicenseRef-KDAB-KDReports.txt (for non-US customers)
