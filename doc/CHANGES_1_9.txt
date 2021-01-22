@@ -21,3 +21,4 @@ Bug fixes:
 CMake buildsystem:
 ------------------
 * Generates .pri files for qmake users
+* fix library versioning for RelWithDebInfo on Windows (Version 1.9.1)
