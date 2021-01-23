@@ -42,6 +42,8 @@ class KDREPORTS_EXPORT AutoTableElement : public AbstractTableElement
 public:
     /**
      * Creates a table element from the given table model.
+     * Note that the argument isn't const because KDReports will call fetchMore() on it,
+     * if canFetchMore() returns true.
      */
     explicit AutoTableElement( QAbstractItemModel* tableModel );
 
