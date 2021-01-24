@@ -15,190 +15,190 @@
 ****************************************************************************/
 
 #include "TestXmlElementHandler.h"
-#include <QDebug>
-#include <QtXml/QDomElement>
-#include "KDReportsReport.h"
-#include "KDReportsTextElement.h"
-#include "KDReportsHtmlElement.h"
-#include "KDReportsImageElement.h"
-#include "KDReportsChartElement.h"
-#include "KDReportsHeader.h"
-#include "KDReportsTableElement.h"
-#include "KDReportsHLineElement.h"
 #include "KDReportsAutoTableElement.h"
 #include "KDReportsCell.h"
+#include "KDReportsChartElement.h"
+#include "KDReportsHLineElement.h"
+#include "KDReportsHeader.h"
+#include "KDReportsHtmlElement.h"
+#include "KDReportsImageElement.h"
+#include "KDReportsReport.h"
+#include "KDReportsTableElement.h"
+#include "KDReportsTextElement.h"
+#include <QDebug>
+#include <QtXml/QDomElement>
 
-TestXmlElementHandler::TestXmlElementHandler( KDReports::Report& report )
-    : mReport( report )
+TestXmlElementHandler::TestXmlElementHandler(KDReports::Report &report)
+    : mReport(report)
 {
 }
 
-bool TestXmlElementHandler::startReport( KDReports::Report& report, QDomElement& xmlElement )
+bool TestXmlElementHandler::startReport(KDReports::Report &report, QDomElement &xmlElement)
 {
-    Q_UNUSED( report ); // unused in release mode
-    Q_ASSERT( &report == &mReport );
-    Q_UNUSED( xmlElement ); // unused in release mode
-    Q_ASSERT( xmlElement.tagName() == "report" );
+    Q_UNUSED(report); // unused in release mode
+    Q_ASSERT(&report == &mReport);
+    Q_UNUSED(xmlElement); // unused in release mode
+    Q_ASSERT(xmlElement.tagName() == "report");
     cb << "startReport";
     return true;
 }
 
-bool TestXmlElementHandler::startHeader( KDReports::Header& header, QDomElement& xmlElement )
+bool TestXmlElementHandler::startHeader(KDReports::Header &header, QDomElement &xmlElement)
 {
-    Q_UNUSED( header );
-    Q_UNUSED( xmlElement ); // unused in release mode
-    Q_ASSERT( xmlElement.tagName() == "header" );
+    Q_UNUSED(header);
+    Q_UNUSED(xmlElement); // unused in release mode
+    Q_ASSERT(xmlElement.tagName() == "header");
     cb << "startHeader";
     return true;
 }
 
-void TestXmlElementHandler::endHeader( KDReports::Header& header, const QDomElement& xmlElement )
+void TestXmlElementHandler::endHeader(KDReports::Header &header, const QDomElement &xmlElement)
 {
-    Q_UNUSED( header );
-    Q_UNUSED( xmlElement ); // unused in release mode
-    Q_ASSERT( xmlElement.tagName() == "header" );
+    Q_UNUSED(header);
+    Q_UNUSED(xmlElement); // unused in release mode
+    Q_ASSERT(xmlElement.tagName() == "header");
     cb << "endHeader";
 }
 
-bool TestXmlElementHandler::startFooter( KDReports::Footer& footer, QDomElement& xmlElement )
+bool TestXmlElementHandler::startFooter(KDReports::Footer &footer, QDomElement &xmlElement)
 {
-    Q_UNUSED( footer );
-    Q_UNUSED( xmlElement ); // unused in release mode
-    Q_ASSERT( xmlElement.tagName() == "footer" );
+    Q_UNUSED(footer);
+    Q_UNUSED(xmlElement); // unused in release mode
+    Q_ASSERT(xmlElement.tagName() == "footer");
     cb << "startFooter";
     return true;
 }
 
-void TestXmlElementHandler::endFooter( KDReports::Footer& footer, const QDomElement& xmlElement )
+void TestXmlElementHandler::endFooter(KDReports::Footer &footer, const QDomElement &xmlElement)
 {
-    Q_UNUSED( footer );
-    Q_UNUSED( xmlElement ); // unused in release mode
-    Q_ASSERT( xmlElement.tagName() == "footer" );
+    Q_UNUSED(footer);
+    Q_UNUSED(xmlElement); // unused in release mode
+    Q_ASSERT(xmlElement.tagName() == "footer");
     cb << "endFooter";
 }
 
-bool TestXmlElementHandler::textElement( KDReports::TextElement& textElement, QDomElement& xmlElement )
+bool TestXmlElementHandler::textElement(KDReports::TextElement &textElement, QDomElement &xmlElement)
 {
-    Q_UNUSED( textElement );
-    Q_UNUSED( xmlElement ); // unused in release mode
-    Q_ASSERT( xmlElement.tagName() == "text" );
+    Q_UNUSED(textElement);
+    Q_UNUSED(xmlElement); // unused in release mode
+    Q_ASSERT(xmlElement.tagName() == "text");
     cb << "textElement";
     if (textElement.id() == "testModification")
         textElement.setId("testModified");
     return true;
 }
 
-bool TestXmlElementHandler::htmlElement( KDReports::HtmlElement& htmlElement, QDomElement& xmlElement )
+bool TestXmlElementHandler::htmlElement(KDReports::HtmlElement &htmlElement, QDomElement &xmlElement)
 {
-    Q_UNUSED( htmlElement );
-    Q_UNUSED( xmlElement ); // unused in release mode
-    Q_ASSERT( xmlElement.tagName() == "html" );
+    Q_UNUSED(htmlElement);
+    Q_UNUSED(xmlElement); // unused in release mode
+    Q_ASSERT(xmlElement.tagName() == "html");
     cb << "htmlElement";
     return true;
 }
 
-bool TestXmlElementHandler::startTableElement( KDReports::TableElement& tableElement, QDomElement& xmlElement )
+bool TestXmlElementHandler::startTableElement(KDReports::TableElement &tableElement, QDomElement &xmlElement)
 {
-    Q_UNUSED( tableElement );
-    Q_UNUSED( xmlElement ); // unused in release mode
-    Q_ASSERT( xmlElement.tagName() == "table" );
+    Q_UNUSED(tableElement);
+    Q_UNUSED(xmlElement); // unused in release mode
+    Q_ASSERT(xmlElement.tagName() == "table");
     cb << "startTableElement";
     return true;
 }
 
-bool TestXmlElementHandler::endTableElement( KDReports::TableElement& tableElement, QDomElement& xmlElement )
+bool TestXmlElementHandler::endTableElement(KDReports::TableElement &tableElement, QDomElement &xmlElement)
 {
-    Q_UNUSED( tableElement );
-    Q_UNUSED( xmlElement ); // unused in release mode
-    Q_ASSERT( xmlElement.tagName() == "table" );
+    Q_UNUSED(tableElement);
+    Q_UNUSED(xmlElement); // unused in release mode
+    Q_ASSERT(xmlElement.tagName() == "table");
     cb << "endTableElement";
     return true;
 }
 
-bool TestXmlElementHandler::startCell( KDReports::Cell& cell, QDomElement& xmlElement )
+bool TestXmlElementHandler::startCell(KDReports::Cell &cell, QDomElement &xmlElement)
 {
-    Q_UNUSED( cell );
-    Q_UNUSED( xmlElement ); // unused in release mode
-    Q_ASSERT( xmlElement.tagName() == "cell" );
+    Q_UNUSED(cell);
+    Q_UNUSED(xmlElement); // unused in release mode
+    Q_ASSERT(xmlElement.tagName() == "cell");
     cb << "startCell";
     return true;
 }
 
-bool TestXmlElementHandler::endCell( KDReports::Cell& cell, QDomElement& xmlElement )
+bool TestXmlElementHandler::endCell(KDReports::Cell &cell, QDomElement &xmlElement)
 {
-    Q_UNUSED( cell );
-    Q_UNUSED( xmlElement ); // unused in release mode
-    Q_ASSERT( xmlElement.tagName() == "cell" );
+    Q_UNUSED(cell);
+    Q_UNUSED(xmlElement); // unused in release mode
+    Q_ASSERT(xmlElement.tagName() == "cell");
     cb << "endCell";
     return true;
 }
 
-bool TestXmlElementHandler::autoTableElement( KDReports::AutoTableElement& tableElement, QDomElement& xmlElement )
+bool TestXmlElementHandler::autoTableElement(KDReports::AutoTableElement &tableElement, QDomElement &xmlElement)
 {
-    Q_UNUSED( tableElement );
-    Q_UNUSED( xmlElement ); // unused in release mode
-    Q_ASSERT( xmlElement.tagName() == "table" );
+    Q_UNUSED(tableElement);
+    Q_UNUSED(xmlElement); // unused in release mode
+    Q_ASSERT(xmlElement.tagName() == "table");
     cb << "autoTableElement";
     return true;
 }
 
-bool TestXmlElementHandler::chartElement( KDReports::ChartElement& chartElement, QDomElement& xmlElement )
+bool TestXmlElementHandler::chartElement(KDReports::ChartElement &chartElement, QDomElement &xmlElement)
 {
-    Q_UNUSED( chartElement );
-    Q_UNUSED( xmlElement ); // unused in release mode
-    Q_ASSERT( xmlElement.tagName() == "chart" );
+    Q_UNUSED(chartElement);
+    Q_UNUSED(xmlElement); // unused in release mode
+    Q_ASSERT(xmlElement.tagName() == "chart");
     cb << "chartElement";
     return true;
 }
 
-bool TestXmlElementHandler::imageElement( KDReports::ImageElement& imageElement, QDomElement& xmlElement )
+bool TestXmlElementHandler::imageElement(KDReports::ImageElement &imageElement, QDomElement &xmlElement)
 {
-    Q_UNUSED( imageElement );
-    Q_UNUSED( xmlElement ); // unused in release mode
-    Q_ASSERT( xmlElement.tagName() == "image" );
+    Q_UNUSED(imageElement);
+    Q_UNUSED(xmlElement); // unused in release mode
+    Q_ASSERT(xmlElement.tagName() == "image");
 
-    if ( xmlElement.hasAttribute("broken") ) {
+    if (xmlElement.hasAttribute("broken")) {
         KDReports::ErrorDetails details;
-        details.setDriverMessage( QString("PC LOAD LETTER") );
-        setErrorDetails( details );
+        details.setDriverMessage(QString("PC LOAD LETTER"));
+        setErrorDetails(details);
         return false;
     }
     cb << "imageElement";
     return true;
 }
 
-bool TestXmlElementHandler::pageBreak( QDomElement& xmlElement )
+bool TestXmlElementHandler::pageBreak(QDomElement &xmlElement)
 {
-    Q_UNUSED( xmlElement ); // unused in release mode
-    Q_ASSERT( xmlElement.tagName() == "page-break" );
+    Q_UNUSED(xmlElement); // unused in release mode
+    Q_ASSERT(xmlElement.tagName() == "page-break");
     cb << "pageBreak";
     return true;
 }
 
-void TestXmlElementHandler::customElement( const QDomElement& xmlElement )
+void TestXmlElementHandler::customElement(const QDomElement &xmlElement)
 {
-    Q_UNUSED( xmlElement ); // unused in release mode
-    Q_ASSERT( xmlElement.tagName() == "custom" );
+    Q_UNUSED(xmlElement); // unused in release mode
+    Q_ASSERT(xmlElement.tagName() == "custom");
     cb << "customElement";
     // Test inserting elements from the XML element handler
-    if ( xmlElement.attribute( "id" ) == "lastParagraph" )
-        mReport.addElement( KDReports::TextElement( "Custom element" ) );
+    if (xmlElement.attribute("id") == "lastParagraph")
+        mReport.addElement(KDReports::TextElement("Custom element"));
 }
 
-bool TestXmlElementHandler::hLineElement( KDReports::HLineElement& hLineElement, QDomElement& xmlElement )
+bool TestXmlElementHandler::hLineElement(KDReports::HLineElement &hLineElement, QDomElement &xmlElement)
 {
-    Q_UNUSED( hLineElement );
-    Q_UNUSED( xmlElement ); // unused in release mode
-    Q_ASSERT( xmlElement.tagName() == "hline" );
+    Q_UNUSED(hLineElement);
+    Q_UNUSED(xmlElement); // unused in release mode
+    Q_ASSERT(xmlElement.tagName() == "hline");
     cb << "hLineElement";
     return true;
 }
 
 bool TestXmlElementHandler::variable(KDReports::VariableType &type, QDomElement &xmlElement)
 {
-    Q_UNUSED( type );
-    Q_UNUSED( xmlElement ); // unused in release mode
-    Q_ASSERT(xmlElement.tagName() ==  "variable");
+    Q_UNUSED(type);
+    Q_UNUSED(xmlElement); // unused in release mode
+    Q_ASSERT(xmlElement.tagName() == "variable");
     cb << "variable";
     return true;
 }
@@ -206,39 +206,38 @@ bool TestXmlElementHandler::variable(KDReports::VariableType &type, QDomElement 
 bool TestXmlElementHandler::vspace(int &size, QDomElement &xmlElement)
 {
     Q_UNUSED(size);
-    Q_UNUSED( xmlElement ); // unused in release mode
+    Q_UNUSED(xmlElement); // unused in release mode
     Q_ASSERT(xmlElement.tagName() == "vspace");
     cb << "vspace";
     return true;
 }
 
-bool TestXmlElementHandler::paragraphMargin(qreal &left, qreal &top, qreal &right, qreal &bottom, const QDomElement& xmlElement)
+bool TestXmlElementHandler::paragraphMargin(qreal &left, qreal &top, qreal &right, qreal &bottom, const QDomElement &xmlElement)
 {
-    Q_UNUSED( left );
-    Q_UNUSED( top );
-    Q_UNUSED( right );
-    Q_UNUSED( bottom );
-    Q_UNUSED( xmlElement ); // unused in release mode
-    Q_ASSERT( xmlElement.tagName() == "paragraph-margins" );
+    Q_UNUSED(left);
+    Q_UNUSED(top);
+    Q_UNUSED(right);
+    Q_UNUSED(bottom);
+    Q_UNUSED(xmlElement); // unused in release mode
+    Q_ASSERT(xmlElement.tagName() == "paragraph-margins");
     cb << "paragraph-margins";
     return true;
 }
 
 bool TestXmlElementHandler::tabs(QList<QTextOption::Tab> &tabs, const QDomElement &xmlElement)
 {
-    Q_UNUSED( tabs );
-    Q_UNUSED( xmlElement ); // unused in release mode
-    Q_ASSERT( xmlElement.tagName() == "tabs" );
+    Q_UNUSED(tabs);
+    Q_UNUSED(xmlElement); // unused in release mode
+    Q_ASSERT(xmlElement.tagName() == "tabs");
     cb << "tabs";
     return true;
 }
 
-void TestXmlElementHandler::endReport( KDReports::Report& report, const QDomElement& xmlElement )
+void TestXmlElementHandler::endReport(KDReports::Report &report, const QDomElement &xmlElement)
 {
-    Q_UNUSED( report ); // unused in release mode
-    Q_ASSERT( &report == &mReport );
-    Q_UNUSED( xmlElement ); // unused in release mode
-    Q_ASSERT( xmlElement.tagName() == "report" );
+    Q_UNUSED(report); // unused in release mode
+    Q_ASSERT(&report == &mReport);
+    Q_UNUSED(xmlElement); // unused in release mode
+    Q_ASSERT(xmlElement.tagName() == "report");
     cb << "endReport";
 }
-

@@ -17,37 +17,36 @@
 #include <QApplication>
 #include <QDebug>
 
+#include <KDReportsPreviewDialog.h>
 #include <KDReportsReport.h>
 #include <KDReportsTextElement.h>
-#include <KDReportsPreviewDialog.h>
-#include <QPrintDialog>
-#include <QMessageBox>
 #include <QFile>
+#include <QMessageBox>
+#include <QPrintDialog>
 
-int main( int argc, char** argv ) {
-    QApplication app( argc, argv );
+int main(int argc, char **argv)
+{
+    QApplication app(argc, argv);
 
     // Create a report
     KDReports::Report report;
 
-    QFile reportFile( ":/HelloWorld.xml" );
-    if( !reportFile.open( QIODevice::ReadOnly ) ) {
-        QMessageBox::warning(
-            0, QObject::tr( "Warning" ),
-            QObject::tr( "Could not open report description file 'HelloWorld.xml'. "
-                         "Please start this program from the HelloWorldXML directory." ) );
+    QFile reportFile(":/HelloWorld.xml");
+    if (!reportFile.open(QIODevice::ReadOnly)) {
+        QMessageBox::warning(0, QObject::tr("Warning"),
+                             QObject::tr("Could not open report description file 'HelloWorld.xml'. "
+                                         "Please start this program from the HelloWorldXML directory."));
         return -1;
     }
 
     KDReports::ErrorDetails details;
-    if( !report.loadFromXML( &reportFile, &details ) ) {
-        QMessageBox::warning( 0, QObject::tr( "Warning" ), QObject::tr( "Could not parse report description file:\n%1" ).arg(details.message()) );
+    if (!report.loadFromXML(&reportFile, &details)) {
+        QMessageBox::warning(0, QObject::tr("Warning"), QObject::tr("Could not parse report description file:\n%1").arg(details.message()));
         reportFile.close();
         return -2;
     }
 
     // show a print preview:
-    KDReports::PreviewDialog preview( &report );
+    KDReports::PreviewDialog preview(&report);
     return preview.exec();
 }
-

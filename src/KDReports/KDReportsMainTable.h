@@ -19,8 +19,7 @@
 
 #include "KDReportsReport.h"
 
-namespace KDReports
-{
+namespace KDReports {
 class AutoTableElement;
 class Report;
 class Test;
@@ -47,11 +46,11 @@ public:
     /**
      * Sets the auto table element, which contains the definition of the main table.
      */
-    void setAutoTableElement(const AutoTableElement& element);
+    void setAutoTableElement(const AutoTableElement &element);
     /**
      * \return the auto table element passed to setAutoTableElement
      */
-    AutoTableElement* autoTableElement() const;
+    AutoTableElement *autoTableElement() const;
 
     /**
      * Sets the page order to use when breaking tables.
@@ -65,7 +64,7 @@ public:
      *
      * The default page order is DownThenRight.
      */
-    void setTableBreakingPageOrder( Report::TableBreakingPageOrder pageOrder );
+    void setTableBreakingPageOrder(Report::TableBreakingPageOrder pageOrder);
 
     /**
      * \return the table breaking page order given to setTableBreakingPageOrder
@@ -76,13 +75,13 @@ public:
      * Sets the font to use for the horizontal header of the table.
      * By default the font passed to report.setDefaultFont is used.
      */
-    void setHorizontalHeaderFont(const QFont& font);
+    void setHorizontalHeaderFont(const QFont &font);
 
     /**
      * Sets the font to use for the vertical header of the table.
      * By default the font passed to report.setDefaultFont is used.
      */
-    void setVerticalHeaderFont(const QFont& font);
+    void setVerticalHeaderFont(const QFont &font);
 
 private:
     friend class Report;
@@ -90,14 +89,14 @@ private:
     MainTable();
     ~MainTable();
 
-    void setLayout(SpreadsheetReportLayout* layout);
+    void setLayout(SpreadsheetReportLayout *layout);
 
     friend class Test;
     QList<QRect> pageRects() const; // for unittests
     qreal lastAutoFontScalingFactor() const; // for unittests
 
     Q_DISABLE_COPY(MainTable)
-    MainTablePrivate* const d;
+    MainTablePrivate *const d;
 };
 
 }

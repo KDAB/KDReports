@@ -39,13 +39,13 @@ public:
      * Creates a image element from the given pixmap.
      * This constructor can only be used in the GUI thread.
      */
-    explicit ImageElement( const QPixmap& pixmap );
+    explicit ImageElement(const QPixmap &pixmap);
     /**
      * Creates a image element from the given image.
      * This constructor can be used from secondary threads as well.
      * \since 1.3
      */
-    explicit ImageElement( const QImage& image );
+    explicit ImageElement(const QImage &image);
     /**
      * Destroys this image element.
      */
@@ -55,24 +55,24 @@ public:
      * Sets the pixmap for this image element.
      * This replaces the pixmap or image set previously.
      */
-    void setPixmap( const QPixmap& pixmap );
+    void setPixmap(const QPixmap &pixmap);
 
     /**
-      * \return the pixmap.
-      * \since 1.4
-      */
+     * \return the pixmap.
+     * \since 1.4
+     */
     QPixmap pixmap() const;
 
     /**
      * Sets a new image for this image element.
      * This replaces the pixmap or image set previously.
      */
-    void setImage( const QImage& image );
+    void setImage(const QImage &image);
 
     /**
-      * \return the image.
-      * \since 1.4
-      */
+     * \return the image.
+     * \since 1.4
+     */
     QImage image() const;
 
     /**
@@ -100,12 +100,12 @@ public:
      * For instance setWidth(10, KDReports::Percent) means that the image width will be 10% of the page width,
      * not 10% of the containing cell's width.
      */
-    void setWidth( qreal width, Unit unit = Millimeters );
+    void setWidth(qreal width, Unit unit = Millimeters);
 
     /**
-      * \return the width of the image.
-      * \since 1.4
-      */
+     * \return the width of the image.
+     * \since 1.4
+     */
     qreal width() const;
 
     /**
@@ -114,24 +114,24 @@ public:
      * This is mutually exclusive with setWidth().
      * \since 1.1
      */
-    void setHeight( qreal height, Unit unit = Millimeters );
+    void setHeight(qreal height, Unit unit = Millimeters);
 
     /**
-      * \return the height of the image.
-      * \since 1.4
-      */
+     * \return the height of the image.
+     * \since 1.4
+     */
     qreal height() const;
 
     /**
-      * \return the unit for the image size (percent or millimeters).
-      * \since 1.4
-      */
+     * \return the unit for the image size (percent or millimeters).
+     * \since 1.4
+     */
     Unit unit() const;
 
     /**
-      * Set the unit for the image size (percent or millimeters).
-      * \since 1.5
-      */
+     * Set the unit for the image size (percent or millimeters).
+     * \since 1.5
+     */
     void setUnit(Unit unit);
 
     /**
@@ -143,16 +143,16 @@ public:
     void setFitToPage();
 
     /**
-      * \return if the image be scaled to fills the page.
-      * \since 1.4
-      */
+     * \return if the image be scaled to fills the page.
+     * \since 1.4
+     */
     bool fitToPage() const;
 
     /**
      * Set the ID associated with this image element.
      * \since 1.4
      */
-    void setId( const QString& id );
+    void setId(const QString &id);
 
     /**
      * \return the ID associated with this image element.
@@ -164,18 +164,17 @@ public:
      * @internal
      * @reimp
      */
-    void build( ReportBuilder& ) const override;
+    void build(ReportBuilder &) const override;
     /**
      * @internal
      * @reimp
      */
-    Element* clone() const override;
+    Element *clone() const override;
 
 private:
-    ImageElementPrivate* const d;
+    ImageElementPrivate *const d;
 };
 
 }
 
 #endif /* KDREPORTSIMAGEELEMENT_H */
-

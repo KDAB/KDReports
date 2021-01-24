@@ -17,40 +17,39 @@
 #ifndef KDREPORTSTEXTDOCREPORTLAYOUT_H
 #define KDREPORTSTEXTDOCREPORTLAYOUT_H
 
-#include "KDReportsTextDocument_p.h"
-#include "KDReportsReportBuilder_p.h"
 #include "KDReportsAbstractReportLayout_p.h"
+#include "KDReportsReportBuilder_p.h"
+#include "KDReportsTextDocument_p.h"
 
-namespace KDReports
-{
+namespace KDReports {
 
 class TextDocReportLayout : public AbstractReportLayout
 {
 public:
-    explicit TextDocReportLayout(KDReports::Report* report);
+    explicit TextDocReportLayout(KDReports::Report *report);
 
     /// \reimp
     void setLayoutDirty() override;
     /// \reimp
-    void setDefaultFont(const QFont& font) override;
+    void setDefaultFont(const QFont &font) override;
     /// \reimp
     QFont defaultFont() const override;
     /// \reimp
-    void paintPageContent(int pageNumber, QPainter& painter) override;
+    void paintPageContent(int pageNumber, QPainter &painter) override;
     /// \reimp
     int numberOfPages() override; // not const, since it can trigger a layout
     /// \reimp
     qreal idealWidth() override;
     /// \reimp
-    void setPageContentSize(const QSizeF& size) override;
+    void setPageContentSize(const QSizeF &size) override;
     /// \reimp
     void ensureLayouted() override;
     /// \reimp
-    void updateTextValue( const QString& id, const QString& newValue ) override;
+    void updateTextValue(const QString &id, const QString &newValue) override;
     /// \reimp
     qreal layoutAsOnePage(qreal width) override;
     /// \reimp
-    bool scaleTo( int numPagesHorizontally, int numPagesVertically ) override;
+    bool scaleTo(int numPagesHorizontally, int numPagesVertically) override;
     /// \reimp
     void setFixedRowHeight(qreal height) override;
     /// \reimp
@@ -67,9 +66,9 @@ public:
     void finishHtmlExport() override;
 
     // for unittests only
-    TextDocument& textDocument() { return m_textDocument; }
+    TextDocument &textDocument() { return m_textDocument; }
 
-    ReportBuilder* builder() {return &m_builder;}
+    ReportBuilder *builder() { return &m_builder; }
 
 private:
     TextDocument m_textDocument;

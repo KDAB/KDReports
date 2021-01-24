@@ -16,10 +16,6 @@
 
 #include "KDReportsAbstractReportLayout_p.h"
 
-KDReports::AbstractReportLayout::AbstractReportLayout()
-{
-}
+KDReports::AbstractReportLayout::AbstractReportLayout() { }
 
-KDReports::AbstractReportLayout::~AbstractReportLayout()
-{
-}
+KDReports::AbstractReportLayout::~AbstractReportLayout() { }

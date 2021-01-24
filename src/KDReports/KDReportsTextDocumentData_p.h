@@ -16,10 +16,10 @@
 
 #ifndef KDREPORTSTEXTDOCUMENTDATA_P_H
 #define KDREPORTSTEXTDOCUMENTDATA_P_H
-#include <QTextCursor>
-#include "KDReportsReport.h"
 #include "KDReportsAutoTableElement.h"
+#include "KDReportsReport.h"
 #include <QMultiMap>
+#include <QTextCursor>
 
 //
 //  W A R N I N G
@@ -33,8 +33,7 @@
 //
 //
 
-namespace KDReports
-{
+namespace KDReports {
 
 /**
  * @internal
@@ -46,43 +45,43 @@ public:
     explicit TextDocumentData();
     ~TextDocumentData();
 
-    QTextDocument& document() { return *m_document; }
-    const QTextDocument& document() const { return *m_document; }
+    QTextDocument &document() { return *m_document; }
+    const QTextDocument &document() const { return *m_document; }
 
     void setUsesTabPositions(bool usesTabs);
     void saveResourcesToFiles();
     enum ModificationMode { Append, Modify };
     void aboutToModifyContents(ModificationMode mode);
-    void updateTextValue( const QString& id, const QString& newValue );
-    void layoutWithTextWidth( qreal w );
-    void setPageSize( const QSizeF& size );
-    void scaleFontsBy( qreal factor ); // TODO remove?
-    void updatePercentSizes( const QSizeF& size );
-    void setTextValueMarker( int pos, const QString& id, int valueLength, bool html );
+    void updateTextValue(const QString &id, const QString &newValue);
+    void layoutWithTextWidth(qreal w);
+    void setPageSize(const QSizeF &size);
+    void scaleFontsBy(qreal factor); // TODO remove?
+    void updatePercentSizes(const QSizeF &size);
+    void setTextValueMarker(int pos, const QString &id, int valueLength, bool html);
     /// Break all tables in the document
     /// @returns the number of horizontal pages used
-    //int breakTables( const QSizeF& textDocPageSize, int numHorizontalPages, KDReports::Report::TableBreakingPageOrder pageOrder );
+    // int breakTables( const QSizeF& textDocPageSize, int numHorizontalPages, KDReports::Report::TableBreakingPageOrder pageOrder );
     /// We need to know about all tables in order to implement table-breaking
-    void registerTable( QTextTable* table );
+    void registerTable(QTextTable *table);
     QString asHtml() const;
     /// For autotables, let's also remember the AutoTableElement, to be able
     /// to regenerate them (when modifying options in the table breaking dialog)
-    void registerAutoTable( QTextTable* table, const KDReports::AutoTableElement* element );
+    void registerAutoTable(QTextTable *table, const KDReports::AutoTableElement *element);
     QList<KDReports::AutoTableElement *> autoTableElements();
     void regenerateAutoTables();
-    void regenerateAutoTableForModel( QAbstractItemModel* model );
-    void addResourceName( const QString& resourceName );
+    void regenerateAutoTableForModel(QAbstractItemModel *model);
+    void addResourceName(const QString &resourceName);
     void setHasResizableImages();
 
-    static void updatePercentSize( QTextImageFormat& format, const QSizeF& size );
+    static void updatePercentSize(QTextImageFormat &format, const QSizeF &size);
 
 private:
     void resolveCursorPositions(ModificationMode mode);
-    void setFontSizeHelper( QTextCursor& lastCursor, int endPosition, qreal pointSize, qreal factor );
-    void regenerateOneTable( const KDReports::AutoTableElement& tableElement, QTextTable* table );
+    void setFontSizeHelper(QTextCursor &lastCursor, int endPosition, qreal pointSize, qreal factor);
+    void regenerateOneTable(const KDReports::AutoTableElement &tableElement, QTextTable *table);
     void dumpTextValueCursors() const;
 
-    QTextDocument* m_document; // a pointer because of the clone() API... TODO: cleanup
+    QTextDocument *m_document; // a pointer because of the clone() API... TODO: cleanup
     enum ElementType { ElementTypeText, ElementTypeHtml };
     struct TextValueData
     {
@@ -93,9 +92,9 @@ private:
     };
     QMultiMap<QString, TextValueData> m_textValueCursors;
 
-    QList<QTextTable*> m_tables;
+    QList<QTextTable *> m_tables;
 
-    typedef QMap<QTextTable*, KDReports::AutoTableElement> AutoTablesMaps;
+    typedef QMap<QTextTable *, KDReports::AutoTableElement> AutoTablesMaps;
     AutoTablesMaps m_autoTables;
     QList<QString> m_resourceNames;
     bool m_usesTabPositions;

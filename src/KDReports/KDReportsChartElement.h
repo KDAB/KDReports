@@ -17,17 +17,19 @@
 #ifndef KDREPORTSCHARTELEMENT_H
 #define KDREPORTSCHARTELEMENT_H
 
-#include <QSharedDataPointer>
 #include "KDReportsElement.h"
 #include "KDReportsUnit.h"
-#include <QtCore/QtGlobal> // qreal
+#include <QSharedDataPointer>
 #include <QSizeF>
+#include <QtCore/QtGlobal> // qreal
 
 QT_BEGIN_NAMESPACE
 class QAbstractItemModel;
 QT_END_NAMESPACE
 
-namespace KDChart { class Chart; }
+namespace KDChart {
+class Chart;
+}
 
 namespace KDReports {
 class ChartElementPrivate;
@@ -42,24 +44,24 @@ public:
     /**
      * Creates a chart element from the given table model.
      */
-    explicit ChartElement( QAbstractItemModel* tableModel );
+    explicit ChartElement(QAbstractItemModel *tableModel);
 
     /**
      * Creates a chart element that does not have an associated model
      * yet. The association will be done later using the model key.
      * @see KDReports::Report::associateModel()
      */
-    explicit ChartElement( const QString& modelKey );
+    explicit ChartElement(const QString &modelKey);
 
     /**
      * Creates a chart element from the given chart.
-     * 
+     *
      * The chart's ownership is NOT transferred. It is very important
      * that the chart exists at least as long as the report object exists.
      *
      * @since 1.3
      */
-    explicit ChartElement( KDChart::Chart* chart );
+    explicit ChartElement(KDChart::Chart *chart);
 
     /**
      * Destroys this chart element.
@@ -78,13 +80,13 @@ public:
     /**
      * Sets the chart to use in this chart element.
      * Useful for associating a chart to a ChartElement from XmlElementHandler.
-     * 
+     *
      * The chart's ownership is NOT transferred. It is very important
      * that the chart exists at least as long as the report object exists.
      *
      * @since 1.3
      */
-    void setChart( KDChart::Chart* chart );
+    void setChart(KDChart::Chart *chart);
 
     /**
      * Sets the size of the chart.
@@ -96,7 +98,7 @@ public:
      * This feature (Percent) leads to slightly worse results on screen at 100% zoom, due to scaling
      * happening even at that size, but the printed report should be fine.
      */
-    void setSize( qreal width, qreal height, Unit unit = Millimeters );
+    void setSize(qreal width, qreal height, Unit unit = Millimeters);
 
     /**
      * \return the size of the chart, use unit() to know the size unit
@@ -105,9 +107,9 @@ public:
     QSizeF size() const;
 
     /**
-      * \return the size unit
-      * \since 1.4
-      */
+     * \return the size unit
+     * \since 1.4
+     */
     Unit unit() const;
 
     /**
@@ -126,12 +128,12 @@ public:
      * @internal
      * @reimp
      */
-    void build( ReportBuilder& ) const override;
+    void build(ReportBuilder &) const override;
     /**
      * @internal
      * @reimp
      */
-    Element* clone() const override;
+    Element *clone() const override;
 
 private:
     QSharedDataPointer<ChartElementPrivate> d;

@@ -15,22 +15,25 @@
 ****************************************************************************/
 
 #include "KDReportsImageElement.h"
+#include "KDReportsLayoutHelper_p.h"
 #include "KDReportsReport.h"
 #include "KDReportsReport_p.h"
-#include "KDReportsLayoutHelper_p.h"
+#include <QDebug>
 #include <QPainter>
 #include <QPixmap>
-#include <QDebug>
 #include <QTextDocument>
 #include <QUrl>
 
 class KDReports::ImageElementPrivate
 {
 public:
-    ImageElementPrivate() : m_width(0), m_height(0),
-                m_fitToPage(false),
-                m_unit(KDReports::Millimeters)
-    {}
+    ImageElementPrivate()
+        : m_width(0)
+        , m_height(0)
+        , m_fitToPage(false)
+        , m_unit(KDReports::Millimeters)
+    {
+    }
     QVariant m_pixmap; // pixmap or image, can't use QPixmap directly in threads
     QSize m_pixmapSize; // = m_pixmap.size()
 
@@ -42,28 +45,29 @@ public:
     QString m_id;
 };
 
-KDReports::ImageElement::ImageElement( const QPixmap& pixmap )
-    : d( new ImageElementPrivate )
+KDReports::ImageElement::ImageElement(const QPixmap &pixmap)
+    : d(new ImageElementPrivate)
 {
-    setPixmap( pixmap );
+    setPixmap(pixmap);
 }
 
-KDReports::ImageElement::ImageElement( const QImage& image )
-    : d( new ImageElementPrivate )
+KDReports::ImageElement::ImageElement(const QImage &image)
+    : d(new ImageElementPrivate)
 {
-    setImage( image );
+    setImage(image);
 }
 
 KDReports::ImageElement::ImageElement(const ImageElement &other)
-    : Element(other), d( new ImageElementPrivate( *other.d ) )
+    : Element(other)
+    , d(new ImageElementPrivate(*other.d))
 {
 }
 
-KDReports::ImageElement & KDReports::ImageElement::operator=(const ImageElement &other)
+KDReports::ImageElement &KDReports::ImageElement::operator=(const ImageElement &other)
 {
-    if ( &other == this )
+    if (&other == this)
         return *this;
-    Element::operator=( other );
+    Element::operator=(other);
     *d = *other.d;
     return *this;
 }
@@ -73,7 +77,7 @@ KDReports::ImageElement::~ImageElement()
     delete d;
 }
 
-void KDReports::ImageElement::setPixmap( const QPixmap& pixmap )
+void KDReports::ImageElement::setPixmap(const QPixmap &pixmap)
 {
     d->m_pixmap = QVariant::fromValue(pixmap);
     d->m_pixmapSize = pixmap.size();
@@ -95,7 +99,7 @@ QImage KDReports::ImageElement::image() const
     return d->m_pixmap.value<QImage>();
 }
 
-void KDReports::ImageElement::setWidth( qreal width, Unit unit )
+void KDReports::ImageElement::setWidth(qreal width, Unit unit)
 {
     d->m_width = width;
     d->m_unit = unit;
@@ -108,7 +112,7 @@ qreal KDReports::ImageElement::width() const
     return d->m_width;
 }
 
-void KDReports::ImageElement::setHeight( qreal height, Unit unit )
+void KDReports::ImageElement::setHeight(qreal height, Unit unit)
 {
     d->m_height = height;
     d->m_unit = unit;
@@ -133,7 +137,7 @@ bool KDReports::ImageElement::fitToPage() const
     return d->m_fitToPage;
 }
 
-void KDReports::ImageElement::build( ReportBuilder& builder ) const
+void KDReports::ImageElement::build(ReportBuilder &builder) const
 {
 #if 0
     if ( d->m_width && d->m_unit == Millimeters ) {
@@ -144,51 +148,51 @@ void KDReports::ImageElement::build( ReportBuilder& builder ) const
     }
 #endif
 
-    if ( d->m_pixmapSize.isNull() )
+    if (d->m_pixmapSize.isNull())
         return;
 
     static int imageNumber = 0;
-    const QString name = QString::fromLatin1( "image%1.png" ).arg( ++imageNumber );
-    builder.currentDocument().addResource( QTextDocument::ImageResource, QUrl( name ), d->m_pixmap );
-    builder.currentDocumentData().addResourceName( name );
+    const QString name = QString::fromLatin1("image%1.png").arg(++imageNumber);
+    builder.currentDocument().addResource(QTextDocument::ImageResource, QUrl(name), d->m_pixmap);
+    builder.currentDocumentData().addResourceName(name);
 
     QTextImageFormat imageFormat;
-    imageFormat.setName( name );
-    imageFormat.setWidth( d->m_pixmapSize.width() );
-    imageFormat.setHeight( d->m_pixmapSize.height() );
+    imageFormat.setName(name);
+    imageFormat.setWidth(d->m_pixmapSize.width());
+    imageFormat.setHeight(d->m_pixmapSize.height());
 
-    if ( d->m_width ) {
-        if ( d->m_unit == Millimeters ) {
-            const int pixelWidth = qRound( mmToPixels( d->m_width ) );
+    if (d->m_width) {
+        if (d->m_unit == Millimeters) {
+            const int pixelWidth = qRound(mmToPixels(d->m_width));
             const int pixelHeight = pixelWidth * imageFormat.height() / imageFormat.width();
-            imageFormat.setWidth( pixelWidth );
-            imageFormat.setHeight( pixelHeight );
+            imageFormat.setWidth(pixelWidth);
+            imageFormat.setHeight(pixelHeight);
         } else {
-            imageFormat.setProperty( ResizableImageProperty, QString( QLatin1Char( 'W' ) + QString::number( d->m_width ) ) );
-            KDReports::TextDocumentData::updatePercentSize( imageFormat, QSizeF( builder.report()->d->textDocumentWidth(), -1 /*unknown*/ ) );
+            imageFormat.setProperty(ResizableImageProperty, QString(QLatin1Char('W') + QString::number(d->m_width)));
+            KDReports::TextDocumentData::updatePercentSize(imageFormat, QSizeF(builder.report()->d->textDocumentWidth(), -1 /*unknown*/));
             builder.currentDocumentData().setHasResizableImages();
         }
-    } else if ( d->m_height ) {
-        if ( d->m_unit == Millimeters ) {
-            const int pixelHeight = qRound( mmToPixels( d->m_height ) );
+    } else if (d->m_height) {
+        if (d->m_unit == Millimeters) {
+            const int pixelHeight = qRound(mmToPixels(d->m_height));
             const int pixelWidth = pixelHeight * imageFormat.width() / imageFormat.height();
-            imageFormat.setHeight( pixelHeight );
-            imageFormat.setWidth( pixelWidth );
+            imageFormat.setHeight(pixelHeight);
+            imageFormat.setWidth(pixelWidth);
         } else {
-            imageFormat.setProperty( ResizableImageProperty, QString( QLatin1Char( 'H' ) + QString::number( d->m_height ) ) );
+            imageFormat.setProperty(ResizableImageProperty, QString(QLatin1Char('H') + QString::number(d->m_height)));
             builder.currentDocumentData().setHasResizableImages();
             // can't calc size yet, will be done at layouting time... hopefully.
         }
-    } else if ( d->m_fitToPage ) {
-        imageFormat.setProperty( ResizableImageProperty, QString( QLatin1Char( 'T' ) ) );
+    } else if (d->m_fitToPage) {
+        imageFormat.setProperty(ResizableImageProperty, QString(QLatin1Char('T')));
         builder.currentDocumentData().setHasResizableImages();
     }
 
-    QTextCursor& cursor = builder.cursor();
-    cursor.insertImage( imageFormat );
+    QTextCursor &cursor = builder.cursor();
+    cursor.insertImage(imageFormat);
 }
 
-void KDReports::ImageElement::setId( const QString& id )
+void KDReports::ImageElement::setId(const QString &id)
 {
     d->m_id = id;
 }
@@ -198,9 +202,9 @@ QString KDReports::ImageElement::id() const
     return d->m_id;
 }
 
-KDReports::Element* KDReports::ImageElement::clone() const
+KDReports::Element *KDReports::ImageElement::clone() const
 {
-    return new ImageElement( *this );
+    return new ImageElement(*this);
 }
 
 KDReports::Unit KDReports::ImageElement::unit() const

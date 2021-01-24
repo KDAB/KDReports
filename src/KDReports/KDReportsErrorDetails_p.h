@@ -30,15 +30,17 @@
 
 #include <QString>
 
-namespace KDReports
-{
+namespace KDReports {
 class HLineElementHandler;
 
 class ErrorDetailsPrivate
 {
 public:
     ErrorDetailsPrivate()
-        : m_hasError( false ), m_line(-1), m_column(-1), m_hlineHandler(0)
+        : m_hasError(false)
+        , m_line(-1)
+        , m_column(-1)
+        , m_hlineHandler(0)
     {
     }
 
@@ -48,11 +50,9 @@ public:
     QString m_message;
 
     // Hack: storage for XmlElementHandler which lacks a d pointer
-    HLineElementHandler* m_hlineHandler;
+    HLineElementHandler *m_hlineHandler;
 };
 
 }
 
-
 #endif /* KDREPORTSERRORDETAILS_P_H */
-

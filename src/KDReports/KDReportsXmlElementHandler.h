@@ -17,8 +17,8 @@
 #ifndef KDREPORTSXMLELEMENTHANDLER_H
 #define KDREPORTSXMLELEMENTHANDLER_H
 
-#include "KDReportsGlobal.h"
 #include "KDReportsErrorDetails.h"
+#include "KDReportsGlobal.h"
 
 QT_BEGIN_NAMESPACE
 class QDomElement;
@@ -77,7 +77,7 @@ class Cell;
  *   report.setXmlElementHandler( handler );
  * </code>
  */
-class KDREPORTS_EXPORT XmlElementHandler //krazy:exclude=dpointer TODO fix this
+class KDREPORTS_EXPORT XmlElementHandler // krazy:exclude=dpointer TODO fix this
 {
 public:
     XmlElementHandler();
@@ -87,31 +87,31 @@ public:
      * Called after parsing "report" and its attributes.
      * Returning false aborts the loading of the report.
      */
-    virtual bool startReport( KDReports::Report& report, QDomElement& xmlElement );
+    virtual bool startReport(KDReports::Report &report, QDomElement &xmlElement);
 
     /**
      * Called after parsing "header" and its attributes, but before
      * parsing its contents.
      * Returning false skips this header.
      */
-    virtual bool startHeader( KDReports::Header& header, QDomElement& xmlElement );
+    virtual bool startHeader(KDReports::Header &header, QDomElement &xmlElement);
 
     /**
      * Called after parsing "header" and its contents.
      */
-    virtual void endHeader( KDReports::Header& header, const QDomElement& xmlElement );
+    virtual void endHeader(KDReports::Header &header, const QDomElement &xmlElement);
 
     /**
      * Called after parsing "footer" and its attributes, but before
      * parsing its contents.
      * Returning false skips this footer.
      */
-    virtual bool startFooter( KDReports::Footer& footer, QDomElement& xmlElement );
+    virtual bool startFooter(KDReports::Footer &footer, QDomElement &xmlElement);
 
     /**
      * Called after parsing "footer" and its contents.
      */
-    virtual void endFooter( KDReports::Footer& footer, const QDomElement& xmlElement );
+    virtual void endFooter(KDReports::Footer &footer, const QDomElement &xmlElement);
 
     /**
      * Called after parsing "text", its attributes and the text content.
@@ -121,7 +121,7 @@ public:
      * block elements must done using <code>xmlElement.setAttribute()</code>,
      * since they are not properties of KDReports::TextElement.
      */
-    virtual bool textElement( KDReports::TextElement& textElement, QDomElement& xmlElement );
+    virtual bool textElement(KDReports::TextElement &textElement, QDomElement &xmlElement);
 
     /**
      * Called after parsing "html", its attributes and the html content.
@@ -131,7 +131,7 @@ public:
      * block elements must done using <code>xmlElement.setAttribute()</code>,
      * since they are not properties of KDReports::HtmlElement.
      */
-    virtual bool htmlElement( KDReports::HtmlElement& htmlElement, QDomElement& xmlElement );
+    virtual bool htmlElement(KDReports::HtmlElement &htmlElement, QDomElement &xmlElement);
 
     /**
      * Called after parsing "table" (without a model) and its attributes,
@@ -142,26 +142,26 @@ public:
      * be done using <code>xmlElement.setAttribute()</code>.
      * Returning false skips the whole table.
      */
-    virtual bool startTableElement( KDReports::TableElement& tableElement, QDomElement& xmlElement );
+    virtual bool startTableElement(KDReports::TableElement &tableElement, QDomElement &xmlElement);
 
     /**
      * Called after parsing a "table" (without a model) and its cells.
      * Returning false skips the whole table.
      */
-    virtual bool endTableElement( KDReports::TableElement& tableElement, QDomElement& xmlElement );
+    virtual bool endTableElement(KDReports::TableElement &tableElement, QDomElement &xmlElement);
 
     /**
      * Called after parsing a "cell" element inside a table, but before parsing the
      * cell contents.
      * Returning false makes the cell empty.
      */
-    virtual bool startCell( KDReports::Cell& cell, QDomElement& xmlElement );
+    virtual bool startCell(KDReports::Cell &cell, QDomElement &xmlElement);
 
     /**
      * Called after parsing each "cell" element inside a table and its contents.
      * Returning false makes the cell empty.
      */
-    virtual bool endCell( KDReports::Cell& cell, QDomElement& xmlElement );
+    virtual bool endCell(KDReports::Cell &cell, QDomElement &xmlElement);
 
     /**
      * Called after parsing a "table" element (when a model is set) and its attributes,
@@ -171,7 +171,7 @@ public:
      * As a special case, changes to the alignment for block elements must
      * be done using <code>xmlElement.setAttribute()</code>.
      */
-    virtual bool autoTableElement( KDReports::AutoTableElement& tableElement, QDomElement& xmlElement );
+    virtual bool autoTableElement(KDReports::AutoTableElement &tableElement, QDomElement &xmlElement);
 
     /**
      * Called after parsing "chart" and its attributes.
@@ -180,7 +180,7 @@ public:
      * As a special case, changes to the alignment for block elements must
      * be done using <code>xmlElement.setAttribute()</code>.
      */
-    virtual bool chartElement( KDReports::ChartElement& chartElement, QDomElement& xmlElement );
+    virtual bool chartElement(KDReports::ChartElement &chartElement, QDomElement &xmlElement);
 
     /**
      * Called after parsing "image" and its attributes.
@@ -189,13 +189,13 @@ public:
      * As a special case, changes to the alignment for block elements must
      * be done using <code>xmlElement.setAttribute()</code>.
      */
-    virtual bool imageElement( KDReports::ImageElement& imageElement, QDomElement& xmlElement );
+    virtual bool imageElement(KDReports::ImageElement &imageElement, QDomElement &xmlElement);
 
     /**
      * Called after parsing "page-break".
      * Can be used to skip the page break depending on some condition.
      */
-    virtual bool pageBreak( QDomElement& xmlElement );
+    virtual bool pageBreak(QDomElement &xmlElement);
 
 #ifdef KDREPORTS_ALLOW_BINARY_INCOMPATIBILITY
     /**
@@ -206,7 +206,7 @@ public:
      * This method is only defined and called if -DKDREPORTS_ALLOW_BINARY_INCOMPATIBILITY
      * is set while compiling both kdreports and your application.
      */
-    virtual bool hLineElement( KDReports::HLineElement& hLineElement, QDomElement& xmlElement );
+    virtual bool hLineElement(KDReports::HLineElement &hLineElement, QDomElement &xmlElement);
 #endif
 
     /**
@@ -214,13 +214,13 @@ public:
      * This allows you to define special places in the XML file where this method
      * should be called, for instance to insert dynamic content into the report.
      */
-    virtual void customElement( const QDomElement& xmlElement );
+    virtual void customElement(const QDomElement &xmlElement);
 
     /**
      * Called at the end of the parsing of the whole report.
      * The "report" element is passed again here.
      */
-    virtual void endReport( KDReports::Report& report, const QDomElement& xmlElement );
+    virtual void endReport(KDReports::Report &report, const QDomElement &xmlElement);
 
     /**
      * @return an ErrorDetails instance.
@@ -231,7 +231,7 @@ public:
      * When parsing the XML code, errors may be reported by setting an ErrorDetail using this method.
      * Parsing will be stopped, and the error reported back to the user.
      */
-    void setErrorDetails( const KDReports::ErrorDetails& details );
+    void setErrorDetails(const KDReports::ErrorDetails &details);
 
 private:
     KDReports::ErrorDetails m_details;

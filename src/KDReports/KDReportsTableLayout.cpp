@@ -14,41 +14,41 @@
 **
 ****************************************************************************/
 
-#include "KDReportsTableLayout_p.h"
 #include "KDReportsLayoutHelper_p.h" // mmToPixels
+#include "KDReportsTableLayout_p.h"
+#include <QAbstractItemModel>
 #include <QDebug>
 #include <QFontMetrics>
-#include <QAbstractItemModel>
 
 using namespace KDReports;
 
 TableLayout::TableLayout()
-    : m_model( 0 ),
-      m_cellFont(),
-      m_horizontalHeaderFont(),
-      m_verticalHeaderFont(),
-      m_horizontalHeaderVisible( true ),
-      m_verticalHeaderVisible( true ),
-      m_cellPadding( KDReports::mmToPixels( 0.5 ) ),
-      m_fixedRowHeight( 0 ),
-      m_iconSize( 32, 32 ),
-      m_rowHeight( 0 ),
-      m_vHeaderWidth( 0 ),
-      m_hHeaderHeight( 0 ),
-      m_cellFontScaler( m_cellFont ),
-      m_horizontalHeaderFontScaler( m_horizontalHeaderFont ),
-      m_verticalHeaderFontScaler( m_verticalHeaderFont )
+    : m_model(0)
+    , m_cellFont()
+    , m_horizontalHeaderFont()
+    , m_verticalHeaderFont()
+    , m_horizontalHeaderVisible(true)
+    , m_verticalHeaderVisible(true)
+    , m_cellPadding(KDReports::mmToPixels(0.5))
+    , m_fixedRowHeight(0)
+    , m_iconSize(32, 32)
+    , m_rowHeight(0)
+    , m_vHeaderWidth(0)
+    , m_hHeaderHeight(0)
+    , m_cellFontScaler(m_cellFont)
+    , m_horizontalHeaderFontScaler(m_horizontalHeaderFont)
+    , m_verticalHeaderFontScaler(m_verticalHeaderFont)
 {
 }
 
-void TableLayout::setInitialFontScalingFactor( qreal fontScalingFactor )
+void TableLayout::setInitialFontScalingFactor(qreal fontScalingFactor)
 {
-    m_cellFontScaler.setFontAndScalingFactor( m_cellFont, fontScalingFactor );
-    if ( m_horizontalHeaderVisible ) {
-        m_horizontalHeaderFontScaler.setFontAndScalingFactor( m_horizontalHeaderFont, fontScalingFactor );
+    m_cellFontScaler.setFontAndScalingFactor(m_cellFont, fontScalingFactor);
+    if (m_horizontalHeaderVisible) {
+        m_horizontalHeaderFontScaler.setFontAndScalingFactor(m_horizontalHeaderFont, fontScalingFactor);
     }
-    if ( m_verticalHeaderVisible ) {
-        m_verticalHeaderFontScaler.setFontAndScalingFactor( m_verticalHeaderFont, fontScalingFactor );
+    if (m_verticalHeaderVisible) {
+        m_verticalHeaderFontScaler.setFontAndScalingFactor(m_verticalHeaderFont, fontScalingFactor);
     }
     updateRowHeight();
 #ifdef DEBUG_LAYOUT
@@ -63,46 +63,44 @@ void TableLayout::updateRowHeight()
         return;
     }
     m_rowHeight = m_cellFontScaler.fontMetrics().height() + 2.0 * scaledCellPadding();
-    if ( m_horizontalHeaderVisible ) {
+    if (m_horizontalHeaderVisible) {
         m_hHeaderHeight = m_horizontalHeaderFontScaler.fontMetrics().height() + 2.0 * scaledCellPadding();
     }
-    if ( m_verticalHeaderVisible ) {
+    if (m_verticalHeaderVisible) {
         qreal vHeaderHeight = m_verticalHeaderFontScaler.fontMetrics().height() + 2.0 * scaledCellPadding();
 #ifdef DEBUG_LAYOUT
-         qDebug() << "cells say rowHeight=" << m_rowHeight << "vHeader says height=" << vHeaderHeight;
+        qDebug() << "cells say rowHeight=" << m_rowHeight << "vHeader says height=" << vHeaderHeight;
 #endif
-        m_rowHeight = qMax( m_rowHeight, vHeaderHeight );
+        m_rowHeight = qMax(m_rowHeight, vHeaderHeight);
     }
 }
 
 void TableLayout::updateColumnWidths()
 {
-    if ( !m_model ) {
+    if (!m_model) {
         return;
     }
 
     const QFontMetricsF fm = m_cellFontScaler.fontMetrics();
     m_hHeaderHeight = 0;
     const int colCount = m_model->columnCount();
-    //qDebug() << "Starting layout of table" << colCount << "columns" << m_model->rowCount() << "rows";
-    m_columnWidths.resize( colCount );
-    m_widestTextPerColumn.resize( colCount );
+    // qDebug() << "Starting layout of table" << colCount << "columns" << m_model->rowCount() << "rows";
+    m_columnWidths.resize(colCount);
+    m_widestTextPerColumn.resize(colCount);
     const int rowCount = m_model->rowCount();
-    for ( int col = 0; col < colCount; ++col )
-    {
+    for (int col = 0; col < colCount; ++col) {
         m_columnWidths[col] = 0;
-        if ( m_horizontalHeaderVisible ) {
-            const QString cellText = m_model->headerData( col, Qt::Horizontal ).toString();
+        if (m_horizontalHeaderVisible) {
+            const QString cellText = m_model->headerData(col, Qt::Horizontal).toString();
             const qreal textWidth = m_horizontalHeaderFontScaler.fontMetrics().width(cellText);
-            const qreal width = addIconWidth( textWidth, m_model->headerData( col, Qt::Horizontal, Qt::DecorationRole ) );
-            m_columnWidths[col] = qMax( m_columnWidths[col], width );
+            const qreal width = addIconWidth(textWidth, m_model->headerData(col, Qt::Horizontal, Qt::DecorationRole));
+            m_columnWidths[col] = qMax(m_columnWidths[col], width);
             m_widestTextPerColumn[col] = cellText;
-            m_hHeaderHeight = qMax( m_hHeaderHeight, m_horizontalHeaderFontScaler.fontMetrics().height() );
+            m_hHeaderHeight = qMax(m_hHeaderHeight, m_horizontalHeaderFontScaler.fontMetrics().height());
         }
-        for ( int row = 0; row < rowCount; ++row )
-        {
-            const QModelIndex index = m_model->index( row, col );
-            if ( m_model->span(index).width() > 1 ) {
+        for (int row = 0; row < rowCount; ++row) {
+            const QModelIndex index = m_model->index(row, col);
+            if (m_model->span(index).width() > 1) {
                 // Ignore spanned cells. Not ideal of course, but we'll have to assume
                 // the other cells determine width, and this one just has to fit in.
                 // I guess a two-pass algorithm is needed otherwise, checking every spanned cell
@@ -110,38 +108,37 @@ void TableLayout::updateColumnWidths()
                 continue;
             }
             qreal width;
-            const QString cellText = m_model->data( index, Qt::DisplayRole ).toString();
-            const QSizeF cellSize = m_model->data( index, Qt::SizeHintRole ).toSizeF();
+            const QString cellText = m_model->data(index, Qt::DisplayRole).toString();
+            const QSizeF cellSize = m_model->data(index, Qt::SizeHintRole).toSizeF();
             if (cellSize.isValid()) {
                 width = mmToPixels(cellSize.width());
             } else {
                 const qreal textWidth = fm.size(0 /*flags*/, cellText).width();
-                width = addIconWidth( textWidth, m_model->data( index, Qt::DecorationRole ) );
+                width = addIconWidth(textWidth, m_model->data(index, Qt::DecorationRole));
             }
             if (width > m_columnWidths[col]) {
                 m_columnWidths[col] = width;
                 m_widestTextPerColumn[col] = cellText;
             }
         }
-        //qDebug() << "Column" << col << "width" << m_columnWidths[col] << "+padding=" << m_columnWidths[col]+2*scaledCellPadding();
+        // qDebug() << "Column" << col << "width" << m_columnWidths[col] << "+padding=" << m_columnWidths[col]+2*scaledCellPadding();
         m_columnWidths[col] += 2 * scaledCellPadding();
     }
 
     m_vHeaderWidth = 0;
-    if ( m_verticalHeaderVisible ) {
-        for ( int row = 0; row < rowCount; ++row )
-        {
-            const QString cellText = m_model->headerData( row, Qt::Vertical ).toString();
+    if (m_verticalHeaderVisible) {
+        for (int row = 0; row < rowCount; ++row) {
+            const QString cellText = m_model->headerData(row, Qt::Vertical).toString();
             const qreal textWidth = m_verticalHeaderFontScaler.fontMetrics().width(cellText);
-            const qreal width = addIconWidth( textWidth, m_model->headerData( row, Qt::Vertical, Qt::DecorationRole ) );
-            m_vHeaderWidth = qMax( m_vHeaderWidth, width );
+            const qreal width = addIconWidth(textWidth, m_model->headerData(row, Qt::Vertical, Qt::DecorationRole));
+            m_vHeaderWidth = qMax(m_vHeaderWidth, width);
         }
         m_vHeaderWidth += 2 * scaledCellPadding();
 #ifdef DEBUG_LAYOUT
-        //qDebug() << "m_vHeaderWidth=" << m_vHeaderWidth;
+        // qDebug() << "m_vHeaderWidth=" << m_vHeaderWidth;
 #endif
     }
-    if ( m_horizontalHeaderVisible ) {
+    if (m_horizontalHeaderVisible) {
         m_hHeaderHeight += 2 * scaledCellPadding();
     }
 }
@@ -167,7 +164,7 @@ void TableLayout::updateColumnWidthsByFactor( qreal factor )
 }
 #endif
 
-void TableLayout::ensureScalingFactorForWidth( qreal factor )
+void TableLayout::ensureScalingFactorForWidth(qreal factor)
 {
 #ifdef DEBUG_LAYOUT
     qDebug() << "TableLayout::ensureScalingFactorForWidth" << factor;
@@ -181,20 +178,20 @@ void TableLayout::ensureScalingFactorForWidth( qreal factor )
 
     const int colCount = m_model->columnCount();
     QString textForScaling;
-    for ( int col = 0; col < colCount; ++col ) {
+    for (int col = 0; col < colCount; ++col) {
         // Which column should we use as 'reference' for the scaling calculation?
         // The widest or the narrowest one? Chose narrowest, more rounding problems there.
         if (col == 0 || m_widestTextPerColumn[col].length() < textForScaling.length())
             textForScaling = m_widestTextPerColumn[col];
     }
 
-    m_cellFontScaler.setFactorForWidth( factor, textForScaling );
-    m_horizontalHeaderFontScaler.setFactorForWidth( factor, textForScaling );
-    m_verticalHeaderFontScaler.setFactorForWidth( factor, textForScaling );
+    m_cellFontScaler.setFactorForWidth(factor, textForScaling);
+    m_horizontalHeaderFontScaler.setFactorForWidth(factor, textForScaling);
+    m_verticalHeaderFontScaler.setFactorForWidth(factor, textForScaling);
     updateRowHeight();
 }
 
-void TableLayout::ensureScalingFactorForHeight( qreal maxRowHeight )
+void TableLayout::ensureScalingFactorForHeight(qreal maxRowHeight)
 {
     const qreal wantedRowHeightFactor = maxRowHeight / m_rowHeight;
     // Apply _final_ padding when determining the wanted text height, obviously.
@@ -202,43 +199,45 @@ void TableLayout::ensureScalingFactorForHeight( qreal maxRowHeight )
     //                        so wanted text height = 5 - 2*1 = 3.
     const qreal wantedTextHeight = maxRowHeight - 2.0 * wantedRowHeightFactor * scaledCellPadding();
 #ifdef DEBUG_LAYOUT
-    qDebug() << " ensureScalingFactorForHeight: wantedRowHeightFactor=" << wantedRowHeightFactor << "wantedTextHeight=" << wantedTextHeight << "after removing padding ( unscaled" << m_cellPadding << "current scaling" << scaledCellPadding() << "wanted" << wantedRowHeightFactor << "*" << m_cellPadding << "*" << scalingFactor() << "=" << wantedRowHeightFactor*scaledCellPadding() << ")";
+    qDebug() << " ensureScalingFactorForHeight: wantedRowHeightFactor=" << wantedRowHeightFactor << "wantedTextHeight=" << wantedTextHeight << "after removing padding ( unscaled" << m_cellPadding
+             << "current scaling" << scaledCellPadding() << "wanted" << wantedRowHeightFactor << "*" << m_cellPadding << "*" << scalingFactor() << "=" << wantedRowHeightFactor * scaledCellPadding()
+             << ")";
 #endif
     qreal additionalFactor = 0;
 
     // Let's see if the height is constrained by the cell font or by the vHeader font,
     // that's the one that has to determine the scaling factor
-    if ( m_cellFontScaler.fontMetrics().height() >= m_verticalHeaderFontScaler.fontMetrics().height() ) {
+    if (m_cellFontScaler.fontMetrics().height() >= m_verticalHeaderFontScaler.fontMetrics().height()) {
 #ifdef DEBUG_LAYOUT
         qDebug() << " Reducing the cell font to be wantedTextHeight=" << wantedTextHeight;
 #endif
         const qreal initialCellFactor = m_cellFontScaler.scalingFactor();
-        m_cellFontScaler.setFactorForHeight( wantedTextHeight );
+        m_cellFontScaler.setFactorForHeight(wantedTextHeight);
         additionalFactor = m_cellFontScaler.scalingFactor() / initialCellFactor;
 #ifdef DEBUG_LAYOUT
-        //qDebug() << " applying factor to m_verticalHeaderFontScaler";
+        // qDebug() << " applying factor to m_verticalHeaderFontScaler";
 #endif
-        m_verticalHeaderFontScaler.applyAdditionalScalingFactor( additionalFactor );
+        m_verticalHeaderFontScaler.applyAdditionalScalingFactor(additionalFactor);
     } else {
         // bigger font in the vertical header
 #ifdef DEBUG_LAYOUT
         qDebug() << "Reducing the vertical header font to be wantedTextHeight=" << wantedTextHeight;
 #endif
         const qreal initialVerticHeaderFactor = m_verticalHeaderFontScaler.scalingFactor();
-        m_verticalHeaderFontScaler.setFactorForHeight( wantedTextHeight );
+        m_verticalHeaderFontScaler.setFactorForHeight(wantedTextHeight);
         additionalFactor = m_verticalHeaderFontScaler.scalingFactor() / initialVerticHeaderFactor;
 #ifdef DEBUG_LAYOUT
-        //qDebug() << " applying factor to m_cellFontScaler";
+        // qDebug() << " applying factor to m_cellFontScaler";
 #endif
-        m_cellFontScaler.applyAdditionalScalingFactor( additionalFactor );
+        m_cellFontScaler.applyAdditionalScalingFactor(additionalFactor);
     }
 
 #ifdef DEBUG_LAYOUT
-    //qDebug() << " Now we have cellFontScaler:" << m_cellFontScaler.fontMetrics().height()
+    // qDebug() << " Now we have cellFontScaler:" << m_cellFontScaler.fontMetrics().height()
     //        << "verticalheaderfontscaler:" << m_verticalHeaderFontScaler.fontMetrics().height();
 #endif
 
-    m_horizontalHeaderFontScaler.applyAdditionalScalingFactor( additionalFactor );
+    m_horizontalHeaderFontScaler.applyAdditionalScalingFactor(additionalFactor);
     updateRowHeight();
     // With very small fonts, we can't get less than 3 pixels high for the text.
     m_rowHeight = qMin(maxRowHeight, m_rowHeight);
@@ -248,23 +247,23 @@ void TableLayout::ensureScalingFactorForHeight( qreal maxRowHeight )
 #endif
 }
 
-QSize KDReports::TableLayout::decorationSize( const QVariant& cellDecoration ) const
+QSize KDReports::TableLayout::decorationSize(const QVariant &cellDecoration) const
 {
-    QImage img = qvariant_cast<QImage>( cellDecoration );
-    if ( !img.isNull() ) {
+    QImage img = qvariant_cast<QImage>(cellDecoration);
+    if (!img.isNull()) {
         return img.size();
     }
-    QPixmap pix = qvariant_cast<QPixmap>( cellDecoration );
-    if ( !pix.isNull() ) {
+    QPixmap pix = qvariant_cast<QPixmap>(cellDecoration);
+    if (!pix.isNull()) {
         return pix.size();
     }
     return m_iconSize;
 }
 
-qreal KDReports::TableLayout::addIconWidth( qreal textWidth, const QVariant& cellDecoration ) const
+qreal KDReports::TableLayout::addIconWidth(qreal textWidth, const QVariant &cellDecoration) const
 {
     qreal width = textWidth;
-    if ( !cellDecoration.isNull() )
-        width += decorationSize( cellDecoration ).width() + 2 /*see textRect adjustments in SpreadsheetReportLayout::paintPageContent*/;
+    if (!cellDecoration.isNull())
+        width += decorationSize(cellDecoration).width() + 2 /*see textRect adjustments in SpreadsheetReportLayout::paintPageContent*/;
     return width;
 }

@@ -25,22 +25,24 @@ public:
     QString m_id;
 };
 
-KDReports::HtmlElement::HtmlElement( const QString& html )
-    : Element(), d( new HtmlElementPrivate )
+KDReports::HtmlElement::HtmlElement(const QString &html)
+    : Element()
+    , d(new HtmlElementPrivate)
 {
     d->m_html = html;
 }
 
-KDReports::HtmlElement::HtmlElement( const HtmlElement &other )
-    : Element(other), d( new HtmlElementPrivate( *other.d ) )
+KDReports::HtmlElement::HtmlElement(const HtmlElement &other)
+    : Element(other)
+    , d(new HtmlElementPrivate(*other.d))
 {
 }
 
-KDReports::HtmlElement & KDReports::HtmlElement::operator=( const HtmlElement &other )
+KDReports::HtmlElement &KDReports::HtmlElement::operator=(const HtmlElement &other)
 {
-    if ( &other == this )
+    if (&other == this)
         return *this;
-    Element::operator=( other );
+    Element::operator=(other);
     *d = *other.d;
     return *this;
 }
@@ -50,32 +52,32 @@ KDReports::HtmlElement::~HtmlElement()
     delete d;
 }
 
-void KDReports::HtmlElement::build( ReportBuilder& builder ) const
+void KDReports::HtmlElement::build(ReportBuilder &builder) const
 {
-    QTextCursor& cursor = builder.cursor();
+    QTextCursor &cursor = builder.cursor();
     const int charPosition = cursor.position();
-    cursor.insertHtml( d->m_html );
-    if ( !d->m_id.isEmpty() )
-        builder.currentDocumentData().setTextValueMarker( charPosition, d->m_id, cursor.position(), false );
+    cursor.insertHtml(d->m_html);
+    if (!d->m_id.isEmpty())
+        builder.currentDocumentData().setTextValueMarker(charPosition, d->m_id, cursor.position(), false);
 }
 
-KDReports::HtmlElement& KDReports::HtmlElement::operator<<( const QString& str )
+KDReports::HtmlElement &KDReports::HtmlElement::operator<<(const QString &str)
 {
-    d->m_html.append( str );
+    d->m_html.append(str);
     return *this;
 }
 
-void KDReports::HtmlElement::setHtml( const QString& html )
+void KDReports::HtmlElement::setHtml(const QString &html)
 {
     d->m_html = html;
 }
 
-KDReports::Element* KDReports::HtmlElement::clone() const
+KDReports::Element *KDReports::HtmlElement::clone() const
 {
-    return new HtmlElement( *this );
+    return new HtmlElement(*this);
 }
 
-void KDReports::HtmlElement::setId( const QString& id )
+void KDReports::HtmlElement::setId(const QString &id)
 {
     d->m_id = id;
 }

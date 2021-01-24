@@ -30,21 +30,13 @@ class ChartTextObject : public QObject, public QTextObjectInterface
 
 public:
     enum { ChartObjectTextFormat = QTextFormat::UserObject + 2 };
-    enum { 
-        ChartObject = 1, 
-        Size = 2, 
-        Unit = 3 
-    };
+    enum { ChartObject = 1, Size = 2, Unit = 3 };
 
     static void registerChartTextObjectHandler(QTextDocument *doc);
 
-    QSizeF intrinsicSize(QTextDocument *doc, int posInDocument,
-                    const QTextFormat &format) override;
+    QSizeF intrinsicSize(QTextDocument *doc, int posInDocument, const QTextFormat &format) override;
 
-    void drawObject(QPainter *painter, const QRectF &rect,
-                    QTextDocument *doc, int posInDocument,
-                    const QTextFormat &format) override;
-
+    void drawObject(QPainter *painter, const QRectF &rect, QTextDocument *doc, int posInDocument, const QTextFormat &format) override;
 };
 
 } // namespace

@@ -31,25 +31,24 @@ class KDREPORTS_EXPORT ErrorDetails
 {
 public:
     ErrorDetails();
-    explicit ErrorDetails( const QString& message );
-    ErrorDetails( const ErrorDetails& other );
-
+    explicit ErrorDetails(const QString &message);
+    ErrorDetails(const ErrorDetails &other);
 
     ~ErrorDetails();
-    inline ErrorDetails& operator=( const ErrorDetails& other );
+    inline ErrorDetails &operator=(const ErrorDetails &other);
 
     /**
      * @return a message including line and column number if available.
      */
     QString message() const;
 
-    void setLine( int line );
-    void setColumn( int column );
+    void setLine(int line);
+    void setColumn(int column);
 
     /**
      * Set the lowlevel message. This excludes line and/or column numbers.
      */
-    void setDriverMessage( const QString& message );
+    void setDriverMessage(const QString &message);
 
     int line() const;
     int column() const;
@@ -61,31 +60,31 @@ public:
 
     bool hasError() const;
 
-    inline void swap( ErrorDetails & other ); //krazy:exclude=inline
+    inline void swap(ErrorDetails &other); // krazy:exclude=inline
 private:
     friend class XmlElementHandler;
-    ErrorDetailsPrivate* d; //krazy:exclude=dpointer make this const
+    ErrorDetailsPrivate *d; // krazy:exclude=dpointer make this const
 };
 
-void ErrorDetails::swap( ErrorDetails & other )
+void ErrorDetails::swap(ErrorDetails &other)
 {
-    qSwap( d, other.d );
+    qSwap(d, other.d);
 }
 
-
-ErrorDetails& ErrorDetails::operator=( const ErrorDetails& other )
+ErrorDetails &ErrorDetails::operator=(const ErrorDetails &other)
 {
-    ErrorDetails copy( other );
-    swap( copy );
+    ErrorDetails copy(other);
+    swap(copy);
     return *this;
 }
 
 } // namespace KDReports
 
 QT_BEGIN_NAMESPACE
-template <> inline void qSwap( KDReports::ErrorDetails & lhs, KDReports::ErrorDetails & rhs )
+template <>
+inline void qSwap(KDReports::ErrorDetails &lhs, KDReports::ErrorDetails &rhs)
 {
-    lhs.swap( rhs );
+    lhs.swap(rhs);
 }
 QT_END_NAMESPACE
 

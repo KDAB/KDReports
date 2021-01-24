@@ -15,20 +15,21 @@
 ****************************************************************************/
 
 #include "KDReportsTableBreakingSettingsDialog.h"
-#include <QDebug>
-#include "KDReportsReport.h"
 #include "KDReportsMainTable.h"
+#include "KDReportsReport.h"
 #include "KDReportsTextDocument_p.h"
 #include "ui_tablebreakingdialogbase.h"
+#include <QDebug>
 
 class KDReports::TableBreakingSettingsDialogPrivate : public Ui::TableBreakingSettingsDialog
 {
 public:
-    TableBreakingSettingsDialogPrivate( KDReports::Report* report )
-        : m_report( report )
+    TableBreakingSettingsDialogPrivate(KDReports::Report *report)
+        : m_report(report)
     {
     }
-    void _kd_slotBreakTablesToggled(bool breakTables) {
+    void _kd_slotBreakTablesToggled(bool breakTables)
+    {
         if (!breakTables) {
             // If we can't break tables, then we can only scale to 1 pages horizontally
             numHorizontalPages->setValue(1);
@@ -36,45 +37,45 @@ public:
         numHorizontalPages->setEnabled(breakTables);
     }
 
-    KDReports::Report* m_report;
+    KDReports::Report *m_report;
 };
 
-KDReports::TableBreakingSettingsDialog::TableBreakingSettingsDialog( KDReports::Report* report, QWidget *parent )
-    : QDialog( parent ), d( new TableBreakingSettingsDialogPrivate( report ) )
+KDReports::TableBreakingSettingsDialog::TableBreakingSettingsDialog(KDReports::Report *report, QWidget *parent)
+    : QDialog(parent)
+    , d(new TableBreakingSettingsDialogPrivate(report))
 {
-    d->setupUi( this );
+    d->setupUi(this);
 
     connect(d->breakTables, SIGNAL(toggled(bool)), this, SLOT(_kd_slotBreakTablesToggled(bool)));
 
     // LOAD SETTINGS
-    d->breakTables->setChecked( true ); // trigger the toggled signal if the next line sets it back to false
-    d->breakTables->setChecked( d->m_report->isTableBreakingEnabled() );
-    if ( d->m_report->isTableBreakingEnabled() && d->m_report->fontScalingFactor() == 1.0 ) {
+    d->breakTables->setChecked(true); // trigger the toggled signal if the next line sets it back to false
+    d->breakTables->setChecked(d->m_report->isTableBreakingEnabled());
+    if (d->m_report->isTableBreakingEnabled() && d->m_report->fontScalingFactor() == 1.0) {
         const int maxH = d->m_report->maximumNumberOfPagesForHorizontalScaling();
         const int maxV = d->m_report->maximumNumberOfPagesForVerticalScaling();
-        d->fit->setChecked( true );
-        d->numHorizontalPages->setValue( maxH );
-        d->numVerticalPages->setValue( maxV );
+        d->fit->setChecked(true);
+        d->numHorizontalPages->setValue(maxH);
+        d->numVerticalPages->setValue(maxV);
     } else {
-        d->scaleFonts->setChecked( true ); // default value, 100% scaling i.e. noop
-        d->scalingFactor->setValue( qRound( d->m_report->fontScalingFactor() * 100 ) );
+        d->scaleFonts->setChecked(true); // default value, 100% scaling i.e. noop
+        d->scalingFactor->setValue(qRound(d->m_report->fontScalingFactor() * 100));
     }
 
-    if ( d->m_report->tableBreakingPageOrder() == KDReports::Report::DownThenRight )
-        d->downThenRight->setChecked( true );
+    if (d->m_report->tableBreakingPageOrder() == KDReports::Report::DownThenRight)
+        d->downThenRight->setChecked(true);
     else
-        d->rightThenDown->setChecked( true );
+        d->rightThenDown->setChecked(true);
 
-    KDReports::AutoTableElement * autoTable = d->m_report->mainTable()->autoTableElement();
+    KDReports::AutoTableElement *autoTable = d->m_report->mainTable()->autoTableElement();
     // Auto table settings
     if (autoTable) {
-        d->showHorizontalHeader->setChecked( autoTable->isHorizontalHeaderVisible() );
-        d->showVerticalHeader->setChecked( autoTable->isVerticalHeaderVisible() );
-        d->showGrid->setChecked( autoTable->border() > 0 );
+        d->showHorizontalHeader->setChecked(autoTable->isHorizontalHeaderVisible());
+        d->showVerticalHeader->setChecked(autoTable->isVerticalHeaderVisible());
+        d->showGrid->setChecked(autoTable->border() > 0);
     } else {
         d->tableSettingsGroupBox->hide();
     }
-
 }
 
 KDReports::TableBreakingSettingsDialog::~TableBreakingSettingsDialog()
@@ -86,29 +87,28 @@ void KDReports::TableBreakingSettingsDialog::accept()
 {
     // SAVE SETTINGS
     const bool breakTables = d->breakTables->isChecked();
-    d->m_report->setTableBreakingEnabled( breakTables );
-    if ( d->fit->isChecked() ) {
-        d->m_report->setFontScalingFactor( 1.0 );
-        d->m_report->scaleTo( breakTables ? d->numHorizontalPages->value() : 1,
-                              d->numVerticalPages->value() );
+    d->m_report->setTableBreakingEnabled(breakTables);
+    if (d->fit->isChecked()) {
+        d->m_report->setFontScalingFactor(1.0);
+        d->m_report->scaleTo(breakTables ? d->numHorizontalPages->value() : 1, d->numVerticalPages->value());
     } else {
-        d->m_report->setFontScalingFactor( static_cast<qreal>( d->scalingFactor->value() ) / 100.0 );
+        d->m_report->setFontScalingFactor(static_cast<qreal>(d->scalingFactor->value()) / 100.0);
     }
 
-    if ( d->downThenRight->isChecked() ) {
-        d->m_report->setTableBreakingPageOrder( KDReports::Report::DownThenRight );
+    if (d->downThenRight->isChecked()) {
+        d->m_report->setTableBreakingPageOrder(KDReports::Report::DownThenRight);
     } else {
-        d->m_report->setTableBreakingPageOrder( KDReports::Report::RightThenDown );
+        d->m_report->setTableBreakingPageOrder(KDReports::Report::RightThenDown);
     }
 
-    KDReports::AutoTableElement * autoTable = d->m_report->mainTable()->autoTableElement();
+    KDReports::AutoTableElement *autoTable = d->m_report->mainTable()->autoTableElement();
     // Auto table settings
     if (autoTable) {
-        autoTable->setHorizontalHeaderVisible( d->showHorizontalHeader->isChecked() );
-        autoTable->setVerticalHeaderVisible( d->showVerticalHeader->isChecked() );
+        autoTable->setHorizontalHeaderVisible(d->showHorizontalHeader->isChecked());
+        autoTable->setVerticalHeaderVisible(d->showVerticalHeader->isChecked());
         const bool currentGrid = autoTable->border() > 0;
-        if ( currentGrid != d->showGrid->isChecked() ) // don't change a border of 2 if the user didn't toggle the checkbox
-            autoTable->setBorder( d->showGrid->isChecked() ? 1 : 0 );
+        if (currentGrid != d->showGrid->isChecked()) // don't change a border of 2 if the user didn't toggle the checkbox
+            autoTable->setBorder(d->showGrid->isChecked() ? 1 : 0);
         d->m_report->regenerateAutoTables();
     } else {
         d->tableSettingsGroupBox->hide();

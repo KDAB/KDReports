@@ -19,10 +19,10 @@
 
 #include "KDReportsErrorDetails.h"
 #include "KDReportsGlobal.h"
-#include <QtCore/QSizeF>
 #include <QColor>
 #include <QFont>
 #include <QTextOption>
+#include <QtCore/QSizeF>
 
 #include <QtPrintSupport/QPrinter>
 
@@ -81,11 +81,11 @@ class XmlElementHandler;
 enum HeaderLocation {
     FirstPage = 1, ///< The first page of the report
     EvenPages = 2, ///< The even pages of the report: 2, 4, 6 etc.
-    OddPages = 4,  ///< The odd pages of the report: 1 (unless FirstPage has its own header), 3, 5, 7 etc.
-    LastPage = 8,  ///< The last page of the report.
+    OddPages = 4, ///< The odd pages of the report: 1 (unless FirstPage has its own header), 3, 5, 7 etc.
+    LastPage = 8, ///< The last page of the report.
     AllPages = OddPages | EvenPages ///< All pages (except first and last if FirstPage or LastPage have their own headers)
 };
-Q_DECLARE_FLAGS( HeaderLocations, HeaderLocation )
+Q_DECLARE_FLAGS(HeaderLocations, HeaderLocation)
 
 /**
  * The Report class represents a report.
@@ -106,16 +106,13 @@ public:
      * Constructs a report.
      * \param parent optional parent object, for memory management
      */
-    explicit Report( QObject* parent = 0 );
+    explicit Report(QObject *parent = 0);
     /**
      * Destroys the report.
      */
     ~Report() override;
 
-    enum ReportMode {
-        WordProcessing = 0,
-        SpreadSheet = 1
-    };
+    enum ReportMode { WordProcessing = 0, SpreadSheet = 1 };
 
     /**
      * Sets the main mode of the report: word-processing or spread-sheet (one large table).
@@ -136,7 +133,7 @@ public:
      *
      * \since 1.3
      */
-    void setReportMode( ReportMode reportMode );
+    void setReportMode(ReportMode reportMode);
 
     /**
      * Returns the mode set with setReportMode();
@@ -148,18 +145,18 @@ public:
      * Sets the default font used for text in this report.
      * \since 1.1
      */
-    void setDefaultFont( const QFont& font );
+    void setDefaultFont(const QFont &font);
 
     /**
-      * \return the default font used for text in this report
-      * \since 1.4
-      */
+     * \return the default font used for text in this report
+     * \since 1.4
+     */
     QFont defaultFont() const;
 
     /**
      * Spreadsheet mode: returns the main table of the report.
      */
-    MainTable* mainTable() const;
+    MainTable *mainTable() const;
 
     /**
      * Adds an element to the report, next to the previous element, in the same paragraph.
@@ -168,7 +165,7 @@ public:
      * the element, though. For this reason, any changes to the element after insertion
      * will have no effect on the report. Set all settings in the element before calling addInlineElement.
      */
-    void addInlineElement( const Element& element );
+    void addInlineElement(const Element &element);
 
     /**
      * Adds an element to the report, creating a new paragraph for it.
@@ -184,15 +181,14 @@ public:
      * The difference with Element::setBackground is that it affects the whole paragraph, including
      * any inline elements as well as the unused area up to the right margin of the page.
      */
-    void addElement( const Element& element, Qt::AlignmentFlag horizontalAlignment = Qt::AlignLeft,
-                     const QColor& backgroundColor = QColor() );
+    void addElement(const Element &element, Qt::AlignmentFlag horizontalAlignment = Qt::AlignLeft, const QColor &backgroundColor = QColor());
 
     /**
      * Adds vertical spacing between paragraphs.
      * Make sure to call addElement after that, not addInlineElement.
      * \param space the space in millimeters
      */
-    void addVerticalSpacing( qreal space );
+    void addVerticalSpacing(qreal space);
 
     /**
      * Adds a piece of formatted text from a QTextDocument.
@@ -200,7 +196,7 @@ public:
      * is in a QTextDocument (e.g. in a QTextEdit). In general you
      * probably want to use addElement(HtmlElement()) instead.
      */
-    void addFragment( const QTextDocumentFragment& fragment );
+    void addFragment(const QTextDocumentFragment &fragment);
 
     /**
      * Adds a page break to the report.
@@ -236,7 +232,7 @@ public:
      *
      * \since 1.2
      */
-    void setTabPositions( const QList<QTextOption::Tab>& tabs );
+    void setTabPositions(const QList<QTextOption::Tab> &tabs);
 
     /**
      * Returns a tab position that is always right-aligned to the right edge of the paper.
@@ -258,20 +254,20 @@ public:
      * The default margins are 0,0,0,0.
      * \since 1.3
      */
-    void setParagraphMargins( qreal left, qreal top, qreal right, qreal bottom );
+    void setParagraphMargins(qreal left, qreal top, qreal right, qreal bottom);
 
     /**
      * Sets the page size of the report. Example: setPageSize(QPrinter::A4) or setPageSize(QPrinter::Letter);
      * Note that for performance reasons, it is recommended to do this after
      * adding all the elements to the report rather than before.
      */
-    void setPageSize( const QPrinter::PageSize& size );
+    void setPageSize(const QPrinter::PageSize &size);
 
     /**
      * Sets a custom paper size for the report.
      * Supported units are DevicePixel, Millimeter, Point and Inch.
      */
-    void setPaperSize( const QSizeF & paperSize, QPrinter::Unit unit );
+    void setPaperSize(const QSizeF &paperSize, QPrinter::Unit unit);
 
     /**
      * \return the page size set by setPageSize. The default page size is A4.
@@ -280,7 +276,7 @@ public:
     /**
      * Sets the orientation, QPrinter::Portrait or QPrinter::Landscape.
      */
-    void setOrientation( QPrinter::Orientation orientation );
+    void setOrientation(QPrinter::Orientation orientation);
     /**
      * \return the orientation set by setOrientation. The default orientation is QPrinter::Portrait.
      */
@@ -299,24 +295,24 @@ public:
      * NOTE: with Qt-4.3, this feature only works reliably on Unix, using Qt compiled with CUPS support.
      * With Qt-4.4, there is no such limitation and this feature should work everywhere.
      */
-    void setWidthForEndlessPrinter( qreal widthMM );
+    void setWidthForEndlessPrinter(qreal widthMM);
 
     /**
      * Sets the page margins in mm. The default margins are 20 mm.
      */
-    void setMargins( qreal top, qreal left, qreal bottom, qreal right );
+    void setMargins(qreal top, qreal left, qreal bottom, qreal right);
 
     /**
      * \return the page margins in mm.
      * \since 1.1
      */
-    void getMargins( qreal* top, qreal* left, qreal* bottom, qreal* right ) const;
+    void getMargins(qreal *top, qreal *left, qreal *bottom, qreal *right) const;
 
     /**
      * Sets the top page margins in mm. The default margin is 20 mm.
      * \since 1.4
      */
-    void setTopPageMargin( qreal top );
+    void setTopPageMargin(qreal top);
 
     /**
      * \return the top page margin in mm.
@@ -328,7 +324,7 @@ public:
      * Sets the left page margins in mm. The default margin is 20 mm.
      * \since 1.4
      */
-    void setLeftPageMargin( qreal left );
+    void setLeftPageMargin(qreal left);
 
     /**
      * \return the left page margin in mm.
@@ -340,7 +336,7 @@ public:
      * Sets the right page margins in mm. The default margin is 20 mm.
      * \since 1.4
      */
-    void setRightPageMargin( qreal right );
+    void setRightPageMargin(qreal right);
 
     /**
      * \return the right page margin in mm.
@@ -352,7 +348,7 @@ public:
      * Sets the bottom page margins in mm. The default margin is 20 mm.
      * \since 1.4
      */
-    void setBottomPageMargin( qreal bottom );
+    void setBottomPageMargin(qreal bottom);
 
     /**
      * \return the bottom page margin in mm.
@@ -365,12 +361,12 @@ public:
      * This margin is 0 by default, i.e. the body starts immediately under the header.
      * \since 1.1
      */
-    void setHeaderBodySpacing( qreal spacing );
+    void setHeaderBodySpacing(qreal spacing);
 
     /**
-      * \return the margin between the header and the body of the report, in mm.
-      * \since 1.4
-      */
+     * \return the margin between the header and the body of the report, in mm.
+     * \since 1.4
+     */
     qreal headerBodySpacing() const;
 
     /**
@@ -378,12 +374,12 @@ public:
      * This margin is 0 by default, i.e. the footer starts immediately under the body.
      * \since 1.1
      */
-    void setFooterBodySpacing( qreal spacing );
+    void setFooterBodySpacing(qreal spacing);
 
     /**
-      * \return the margin between the footer and the body of the report, in mm.
-      * \since 1.4
-      */
+     * \return the margin between the footer and the body of the report, in mm.
+     * \since 1.4
+     */
     qreal footerBodySpacing() const;
 
     /**
@@ -402,7 +398,7 @@ public:
      *
      * Specify the contents of the header by calling Header::addElement.
      */
-    Header& header( HeaderLocations hl = AllPages );
+    Header &header(HeaderLocations hl = AllPages);
 
     /**
      * \return a reference to the footer object.
@@ -411,7 +407,7 @@ public:
      *
      * Specify the contents of the footer by calling Footer::addElement.
      */
-    Footer& footer( HeaderLocations hl = AllPages );
+    Footer &footer(HeaderLocations hl = AllPages);
 
     /**
      * Associates a model with a model key. This is only used if the
@@ -419,7 +415,7 @@ public:
      * loadFromXML. This method needs to be called before \a
      * loadFromXML is called.
      */
-    void associateModel( const QString& modelKey, QAbstractItemModel* model );
+    void associateModel(const QString &modelKey, QAbstractItemModel *model);
 
     /**
      * Associate a text string with the id of a text or html element.
@@ -431,7 +427,7 @@ public:
      * If associateTextValue was already called with the id \p id, the new value
      * replaces the old one.
      */
-    void associateTextValue( const QString& id, const QString& value );
+    void associateTextValue(const QString &id, const QString &value);
 
     /**
      * Associate a pixmap with the id of an image element.
@@ -442,7 +438,7 @@ public:
      * If associateImageValue was already called with the id \p id, the new value
      * replaces the old one.
      */
-    void associateImageValue( const QString& id, const QPixmap& value );
+    void associateImageValue(const QString &id, const QPixmap &value);
 
     /**
      * Associate an image with the id of an image element. This is only used if the
@@ -457,7 +453,7 @@ public:
      * This overload is especially useful in threads.
      * \since 1.3
      */
-    void associateImageValue( const QString& id, const QImage& value );
+    void associateImageValue(const QString &id, const QImage &value);
 
     /**
      * Loads a report definition from an XML document. Notice that if the
@@ -469,7 +465,7 @@ public:
      * otherwise these elements will stay empty.
      * \return true if the XML document was successfully loaded, false otherwise
      */
-    bool loadFromXML( QIODevice* iodevice, ErrorDetails* details = 0 );
+    bool loadFromXML(QIODevice *iodevice, ErrorDetails *details = 0);
 
     /**
      * This is an overloaded member function, provided for convenience.
@@ -483,7 +479,7 @@ public:
      * \return true if the XML document was successfully loaded, false otherwise
      * \since 1.1
      */
-    bool loadFromXML( const QDomDocument& doc, ErrorDetails* details = 0 );
+    bool loadFromXML(const QDomDocument &doc, ErrorDetails *details = 0);
 
     /**
      * Sets an xml element handler.
@@ -493,7 +489,7 @@ public:
      * and give the report as parent QObject.
      * \since 1.2
      */
-    void setXmlElementHandler( KDReports::XmlElementHandler* handler );
+    void setXmlElementHandler(KDReports::XmlElementHandler *handler);
 
     /**
      * Sets the current row for the given model.
@@ -501,14 +497,14 @@ public:
      * of the 'row' attributes within XML tags
      * \since 1.3
      */
-    void setCurrentRow( const QAbstractItemModel *model, int row );
+    void setCurrentRow(const QAbstractItemModel *model, int row);
 
     /**
      * Sets the name of the report.
      * This is used for QPrinter::setDocName(), which gives a name to the print job.
      * \since 1.7
      */
-    void setDocumentName( const QString &name );
+    void setDocumentName(const QString &name);
 
     /**
      * Returns the name of the report.
@@ -521,7 +517,7 @@ public:
      * \param parent the parent widget for the progress dialog that appears when printing
      * \return false if the print dialog was cancelled
      */
-    bool printWithDialog( QWidget* parent );
+    bool printWithDialog(QWidget *parent);
 
     /**
      * Print directly using the setup values from a preexisting
@@ -535,7 +531,7 @@ public:
      * \param printer the printer to use for printing
      * \param parent the parent widget for the progress dialog that appears when printing
      */
-    bool print( QPrinter* printer, QWidget* parent = 0 );
+    bool print(QPrinter *printer, QWidget *parent = 0);
 
     /**
      * Export the whole report to a PS or PDF file.
@@ -543,7 +539,7 @@ public:
      * selected as output format.
      * If the file name has the ".pdf" suffix PDF is generated.
      */
-    bool exportToFile( const QString& fileName, QWidget* parent = 0 );
+    bool exportToFile(const QString &fileName, QWidget *parent = 0);
 
     /**
      * Export the whole report to an image file.
@@ -551,7 +547,7 @@ public:
      * \param fileName the name of the image file
      * \param format the format of the image, for instance: BMP, JPG, PNG.
      */
-    bool exportToImage( const QSize& size, const QString& fileName, const char* format );
+    bool exportToImage(const QSize &size, const QString &fileName, const char *format);
 
     /**
      * Export the whole report to HTML.
@@ -560,21 +556,21 @@ public:
      * Images are saved into separate files.
      * \since 1.2
      */
-    bool exportToHtml( const QString& fileName );
+    bool exportToHtml(const QString &fileName);
 
     /**
      * Paints a given page of the report into the painter.
      * Note that this method can be used for printing and for on-screen rendering
      * so it doesn't fill the background with white, the caller has do to that.
      */
-    void paintPage( int pageNumber, QPainter& painter );
+    void paintPage(int pageNumber, QPainter &painter);
 
     /**
      * Sets the number of the first page, so that the variable PageNumber
      * starts at another value than 1. This is useful when splitting a
      * large report into smaller documents.
      */
-    void setFirstPageNumber( int num );
+    void setFirstPageNumber(int num);
 
     /**
      * \return the number given to setFirstPageNumber
@@ -609,7 +605,7 @@ public:
      * \deprecated since 1.3, use scaleTo.
      *
      */
-    void setTableBreakingEnabled( bool tableBreakingEnabled );
+    void setTableBreakingEnabled(bool tableBreakingEnabled);
 
     /**
      * \return the value passed to setTableBreakingEnabled,
@@ -626,7 +622,7 @@ public:
      *
      * \since 1.1
      */
-    void setTableBreakingPageOrder( TableBreakingPageOrder pageOrder );
+    void setTableBreakingPageOrder(TableBreakingPageOrder pageOrder);
 
     /**
      * \return the table breaking page order given to setTableBreakingPageOrder
@@ -643,7 +639,7 @@ public:
      *
      * \since 1.1
      */
-    void setFontScalingFactor( qreal factor );
+    void setFontScalingFactor(qreal factor);
 
     /**
      * \return the font scaling factor given to setFontScalingFactor
@@ -673,7 +669,7 @@ public:
      *
      * \since 1.1
      */
-    void scaleTo( int numPagesHorizontally, int numPagesVertically );
+    void scaleTo(int numPagesHorizontally, int numPagesVertically);
 
     /**
      * \return the number of horizontal pages set with scaleTo, otherwise 1.
@@ -691,7 +687,7 @@ public:
      * The main use case is printing of fixed size labels.
      * \since 1.7
      */
-    void setFixedRowHeight( qreal mm );
+    void setFixedRowHeight(qreal mm);
 
     /**
      * Returns a list of the auto-table elements that were used to create this report.
@@ -715,7 +711,7 @@ public:
      * this specific model changes frequently, to save time compared to recreating the full report.
      * \since 1.2
      */
-    void regenerateAutoTableForModel( QAbstractItemModel* model );
+    void regenerateAutoTableForModel(QAbstractItemModel *model);
 
     /**
      * Sets the text to be used as a watermark. By default, the text
@@ -726,10 +722,7 @@ public:
      * recommended. Also notice that if you choose a watermark color
      * that is too dark, this will make the reports less legible.
      */
-    void setWatermarkText( const QString& text,
-                           int rotation = 0,
-                           const QColor& color = QColor( 204, 204, 204 ),
-                           const QFont& font = QFont( QLatin1String( "Helvetica" ), 48 ) );
+    void setWatermarkText(const QString &text, int rotation = 0, const QColor &color = QColor(204, 204, 204), const QFont &font = QFont(QLatin1String("Helvetica"), 48));
 
     /**
      * \return the watermark text.
@@ -761,7 +754,7 @@ public:
      * You can set both a watermark text and a watermark image, but
      * the two will overwrite each other so this is not recommended.
      */
-    void setWatermarkPixmap( const QPixmap& pixmap, bool autoGrayOut = true );
+    void setWatermarkPixmap(const QPixmap &pixmap, bool autoGrayOut = true);
 
     /**
      * \return the image to be used as watermark. If autoGrayOut was
@@ -774,7 +767,7 @@ public:
      * Same as setWatermarkPixmap but with a QImage. Especially useful in threads.
      * \since 1.2
      */
-    void setWatermarkImage( const QImage& image );
+    void setWatermarkImage(const QImage &image);
 
     /**
      * \return the image to be used as watermark.
@@ -786,7 +779,7 @@ public:
      * \return the location for the given header.
      * \since 1.4
      */
-    KDReports::HeaderLocations headerLocation(Header* header) const;
+    KDReports::HeaderLocations headerLocation(Header *header) const;
 
     /**
      * \return the location for the given footer.
@@ -795,15 +788,15 @@ public:
     KDReports::HeaderLocations footerLocation(KDReports::Footer *footer) const;
 
     /**
-      * Set the header location
-      * \since 1.4
-      */
+     * Set the header location
+     * \since 1.4
+     */
     void setHeaderLocation(HeaderLocations hl, Header *header);
 
     /**
-      * Set the footer location
-      * \since 1.4
-      */
+     * Set the footer location
+     * \since 1.4
+     */
     void setFooterLocation(HeaderLocations hl, Footer *footer);
 
     /**
@@ -845,14 +838,14 @@ private:
     friend class Test;
     friend class ::ReportData;
     friend class ::EditorData;
-    KDReports::TextDocument& doc() const;
+    KDReports::TextDocument &doc() const;
 
     QString asHtml() const;
 
-    void setupPrinter( QPrinter* printer );
+    void setupPrinter(QPrinter *printer);
 
 private:
-    Q_DISABLE_COPY( Report )
+    Q_DISABLE_COPY(Report)
     friend class HeaderReportBuilder; // for headerChanged()
     friend class ImageElement; // for textDocumentWidth()
     friend class ChartElement; // for textDocumentWidth()
@@ -861,7 +854,7 @@ private:
     friend class PreviewDialogPrivate; // setupPrinter
     friend class PreviewWidgetPrivate; // setupPrinter
     friend class ReportPrivate; // setupPrinter
-    ReportPrivate* const d;
+    ReportPrivate *const d;
 };
 
 }

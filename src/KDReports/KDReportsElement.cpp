@@ -24,18 +24,18 @@ public:
 };
 
 KDReports::Element::Element()
-    : d( new ElementPrivate )
+    : d(new ElementPrivate)
 {
 }
 
 KDReports::Element::Element(const Element &other)
-    : d( new ElementPrivate( *other.d ) )
+    : d(new ElementPrivate(*other.d))
 {
 }
 
-KDReports::Element & KDReports::Element::operator=(const Element &other)
+KDReports::Element &KDReports::Element::operator=(const Element &other)
 {
-    if ( &other == this )
+    if (&other == this)
         return *this;
     *d = *other.d;
     return *this;
@@ -46,7 +46,7 @@ KDReports::Element::~Element()
     delete d;
 }
 
-void KDReports::Element::setBackground( const QBrush& brush )
+void KDReports::Element::setBackground(const QBrush &brush)
 {
     d->m_background = brush;
 }
@@ -55,4 +55,3 @@ QBrush KDReports::Element::background() const
 {
     return d->m_background;
 }
-

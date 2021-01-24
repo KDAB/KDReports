@@ -20,12 +20,11 @@
 #include "KDReportsElement.h"
 #include "KDReportsUnit.h"
 #include "KDReportsVariableType.h"
-#include <QtCore/Qt>
 #include <QMap>
 #include <QPair>
+#include <QtCore/Qt>
 
-namespace KDReports
-{
+namespace KDReports {
 class ReportBuilder;
 class Element;
 class FramePrivate;
@@ -60,11 +59,11 @@ public:
     /**
      * Set the frame width in millimeters or in percent of the page width.
      */
-    void setWidth( qreal width, Unit unit = Millimeters );
+    void setWidth(qreal width, Unit unit = Millimeters);
     /**
      * Set the frame height in millimeters or in percent of the page height.
      */
-    void setHeight( qreal height, Unit unit = Millimeters );
+    void setHeight(qreal height, Unit unit = Millimeters);
 
     /**
      * Specifies the size of the padding in millimeters.
@@ -72,7 +71,7 @@ public:
      * all around the contents (above, below, on the left and on the right).
      * The default padding has a size of 0.5 mm.
      */
-    void setPadding( qreal padding );
+    void setPadding(qreal padding);
 
     /**
      * Returns the width of the frame's internal padding in millimeters.
@@ -84,7 +83,7 @@ public:
      * The default border has a width of 1.
      * Set it to 0 for a frame without borders.
      */
-    void setBorder( qreal border );
+    void setBorder(qreal border);
 
     /**
      * Returns the width of the frame
@@ -94,35 +93,34 @@ public:
     /**
      * Adds an element to the frame, next to the previous element, in the same paragraph.
      */
-    void addInlineElement( const Element& element );
+    void addInlineElement(const Element &element);
 
     /**
      * Adds an element to the frame, creating a new paragraph for it.
      * You can specify the alignment of that paragraph.
      */
-    void addElement( const Element& element, Qt::AlignmentFlag horizontalAlignment = Qt::AlignLeft );
+    void addElement(const Element &element, Qt::AlignmentFlag horizontalAlignment = Qt::AlignLeft);
 
     /**
      * Adds an variable in the text of the current paragraph.
      * @see KDReportsHeader::addVariable
      */
-    void addVariable( VariableType variable );
+    void addVariable(VariableType variable);
 
     /**
      * @internal
      * @reimp
      */
-    void build( ReportBuilder& builder ) const override;
+    void build(ReportBuilder &builder) const override;
 
     /**
      * @internal
      * @reimp
      */
-    Element* clone() const override;
+    Element *clone() const override;
 
 private:
-
-    FramePrivate* const d;
+    FramePrivate *const d;
 };
 
 }

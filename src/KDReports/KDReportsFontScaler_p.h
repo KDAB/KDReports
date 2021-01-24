@@ -17,9 +17,9 @@
 #ifndef FONTSCALER_P_H
 #define FONTSCALER_P_H
 
-#include <QFontMetricsF>
-#include <QFont>
 #include "KDReportsGlobal.h"
+#include <QFont>
+#include <QFontMetricsF>
 
 //
 //  W A R N I N G
@@ -33,7 +33,6 @@
 //
 //
 
-
 // Enable this to get debug output about the layouting
 // (font scaling, table layout, spreadsheet layout)
 //#define DEBUG_LAYOUT
@@ -43,13 +42,13 @@ namespace KDReports {
 class KDREPORTS_EXPORT FontScaler
 {
 public:
-    explicit FontScaler( const QFont& initialFont );
+    explicit FontScaler(const QFont &initialFont);
 
-    void setFontAndScalingFactor( const QFont& font, qreal scalingFactor );
+    void setFontAndScalingFactor(const QFont &font, qreal scalingFactor);
 
-    void setFactorForHeight( qreal wantedHeight );
-    void setFactorForWidth( qreal wantedFactor, const QString& usingText );
-    void applyAdditionalScalingFactor( qreal factor );
+    void setFactorForHeight(qreal wantedHeight);
+    void setFactorForWidth(qreal wantedFactor, const QString &usingText);
+    void applyAdditionalScalingFactor(qreal factor);
 
     QFont font() const { return m_font; }
     QFontMetricsF fontMetrics() const { return m_fontMetrics; }

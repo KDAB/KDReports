@@ -34,43 +34,52 @@
 
 namespace KDReports {
 
-    /**
-     * @internal
-     * Storage for Cell and Frame contents
-     */
-    struct ElementData
+/**
+ * @internal
+ * Storage for Cell and Frame contents
+ */
+struct ElementData
+{
+    enum Type { Inline, Block, Variable };
+    // inline
+    ElementData(Element *elem)
+        : m_element(elem)
+        , m_type(Inline)
     {
-        enum Type { Inline, Block, Variable };
-        // inline
-        ElementData( Element* elem )
-            : m_element( elem ), m_type( Inline ) {} // m_align not used
-        // block
-        ElementData( Element* elem, Qt::AlignmentFlag a )
-            : m_element( elem ), m_type( Block ), m_align( a ) {}
-        // inline variable
-        ElementData( KDReports::VariableType variable )
-            : m_element( 0 ), m_type( Variable ), m_variableType( variable ) {}
-        // copy ctor
-        ElementData(const ElementData &other) {
-            operator=(other);
-        }
-        ElementData &operator=(const ElementData &other) {
-            m_element = other.m_element ? other.m_element->clone() : 0;
-            m_type = other.m_type;
-            m_variableType = other.m_variableType;
-            m_align = other.m_align;
-            return *this;
-        }
-        ~ElementData() { delete m_element; }
+    } // m_align not used
+    // block
+    ElementData(Element *elem, Qt::AlignmentFlag a)
+        : m_element(elem)
+        , m_type(Block)
+        , m_align(a)
+    {
+    }
+    // inline variable
+    ElementData(KDReports::VariableType variable)
+        : m_element(0)
+        , m_type(Variable)
+        , m_variableType(variable)
+    {
+    }
+    // copy ctor
+    ElementData(const ElementData &other) { operator=(other); }
+    ElementData &operator=(const ElementData &other)
+    {
+        m_element = other.m_element ? other.m_element->clone() : 0;
+        m_type = other.m_type;
+        m_variableType = other.m_variableType;
+        m_align = other.m_align;
+        return *this;
+    }
+    ~ElementData() { delete m_element; }
 
-        Element* m_element;
-        Type m_type : 3;
-        union {
-            KDReports::VariableType m_variableType;
-            Qt::AlignmentFlag m_align;
-        };
+    Element *m_element;
+    Type m_type : 3;
+    union {
+        KDReports::VariableType m_variableType;
+        Qt::AlignmentFlag m_align;
     };
-
+};
 }
 
 #endif

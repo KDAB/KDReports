@@ -34,7 +34,7 @@ public:
     /**
      * Creates an HTML report element.
      */
-    explicit HtmlElement( const QString& html = QString() );
+    explicit HtmlElement(const QString &html = QString());
     /**
      * Destroys this element.
      */
@@ -53,7 +53,7 @@ public:
     /**
      * Sets the full HTML text in this element.
      */
-    void setHtml( const QString& html );
+    void setHtml(const QString &html);
 
     /**
      * \return the full HTML text in this element.
@@ -64,13 +64,13 @@ public:
     /**
      * Adds more text to the HTML in this element.
      */
-    HtmlElement& operator<<( const QString& );
+    HtmlElement &operator<<(const QString &);
 
     /**
      * Set the ID associated with this text element.
      * \since 1.2
      */
-    void setId( const QString& id );
+    void setId(const QString &id);
 
     /**
      * @return the ID associated with this text element.
@@ -82,18 +82,17 @@ public:
      * @internal
      * @reimp
      */
-    void build( ReportBuilder& builder ) const override;
+    void build(ReportBuilder &builder) const override;
     /**
      * @internal
      * @reimp
      */
-    Element* clone() const override;
+    Element *clone() const override;
 
 private:
-    HtmlElementPrivate* const d;
+    HtmlElementPrivate *const d;
 };
 
 }
 
 #endif /* KDREPORTSHTMLELEMENT_H */
-

@@ -30,25 +30,24 @@
 
 #include "KDReportsHeader.h"
 #include "KDReportsReport.h"
+#include "KDReportsReportBuilder_p.h"
 #include "KDReportsReport_p.h"
 #include "KDReportsTextDocument_p.h"
-#include "KDReportsReportBuilder_p.h"
 
-namespace KDReports
-{
+namespace KDReports {
 
 /**
  * @internal
  */
-void setVariableMarker( QTextDocument& textDoc, int pos, KDReports::VariableType variableType, int valueLength );
+void setVariableMarker(QTextDocument &textDoc, int pos, KDReports::VariableType variableType, int valueLength);
 /**
  * @internal
  */
-QString variableValue( int pageNumber, KDReports::Report* report, VariableType type );
+QString variableValue(int pageNumber, KDReports::Report *report, VariableType type);
 /**
  * @internal
  */
-void cleanupVariableProperties( QTextCharFormat &charFormat );
+void cleanupVariableProperties(QTextCharFormat &charFormat);
 
 /**
  * @internal
@@ -56,19 +55,24 @@ void cleanupVariableProperties( QTextCharFormat &charFormat );
 class HeaderReportBuilder : public KDReports::ReportBuilder
 {
 public:
-    HeaderReportBuilder( REPORTBUILDER_CTOR_ARGDEFS )  //krazy:exclude=explicit
-        : ReportBuilder( REPORTBUILDER_CTOR_ARGNAMES ) {}
+    HeaderReportBuilder(REPORTBUILDER_CTOR_ARGDEFS) // krazy:exclude=explicit
+        : ReportBuilder(REPORTBUILDER_CTOR_ARGNAMES)
+    {
+    }
 
-    /*reimp*/ void addInlineElement( const KDReports::Element& element ) override {
-        ReportBuilder::addInlineElement( element );
+    /*reimp*/ void addInlineElement(const KDReports::Element &element) override
+    {
+        ReportBuilder::addInlineElement(element);
         report()->d->headerChanged();
     }
-    /*reimp*/ void addBlockElement( const KDReports::Element& element, Qt::AlignmentFlag horizontalAlignment, const QColor& background = QColor() ) override {
-        ReportBuilder::addBlockElement( element, horizontalAlignment, background );
+    /*reimp*/ void addBlockElement(const KDReports::Element &element, Qt::AlignmentFlag horizontalAlignment, const QColor &background = QColor()) override
+    {
+        ReportBuilder::addBlockElement(element, horizontalAlignment, background);
         report()->d->headerChanged();
     }
-    /*reimp*/ void addVerticalSpacing( qreal space ) override {
-        ReportBuilder::addVerticalSpacing( space );
+    /*reimp*/ void addVerticalSpacing(qreal space) override
+    {
+        ReportBuilder::addVerticalSpacing(space);
         report()->d->headerChanged();
     }
 };
@@ -79,20 +83,17 @@ public:
 class HeaderPrivate
 {
 public:
-    explicit HeaderPrivate( KDReports::Report* report )
-        : m_textDocument(),
-          m_builder( m_textDocument.contentDocumentData(),
-                     QTextCursor( &m_textDocument.contentDocument() ),
-                     report ),
-          m_report( report )
+    explicit HeaderPrivate(KDReports::Report *report)
+        : m_textDocument()
+        , m_builder(m_textDocument.contentDocumentData(), QTextCursor(&m_textDocument.contentDocument()), report)
+        , m_report(report)
     {
     }
     KDReports::TextDocument m_textDocument;
     KDReports::HeaderReportBuilder m_builder;
-    KDReports::Report* m_report;
+    KDReports::Report *m_report;
 };
 
 }
 
 #endif /* KDREPORTSHEADER_P_H */
-

@@ -18,13 +18,13 @@
 #define XMLHELPER_H
 
 #include "KDReportsGlobal.h"
-#include "KDReportsVariableType.h"
 #include "KDReportsReport.h"
+#include "KDReportsVariableType.h"
 #include <QDomElement>
 
 namespace KDReports {
 
-class KDREPORTS_EXPORT XmlHelper //krazy:exclude=dpointer
+class KDREPORTS_EXPORT XmlHelper // krazy:exclude=dpointer
 {
 public:
     static Qt::AlignmentFlag stringToAlignment(const QString &str);

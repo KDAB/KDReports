@@ -18,8 +18,8 @@
 #define KDREPORTSPREVIEWWIDGET_H
 
 #include "KDReportsGlobal.h"
-#include <QWidget>
 #include <QPrinter>
+#include <QWidget>
 
 namespace KDReports {
 class Report;
@@ -39,19 +39,19 @@ public:
     /**
      * Constructs a preview widget.
      */
-    explicit PreviewWidget( QWidget *parent = 0 );
+    explicit PreviewWidget(QWidget *parent = 0);
 
     ~PreviewWidget() override;
 
     /**
      * Show a different report in the preview widget
      */
-    void setReport( KDReports::Report* report );
+    void setReport(KDReports::Report *report);
 
     /**
      * Return true if the page has been selected (checked) by the user.
      */
-    bool isSelected( int pageNumber ) const;
+    bool isSelected(int pageNumber) const;
 
     /**
      * Set to false if you want to prevent the user from changing the page size
@@ -60,27 +60,27 @@ public:
      * note that this leads to a call to Report::setPageSize().
      * Changing the page size is allowed by default.
      */
-    void setPageSizeChangeAllowed( bool b );
+    void setPageSizeChangeAllowed(bool b);
 
     /**
      * Show or hide the button for configuring table settings and font scaling.
      * The button is shown by default.
      * \since 1.1
      */
-    void setShowTableSettingsDialog( bool b );
+    void setShowTableSettingsDialog(bool b);
 
     /**
      * Sets the width of the endless printer, in case the user selects that item
      * from the page selection combobox.
      */
-    void setWidthForEndlessPrinter( qreal widthMM );
+    void setWidthForEndlessPrinter(qreal widthMM);
 
     // maybe setZoomFactor() to set the initial value?
 
     /**
      * \return the report passed to the constructor or to setReport.
      */
-    KDReports::Report* report() const;
+    KDReports::Report *report() const;
 
     /**
      * Show the print dialog and print the selected pages
@@ -91,7 +91,7 @@ public:
     /**
      * Show/hide the page list widget (with small previews) on the left.
      */
-    void setShowPageListWidget( bool show );
+    void setShowPageListWidget(bool show);
 
     /**
      * Updates the preview. Call this after the report has changed.
@@ -105,9 +105,9 @@ public:
 
 Q_SIGNALS:
     /// Emitted when the user changes the page size.
-    void pageSizeChanged( QPrinter::PageSize pageSize );
+    void pageSizeChanged(QPrinter::PageSize pageSize);
     /// Emitted when the user changes the page orientation.
-    void orientationChanged( QPrinter::Orientation orientation );
+    void orientationChanged(QPrinter::Orientation orientation);
     /// Emitted when the table settings button has been clicked
     void tableSettingsClicked();
 
@@ -115,23 +115,23 @@ protected:
     /// \reimp
     void resizeEvent(QResizeEvent *) override;
     /// \reimp
-    bool eventFilter(QObject*, QEvent*) override;
+    bool eventFilter(QObject *, QEvent *) override;
 
 private:
-    Q_PRIVATE_SLOT( d, void _kd_slotCurrentPageChanged() )
-    Q_PRIVATE_SLOT( d, void _kd_slotFirstPage() )
-    Q_PRIVATE_SLOT( d, void _kd_slotPrevPage() )
-    Q_PRIVATE_SLOT( d, void _kd_slotNextPage() )
-    Q_PRIVATE_SLOT( d, void _kd_slotLastPage() )
-    Q_PRIVATE_SLOT( d, void _kd_slotPaperSizeActivated( int ) )
-    Q_PRIVATE_SLOT( d, void _kd_slotPaperOrientationActivated( int ) )
-    Q_PRIVATE_SLOT( d, void _kd_slotZoomIn() )
-    Q_PRIVATE_SLOT( d, void _kd_slotZoomOut() )
-    Q_PRIVATE_SLOT( d, void _kd_slotZoomChanged() )
-    Q_PRIVATE_SLOT( d, void _kd_previewNextItems() )
+    Q_PRIVATE_SLOT(d, void _kd_slotCurrentPageChanged())
+    Q_PRIVATE_SLOT(d, void _kd_slotFirstPage())
+    Q_PRIVATE_SLOT(d, void _kd_slotPrevPage())
+    Q_PRIVATE_SLOT(d, void _kd_slotNextPage())
+    Q_PRIVATE_SLOT(d, void _kd_slotLastPage())
+    Q_PRIVATE_SLOT(d, void _kd_slotPaperSizeActivated(int))
+    Q_PRIVATE_SLOT(d, void _kd_slotPaperOrientationActivated(int))
+    Q_PRIVATE_SLOT(d, void _kd_slotZoomIn())
+    Q_PRIVATE_SLOT(d, void _kd_slotZoomOut())
+    Q_PRIVATE_SLOT(d, void _kd_slotZoomChanged())
+    Q_PRIVATE_SLOT(d, void _kd_previewNextItems())
 
     friend class PreviewWidgetPrivate;
-    PreviewWidgetPrivate* const d;
+    PreviewWidgetPrivate *const d;
 };
 
 }

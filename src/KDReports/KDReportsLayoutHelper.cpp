@@ -20,14 +20,14 @@ QT_BEGIN_NAMESPACE
 Q_GUI_EXPORT extern int qt_defaultDpi(); // This is what QTextDocument uses...
 QT_END_NAMESPACE
 
-qreal KDReports::mmToPixels( qreal mm )
+qreal KDReports::mmToPixels(qreal mm)
 {
     return mm * 0.039370147 // mm to inch
-        * qt_defaultDpi();  // inch to pixels
+        * qt_defaultDpi(); // inch to pixels
 }
 
-qreal KDReports::mmToPixels( qreal mm, double dpi )
+qreal KDReports::mmToPixels(qreal mm, double dpi)
 {
     return mm * 0.039370147 // mm to inch
-        * dpi;  // inch to pixels
+        * dpi; // inch to pixels
 }

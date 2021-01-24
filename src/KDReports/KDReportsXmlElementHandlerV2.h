@@ -17,8 +17,8 @@
 #ifndef KDREPORTSXMLELEMENTHANDLERV2_H
 #define KDREPORTSXMLELEMENTHANDLERV2_H
 
-#include "KDReportsXmlElementHandler.h"
 #include "KDReportsVariableType.h"
+#include "KDReportsXmlElementHandler.h"
 #include <QTextOption>
 
 namespace KDReports {
@@ -26,11 +26,11 @@ namespace KDReports {
 class HLineElement;
 
 /**
-  * This handler handle more item than XmlElementHandler.
-  * @see KDReports::XmlElementHandler
-  * \since  1.4
-  */
-class KDREPORTS_EXPORT XmlElementHandlerV2 : public XmlElementHandler //krazy:exclude=dpointer
+ * This handler handle more item than XmlElementHandler.
+ * @see KDReports::XmlElementHandler
+ * \since  1.4
+ */
+class KDREPORTS_EXPORT XmlElementHandlerV2 : public XmlElementHandler // krazy:exclude=dpointer
 {
 public:
     XmlElementHandlerV2();
@@ -39,33 +39,33 @@ public:
     /**
      * Called after parsing "variable".
      */
-    virtual bool variable( KDReports::VariableType &type, QDomElement& xmlElement );
+    virtual bool variable(KDReports::VariableType &type, QDomElement &xmlElement);
 
     /**
      * Called after parsing "vspace"
      * Can be used to modify vertical space size
      * Returning false skip the vertical space
      */
-    virtual bool vspace( int &size, QDomElement& xmlElement );
+    virtual bool vspace(int &size, QDomElement &xmlElement);
 
     /**
      * Called after parsing a "hline".
      * Returning false skips the whole line. Can be used to change
      * hline attributes.
      */
-    virtual bool hLineElement( KDReports::HLineElement& hLineElement, QDomElement& xmlElement );
+    virtual bool hLineElement(KDReports::HLineElement &hLineElement, QDomElement &xmlElement);
 
     /**
      * Called after parsing a "paragraph-margins".
      * Returning false skips the paragraph margin.
      */
-    virtual bool paragraphMargin( qreal &left, qreal &top, qreal &right, qreal &bottom, const QDomElement& xmlElement );
+    virtual bool paragraphMargin(qreal &left, qreal &top, qreal &right, qreal &bottom, const QDomElement &xmlElement);
 
     /**
-      * Called after parsing a "tabs"
-      * Returning false skips tabs
-      */
-    virtual bool tabs(QList<QTextOption::Tab> &tabs, const QDomElement& xmlElement );
+     * Called after parsing a "tabs"
+     * Returning false skips tabs
+     */
+    virtual bool tabs(QList<QTextOption::Tab> &tabs, const QDomElement &xmlElement);
 };
 
 }

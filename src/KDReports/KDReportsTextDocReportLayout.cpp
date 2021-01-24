@@ -15,28 +15,23 @@
 ****************************************************************************/
 
 #include "KDReportsTextDocReportLayout_p.h"
-#include <QPainter>
-#include <QDebug>
-#include <QTextBlock>
 #include <QAbstractTextDocumentLayout>
+#include <QDebug>
+#include <QPainter>
+#include <QTextBlock>
 
-KDReports::TextDocReportLayout::TextDocReportLayout(KDReports::Report* report)
-    : m_textDocument(),
-      m_builder(m_textDocument.contentDocumentData(),
-                 QTextCursor(&m_textDocument.contentDocument()),
-                 report)
+KDReports::TextDocReportLayout::TextDocReportLayout(KDReports::Report *report)
+    : m_textDocument()
+    , m_builder(m_textDocument.contentDocumentData(), QTextCursor(&m_textDocument.contentDocument()), report)
 
 {
 }
 
-void KDReports::TextDocReportLayout::setLayoutDirty()
-{
-
-}
+void KDReports::TextDocReportLayout::setLayoutDirty() { }
 
 void KDReports::TextDocReportLayout::paintPageContent(int pageNumber, QPainter &painter)
 {
-    painter.translate( 0, - pageNumber * m_textDocument.contentDocument().pageSize().height() );
+    painter.translate(0, -pageNumber * m_textDocument.contentDocument().pageSize().height());
 
     // Instead of using drawContents directly, we have to fork it in order to fix the palette (to avoid white-on-white in dark color schemes)
     // m_textDocument.contentDocument().drawContents(&painter, painter.clipRegion().boundingRect());
@@ -50,19 +45,17 @@ void KDReports::TextDocReportLayout::paintPageContent(int pageNumber, QPainter &
 
 int KDReports::TextDocReportLayout::numberOfPages()
 {
-    //qDebug() << "page height" << m_textDocument.contentDocument().pageSize().height();
-    //qDebug() << "doc height" << m_textDocument.contentDocument().size().height();
+    // qDebug() << "page height" << m_textDocument.contentDocument().pageSize().height();
+    // qDebug() << "doc height" << m_textDocument.contentDocument().size().height();
     return m_textDocument.contentDocument().pageCount();
 }
 
-void KDReports::TextDocReportLayout::setPageContentSize(const QSizeF& size)
+void KDReports::TextDocReportLayout::setPageContentSize(const QSizeF &size)
 {
     m_textDocument.setPageSize(size);
 }
 
-void KDReports::TextDocReportLayout::ensureLayouted()
-{
-}
+void KDReports::TextDocReportLayout::ensureLayouted() { }
 
 QString KDReports::TextDocReportLayout::toHtml() const
 {
@@ -80,14 +73,14 @@ qreal KDReports::TextDocReportLayout::layoutAsOnePage(qreal docWidth)
     c.beginEditBlock();
     QTextBlock block = m_textDocument.contentDocument().firstBlock();
     do {
-        //qDebug() << "addBlock: Looking at block" << block.blockNumber();
+        // qDebug() << "addBlock: Looking at block" << block.blockNumber();
         QTextBlockFormat format = block.blockFormat();
-        if ( format.pageBreakPolicy() != QTextBlockFormat::PageBreak_Auto )
-            format.setPageBreakPolicy( QTextBlockFormat::PageBreak_Auto );
-        c.setPosition( block.position() );
-        c.setBlockFormat( format );
+        if (format.pageBreakPolicy() != QTextBlockFormat::PageBreak_Auto)
+            format.setPageBreakPolicy(QTextBlockFormat::PageBreak_Auto);
+        c.setPosition(block.position());
+        c.setBlockFormat(format);
         block = block.next();
-    } while ( block.isValid() );
+    } while (block.isValid());
     c.endEditBlock();
 
     setPageContentSize(QSizeF(docWidth, docHeight));
@@ -114,8 +107,8 @@ void KDReports::TextDocReportLayout::finishHtmlExport()
 
 void KDReports::TextDocReportLayout::setDefaultFont(const QFont &font)
 {
-    m_textDocument.contentDocument().setDefaultFont( font );
-    m_builder.setDefaultFont( font );
+    m_textDocument.contentDocument().setDefaultFont(font);
+    m_builder.setDefaultFont(font);
 }
 
 QFont KDReports::TextDocReportLayout::defaultFont() const

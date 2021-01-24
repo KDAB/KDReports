@@ -19,8 +19,7 @@
 
 #include <QVector>
 
-namespace KDReports
-{
+namespace KDReports {
 
 /// @internal
 /// Table breaking in the horizontal direction
@@ -30,8 +29,8 @@ public:
     TableBreakingLogic();
 
     typedef QVector<qreal> WidthVector;
-    void setColumnWidths( const WidthVector& widths );
-    void setPageCount( int pages );
+    void setColumnWidths(const WidthVector &widths);
+    void setPageCount(int pages);
 
     /// Performs the optimization calculation and
     /// returns: the number of columns per page
@@ -41,7 +40,7 @@ public:
 
     /// Simple transformation of the result of columnsPerPage,
     /// returns the sum of the column widths for a given page
-    WidthVector widthPerPage( const QVector<int>& colPerPage ) const;
+    WidthVector widthPerPage(const QVector<int> &colPerPage) const;
 
 private:
     WidthVector m_widths;
@@ -51,4 +50,3 @@ private:
 } // namespace KDReports
 
 #endif /* TABLEBREAKINGLOGIC_H */
-

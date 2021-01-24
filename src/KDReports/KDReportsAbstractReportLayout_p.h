@@ -26,8 +26,7 @@ class QWidget;
 class QFont;
 QT_END_NAMESPACE
 
-namespace KDReports
-{
+namespace KDReports {
 
 class AbstractReportLayout
 {
@@ -36,23 +35,23 @@ public:
     virtual ~AbstractReportLayout();
 
     virtual void setLayoutDirty() = 0;
-    virtual void setDefaultFont(const QFont& font) = 0;
+    virtual void setDefaultFont(const QFont &font) = 0;
     virtual QFont defaultFont() const = 0;
-    virtual void paintPageContent(int pageNumber, QPainter& painter) = 0;
+    virtual void paintPageContent(int pageNumber, QPainter &painter) = 0;
     virtual int numberOfPages() = 0; // not const, since it can trigger a layout
     /**
      * Sets the size of the "page content": i.e. the body of the report,
      * not including the page headers+footers.
      * The size is in pixels.
      */
-    virtual void setPageContentSize(const QSizeF& size) = 0;
+    virtual void setPageContentSize(const QSizeF &size) = 0;
     virtual qreal layoutAsOnePage(qreal width) = 0;
-    virtual bool scaleTo( int numPagesHorizontally, int numPagesVertically ) = 0;
+    virtual bool scaleTo(int numPagesHorizontally, int numPagesVertically) = 0;
     virtual void setFixedRowHeight(qreal height) = 0;
     virtual int maximumNumberOfPagesForHorizontalScaling() const = 0;
     virtual int maximumNumberOfPagesForVerticalScaling() const = 0;
     virtual void ensureLayouted() = 0;
-    virtual void updateTextValue( const QString& id, const QString& newValue ) = 0;
+    virtual void updateTextValue(const QString &id, const QString &newValue) = 0;
     /**
      * Returns the width that could be used when exporting to an image, for instance.
      * Unrelated to any paper sizes, just from the contents.

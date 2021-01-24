@@ -19,11 +19,12 @@
 
 #include "KDReportsGlobal.h"
 #include "KDReportsVariableType.h"
-#include <QtCore/Qt>
 #include <QTextOption>
+#include <QtCore/Qt>
 
 QT_BEGIN_NAMESPACE
-template<class T> class QList;
+template <class T>
+class QList;
 class QFont;
 class QTextDocument;
 class HeaderData;
@@ -52,7 +53,7 @@ public:
      * Sets the default font used for text in this header
      * \since 1.1
      */
-    void setDefaultFont( const QFont& font );
+    void setDefaultFont(const QFont &font);
 
     /**
      * \return the default font used for text in this header
@@ -63,13 +64,13 @@ public:
     /**
      * Adds an element to the report, next to the previous element, in the same paragraph.
      */
-    void addInlineElement( const Element& element );
+    void addInlineElement(const Element &element);
 
     /**
      * Adds an element to the report, creating a new paragraph for it.
      * You can specify the alignment of that paragraph.
      */
-    void addElement( const Element& element, Qt::AlignmentFlag horizontalAlignment = Qt::AlignLeft );
+    void addElement(const Element &element, Qt::AlignmentFlag horizontalAlignment = Qt::AlignLeft);
 
     /**
      * Adds a variable in the text of the current paragraph.
@@ -82,14 +83,14 @@ public:
         header.addVariable( KDReports::PageCount );
      * @endcode
      */
-    void addVariable( VariableType variable );
+    void addVariable(VariableType variable);
 
     /**
      * Adds vertical spacing between paragraphs.
      * Make sure to call addElement after that, not addInlineElement.
      * @param space the space in millimeters
      */
-    void addVerticalSpacing( qreal space );
+    void addVerticalSpacing(qreal space);
 
     /**
      * Set the list of tabs (tabulations) to use when adding block elements.
@@ -99,7 +100,7 @@ public:
      *
      * \since 1.2
      */
-    void setTabPositions( const QList<QTextOption::Tab>& tabs );
+    void setTabPositions(const QList<QTextOption::Tab> &tabs);
 
     /**
      * \internal Returns the current builder cursor position.
@@ -110,17 +111,17 @@ private:
     friend class XmlParser;
     friend class Report;
     friend class ReportPrivate;
-    explicit Header( Report* report );
+    explicit Header(Report *report);
     ~Header();
     friend class Test;
     friend class HeaderMap;
     friend class ::HeaderData;
-    TextDocument& doc();
-    void preparePaintingPage( int pageNumber );
+    TextDocument &doc();
+    void preparePaintingPage(int pageNumber);
 
-    Q_DISABLE_COPY( Header )
+    Q_DISABLE_COPY(Header)
 
-    HeaderPrivate* const d;
+    HeaderPrivate *const d;
 };
 
 typedef Header Footer;

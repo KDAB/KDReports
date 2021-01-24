@@ -27,15 +27,15 @@ namespace KDReports {
  * Type of variable
  */
 enum VariableType {
-    PageNumber,  ///< Page number
-    PageCount,   ///< Page count
-    TextDate,    ///< Current date in text format like "Thu Aug 18 2005", with translated
-                 ///  names but unlocalized order of names and numbers
-    ISODate,     ///< Current date in ISO 8601 format like "2005-08-18"
-    LocaleDate,  ///< Current date in locale-dependent format, deprecated in favour of SystemLocaleShortDate or SystemLocaleLongDate.
-    TextTime,    ///< Current time in text format like "13:42:59"
-    ISOTime,     ///< Current time in ISO 8601 format like "13:42:59"
-    LocaleTime,  ///< Current time in locale-dependent format
+    PageNumber, ///< Page number
+    PageCount, ///< Page count
+    TextDate, ///< Current date in text format like "Thu Aug 18 2005", with translated
+              ///  names but unlocalized order of names and numbers
+    ISODate, ///< Current date in ISO 8601 format like "2005-08-18"
+    LocaleDate, ///< Current date in locale-dependent format, deprecated in favour of SystemLocaleShortDate or SystemLocaleLongDate.
+    TextTime, ///< Current time in text format like "13:42:59"
+    ISOTime, ///< Current time in ISO 8601 format like "13:42:59"
+    LocaleTime, ///< Current time in locale-dependent format
 
     SystemLocaleShortDate, ///< Current date formatted according to the system locale, short format, see Qt::SystemLocaleShortDate
     SystemLocaleLongDate, ///< Current date formatted according to the system locale, long format, see Qt::SystemLocaleLongDate
@@ -44,7 +44,6 @@ enum VariableType {
 
     NVariableTypes ///< @internal
 };
-
 }
 
 #endif /* KDREPORTSVARIABLETYPE_H */

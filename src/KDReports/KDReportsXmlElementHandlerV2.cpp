@@ -22,48 +22,44 @@
 #endif
 #include <QDomElement>
 
-KDReports::XmlElementHandlerV2::XmlElementHandlerV2()
-{
-}
+KDReports::XmlElementHandlerV2::XmlElementHandlerV2() { }
 
-KDReports::XmlElementHandlerV2::~XmlElementHandlerV2()
-{
-}
+KDReports::XmlElementHandlerV2::~XmlElementHandlerV2() { }
 
 bool KDReports::XmlElementHandlerV2::vspace(int &size, QDomElement &xmlElement)
 {
-    Q_UNUSED( xmlElement );
-    Q_UNUSED( size );
+    Q_UNUSED(xmlElement);
+    Q_UNUSED(size);
     return true;
 }
 
 bool KDReports::XmlElementHandlerV2::hLineElement(KDReports::HLineElement &hLineElement, QDomElement &xmlElement)
 {
-    Q_UNUSED( hLineElement );
-    Q_UNUSED( xmlElement );
+    Q_UNUSED(hLineElement);
+    Q_UNUSED(xmlElement);
     return true;
 }
 
-bool KDReports::XmlElementHandlerV2::variable( KDReports::VariableType &type, QDomElement &xmlElement)
+bool KDReports::XmlElementHandlerV2::variable(KDReports::VariableType &type, QDomElement &xmlElement)
 {
-    Q_UNUSED( type );
-    Q_UNUSED( xmlElement );
+    Q_UNUSED(type);
+    Q_UNUSED(xmlElement);
     return true;
 }
 
-bool KDReports::XmlElementHandlerV2::paragraphMargin(qreal &left, qreal &top, qreal &right, qreal &bottom, const QDomElement& xmlElement )
+bool KDReports::XmlElementHandlerV2::paragraphMargin(qreal &left, qreal &top, qreal &right, qreal &bottom, const QDomElement &xmlElement)
 {
-    Q_UNUSED( left );
-    Q_UNUSED( top );
-    Q_UNUSED( right );
-    Q_UNUSED( bottom );
-    Q_UNUSED( xmlElement )
+    Q_UNUSED(left);
+    Q_UNUSED(top);
+    Q_UNUSED(right);
+    Q_UNUSED(bottom);
+    Q_UNUSED(xmlElement)
     return true;
 }
 
 bool KDReports::XmlElementHandlerV2::tabs(QList<QTextOption::Tab> &tabs, const QDomElement &xmlElement)
 {
-    Q_UNUSED( tabs );
-    Q_UNUSED( xmlElement );
+    Q_UNUSED(tabs);
+    Q_UNUSED(xmlElement);
     return true;
 }

@@ -58,7 +58,7 @@ public:
     /**
      * Set the line color.
      */
-    void setColor( const QColor& color );
+    void setColor(const QColor &color);
 
     /**
      * Returns the hline color
@@ -85,19 +85,17 @@ public:
      */
     int margin() const;
 
-    void build( ReportBuilder& builder ) const override;
+    void build(ReportBuilder &builder) const override;
     /**
      * @internal
      * @reimp
      */
-    Element* clone() const override;
+    Element *clone() const override;
 
 private:
-
-    HLineElementPrivate* const d;
+    HLineElementPrivate *const d;
 };
 
 }
 
 #endif /* KDREPORTSHLINELEMENT_H */
-

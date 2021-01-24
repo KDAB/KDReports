@@ -19,23 +19,22 @@
 #include <QObject>
 
 KDReports::ErrorDetails::ErrorDetails()
-    : d( new ErrorDetailsPrivate )
+    : d(new ErrorDetailsPrivate)
 {
 }
 
-KDReports::ErrorDetails::ErrorDetails( const QString& message )
-    : d( new ErrorDetailsPrivate )
+KDReports::ErrorDetails::ErrorDetails(const QString &message)
+    : d(new ErrorDetailsPrivate)
 {
-    setDriverMessage( message );
+    setDriverMessage(message);
 }
-
 
 QString KDReports::ErrorDetails::message() const
 {
-    if ( !hasError() )
+    if (!hasError())
         return QString();
 
-    if ( d->m_line != -1 )
+    if (d->m_line != -1)
         return QObject::tr("Error on line %1, column %2: %3").arg(line()).arg(column()).arg(driverMessage());
 
     else
@@ -62,19 +61,19 @@ QString KDReports::ErrorDetails::driverMessage() const
     return d->m_message;
 }
 
-void KDReports::ErrorDetails::setLine( int line )
+void KDReports::ErrorDetails::setLine(int line)
 {
     d->m_hasError = true;
     d->m_line = line;
 }
 
-void KDReports::ErrorDetails::setColumn( int column )
+void KDReports::ErrorDetails::setColumn(int column)
 {
     d->m_hasError = true;
     d->m_column = column;
 }
 
-void KDReports::ErrorDetails::setDriverMessage( const QString& message )
+void KDReports::ErrorDetails::setDriverMessage(const QString &message)
 {
     d->m_hasError = true;
     d->m_message = message;
@@ -85,8 +84,7 @@ KDReports::ErrorDetails::~ErrorDetails()
     delete d;
 }
 
-KDReports::ErrorDetails::ErrorDetails( const ErrorDetails& other )
-    : d( new ErrorDetailsPrivate( *other.d ) )
+KDReports::ErrorDetails::ErrorDetails(const ErrorDetails &other)
+    : d(new ErrorDetailsPrivate(*other.d))
 {
 }
-

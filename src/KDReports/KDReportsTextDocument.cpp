@@ -14,36 +14,32 @@
 **
 ****************************************************************************/
 
-#include "KDReportsTextDocument_p.h"
 #include "KDReportsLayoutHelper_p.h"
+#include "KDReportsTextDocument_p.h"
 #include <QDebug>
 
 //#define DEBUG_TABLEBREAKING
 
-KDReports::TextDocument::TextDocument()
+KDReports::TextDocument::TextDocument() { }
+
+KDReports::TextDocument::~TextDocument() { }
+
+void KDReports::TextDocument::layoutWithTextWidth(qreal w)
 {
+    m_contentDocument.layoutWithTextWidth(w);
 }
 
-KDReports::TextDocument::~TextDocument()
+void KDReports::TextDocument::setPageSize(const QSizeF &size)
 {
+    m_contentDocument.setPageSize(size);
 }
 
-void KDReports::TextDocument::layoutWithTextWidth( qreal w )
-{
-    m_contentDocument.layoutWithTextWidth( w );
-}
-
-void KDReports::TextDocument::setPageSize( const QSizeF& size )
-{
-    m_contentDocument.setPageSize( size );
-}
-
-KDReports::TextDocumentData& KDReports::TextDocument::contentDocumentData()
+KDReports::TextDocumentData &KDReports::TextDocument::contentDocumentData()
 {
     return m_contentDocument;
 }
 
-QTextDocument& KDReports::TextDocument::contentDocument()
+QTextDocument &KDReports::TextDocument::contentDocument()
 {
     return contentDocumentData().document();
 }
@@ -53,14 +49,14 @@ QFont KDReports::TextDocument::defaultFont() const
     return m_contentDocument.document().defaultFont();
 }
 
-void KDReports::TextDocument::scaleFontsBy( qreal factor )
+void KDReports::TextDocument::scaleFontsBy(qreal factor)
 {
-    m_contentDocument.scaleFontsBy( factor );
+    m_contentDocument.scaleFontsBy(factor);
 }
 
-void KDReports::TextDocument::updateTextValue( const QString& id, const QString& newValue )
+void KDReports::TextDocument::updateTextValue(const QString &id, const QString &newValue)
 {
-    m_contentDocument.updateTextValue( id, newValue );
+    m_contentDocument.updateTextValue(id, newValue);
 }
 
 QString KDReports::TextDocument::asHtml() const
@@ -99,7 +95,6 @@ void KDReports::TextDocument::preciseDump()
 #endif
 }
 
-
 QList<KDReports::AutoTableElement *> KDReports::TextDocument::autoTableElements()
 {
     return m_contentDocument.autoTableElements(); // doesn't matter in which one we call it
@@ -110,8 +105,7 @@ void KDReports::TextDocument::regenerateAutoTables()
     m_contentDocument.regenerateAutoTables();
 }
 
-void KDReports::TextDocument::regenerateAutoTableForModel( QAbstractItemModel* model )
+void KDReports::TextDocument::regenerateAutoTableForModel(QAbstractItemModel *model)
 {
-    m_contentDocument.regenerateAutoTableForModel( model );
+    m_contentDocument.regenerateAutoTableForModel(model);
 }
-

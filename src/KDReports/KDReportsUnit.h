@@ -17,18 +17,16 @@
 #ifndef KDREPORTSUNIT_H
 #define KDREPORTSUNIT_H
 
-namespace KDReports
-{
+namespace KDReports {
 
 /**
  * Units used when setting a size.
  */
 enum Unit {
     Millimeters, ///< Millimeters (the default)
-    Percent      ///< Percentage of the text width, i.e. the page width minus margins
+    Percent ///< Percentage of the text width, i.e. the page width minus margins
 };
 
 }
 
 #endif /* KDREPORTSUNIT_H */
-

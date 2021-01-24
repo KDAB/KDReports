@@ -18,8 +18,8 @@
 #define KDREPORTSTEXTELEMENT_H
 
 #include "KDReportsElement.h"
-#include <QtCore/QString>
 #include <QTextCharFormat>
+#include <QtCore/QString>
 
 QT_BEGIN_NAMESPACE
 class QColor;
@@ -39,7 +39,7 @@ public:
     /**
      * Creates a text element.
      */
-    explicit TextElement( const QString& string = QString() );
+    explicit TextElement(const QString &string = QString());
     /**
      * Destroys this text element.
      */
@@ -58,25 +58,25 @@ public:
     /**
      * Sets the full text in this element.
      */
-    void setText( const QString& text );
+    void setText(const QString &text);
 
     /**
      * Adds more text to the text in this element.
      */
-    TextElement& operator<<( const QString& );
+    TextElement &operator<<(const QString &);
 
     /// Set font attribute: family.
-    void setFontFamily( const QString& family );
+    void setFontFamily(const QString &family);
     /// Set font attribute: bold.
-    void setBold( bool bold );
+    void setBold(bool bold);
     /// Set font attribute: italic.
-    void setItalic( bool italic );
+    void setItalic(bool italic);
     /// Set font attribute: underline.
-    void setUnderline( bool underline );
+    void setUnderline(bool underline);
     /// Set font attribute: strike out.
-    void setStrikeOut( bool strikeout );
+    void setStrikeOut(bool strikeout);
     /// Set font attribute: size in points. Can be integer or decimal.
-    void setPointSize( qreal size );
+    void setPointSize(qreal size);
 
     /**
      * Set multiple font attributes with a single call.
@@ -85,19 +85,19 @@ public:
      * explicitly specified in this font, will be resolved against the report's default font,
      * rather than being resolved against the application's font.
      */
-    void setFont( const QFont& );
+    void setFont(const QFont &);
 
     /**
-      * \return all font attribute
-      * \since 1.4
-      */
+     * \return all font attribute
+     * \since 1.4
+     */
     QFont font() const;
 
     /**
      * Set the text color.
      * \since 1.1
      */
-    void setTextColor( const QColor& color );
+    void setTextColor(const QColor &color);
 
     /**
      * \return the text color.
@@ -109,7 +109,7 @@ public:
      * Set the ID associated with this text element.
      * \since 1.2
      */
-    void setId( const QString& id );
+    void setId(const QString &id);
 
     /**
      * \return the ID associated with this text element.
@@ -127,19 +127,18 @@ public:
      * @internal
      * @reimp
      */
-    void build( ReportBuilder& builder ) const override;
+    void build(ReportBuilder &builder) const override;
     /**
      * @internal
      * @reimp
      */
-    Element* clone() const override;
+    Element *clone() const override;
 
 private:
-
     friend class ReportBuilder;
-    void setCharFormat( const QTextCharFormat& format );
+    void setCharFormat(const QTextCharFormat &format);
 
-    TextElementPrivate* const d;
+    TextElementPrivate *const d;
 };
 
 }

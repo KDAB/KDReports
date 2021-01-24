@@ -21,7 +21,8 @@
 #include "KDReportsUnit.h"
 
 QT_BEGIN_NAMESPACE
-template <typename T> class QList;
+template <typename T>
+class QList;
 class QFont;
 class QTextTableFormat;
 class QTextCursor;
@@ -37,13 +38,12 @@ class AbstractTableElementPrivate;
 class KDREPORTS_EXPORT AbstractTableElement : public Element
 {
 public:
-
     /**
      * Specifies the width of the border in pixels.
      * The default border has a width of 1.
      * Set it to 0 for a table without borders.
      */
-    void setBorder( qreal border );
+    void setBorder(qreal border);
 
     /**
      * Returns the width of the table border
@@ -54,7 +54,7 @@ public:
      * Specifies the color (more generally, the brush) of the border.
      * \since 1.2
      */
-    void setBorderBrush( const QBrush& brush );
+    void setBorderBrush(const QBrush &brush);
 
     /**
      * Returns the color (brush) of the table border
@@ -68,7 +68,7 @@ public:
      * all around the contents (above, below, on the left and on the right).
      * The default padding has a size of 0.5 mm.
      */
-    void setPadding( qreal padding );
+    void setPadding(qreal padding);
 
     /**
      * Returns the width of the cell's internal padding in millimeters.
@@ -82,7 +82,7 @@ public:
      *
      * This is only available in WordProcessing mode.
      */
-    void setWidth( qreal width, Unit unit = Millimeters );
+    void setWidth(qreal width, Unit unit = Millimeters);
 
     /**
      * \return the width of the table, in millimeters or as a percentage of the page width.
@@ -102,14 +102,14 @@ public:
      * In WordProcessing mode, per-cell fonts can override this.
      * \since 1.3
      */
-    void setDefaultFont( const QFont& font );
+    void setDefaultFont(const QFont &font);
 
     /**
      * \return the default font set by setDefaultFont(), if any
      * \param isSet set to true if a default font was set, false otherwise
      * \since 1.8
      */
-    QFont defaultFont( bool *isSet ) const;
+    QFont defaultFont(bool *isSet) const;
 
     /**
      * Copies a table element.
@@ -121,7 +121,8 @@ public:
      */
     AbstractTableElement &operator=(const AbstractTableElement &other);
 
-    struct ColumnConstraint {
+    struct ColumnConstraint
+    {
         qreal width;
         Unit unit;
     };
@@ -130,7 +131,7 @@ public:
      * \param constraints vector of constraints
      * \since 1.9
      */
-    void setColumnConstraints( const QVector<ColumnConstraint> &constraints );
+    void setColumnConstraints(const QVector<ColumnConstraint> &constraints);
 
 protected:
     /**
@@ -146,13 +147,12 @@ protected:
     /**
      * @internal for derived classes only.
      */
-    void fillTableFormat( QTextTableFormat& tableFormat, QTextCursor& textDocCursor ) const;
+    void fillTableFormat(QTextTableFormat &tableFormat, QTextCursor &textDocCursor) const;
 
 private:
-    AbstractTableElementPrivate* const d;
+    AbstractTableElementPrivate *const d;
 };
 
 }
 
 #endif /* KDREPORTSABSTRACTTABLEELEMENT_H */
-

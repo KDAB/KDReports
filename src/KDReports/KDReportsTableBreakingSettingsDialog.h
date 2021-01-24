@@ -31,7 +31,7 @@ class Report;
  * or an instance of the dialog for full details.
  * @see Report::setTableBreakingPageOrder, Report::setFontScalingFactor,
  *      AutoTable::setHorizontalHeaderVisible, ...
- *      
+ *
  * \since 1.1
  */
 class KDREPORTS_EXPORT TableBreakingSettingsDialog : public QDialog
@@ -42,7 +42,7 @@ public:
     /**
      * Constructs a settings dialog for \a report as a child window of \a parent.
      */
-    explicit TableBreakingSettingsDialog( KDReports::Report* report, QWidget *parent = 0 );
+    explicit TableBreakingSettingsDialog(KDReports::Report *report, QWidget *parent = 0);
 
     ~TableBreakingSettingsDialog() override;
 
@@ -54,7 +54,7 @@ private Q_SLOTS:
 
 private:
     Q_PRIVATE_SLOT(d, void _kd_slotBreakTablesToggled(bool))
-    TableBreakingSettingsDialogPrivate* const d;
+    TableBreakingSettingsDialogPrivate *const d;
 };
 
 }

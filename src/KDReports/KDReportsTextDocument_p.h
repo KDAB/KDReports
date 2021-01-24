@@ -29,25 +29,23 @@
 //
 //
 
+#include "KDReportsAutoTableElement.h"
+#include "KDReportsGlobal.h"
+#include "KDReportsReport.h"
 #include "KDReportsTextDocumentData_p.h"
-#include <QTextCursor>
+#include <QFont>
 #include <QMap>
+#include <QTextCursor>
 #include <QTextDocument>
 #include <QTextFormat>
-#include "KDReportsGlobal.h"
-#include "KDReportsAutoTableElement.h"
-#include "KDReportsReport.h"
-#include <QFont>
 
 QT_BEGIN_NAMESPACE
 class QTextImageFormat;
 class QTextTable;
 QT_END_NAMESPACE
 
-namespace KDReports
-{
+namespace KDReports {
 enum { HeaderColumnsProperty = QTextFormat::UserProperty + 248 };
-
 
 /**
  * @internal  (exported for unit tests)
@@ -61,10 +59,10 @@ public:
     ~TextDocument();
 
     // like QTextDocument::setTextWidth but also takes care of objects with % sizes
-    void layoutWithTextWidth( qreal w );
+    void layoutWithTextWidth(qreal w);
 
     // like QTextDocument::setPageSize but also takes care of objects with % sizes
-    void setPageSize( const QSizeF& size );
+    void setPageSize(const QSizeF &size);
 
 #if 0
     // add user property to char format
@@ -72,15 +70,15 @@ public:
 #endif
 
     void regenerateAutoTables();
-    void regenerateAutoTableForModel( QAbstractItemModel* model );
+    void regenerateAutoTableForModel(QAbstractItemModel *model);
 
-    void updateTextValue( const QString& id, const QString& newValue );
+    void updateTextValue(const QString &id, const QString &newValue);
 
-    void scaleFontsBy( qreal factor );
+    void scaleFontsBy(qreal factor);
 
     QFont defaultFont() const;
-    QTextDocument& contentDocument();
-    TextDocumentData& contentDocumentData();
+    QTextDocument &contentDocument();
+    TextDocumentData &contentDocumentData();
 
     QList<KDReports::AutoTableElement *> autoTableElements();
 
@@ -94,4 +92,3 @@ private:
 }
 
 #endif /* KDREPORTSTEXTDOCUMENT_H */
-

@@ -22,9 +22,13 @@
 class KDReports::MainTablePrivate
 {
 public:
-    MainTablePrivate() : m_element(0), m_layout(0) {}
-    AutoTableElement* m_element;
-    SpreadsheetReportLayout* m_layout;
+    MainTablePrivate()
+        : m_element(0)
+        , m_layout(0)
+    {
+    }
+    AutoTableElement *m_element;
+    SpreadsheetReportLayout *m_layout;
 };
 
 KDReports::MainTable::MainTable()
@@ -52,14 +56,14 @@ void KDReports::MainTable::setAutoTableElement(const AutoTableElement &element)
     d->m_layout->setHeaderBackground(element.headerBackground());
 }
 
-KDReports::AutoTableElement* KDReports::MainTable::autoTableElement() const
+KDReports::AutoTableElement *KDReports::MainTable::autoTableElement() const
 {
     return d->m_element;
 }
 
 void KDReports::MainTable::setTableBreakingPageOrder(Report::TableBreakingPageOrder pageOrder)
 {
-    d->m_layout->setTableBreakingPageOrder( pageOrder );
+    d->m_layout->setTableBreakingPageOrder(pageOrder);
 }
 
 KDReports::Report::TableBreakingPageOrder KDReports::MainTable::tableBreakingPageOrder() const
@@ -84,8 +88,8 @@ void KDReports::MainTable::setVerticalHeaderFont(const QFont &font)
 
 QList<QRect> KDReports::MainTable::pageRects() const
 {
-   d->m_layout->ensureLayouted();
-   return d->m_layout->m_pageRects;
+    d->m_layout->ensureLayouted();
+    return d->m_layout->m_pageRects;
 }
 
 qreal KDReports::MainTable::lastAutoFontScalingFactor() const

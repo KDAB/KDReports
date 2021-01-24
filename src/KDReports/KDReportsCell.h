@@ -19,12 +19,11 @@
 
 #include "KDReportsElement.h"
 #include "KDReportsVariableType.h"
-#include <QtCore/Qt>
 #include <QMap>
 #include <QPair>
+#include <QtCore/Qt>
 
-namespace KDReports
-{
+namespace KDReports {
 class ReportBuilder;
 class Element;
 class CellContentMap;
@@ -43,7 +42,7 @@ public:
      * Set the number of columns that this cell will span.
      * The default is 1.
      */
-    void setColumnSpan( int columnSpan );
+    void setColumnSpan(int columnSpan);
     /**
      * Returns the number of columns that this cell will span.
      */
@@ -53,7 +52,7 @@ public:
      * Set the number of rows that this cell will span.
      * The default is 1.
      */
-    void setRowSpan( int rowSpan );
+    void setRowSpan(int rowSpan);
     /**
      * Returns the number of rows that this cell will span.
      */
@@ -62,30 +61,30 @@ public:
     /**
      * Adds an element to the cell, next to the previous element, in the same paragraph.
      */
-    void addInlineElement( const Element& element );
+    void addInlineElement(const Element &element);
 
     /**
      * Adds an element to the cell, creating a new paragraph for it.
      * You can specify the alignment of that paragraph.
      */
-    void addElement( const Element& element, Qt::AlignmentFlag horizontalAlignment = Qt::AlignLeft );
+    void addElement(const Element &element, Qt::AlignmentFlag horizontalAlignment = Qt::AlignLeft);
 
     /**
      * Adds an variable in the text of the current paragraph.
      * @see KDReportsHeader::addVariable
      */
-    void addVariable( VariableType variable );
+    void addVariable(VariableType variable);
 
     /**
      * @internal
      * @reimp
      */
-    void build( ReportBuilder& builder ) const override;
+    void build(ReportBuilder &builder) const override;
 
     /**
      * @internal - not supported
      */
-    Element* clone() const override { return 0; } //krazy:exclude=inline
+    Element *clone() const override { return 0; } // krazy:exclude=inline
 
     /**
      * @internal - do not call
@@ -102,7 +101,7 @@ private:
     Cell(const Cell &other);
     Cell &operator=(const Cell &other);
 
-    CellPrivate* const d;
+    CellPrivate *const d;
 };
 
 }

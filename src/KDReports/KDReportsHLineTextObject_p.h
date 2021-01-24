@@ -46,14 +46,10 @@ public:
      */
     static void registerHLineObjectHandler(QTextDocument *doc);
 
-    QSizeF intrinsicSize(QTextDocument *doc, int posInDocument,
-                    const QTextFormat &format) override;
+    QSizeF intrinsicSize(QTextDocument *doc, int posInDocument, const QTextFormat &format) override;
 
-    void drawObject(QPainter *painter, const QRectF &rect,
-                    QTextDocument *doc, int posInDocument,
-                    const QTextFormat &format) override;
+    void drawObject(QPainter *painter, const QRectF &rect, QTextDocument *doc, int posInDocument, const QTextFormat &format) override;
 };
-
 
 }
 

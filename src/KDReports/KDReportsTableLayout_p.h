@@ -18,8 +18,8 @@
 #define KDREPORTSTABLELAYOUT_H
 
 #include "KDReportsFontScaler_p.h"
-#include <QVector>
 #include <QFont>
+#include <QVector>
 
 QT_BEGIN_NAMESPACE
 class QAbstractItemModel;
@@ -32,7 +32,7 @@ class TableLayout
 public:
     TableLayout();
 
-    void setInitialFontScalingFactor( qreal fontScalingFactor );
+    void setInitialFontScalingFactor(qreal fontScalingFactor);
 
     // Determine "ideal" column widths, based on contents
     void updateColumnWidths();
@@ -43,21 +43,21 @@ public:
     // Return the height of the horizontal header, 0 if not shown
     qreal hHeaderHeight() const { return m_hHeaderHeight; }
 
-    //void updateColumnWidthsByFactor( qreal factor );
+    // void updateColumnWidthsByFactor( qreal factor );
 
     QFont scaledFont() const { return m_cellFontScaler.font(); }
     QFont horizontalHeaderScaledFont() const { return m_horizontalHeaderFontScaler.font(); }
     QFont verticalHeaderScaledFont() const { return m_verticalHeaderFontScaler.font(); }
 
-    //QFontMetricsF scaledFontMetrics() const { return m_cellFontScaler.fontMetrics(); }
+    // QFontMetricsF scaledFontMetrics() const { return m_cellFontScaler.fontMetrics(); }
     qreal scalingFactor() const { return m_cellFontScaler.scalingFactor(); }
-    void ensureScalingFactorForWidth( qreal scalingFactor );
-    void ensureScalingFactorForHeight( qreal maxRowHeight );
+    void ensureScalingFactorForWidth(qreal scalingFactor);
+    void ensureScalingFactorForHeight(qreal maxRowHeight);
     qreal scaledCellPadding() const { return m_cellPadding * scalingFactor(); }
 
-    QSize decorationSize( const QVariant& cellDecoration ) const;
+    QSize decorationSize(const QVariant &cellDecoration) const;
 
-    QAbstractItemModel* m_model;
+    QAbstractItemModel *m_model;
 
     QFont m_cellFont;
     QFont m_horizontalHeaderFont;
@@ -76,7 +76,7 @@ public:
     QSize m_iconSize;
 
 private:
-    qreal addIconWidth( qreal textWidth, const QVariant& cellDecoration ) const;
+    qreal addIconWidth(qreal textWidth, const QVariant &cellDecoration) const;
     void updateRowHeight();
 
     qreal m_rowHeight;

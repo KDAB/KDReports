@@ -60,7 +60,7 @@ public:
      * The table header rows get repeated when a table is broken across a page boundary.
      * The default number of header rows is 0.
      */
-    void setHeaderRowCount( int count );
+    void setHeaderRowCount(int count);
 
     /**
      * \return table header rows count.
@@ -75,7 +75,7 @@ public:
      * The default number of header rows is 0.
      * \since 1.1
      */
-    void setHeaderColumnCount( int count );
+    void setHeaderColumnCount(int count);
 
     /**
      * \return table header columns count.
@@ -88,25 +88,23 @@ public:
      * @param row number, starting from 0
      * @param column number, starting from 0
      */
-    Cell& cell( int row, int column );
+    Cell &cell(int row, int column);
 
     /**
      * @internal
      * @reimp
      */
-    void build( ReportBuilder& ) const override;
+    void build(ReportBuilder &) const override;
     /**
      * @internal
      * @reimp
      */
-    Element* clone() const override;
+    Element *clone() const override;
 
 private:
-    TableElementPrivate* const d;
+    TableElementPrivate *const d;
 };
 
 }
 
-
 #endif /* KDREPORTSTABLEELEMENT_H */
-

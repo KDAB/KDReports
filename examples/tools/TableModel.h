@@ -17,11 +17,11 @@
 #ifndef TABLEMODEL_H
 #define TABLEMODEL_H
 
+#include "tools_export.h"
+#include <QAbstractTableModel>
+#include <QStringList>
 #include <QVariant>
 #include <QVector>
-#include <QAbstractTableModel>
-#include "tools_export.h"
-#include <QStringList>
 
 /** TableModel uses a simple rectangular vector of vectors to represent a data
     table that can be displayed in regular Qt Interview views.
@@ -38,8 +38,8 @@ class TESTTOOLS_EXPORT TableModel : public QAbstractTableModel
 {
     Q_OBJECT
 public:
-    explicit TableModel ( QObject * parent = 0 );
-    ~TableModel () override;
+    explicit TableModel(QObject *parent = 0);
+    ~TableModel() override;
 
     /** Return header data from the model.
         The model will use the first data row and the first data column of the
@@ -47,16 +47,15 @@ public:
         exposed as model data, that means, the first model row and column will
         start at index (1,1).
     */
-    QVariant headerData ( int section, Qt::Orientation orientation,
-                          int role = Qt::DisplayRole ) const override ;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
-    int rowCount ( const QModelIndex & parent = QModelIndex() ) const override;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
-    int columnCount ( const QModelIndex & parent = QModelIndex() ) const override;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
 
-    QVariant data ( const QModelIndex & index, int role = Qt::DisplayRole ) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
-    bool setData ( const QModelIndex & index, const QVariant & value, int role = Qt::EditRole ) override;
+    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
 
     /** Load the table from a comma separated file.
      *
@@ -71,7 +70,7 @@ public:
      *
      * @returns true if successful, false otherwise
      */
-    bool loadFromCSV ( const QString& filename );
+    bool loadFromCSV(const QString &filename);
 
     /** Make the model invalid, that is, provide no data. */
     void clear();
@@ -79,26 +78,20 @@ public:
     /**
      * Set to false if the data has no horizontal header
      */
-    void setDataHasHorizontalHeaders( bool value ) {
-        m_dataHasHorizontalHeaders = value;
-    }
+    void setDataHasHorizontalHeaders(bool value) { m_dataHasHorizontalHeaders = value; }
     /**
      * Set to false if the data has no vertical header
      */
-    void setDataHasVerticalHeaders( bool value ) {
-        m_dataHasVerticalHeaders = value;
-    }
+    void setDataHasVerticalHeaders(bool value) { m_dataHasVerticalHeaders = value; }
     /**
      * setSupplyHeaderData(false) allows to prevent the model from supplying header data,
      * even if parsing found any
      */
-    void setSupplyHeaderData( bool value ) {
-        m_supplyHeaderData = value;
-    }
+    void setSupplyHeaderData(bool value) { m_supplyHeaderData = value; }
 
 private:
     // the vector of rows:
-    QVector< QVector<QVariant> > m_rows;
+    QVector<QVector<QVariant>> m_rows;
     // the header data:
     QStringList m_horizontalHeaderData;
     QStringList m_verticalHeaderData;
@@ -106,6 +99,5 @@ private:
     bool m_dataHasVerticalHeaders;
     bool m_supplyHeaderData;
 };
-
 
 #endif

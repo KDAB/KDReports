@@ -45,13 +45,13 @@ public:
      * Note that the argument isn't const because KDReports will call fetchMore() on it,
      * if canFetchMore() returns true.
      */
-    explicit AutoTableElement( QAbstractItemModel* tableModel );
+    explicit AutoTableElement(QAbstractItemModel *tableModel);
 
     /**
      * Creates a table element that does not have an associated model
      * yet. The association will be done later using the model key.
      */
-    explicit AutoTableElement( const QString& modelKey );
+    explicit AutoTableElement(const QString &modelKey);
 
     /**
      * Destructor. Deletes internal data.
@@ -72,7 +72,7 @@ public:
      * \return the model associated with this element
      * \since 1.2
      */
-    QAbstractItemModel* tableModel() const;
+    QAbstractItemModel *tableModel() const;
 
     /**
      * set the model associated with this element
@@ -91,13 +91,13 @@ public:
      * or row numbers by default).
      * This is true by default, call setVerticalHeaderVisible(false) to hide the vertical header.
      */
-    void setVerticalHeaderVisible( bool visible );
+    void setVerticalHeaderVisible(bool visible);
 
     /**
      * Sets whether to show a horizontal header, showing header data from the model.
      * This is true by default, call setHorizontalHeaderVisible(false) to hide the horizontal header.
      */
-    void setHorizontalHeaderVisible( bool visible );
+    void setHorizontalHeaderVisible(bool visible);
 
     /**
      * \return true if the vertical header will be visible
@@ -117,7 +117,7 @@ public:
      * Call setHeaderBackground(QBrush()) to disable the background color
      * and have transparent headers instead.
      */
-    void setHeaderBackground( const QBrush& brush );
+    void setHeaderBackground(const QBrush &brush);
 
     /**
      * \return the background color of the headers
@@ -132,7 +132,7 @@ public:
      * the size in the report will simply be the size of the pixmap or image.
      * \since 1.1
      */
-    void setIconSize( const QSize& iconSize );
+    void setIconSize(const QSize &iconSize);
 
     /**
      * \return the size passed to setIconSize
@@ -144,12 +144,12 @@ public:
      * @internal
      * @reimp
      */
-    void build( ReportBuilder& ) const override;
+    void build(ReportBuilder &) const override;
     /**
      * @internal
      * @reimp
      */
-    Element* clone() const override;
+    Element *clone() const override;
 
     enum {
         DecorationAlignmentRole = 0x2D535FB1, ///< This model role allows to specify whether the icon should go before the text (Qt::AlignLeft) or after the text (Qt::AlignRight).
@@ -157,7 +157,7 @@ public:
     };
 
 private:
-    AutoTableElementPrivate* const d;
+    AutoTableElementPrivate *const d;
 };
 
 }

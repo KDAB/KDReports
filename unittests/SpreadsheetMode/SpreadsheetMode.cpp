@@ -14,12 +14,12 @@
 **
 ****************************************************************************/
 
-#include <QtTest/QtTest>
 #include <KDReports>
-#include <KDReportsTextDocument_p.h>
-#include <KDReportsReport_p.h>
 #include <KDReportsFontScaler_p.h>
+#include <KDReportsReport_p.h>
+#include <KDReportsTextDocument_p.h>
 #include <QStandardItemModel>
+#include <QtTest/QtTest>
 #ifdef Q_WS_X11
 #include <QX11Info>
 #endif
@@ -30,12 +30,16 @@ static const char s_fontName[] = "Nimbus Sans L";
 static bool fontFound;
 
 using namespace KDReports;
-namespace KDReports { class Test; }
+namespace KDReports {
+class Test;
+}
 
-#define FUZZYCOMPARE(a, b) \
- QVERIFY( a >= b - 4 ); QVERIFY( a <= b + 4 );
+#define FUZZYCOMPARE(a, b)                                                                                                                                                                             \
+    QVERIFY(a >= b - 4);                                                                                                                                                                               \
+    QVERIFY(a <= b + 4);
 
-class KDReports::Test : public QObject {
+class KDReports::Test : public QObject
+{
     Q_OBJECT
 
 private slots:
@@ -44,16 +48,16 @@ private slots:
         // Force the DPI do the same value as on Windows
         // (mostly for testFontScaling)
         qApp->setAttribute(Qt::AA_Use96Dpi, true);
-        QFont font( s_fontName, 48 );
-        QFontInfo info( font );
+        QFont font(s_fontName, 48);
+        QFontInfo info(font);
         fontFound = (info.family() == s_fontName);
-        qDebug() << "Setting DPI to 96. " << s_fontName << "48 has a size of" << QFontMetrics( font ).height();
+        qDebug() << "Setting DPI to 96. " << s_fontName << "48 has a size of" << QFontMetrics(font).height();
         qDebug() << font << info.family();
         // Unfortunately, Qt on Mac OSX hardcodes 72 DPI, so we'll always have different results there.
     }
 
-#define SKIP_IF_FONT_NOT_FOUND \
-    if (!fontFound) \
+#define SKIP_IF_FONT_NOT_FOUND                                                                                                                                                                         \
+    if (!fontFound)                                                                                                                                                                                    \
         QSKIP(QString("Font %1 not found").arg(s_fontName).toLatin1());
 
     // Tests
@@ -67,7 +71,7 @@ private slots:
         report.setDefaultFont(QFont(QLatin1String(s_fontName), 14));
         report.mainTable()->setAutoTableElement(AutoTableElement(&m_model));
         QCOMPARE(report.numberOfPages(), 1);
-        QCOMPARE(report.mainTable()->pageRects(), QList<QRect>() << QRect(0,0,4,8));
+        QCOMPARE(report.mainTable()->pageRects(), QList<QRect>() << QRect(0, 0, 4, 8));
         QCOMPARE(report.mainTable()->lastAutoFontScalingFactor(), 1.0);
     }
 
@@ -90,8 +94,8 @@ private slots:
         const int rowsFirstPage = report.mainTable()->pageRects()[0].height();
         QVERIFY(rowsFirstPage <= 20);
         QVERIFY(rowsFirstPage >= 18);
-        QCOMPARE(report.mainTable()->pageRects()[0], QRect(0,0,2,rowsFirstPage));
-        QCOMPARE(report.mainTable()->pageRects()[1], QRect(0,rowsFirstPage,2,m_model.rowCount()-rowsFirstPage));
+        QCOMPARE(report.mainTable()->pageRects()[0], QRect(0, 0, 2, rowsFirstPage));
+        QCOMPARE(report.mainTable()->pageRects()[1], QRect(0, rowsFirstPage, 2, m_model.rowCount() - rowsFirstPage));
 
         // Now show a huge horizontal header, and check we have less rows per page
         tableElement.setHorizontalHeaderVisible(true);
@@ -104,7 +108,7 @@ private slots:
         report.setFontScalingFactor(0.2);
         QCOMPARE(report.numberOfPages(), 1);
         QCOMPARE(report.mainTable()->lastAutoFontScalingFactor(), 0.2);
-        QCOMPARE(report.mainTable()->pageRects()[0], QRect(0,0,2,m_model.rowCount()));
+        QCOMPARE(report.mainTable()->pageRects()[0], QRect(0, 0, 2, m_model.rowCount()));
 #endif
     }
 
@@ -190,7 +194,6 @@ private slots:
 #endif
     }
 
-
     // Test that we don't hit an infinite loop when trying to use setFactorForWidth
     // with a very small number.
     void testFontScalerVerySmall()
@@ -200,7 +203,7 @@ private slots:
         FontScaler scaler(f);
         scaler.setFactorForWidth(0.09, "Hello world");
         qreal factor = scaler.scalingFactor();
-        QVERIFY( factor < 0.1 );
+        QVERIFY(factor < 0.1);
     }
 
     void testSimpleScaleTo()
@@ -215,14 +218,14 @@ private slots:
         report.scaleTo(1, 4);
         QCOMPARE(report.numberOfPages(), 1); // it fits
         QCOMPARE(report.mainTable()->lastAutoFontScalingFactor(), 1.0);
-        QCOMPARE(report.mainTable()->pageRects(), QList<QRect>() << QRect(0,0,4,8));
+        QCOMPARE(report.mainTable()->pageRects(), QList<QRect>() << QRect(0, 0, 4, 8));
         report.scaleTo(4, 1);
         QCOMPARE(report.numberOfPages(), 4); // one column per page
         QCOMPARE(report.mainTable()->lastAutoFontScalingFactor(), 1.0);
-        QCOMPARE(report.mainTable()->pageRects()[0], QRect(0,0,1,8));
-        QCOMPARE(report.mainTable()->pageRects()[1], QRect(1,0,1,8));
-        QCOMPARE(report.mainTable()->pageRects()[2], QRect(2,0,1,8));
-        QCOMPARE(report.mainTable()->pageRects()[3], QRect(3,0,1,8));
+        QCOMPARE(report.mainTable()->pageRects()[0], QRect(0, 0, 1, 8));
+        QCOMPARE(report.mainTable()->pageRects()[1], QRect(1, 0, 1, 8));
+        QCOMPARE(report.mainTable()->pageRects()[2], QRect(2, 0, 1, 8));
+        QCOMPARE(report.mainTable()->pageRects()[3], QRect(3, 0, 1, 8));
     }
 
     void testVerticalScaling() // when scaleTo doesn't have enough room vertically
@@ -237,8 +240,8 @@ private slots:
         report.setDefaultFont(font);
         QCOMPARE(report.numberOfPages(), 2);
         QVERIFY(report.mainTable()->lastAutoFontScalingFactor() < 0.8);
-        QCOMPARE(report.mainTable()->pageRects()[0], QRect(0,0,1,20));
-        QCOMPARE(report.mainTable()->pageRects()[1], QRect(0,20,1,20));
+        QCOMPARE(report.mainTable()->pageRects()[0], QRect(0, 0, 1, 20));
+        QCOMPARE(report.mainTable()->pageRects()[1], QRect(0, 20, 1, 20));
     }
 
     void testHorizontalScaling()
@@ -251,10 +254,10 @@ private slots:
         report.setDefaultFont(QFont(QLatin1String(s_fontName), 48));
         QCOMPARE(report.numberOfPages(), 2);
         QVERIFY(report.mainTable()->lastAutoFontScalingFactor() < 0.8);
-        //qDebug() << report.mainTable()->pageRects();
+        // qDebug() << report.mainTable()->pageRects();
         const int columns = report.mainTable()->pageRects()[0].width();
         Q_ASSERT(columns == 5 || columns == 6); // I get 6 on linux, but 5 on Windows
-        QCOMPARE(report.mainTable()->pageRects(), QList<QRect>() << QRect(0,0,columns,4) << QRect(columns,0,10-columns,4));
+        QCOMPARE(report.mainTable()->pageRects(), QList<QRect>() << QRect(0, 0, columns, 4) << QRect(columns, 0, 10 - columns, 4));
     }
 
     void testVertAndHorizScaling()
@@ -267,8 +270,8 @@ private slots:
         report.setDefaultFont(QFont(QLatin1String(s_fontName), 48));
         QCOMPARE(report.numberOfPages(), 2);
         QVERIFY(report.mainTable()->lastAutoFontScalingFactor() < 0.8);
-        //qDebug() << report.mainTable()->pageRects();
-        QCOMPARE(report.mainTable()->pageRects(), QList<QRect>() << QRect(0,0,2,20) << QRect(2,0,2,20));
+        // qDebug() << report.mainTable()->pageRects();
+        QCOMPARE(report.mainTable()->pageRects(), QList<QRect>() << QRect(0, 0, 2, 20) << QRect(2, 0, 2, 20));
     }
 
     void testHorizForcedBreaking()
@@ -284,8 +287,8 @@ private slots:
         report.setDefaultFont(QFont(QLatin1String(s_fontName), 48));
         QCOMPARE(report.numberOfPages(), 2);
         QCOMPARE(report.mainTable()->lastAutoFontScalingFactor(), 1.0);
-        //qDebug() << report.mainTable()->pageRects();
-        QCOMPARE(report.mainTable()->pageRects(), QList<QRect>() << QRect(0,0,1,10) << QRect(1,0,1,10));
+        // qDebug() << report.mainTable()->pageRects();
+        QCOMPARE(report.mainTable()->pageRects(), QList<QRect>() << QRect(0, 0, 1, 10) << QRect(1, 0, 1, 10));
     }
 
     void testScaleToHuge()
@@ -301,7 +304,7 @@ private slots:
         report.setDefaultFont(QFont(QLatin1String(s_fontName), 48));
         QCOMPARE(report.numberOfPages(), 2);
         QCOMPARE(report.mainTable()->lastAutoFontScalingFactor(), 1.0);
-        QCOMPARE(report.mainTable()->pageRects(), QList<QRect>() << QRect(0,0,1,2) << QRect(1,0,1,2));
+        QCOMPARE(report.mainTable()->pageRects(), QList<QRect>() << QRect(0, 0, 1, 2) << QRect(1, 0, 1, 2));
     }
 
     void test4000SmallCells()
@@ -340,23 +343,19 @@ private slots:
         QVERIFY(columns >= 20);
         QVERIFY(columns <= 21);
 
-        //qDebug() << report.mainTable()->pageRects();
-        QCOMPARE(report.mainTable()->pageRects()[0], QRect(0,0,columns,rows));
-        QCOMPARE(report.mainTable()->pageRects()[1], QRect(columns,0,40-columns,rows));
-        QCOMPARE(report.mainTable()->pageRects()[2], QRect(0,rows,columns,rows));
-        QCOMPARE(report.mainTable()->pageRects()[3], QRect(columns,rows,40-columns,rows));
-        QCOMPARE(report.mainTable()->pageRects()[4], QRect(0,2*rows,columns,100-2*rows));
-        QCOMPARE(report.mainTable()->pageRects()[5], QRect(columns,2*rows,40-columns,100-2*rows));
+        // qDebug() << report.mainTable()->pageRects();
+        QCOMPARE(report.mainTable()->pageRects()[0], QRect(0, 0, columns, rows));
+        QCOMPARE(report.mainTable()->pageRects()[1], QRect(columns, 0, 40 - columns, rows));
+        QCOMPARE(report.mainTable()->pageRects()[2], QRect(0, rows, columns, rows));
+        QCOMPARE(report.mainTable()->pageRects()[3], QRect(columns, rows, 40 - columns, rows));
+        QCOMPARE(report.mainTable()->pageRects()[4], QRect(0, 2 * rows, columns, 100 - 2 * rows));
+        QCOMPARE(report.mainTable()->pageRects()[5], QRect(columns, 2 * rows, 40 - columns, 100 - 2 * rows));
 
         report.setTableBreakingPageOrder(Report::DownThenRight);
-        //qDebug() << report.mainTable()->pageRects();
-        QCOMPARE(report.mainTable()->pageRects(), QList<QRect>()
-                  << QRect(0,0,columns,rows)
-                  << QRect(0,rows,columns,rows)
-                  << QRect(0,2*rows,columns,100-2*rows)
-                  << QRect(columns,0,40-columns,rows)
-                  << QRect(columns,rows,40-columns,rows)
-                  << QRect(columns,2*rows,40-columns,100-2*rows));
+        // qDebug() << report.mainTable()->pageRects();
+        QCOMPARE(report.mainTable()->pageRects(),
+                 QList<QRect>() << QRect(0, 0, columns, rows) << QRect(0, rows, columns, rows) << QRect(0, 2 * rows, columns, 100 - 2 * rows) << QRect(columns, 0, 40 - columns, rows)
+                                << QRect(columns, rows, 40 - columns, rows) << QRect(columns, 2 * rows, 40 - columns, 100 - 2 * rows));
     }
 
     // Various tests for table-breaking with scaleTo()
@@ -376,17 +375,13 @@ private slots:
         QX11Info::setAppDpiY(0, 72);
 
         // We allow to go down to 2*70 pages, because asking for a font of height "2.38" and getting 2, is ok. Quite small.
-        QTest::newRow("40x10000, 2*84, was a rounding problem")
-            << 40 /*cols*/ << 10000 /*rows*/ << 2 << 84 /*pages, vertically*/ << 70 /*min pages, vertically*/ << 10 << 0;
+        QTest::newRow("40x10000, 2*84, was a rounding problem") << 40 /*cols*/ << 10000 /*rows*/ << 2 << 84 /*pages, vertically*/ << 70 /*min pages, vertically*/ << 10 << 0;
 #endif
 
         // The same thing with a more reasonable font size
-        QTest::newRow("10x1000, 2*30")
-            << 10 /*cols*/ << 1000 /*rows*/ << 2 << 30 /*pages, vertically*/ << 25 /*min pages, vertically*/ << 10 << 0;
-        QTest::newRow("6x1000, 1*35, large font in vHeader")
-            << 6  /*cols*/ << 1000  /*rows*/ << 1 << 35 /*pages*/ << 34 <<  30 << 8;
-        QTest::newRow("8x10000, 2*50")
-            << 8 /*cols*/ << 10000 /*rows*/ << 2 << 50 /*pages*/ << 44 <<  10 << 0;
+        QTest::newRow("10x1000, 2*30") << 10 /*cols*/ << 1000 /*rows*/ << 2 << 30 /*pages, vertically*/ << 25 /*min pages, vertically*/ << 10 << 0;
+        QTest::newRow("6x1000, 1*35, large font in vHeader") << 6 /*cols*/ << 1000 /*rows*/ << 1 << 35 /*pages*/ << 34 << 30 << 8;
+        QTest::newRow("8x10000, 2*50") << 8 /*cols*/ << 10000 /*rows*/ << 2 << 50 /*pages*/ << 44 << 10 << 0;
     }
 
     void testMaxVerticPages()
@@ -418,18 +413,18 @@ private slots:
             report.mainTable()->setHorizontalHeaderFont(QFont(fontName, horizontalHeaderFontSize));
         if (verticalHeaderFontSize > 0) {
             QFont vHeaderFont(fontName, verticalHeaderFontSize);
-            qDebug() << "vHeaderFont:" << vHeaderFont << QFontInfo( vHeaderFont ).family() << QFontMetricsF( vHeaderFont ).height();
+            qDebug() << "vHeaderFont:" << vHeaderFont << QFontInfo(vHeaderFont).family() << QFontMetricsF(vHeaderFont).height();
             report.mainTable()->setVerticalHeaderFont(vHeaderFont);
         }
         report.setTableBreakingPageOrder(Report::RightThenDown);
         qDebug() << "numberOfPages=" << report.numberOfPages();
         // If this is >, then KDReports is not respecting the scaleTo API.
-        QVERIFY(report.numberOfPages() <= maxHorizPages*maxVerticPages);
+        QVERIFY(report.numberOfPages() <= maxHorizPages * maxVerticPages);
 
 #ifndef Q_OS_WIN
-        qDebug() << maxHorizPages << "*" << minVerticPages << "=" << maxHorizPages*minVerticPages;
+        qDebug() << maxHorizPages << "*" << minVerticPages << "=" << maxHorizPages * minVerticPages;
         // If the DPI is known, we can even check that we're not down-scaling too much.
-        QVERIFY(report.numberOfPages() >= maxHorizPages*minVerticPages);
+        QVERIFY(report.numberOfPages() >= maxHorizPages * minVerticPages);
 #else
         Q_UNUSED(minVerticPages);
 #endif
@@ -459,14 +454,14 @@ private slots:
         report.setReportMode(Report::SpreadSheet);
         report.setDefaultFont(QFont(QLatin1String(s_fontName), 8));
         // A page header with a huge font
-        KDReports::Header& header = report.header( KDReports::FirstPage );
+        KDReports::Header &header = report.header(KDReports::FirstPage);
         header.setDefaultFont(QFont(QLatin1String("courier"), 40));
-        header.addElement( KDReports::TextElement( "This is the page header.\nIt's big.\nVery\nbig.\nHuge." ) );
+        header.addElement(KDReports::TextElement("This is the page header.\nIt's big.\nVery\nbig.\nHuge."));
         AutoTableElement tableElement(&m_model);
         tableElement.setVerticalHeaderVisible(true);
         tableElement.setPadding(3);
         report.mainTable()->setAutoTableElement(tableElement);
-        //report.exportToFile( "testWithHeaders.pdf" ); // for debugging
+        // report.exportToFile( "testWithHeaders.pdf" ); // for debugging
 #ifndef Q_OS_MAC
         QCOMPARE(report.numberOfPages(), 2);
 #endif
@@ -552,23 +547,23 @@ private slots:
         QFont font = QFont(QLatin1String(s_fontName));
         font.setPointSize(86); // huge :)
         report.setDefaultFont(font);
-        //QCOMPARE(report.numberOfPages(), 2);
+        // QCOMPARE(report.numberOfPages(), 2);
 
-        //report.exportToFile( "testExportAsSinglePage.pdf" ); // for debugging
+        // report.exportToFile( "testExportAsSinglePage.pdf" ); // for debugging
 
         QTemporaryFile tempFile;
         QVERIFY(tempFile.open());
         const QString filename = tempFile.fileName();
         tempFile.close();
         const QSize size(1000, 2000);
-        bool ok = report.exportToImage( size, filename, "PNG" );
+        bool ok = report.exportToImage(size, filename, "PNG");
         QVERIFY(ok);
         QVERIFY(QFile::exists(filename));
         QPixmap pix;
         QVERIFY(pix.load(filename));
         QCOMPARE(pix.size(), size);
 
-        QCOMPARE(report.mainTable()->pageRects()[0], QRect(0,0,1,40));
+        QCOMPARE(report.mainTable()->pageRects()[0], QRect(0, 0, 1, 40));
         QVERIFY(report.mainTable()->lastAutoFontScalingFactor() > 0.9999);
         // The only way to truly validate that it worked, though, is to open test-export.jpg and check...
 
@@ -604,39 +599,38 @@ private:
             }
         }
     }
-    static void addTable( KDReports::Report& report, int rows, int columns )
+    static void addTable(KDReports::Report &report, int rows, int columns)
     {
-        const QString cellText = QString::fromLatin1( "HELLO WORLD table %1x%2" )
-                                 .arg( rows ).arg( columns );
+        const QString cellText = QString::fromLatin1("HELLO WORLD table %1x%2").arg(rows).arg(columns);
         TableElement table;
-        table.setBorder( 1 );
-        for ( int row = 0; row < rows; ++row ) {
-            for ( int column = 0; column < columns; ++column ) {
-                table.cell(0, column).addElement( KDReports::TextElement( cellText ) );
+        table.setBorder(1);
+        for (int row = 0; row < rows; ++row) {
+            for (int column = 0; column < columns; ++column) {
+                table.cell(0, column).addElement(KDReports::TextElement(cellText));
             }
         }
-        report.addElement( table );
+        report.addElement(table);
     }
 
-    static void makeSimpleTable( KDReports::Report& report )
+    static void makeSimpleTable(KDReports::Report &report)
     {
         // Test for setTableBreakingEnabled
         // This also tests that the cell rect is correctly determined, not
         // just from the bounding rect of the first paragraph of the cell.
-        QFont defaultFont( QLatin1String( "Helvetica" ), 48 );
-        report.setDefaultFont( defaultFont );
+        QFont defaultFont(QLatin1String("Helvetica"), 48);
+        report.setDefaultFont(defaultFont);
         TableElement table;
-        table.setBorder( 1 );
+        table.setBorder(1);
         int rows = 1;
         int columns = 4;
-        for ( int row = 0; row < rows; ++row ) {
-            for ( int column = 0; column < columns; ++column ) {
-                KDReports::Cell& cell = table.cell(0, column);
-                cell.addElement( KDReports::TextElement( "a" ) ); // a short first line
-                cell.addElement( KDReports::TextElement( "HELLO WORLD" ) ); // a long second line
+        for (int row = 0; row < rows; ++row) {
+            for (int column = 0; column < columns; ++column) {
+                KDReports::Cell &cell = table.cell(0, column);
+                cell.addElement(KDReports::TextElement("a")); // a short first line
+                cell.addElement(KDReports::TextElement("HELLO WORLD")); // a long second line
             }
         }
-        report.addElement( table );
+        report.addElement(table);
     }
 
     QStandardItemModel m_model;

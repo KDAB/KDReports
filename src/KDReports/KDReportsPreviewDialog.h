@@ -38,7 +38,7 @@ public:
     /**
      * Constructs a preview dialog.
      */
-    explicit PreviewDialog( KDReports::Report* report, QWidget *parent = 0 );
+    explicit PreviewDialog(KDReports::Report *report, QWidget *parent = 0);
 
     ~PreviewDialog() override;
 
@@ -49,7 +49,7 @@ public:
      *
      * \since 1.7
      */
-    void setQuickPrinterName( const QString &printerName );
+    void setQuickPrinterName(const QString &printerName);
 
     /**
      * Sets the initial directory for the save dialog.
@@ -57,7 +57,7 @@ public:
      *
      * \since 1.7
      */
-    void setDefaultSaveDirectory( const QString &path );
+    void setDefaultSaveDirectory(const QString &path);
 
     /**
      * Allows or forbids the user from choosing the save directory.
@@ -67,12 +67,12 @@ public:
      *
      * \since 1.7
      */
-    void setDirectoryBrowsingEnabled( bool allowed );
+    void setDirectoryBrowsingEnabled(bool allowed);
 
     /**
      * Return true if the page has been selected (checked) by the user.
      */
-    bool isSelected( int pageNumber ) const;
+    bool isSelected(int pageNumber) const;
 
     /**
      * Set to false if you want to prevent the user from changing the page size
@@ -81,20 +81,20 @@ public:
      * note that this leads to a call to Report::setPageSize().
      * Changing the page size is allowed by default.
      */
-    void setPageSizeChangeAllowed( bool b );
+    void setPageSizeChangeAllowed(bool b);
 
     /**
      * Show or hide the button for configuring table settings and font scaling.
      * The button is shown by default.
      * \since 1.1
      */
-    void setShowTableSettingsDialog( bool b );
+    void setShowTableSettingsDialog(bool b);
 
     /**
      * Sets the width of the endless printer, in case the user selects that item
      * from the page selection combobox.
      */
-    void setWidthForEndlessPrinter( qreal widthMM );
+    void setWidthForEndlessPrinter(qreal widthMM);
 
     // maybe setZoomFactor() to set the initial value?
 
@@ -105,14 +105,14 @@ public:
      * or subclassed.
      * \since 1.1
      */
-    virtual bool showTableSettingsDialog( KDReports::Report* report );
+    virtual bool showTableSettingsDialog(KDReports::Report *report);
 
     /**
      * Returns the preview widget used in this dialog.
      * Can be used for fine tuning, for instance setShowPageListWidget(false).
      * \since 1.4
      */
-    KDReports::PreviewWidget* previewWidget();
+    KDReports::PreviewWidget *previewWidget();
 
     /**
      * The Result enum describes result code accessible with QDialog::result()
@@ -127,9 +127,9 @@ public:
 
 Q_SIGNALS:
     /// Emitted when the user changes the page size.
-    void pageSizeChanged( QPrinter::PageSize pageSize );
+    void pageSizeChanged(QPrinter::PageSize pageSize);
     /// Emitted when the user changes the page orientation.
-    void orientationChanged( QPrinter::Orientation orientation );
+    void orientationChanged(QPrinter::Orientation orientation);
 
 public Q_SLOTS:
     /// \reimp
@@ -138,11 +138,11 @@ public Q_SLOTS:
     void reject() override;
 
 private:
-    Q_PRIVATE_SLOT( d, void _kd_slotTableBreakingDialog() )
-    Q_PRIVATE_SLOT( d, void _kd_slotPrintWithDialog() )
-    Q_PRIVATE_SLOT( d, void _kd_slotQuickPrint() )
-    Q_PRIVATE_SLOT( d, void _kd_slotSave() )
-    PreviewDialogPrivate* const d;
+    Q_PRIVATE_SLOT(d, void _kd_slotTableBreakingDialog())
+    Q_PRIVATE_SLOT(d, void _kd_slotPrintWithDialog())
+    Q_PRIVATE_SLOT(d, void _kd_slotQuickPrint())
+    Q_PRIVATE_SLOT(d, void _kd_slotSave())
+    PreviewDialogPrivate *const d;
 };
 
 }

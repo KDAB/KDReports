@@ -14,89 +14,92 @@
 **
 ****************************************************************************/
 
-#include <QtTest/QtTest>
 #include <KDReports>
-#include <KDReportsTextDocument_p.h>
 #include <KDReportsReport_p.h>
+#include <KDReportsTextDocument_p.h>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlTableModel>
 #include <QTextTableCell>
+#include <QtTest/QtTest>
 
 using namespace KDReports;
-namespace KDReports { class Test; }
+namespace KDReports {
+class Test;
+}
 
-class KDReports::Test : public QObject {
+class KDReports::Test : public QObject
+{
     Q_OBJECT
 private slots:
     void testSimplePagination()
     {
         Report report;
-        TextElement elem( QString::fromLatin1( "foo" ) );
-        for ( int i = 0; i < 100; ++i ) {
-            report.addElement( elem );
+        TextElement elem(QString::fromLatin1("foo"));
+        for (int i = 0; i < 100; ++i) {
+            report.addElement(elem);
         }
-        QVERIFY( report.numberOfPages() > 1 );
+        QVERIFY(report.numberOfPages() > 1);
     }
 
     void testPageBreak()
     {
         Report report;
-        report.addElement( KDReports::TextElement( "First page" ) );
+        report.addElement(KDReports::TextElement("First page"));
         report.addPageBreak();
-        report.addElement( KDReports::TextElement( "Second page" ) );
-        QCOMPARE( report.numberOfPages(), 2 );
+        report.addElement(KDReports::TextElement("Second page"));
+        QCOMPARE(report.numberOfPages(), 2);
         report.addPageBreak();
-        QCOMPARE( report.numberOfPages(), 3 );
+        QCOMPARE(report.numberOfPages(), 3);
         report.addPageBreak();
-        QCOMPARE( report.numberOfPages(), 3 ); // yep, it's a flag, can only be set once; documented.
-        report.addElement( KDReports::TextElement( QString() ) );
+        QCOMPARE(report.numberOfPages(), 3); // yep, it's a flag, can only be set once; documented.
+        report.addElement(KDReports::TextElement(QString()));
         report.addPageBreak();
-        QCOMPARE( report.numberOfPages(), 4 );
+        QCOMPARE(report.numberOfPages(), 4);
     }
 
     void testOrientation()
     {
         Report report;
-        report.setPageSize( QPrinter::A5 );
-        report.addElement( KDReports::TextElement( "Foo" ) );
-        QCOMPARE( report.numberOfPages(), 1 );
-        QCOMPARE( report.pageSize(), QPrinter::A5 );
-        QCOMPARE( report.orientation(), QPrinter::Portrait );
+        report.setPageSize(QPrinter::A5);
+        report.addElement(KDReports::TextElement("Foo"));
+        QCOMPARE(report.numberOfPages(), 1);
+        QCOMPARE(report.pageSize(), QPrinter::A5);
+        QCOMPARE(report.orientation(), QPrinter::Portrait);
         QSizeF paperSize = report.paperSize();
-        report.setOrientation( QPrinter::Landscape );
-        QCOMPARE( report.pageSize(), QPrinter::A5 );
-        QCOMPARE( report.orientation(), QPrinter::Landscape );
+        report.setOrientation(QPrinter::Landscape);
+        QCOMPARE(report.pageSize(), QPrinter::A5);
+        QCOMPARE(report.orientation(), QPrinter::Landscape);
         paperSize.transpose(); // swap width and height
-        QCOMPARE( report.paperSize(), paperSize );
+        QCOMPARE(report.paperSize(), paperSize);
     }
 
     void testEndlessPrinter()
     {
         Report report;
-        TextElement elem( QString::fromLatin1( "foo" ) );
-        for ( int i = 0; i < 400; ++i ) {
-            report.addElement( elem );
+        TextElement elem(QString::fromLatin1("foo"));
+        for (int i = 0; i < 400; ++i) {
+            report.addElement(elem);
         }
-        report.setWidthForEndlessPrinter( 114.0 );
-        QCOMPARE( report.numberOfPages(), 1 );
+        report.setWidthForEndlessPrinter(114.0);
+        QCOMPARE(report.numberOfPages(), 1);
         // Switching back to normal pagination
-        report.setWidthForEndlessPrinter( 0 );
-        report.setPageSize( QPrinter::A6 );
-        QVERIFY( report.numberOfPages() > 1 );
+        report.setWidthForEndlessPrinter(0);
+        report.setPageSize(QPrinter::A6);
+        QVERIFY(report.numberOfPages() > 1);
     }
 
     void testEndlessPrinterWithPageBreak()
     {
         Report report;
-        TextElement elem( QString::fromLatin1( "foo" ) );
-        for ( int i = 0; i < 200; ++i ) {
-            report.addElement( elem );
+        TextElement elem(QString::fromLatin1("foo"));
+        for (int i = 0; i < 200; ++i) {
+            report.addElement(elem);
         }
         report.addPageBreak();
-        report.addElement( elem );
-        report.setWidthForEndlessPrinter( 114.0 );
-        QCOMPARE( report.numberOfPages(), 1 );
+        report.addElement(elem);
+        report.setWidthForEndlessPrinter(114.0);
+        QCOMPARE(report.numberOfPages(), 1);
     }
 
     void testEndlessPrinterBug()
@@ -104,7 +107,7 @@ private slots:
         KDReports::Report report;
         QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
         db.setDatabaseName(":memory:");
-        QVERIFY( db.open() );
+        QVERIFY(db.open());
 
         // fill the DB with some test data
         QSqlQuery query;
@@ -113,17 +116,17 @@ private slots:
         for (int i = 0; i < 500; i++)
             query.exec(QString("insert into airlines values(%0, 'Test%0', 'T%0')").arg(i));
 
-        QSqlTableModel tableModel( 0, db );
-        tableModel.setTable( "airlines" );
+        QSqlTableModel tableModel(0, db);
+        tableModel.setTable("airlines");
         tableModel.select();
 
-        KDReports::AutoTableElement tableElement( &tableModel );
-        tableElement.setVerticalHeaderVisible( false );
-        report.addElement( tableElement );
+        KDReports::AutoTableElement tableElement(&tableModel);
+        tableElement.setVerticalHeaderVisible(false);
+        report.addElement(tableElement);
 
         report.setWidthForEndlessPrinter(105.0);
 
-        QCOMPARE( report.numberOfPages(), 1 );
+        QCOMPARE(report.numberOfPages(), 1);
     }
 
     void testTableFont()
@@ -131,22 +134,21 @@ private slots:
         KDReports::Report report;
         int rows = 2;
         int columns = 2;
-        const QString cellText = QString::fromLatin1( "HELLO WORLD table %1x%2" )
-            .arg( rows ).arg( columns );
+        const QString cellText = QString::fromLatin1("HELLO WORLD table %1x%2").arg(rows).arg(columns);
         TableElement tableElement;
         tableElement.setDefaultFont(QFont("Arial", 11));
-        tableElement.setBorder( 1 );
-        for ( int row = 0; row < rows; ++row ) {
-            for ( int column = 0; column < columns; ++column ) {
-                tableElement.cell(0, column).addElement( KDReports::TextElement( cellText ) );
+        tableElement.setBorder(1);
+        for (int row = 0; row < rows; ++row) {
+            for (int column = 0; column < columns; ++column) {
+                tableElement.cell(0, column).addElement(KDReports::TextElement(cellText));
             }
         }
-        report.addElement( tableElement );
+        report.addElement(tableElement);
         // trigger a layout
-        QCOMPARE( report.numberOfPages(), 1 );
-        QTextCursor c( &report.doc().contentDocument() );
-        c.movePosition( QTextCursor::NextCharacter );
-        QTextTable* table = c.currentTable();
+        QCOMPARE(report.numberOfPages(), 1);
+        QTextCursor c(&report.doc().contentDocument());
+        c.movePosition(QTextCursor::NextCharacter);
+        QTextTable *table = c.currentTable();
         QVERIFY(table);
 
         QTextTableCell firstCell = table->cellAt(0, 0);
@@ -184,7 +186,6 @@ private slots:
         QCOMPARE( report.numberOfPages(), 1 );
     }
 #endif
-
 };
 
 QTEST_MAIN(Test) // Report needs QPrinter needs a QApplication

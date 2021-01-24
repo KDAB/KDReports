@@ -47,7 +47,7 @@ public:
     /**
      * Sets the background color for this element.
      */
-    void setBackground( const QBrush& brush );
+    void setBackground(const QBrush &brush);
     /**
      * Returns the background color for this element.
      */
@@ -56,12 +56,12 @@ public:
     /**
      * @internal
      */
-    virtual void build( ReportBuilder& ) const = 0;
+    virtual void build(ReportBuilder &) const = 0;
 
     /**
      * @internal
      */
-    virtual Element* clone() const = 0;
+    virtual Element *clone() const = 0;
 
 protected:
     /**
@@ -78,10 +78,9 @@ protected:
     Element &operator=(const Element &other);
 
 private:
-    ElementPrivate* const d;
+    ElementPrivate *const d;
 };
 
 }
 
 #endif /* KDREPORTSELEMENT_H */
-
