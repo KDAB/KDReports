@@ -54,13 +54,14 @@ option(${PROJECT_NAME}_STATIC "Build statically" OFF)
 option(${PROJECT_NAME}_TESTS "Build the tests" ON)
 option(${PROJECT_NAME}_EXAMPLES "Build the examples" ON)
 
-set(${PROJECT_NAME}_VERSION_MAJOR 1)
-set(${PROJECT_NAME}_VERSION_MINOR 9)
-set(${PROJECT_NAME}_VERSION_PATCH 50)
-set(${PROJECT_NAME}_VERSION ${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH})
-set(${PROJECT_NAME}_SOVERSION ${${PROJECT_NAME}_VERSION_MAJOR})
-
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+
+include(ECMSetupVersion)
+ecm_setup_version("1.9.50"
+    VARIABLE_PREFIX ${PROJECT_NAME}
+    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/src/KDReports/KDReportsVersion.h"
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReportsConfigVersion.cmake"
+)
 
 # setup default install locations
 include(InstallLocation)
@@ -146,10 +147,6 @@ if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
 
   include(CMakePackageConfigHelpers)
 
-  write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReportsConfigVersion.cmake"
-    VERSION ${${PROJECT_NAME}_VERSION}
-    COMPATIBILITY AnyNewerVersion
-  )
   configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/KDReportsConfig-buildtree.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReportsConfig.cmake"

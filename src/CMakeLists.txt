@@ -95,6 +95,7 @@ install(FILES
   KDReports/KDReportsXmlHelper.h
   KDReports/KDReportsErrorDetails.h
   KDReports/KDReports.h
+  ${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReportsVersion.h # generated
 DESTINATION ${INSTALL_INCLUDE_DIR}/KDReports
 )
 
