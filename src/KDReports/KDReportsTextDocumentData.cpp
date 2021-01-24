@@ -126,24 +126,28 @@ void KDReports::TextDocumentData::updateTextValue( const QString& id, const QStr
     //dumpTextValueCursors();
 }
 
-void KDReports::TextDocumentData::updatePercentSizes( const QSizeF& size )
+void KDReports::TextDocumentData::updatePercentSizes(const QSizeF& size )
 {
+    if (!m_hasResizableImages && !m_usesTabPositions) {
+        return;
+    }
     QTextCursor c( m_document );
     c.beginEditBlock();
-    // TODO only if we inserted resizable images
-    do {
-        c.movePosition( QTextCursor::NextCharacter );
-        QTextCharFormat format = c.charFormat();
-        if ( format.hasProperty( ResizableImageProperty ) ) {
-            Q_ASSERT( format.isImageFormat() );
-            QTextImageFormat imageFormat = format.toImageFormat();
-            updatePercentSize( imageFormat, size );
-            //qDebug() << "updatePercentSizes: setting image to " << imageFormat.width() << "," << imageFormat.height();
-            c.movePosition( QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor );
-            c.setCharFormat( imageFormat );
+    if (m_hasResizableImages) {
+        do {
             c.movePosition( QTextCursor::NextCharacter );
-        }
-    } while ( !c.atEnd() );
+            QTextCharFormat format = c.charFormat();
+            if ( format.hasProperty( ResizableImageProperty ) ) {
+                Q_ASSERT( format.isImageFormat() );
+                QTextImageFormat imageFormat = format.toImageFormat();
+                updatePercentSize( imageFormat, size );
+                //qDebug() << "updatePercentSizes: setting image to " << imageFormat.width() << "," << imageFormat.height();
+                c.movePosition( QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor );
+                c.setCharFormat( imageFormat );
+                c.movePosition( QTextCursor::NextCharacter );
+            }
+        } while ( !c.atEnd() );
+    }
 
     if (m_usesTabPositions) {
         QTextFrameFormat rootFrameFormat = m_document->rootFrame()->frameFormat();
@@ -399,6 +403,11 @@ void KDReports::TextDocumentData::saveResourcesToFiles()
 void KDReports::TextDocumentData::addResourceName( const QString& resourceName )
 {
     m_resourceNames.append( resourceName );
+}
+
+void KDReports::TextDocumentData::setHasResizableImages()
+{
+    m_hasResizableImages = true;
 }
 
 void KDReports::TextDocumentData::setUsesTabPositions(bool usesTabs)

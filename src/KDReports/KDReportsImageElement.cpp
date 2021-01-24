@@ -166,6 +166,7 @@ void KDReports::ImageElement::build( ReportBuilder& builder ) const
         } else {
             imageFormat.setProperty( ResizableImageProperty, QString( QLatin1Char( 'W' ) + QString::number( d->m_width ) ) );
             KDReports::TextDocumentData::updatePercentSize( imageFormat, QSizeF( builder.report()->d->textDocumentWidth(), -1 /*unknown*/ ) );
+            builder.currentDocumentData().setHasResizableImages();
         }
     } else if ( d->m_height ) {
         if ( d->m_unit == Millimeters ) {
@@ -175,10 +176,12 @@ void KDReports::ImageElement::build( ReportBuilder& builder ) const
             imageFormat.setWidth( pixelWidth );
         } else {
             imageFormat.setProperty( ResizableImageProperty, QString( QLatin1Char( 'H' ) + QString::number( d->m_height ) ) );
+            builder.currentDocumentData().setHasResizableImages();
             // can't calc size yet, will be done at layouting time... hopefully.
         }
     } else if ( d->m_fitToPage ) {
         imageFormat.setProperty( ResizableImageProperty, QString( QLatin1Char( 'T' ) ) );
+        builder.currentDocumentData().setHasResizableImages();
     }
 
     QTextCursor& cursor = builder.cursor();

@@ -72,6 +72,7 @@ public:
     void regenerateAutoTables();
     void regenerateAutoTableForModel( QAbstractItemModel* model );
     void addResourceName( const QString& resourceName );
+    void setHasResizableImages();
 
     static void updatePercentSize( QTextImageFormat& format, const QSizeF& size );
 
@@ -98,6 +99,7 @@ private:
     AutoTablesMaps m_autoTables;
     QList<QString> m_resourceNames;
     bool m_usesTabPositions;
+    bool m_hasResizableImages = false;
 };
 
 }
