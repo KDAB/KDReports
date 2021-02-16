@@ -45,7 +45,7 @@ Stay up-to-date with KDAB product announcements:
 Get Involved
 ============
 KDAB will happily accept external contributions, but substantial contributions require
-a signed [Copyright Assignment Agreement](doc/KDReports-CopyrightAssignmentForm.docx).
+a signed [Copyright Assignment Agreement](doc/KDReports-CopyrightAssignmentForm.pdf).
 
 Contact info@kdab.com for more information about the Copyright Assignment Agreement.
 
