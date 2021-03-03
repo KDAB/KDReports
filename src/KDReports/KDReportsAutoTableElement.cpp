@@ -62,8 +62,8 @@ public:
         cellDecoration = tableModel->headerData(section, orientation, Qt::DecorationRole);
         cellFont = tableModel->headerData(section, orientation, Qt::FontRole);
         cellText = tableModel->headerData(section, orientation, Qt::DisplayRole).toString();
-        foreground = qvariant_cast<QColor>(tableModel->headerData(section, orientation, Qt::ForegroundRole));
-        background = qvariant_cast<QColor>(tableModel->headerData(section, orientation, Qt::BackgroundRole));
+        foreground = tableModel->headerData(section, orientation, Qt::ForegroundRole);
+        background = tableModel->headerData(section, orientation, Qt::BackgroundRole);
         alignment = Qt::Alignment(tableModel->headerData(section, orientation, Qt::TextAlignmentRole).toInt());
         decorationAlignment = tableModel->headerData(section, orientation, KDReports::AutoTableElement::DecorationAlignmentRole);
         nonBreakableLines = tableModel->headerData(section, orientation, KDReports::AutoTableElement::NonBreakableLinesRole).toBool();
@@ -75,8 +75,8 @@ public:
         cellDecoration = tableModel->data(index, Qt::DecorationRole);
         cellFont = tableModel->data(index, Qt::FontRole);
         cellText = displayText(tableModel->data(index, Qt::DisplayRole));
-        foreground = qvariant_cast<QColor>(tableModel->data(index, Qt::ForegroundRole));
-        background = qvariant_cast<QColor>(tableModel->data(index, Qt::BackgroundRole));
+        foreground = tableModel->data(index, Qt::ForegroundRole);
+        background = tableModel->data(index, Qt::BackgroundRole);
         alignment = Qt::Alignment(tableModel->data(index, Qt::TextAlignmentRole).toInt());
         decorationAlignment = tableModel->data(index, KDReports::AutoTableElement::DecorationAlignmentRole);
         nonBreakableLines = tableModel->data(index, KDReports::AutoTableElement::NonBreakableLinesRole).toBool();
@@ -92,8 +92,8 @@ private:
     QVariant cellDecoration;
     QVariant cellFont;
     QString cellText;
-    QColor foreground;
-    QColor background;
+    QVariant foreground;
+    QVariant background;
     Qt::Alignment alignment;
     QVariant decorationAlignment;
     bool nonBreakableLines;
@@ -119,8 +119,8 @@ void FillCellHelper::fill(QTextTable *textTable, KDReports::ReportBuilder &build
 {
     cellCursor = cell.firstCursorPosition();
     QTextCharFormat cellFormat = cell.format();
-    if (background.isValid()) {
-        cellFormat.setBackground(background);
+    if (background.canConvert<QBrush>()) {
+        cellFormat.setBackground(qvariant_cast<QBrush>(background));
     }
     cellFormat.setVerticalAlignment(toVerticalAlignment(alignment));
     cell.setFormat(cellFormat);
@@ -149,8 +149,9 @@ void FillCellHelper::fill(QTextTable *textTable, KDReports::ReportBuilder &build
     } else {
         charFormat.setFont(builder.defaultFont());
     }
-    if (foreground.isValid())
-        charFormat.setForeground(foreground);
+    if (foreground.canConvert<QBrush>()) {
+        charFormat.setForeground(qvariant_cast<QBrush>(foreground));
+    }
     cellCursor.setCharFormat(charFormat);
 
     if (hasIcon && !iconAfterText) {
