@@ -259,13 +259,13 @@ void KDReports::SpreadsheetReportLayout::paintPageContent(int pageNumber, QPaint
 
             const QString cellText = model->data(index, Qt::DisplayRole).toString();
             const QColor foreground = qvariant_cast<QColor>(model->data(index, Qt::ForegroundRole));
-            const QColor background = qvariant_cast<QColor>(model->data(index, Qt::BackgroundRole));
+            const QVariant background = model->data(index, Qt::BackgroundRole);
             const Qt::Alignment alignment(model->data(index, Qt::TextAlignmentRole).toInt());
             const QVariant decorationAlignment(model->data(index, KDReports::AutoTableElement::DecorationAlignmentRole));
             const QVariant cellDecoration(model->data(index, Qt::DecorationRole));
 
-            if (background.isValid()) {
-                painter.fillRect(cellRect, QBrush(background));
+            if (background.canConvert<QBrush>()) {
+                painter.fillRect(cellRect, background.value<QBrush>());
             } else if (span.isValid()) {
                 painter.fillRect(cellRect, Qt::white);
             }
