@@ -14,12 +14,13 @@
 **
 ****************************************************************************/
 
+#include "KDReportsTextDocumentData_p.h"
+#include "KDReportsReportBuilder_p.h"
 #include "KDReportsAutoTableElement.h"
 #include "KDReportsChartTextObject_p.h"
 #include "KDReportsHLineTextObject_p.h"
 #include "KDReportsLayoutHelper_p.h"
-#include "KDReportsReportBuilder_p.h"
-#include "KDReportsTextDocumentData_p.h"
+
 #include <QAbstractTextDocumentLayout>
 #include <QDebug>
 #include <QTextDocument>

@@ -15,14 +15,15 @@
 ****************************************************************************/
 
 #include "KDReportsReport.h"
+#include "KDReportsReport_p.h"
 #include "KDReportsElement.h"
 #include "KDReportsHeader.h"
 #include "KDReportsLayoutHelper_p.h"
 #include "KDReportsMainTable.h"
-#include "KDReportsReport_p.h"
 #include "KDReportsSpreadsheetReportLayout_p.h"
 #include "KDReportsTextDocReportLayout_p.h"
 #include "KDReportsXmlParser_p.h"
+
 #include <QAbstractTextDocumentLayout>
 #include <QApplication>
 #include <QDebug>

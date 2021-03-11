@@ -14,9 +14,10 @@
 **
 ****************************************************************************/
 
-#include "KDReportsLayoutHelper_p.h" // mmToPixels
 #include "KDReportsTableLayout_p.h"
+#include "KDReportsLayoutHelper_p.h" // mmToPixels
 #include <QAbstractItemModel>
+
 #include <QDebug>
 #include <QFontMetrics>
 

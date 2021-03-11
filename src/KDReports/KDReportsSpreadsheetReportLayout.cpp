@@ -14,11 +14,12 @@
 **
 ****************************************************************************/
 
+#include "KDReportsSpreadsheetReportLayout_p.h"
 #include "KDReportsAutoTableElement.h"
 #include "KDReportsLayoutHelper_p.h"
-#include "KDReportsSpreadsheetReportLayout_p.h"
 #include "KDReportsTableBreakingLogic_p.h"
 #include <QAbstractItemModel>
+
 #include <QBitArray>
 #include <QDebug>
 #include <QIcon>

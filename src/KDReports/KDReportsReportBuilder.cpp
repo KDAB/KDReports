@@ -14,10 +14,11 @@
 **
 ****************************************************************************/
 
+#include "KDReportsReportBuilder_p.h"
 #include "KDReportsHeader_p.h" // for variableValue and setVariableMarker
 #include "KDReportsLayoutHelper_p.h" // mmToPixels
-#include "KDReportsReportBuilder_p.h"
 #include "KDReportsTextElement.h"
+
 #include <QDebug>
 #include <QTextBlock>
 

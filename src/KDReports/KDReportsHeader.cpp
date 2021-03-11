@@ -15,12 +15,13 @@
 ****************************************************************************/
 
 #include "KDReportsHeader.h"
-#include "KDReportsAbstractReportLayout_p.h"
 #include "KDReportsHeader_p.h"
+#include "KDReportsAbstractReportLayout_p.h"
 #include "KDReportsLayoutHelper_p.h"
 #include "KDReportsReport.h"
 #include "KDReportsReport_p.h"
 #include "KDReportsTextElement.h"
+
 #include <QDate>
 #include <QDebug>
 #include <QLocale>

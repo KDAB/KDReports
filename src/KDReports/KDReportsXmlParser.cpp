@@ -14,6 +14,7 @@
 **
 ****************************************************************************/
 
+#include "KDReportsXmlParser_p.h"
 #include "KDReportsAutoTableElement.h"
 #include "KDReportsCell.h"
 #include "KDReportsChartElement.h"
@@ -29,7 +30,7 @@
 #include "KDReportsXmlElementHandler.h"
 #include "KDReportsXmlElementHandlerV2.h"
 #include "KDReportsXmlHelper.h"
-#include "KDReportsXmlParser_p.h"
+
 #include <QDebug>
 #include <QDomDocument>
 #include <QDomElement>

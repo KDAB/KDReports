@@ -14,8 +14,9 @@
 **
 ****************************************************************************/
 
-#include "KDReportsLayoutHelper_p.h"
 #include "KDReportsTextDocument_p.h"
+#include "KDReportsLayoutHelper_p.h"
+
 #include <QDebug>
 
 //#define DEBUG_TABLEBREAKING
