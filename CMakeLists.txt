@@ -35,6 +35,10 @@ endif()
 if(POLICY CMP0025)
   cmake_policy(SET CMP0025 NEW)
 endif()
+if(POLICY CMP0071)
+    # Silence warning about automoc/autouic skipping generated files
+  cmake_policy(SET CMP0071 NEW)
+endif()
 if(POLICY CMP0074)
   # Since 3.12 tells find_package to look for <Package>_ROOT variables.
   cmake_policy(SET CMP0074 NEW)
@@ -66,12 +70,14 @@ ecm_setup_version("1.9.50"
 # setup default install locations
 include(InstallLocation)
 
-find_package(Qt5Core QUIET)
+set(REQUIRED_QT_VERSION 5.6.0)
+
+find_package(Qt5Core ${REQUIRED_QT_VERSION} QUIET)
 
 if(Qt5Core_FOUND)
-  find_package(Qt5 COMPONENTS Widgets PrintSupport Sql Xml Test REQUIRED)
+  find_package(Qt5 ${REQUIRED_QT_VERSION} COMPONENTS Widgets PrintSupport Sql Xml Test REQUIRED)
   if(${PROJECT_NAME}_TESTS)
-    find_package(Qt5 COMPONENTS Test REQUIRED)
+    find_package(Qt5Test REQUIRED)
   endif()
   set(QT_LIBRARIES Qt5::Core Qt5::PrintSupport Qt5::Sql Qt5::Xml)
   set(QT_USE_FILE "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Qt5Portability.cmake")
