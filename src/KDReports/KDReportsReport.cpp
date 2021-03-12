@@ -40,6 +40,8 @@
 #include <QThread>
 #include <QXmlInputSource>
 
+#include <memory>
+
 QT_BEGIN_NAMESPACE
 Q_GUI_EXPORT extern int qt_defaultDpi(); // This is what QTextDocument uses...
 QT_END_NAMESPACE
@@ -393,9 +395,9 @@ bool KDReports::ReportPrivate::doPrint(QPrinter *printer, QWidget *parent)
 {
     // caller has to ensure that we have been layouted for this printer already
     const int pageCount = m_layout->numberOfPages();
-    QProgressDialog *dialog = 0;
+    std::unique_ptr<QProgressDialog> dialog;
     if (QThread::currentThread() == qApp->thread()) {
-        dialog = new QProgressDialog(QObject::tr("Printing"), QObject::tr("Cancel"), 0, pageCount, parent);
+        dialog.reset(new QProgressDialog(QObject::tr("Printing"), QObject::tr("Cancel"), 0, pageCount, parent));
         dialog->setWindowModality(Qt::ApplicationModal);
     }
     QPainter painter;
@@ -428,7 +430,6 @@ bool KDReports::ReportPrivate::doPrint(QPrinter *printer, QWidget *parent)
         firstPage = false;
     }
 
-    delete dialog;
     return true;
 }
 
