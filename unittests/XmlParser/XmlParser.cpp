@@ -379,7 +379,7 @@ private slots:
 
         QAbstractItemModel *baseModel = &model;
         QCOMPARE(report.mainTable()->autoTableElement()->tableModel(), baseModel);
-        QCOMPARE(report.orientation(), QPrinter::Landscape);
+        QCOMPARE(report.pageOrientation(), QPageLayout::Landscape);
     }
 
     void testSeparateHeaderAndFooter()

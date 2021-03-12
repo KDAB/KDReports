@@ -40,6 +40,7 @@ namespace KDReports {
  */
 KDREPORTS_EXPORT qreal mmToPixels(qreal mm);
 KDREPORTS_EXPORT qreal mmToPixels(qreal mm, double dpi);
+KDREPORTS_EXPORT qreal pixelsToPointsMultiplier(double resolution);
 
 static const int ResizableImageProperty = QTextFormat::UserProperty + 5984;
 

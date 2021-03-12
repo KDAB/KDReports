@@ -117,8 +117,8 @@ public:
     qreal m_layoutWidth; // in pixels; used for layoutAsOnePage only
     qreal m_endlessPrinterWidth; // in mm
     mutable QSizeF m_paperSize; // in pixels
-    QPrinter::Orientation m_orientation;
-    QPrinter::PageSize m_pageSize;
+    QPageLayout::Orientation m_orientation;
+    QPageSize m_pageSize;
     QString m_documentName;
     qreal m_marginTop;
     qreal m_marginLeft;

@@ -65,11 +65,11 @@ private slots:
         report.addElement(KDReports::TextElement("Foo"));
         QCOMPARE(report.numberOfPages(), 1);
         QCOMPARE(report.pageSize(), QPrinter::A5);
-        QCOMPARE(report.orientation(), QPrinter::Portrait);
+        QCOMPARE(report.pageOrientation(), QPageLayout::Portrait);
         QSizeF paperSize = report.paperSize();
-        report.setOrientation(QPrinter::Landscape);
+        report.setPageOrientation(QPageLayout::Landscape);
         QCOMPARE(report.pageSize(), QPrinter::A5);
-        QCOMPARE(report.orientation(), QPrinter::Landscape);
+        QCOMPARE(report.pageOrientation(), QPageLayout::Landscape);
         paperSize.transpose(); // swap width and height
         QCOMPARE(report.paperSize(), paperSize);
     }

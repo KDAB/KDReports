@@ -260,8 +260,16 @@ public:
      * Sets the page size of the report. Example: setPageSize(QPrinter::A4) or setPageSize(QPrinter::Letter);
      * Note that for performance reasons, it is recommended to do this after
      * adding all the elements to the report rather than before.
+     * Deprecated, use setPageSize(QPageSize)
      */
     void setPageSize(const QPrinter::PageSize &size);
+
+    /**
+     * Sets the page size of the report. Example: setPageSize(QPageSize::A4) or setPageSize(QPageSize::Letter);
+     * Note that for performance reasons, it is recommended to do this after
+     * adding all the elements to the report rather than before.
+     */
+    void setPageSize(const QPageSize &size);
 
     /**
      * Sets a custom paper size for the report.
@@ -275,12 +283,23 @@ public:
     QPrinter::PageSize pageSize() const;
     /**
      * Sets the orientation, QPrinter::Portrait or QPrinter::Landscape.
+     * Deprecated, use setPageOrientation
      */
-    void setOrientation(QPrinter::Orientation orientation);
+    Q_DECL_DEPRECATED void setOrientation(QPrinter::Orientation orientation);
     /**
      * \return the orientation set by setOrientation. The default orientation is QPrinter::Portrait.
+     * Deprecated, use orientation
      */
-    QPrinter::Orientation orientation() const;
+    Q_DECL_DEPRECATED QPrinter::Orientation orientation() const;
+
+    /**
+     * Sets the orientation, QPageLayout::Portrait or QPageLayout::Landscape.
+     */
+    void setPageOrientation(QPageLayout::Orientation orientation);
+    /**
+     * \return the orientation set by setPageOrientation. The default orientation is QPageLayout::Portrait.
+     */
+    QPageLayout::Orientation pageOrientation() const;
 
     /**
      * Set a custom page size for an endless printer.
@@ -531,7 +550,7 @@ public:
      * \param printer the printer to use for printing
      * \param parent the parent widget for the progress dialog that appears when printing
      */
-    bool print(QPrinter *printer, QWidget *parent = 0);
+    bool print(QPrinter *printer, QWidget *parent = nullptr);
 
     /**
      * Export the whole report to a PS or PDF file.
@@ -539,7 +558,7 @@ public:
      * selected as output format.
      * If the file name has the ".pdf" suffix PDF is generated.
      */
-    bool exportToFile(const QString &fileName, QWidget *parent = 0);
+    bool exportToFile(const QString &fileName, QWidget *parent = nullptr);
 
     /**
      * Export the whole report to an image file.

@@ -158,9 +158,9 @@ bool KDReports::XmlParser::processDocument(const QDomDocument &doc, KDReports::R
     if (docElement.hasAttribute(QLatin1String("orientation"))) {
         const QString orientation = docElement.attribute(QLatin1String("orientation"));
         if (orientation == QLatin1String("landscape"))
-            m_report->setOrientation(QPrinter::Landscape);
+            m_report->setPageOrientation(QPageLayout::Landscape);
         else if (orientation == QLatin1String("portrait"))
-            m_report->setOrientation(QPrinter::Portrait);
+            m_report->setPageOrientation(QPageLayout::Portrait);
     }
 
     // Support for margins

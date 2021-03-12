@@ -225,8 +225,8 @@ void KDReports::PreviewWidgetPrivate::printSelectedPages()
 {
     // Well, the user can modify the page size in the printer dialog too - ensure layout matches
     // qDebug() << "pageSize: " << m_printer.pageSize();
-    m_report->setPageSize(m_printer.pageSize());
-    m_report->setOrientation(m_printer.orientation());
+    m_report->setPageSize(m_printer.pageLayout().pageSize());
+    m_report->setPageOrientation(m_printer.pageLayout().orientation());
     pageCountChanged();
 
     // ### But how do we match "marked pages" from a previous layout into the new layout?
@@ -301,8 +301,8 @@ void KDReports::PreviewWidgetPrivate::setupComboBoxes()
     paperSizeCombo->addItem(q->tr("US #10 Envelope (105 x 241 mm)"), QPrinter::Comm10E);
     paperSizeCombo->addItem(q->tr("Endless printer (%1 mm wide)").arg(m_endlessPrinterWidth), QPrinter::Custom);
 
-    paperOrientationCombo->addItem(q->tr("Portrait"), QPrinter::Portrait);
-    paperOrientationCombo->addItem(q->tr("Landscape"), QPrinter::Landscape);
+    paperOrientationCombo->addItem(q->tr("Portrait"), QPageLayout::Portrait);
+    paperOrientationCombo->addItem(q->tr("Landscape"), QPageLayout::Landscape);
 }
 
 void KDReports::PreviewWidgetPrivate::_kd_slotCurrentPageChanged()
@@ -381,16 +381,18 @@ void KDReports::PreviewWidgetPrivate::_kd_slotPaperSizeActivated(int index)
 
 void KDReports::PreviewWidgetPrivate::_kd_slotPaperOrientationActivated(int index)
 {
-    m_printer.setOrientation(QPrinter::Orientation(paperOrientationCombo->itemData(index).toInt()));
-    m_report->setOrientation(m_printer.orientation());
+    const QPageLayout::Orientation orientation = static_cast<QPageLayout::Orientation>(paperOrientationCombo->itemData(index).toInt());
+    m_printer.setPageOrientation(orientation);
+    m_report->setPageOrientation(orientation);
     pageCountChanged();
-    emit q->orientationChanged(m_printer.orientation());
+    emit q->orientationChanged(static_cast<QPrinter::Orientation>(orientation)); // deprecated signal
+    emit q->pageOrientationChanged(orientation);
 }
 
 void KDReports::PreviewWidgetPrivate::pageCountChanged()
 {
     qApp->setOverrideCursor(Qt::WaitCursor); // layouting could take a long time
-    if (m_printer.pageSize() == QPrinter::Custom) {
+    if (m_printer.pageLayout().pageSize().id() == QPageSize::Custom) {
         // Printing without page breaks -> only one page
         m_pageCount = 1;
     } else {
@@ -641,7 +643,7 @@ void KDReports::PreviewWidgetPrivate::setReport(KDReports::Report *report)
 
     // initialize combos from report
     paperSizeCombo->setCurrentIndex(paperSizeCombo->findData(m_report->pageSize()));
-    paperOrientationCombo->setCurrentIndex(paperOrientationCombo->findData(m_report->orientation()));
+    paperOrientationCombo->setCurrentIndex(paperOrientationCombo->findData(m_report->pageOrientation()));
 
     tableBreakingButton->setVisible(m_report->reportMode() == KDReports::Report::SpreadSheet);
 

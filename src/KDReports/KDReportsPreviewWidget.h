@@ -106,8 +106,10 @@ public:
 Q_SIGNALS:
     /// Emitted when the user changes the page size.
     void pageSizeChanged(QPrinter::PageSize pageSize);
-    /// Emitted when the user changes the page orientation.
+    /// Emitted when the user changes the page orientation (deprecated, use pageOrientationChanged)
     void orientationChanged(QPrinter::Orientation orientation);
+    /// Emitted when the user changes the page orientation.
+    void pageOrientationChanged(QPageLayout::Orientation orientation);
     /// Emitted when the table settings button has been clicked
     void tableSettingsClicked();
 

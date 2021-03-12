@@ -47,8 +47,8 @@ QT_END_NAMESPACE
 KDReports::ReportPrivate::ReportPrivate(Report *report)
     : m_layoutWidth(0)
     , m_endlessPrinterWidth(0)
-    , m_orientation(QPrinter::Portrait)
-    , m_pageSize(QPrinter::A4)
+    , m_orientation(QPageLayout::Portrait)
+    , m_pageSize(QPageSize::A4)
     , m_marginTop(20.0)
     , // warning, defaults are duplicated in KDReportsXmlParser.cpp
     m_marginLeft(20.0)
@@ -127,23 +127,18 @@ static const float kdr_paperSizes[][2] = {
     {279.4f, 431.8f} // Tabloid
 };
 
-// "raw" because it does not swap for Landscape
-static QSizeF rawPaperSize(QPrinter::PageSize pageSize, QPrinter *printer)
-{
-    return QSizeF(KDReports::mmToPixels(kdr_paperSizes[pageSize][0], printer->logicalDpiX()), KDReports::mmToPixels(kdr_paperSizes[pageSize][1], printer->logicalDpiY()));
-}
-
 QSizeF KDReports::ReportPrivate::paperSize() const
 {
     // determine m_paperSize from m_pageSize if needed
     if (m_paperSize.isEmpty()) {
         int width_index = 0;
         int height_index = 1;
-        if (m_orientation == QPrinter::Landscape) {
+        if (m_orientation == QPageLayout::Landscape) {
             width_index = 1;
             height_index = 0;
         }
-        m_paperSize = QSizeF(mmToPixels(kdr_paperSizes[m_pageSize][width_index]), mmToPixels(kdr_paperSizes[m_pageSize][height_index]));
+        m_paperSize = QSizeF(mmToPixels(kdr_paperSizes[m_pageSize.id()][width_index]),
+                mmToPixels(kdr_paperSizes[m_pageSize.id()][height_index]));
     }
     // qDebug() << "m_paperSize=" << m_paperSize;
     return m_paperSize;
@@ -524,6 +519,11 @@ void KDReports::Report::addVerticalSpacing(qreal space)
 
 void KDReports::Report::setPageSize(const QPrinter::PageSize &size)
 {
+    setPageSize(QPageSize(static_cast<QPageSize::PageSizeId>(size)));
+}
+
+void KDReports::Report::setPageSize(const QPageSize &size)
+{
     d->m_pageSize = size;
     d->m_paperSize = QSizeF();
     d->m_pageContentSizeDirty = true;
@@ -551,21 +551,34 @@ void KDReports::Report::setPaperSize(const QSizeF &paperSize, QPrinter::Unit uni
     d->m_pageContentSizeDirty = true;
 }
 
+// Qt6 TODO return QPageSize
 QPrinter::PageSize KDReports::Report::pageSize() const
 {
-    return d->m_pageSize;
+    return static_cast<QPrinter::PageSize>(d->m_pageSize.id());
 }
 
 void KDReports::Report::setOrientation(QPrinter::Orientation orientation)
 {
-    d->m_orientation = orientation;
+    d->m_orientation = static_cast<QPageLayout::Orientation>(orientation);
     d->m_paperSize = QSizeF();
     d->m_pageContentSizeDirty = true;
 }
 
 QPrinter::Orientation KDReports::Report::orientation() const
 {
-    return d->m_orientation;
+    return static_cast<QPrinter::Orientation>(d->m_orientation);
+}
+
+void KDReports::Report::setPageOrientation(QPageLayout::Orientation orientation)
+{
+    d->m_orientation = orientation;
+    d->m_paperSize = QSizeF();
+    d->m_pageContentSizeDirty = true;
+}
+
+QPageLayout::Orientation KDReports::Report::pageOrientation() const
+{
+   return d->m_orientation;
 }
 
 void KDReports::Report::setMargins(qreal top, qreal left, qreal bottom, qreal right)
@@ -690,6 +703,7 @@ bool KDReports::Report::printWithDialog(QWidget *parent)
     return ok;
 }
 
+
 bool KDReports::Report::print(QPrinter *printer, QWidget *parent)
 {
     // save the old page size
@@ -697,10 +711,12 @@ bool KDReports::Report::print(QPrinter *printer, QWidget *parent)
     if (d->wantEndlessPrinting()) {
         // ensure that the printer is set up with the right size
         d->ensureLayouted();
-        printer->setPaperSize(d->m_paperSize, QPrinter::DevicePixel);
+        // was: printer->setPaperSize(d->m_paperSize, QPrinter::DevicePixel);
+        printer->setPageSize(QPageSize(d->m_paperSize * pixelsToPointsMultiplier(printer->resolution()), QPageSize::Point));
+
     } else {
         // ensure that the layout matches the printer
-        d->setPaperSizeFromPrinter(printer->paperRect().size());
+        d->setPaperSizeFromPrinter(printer->pageLayout().fullRectPixels(printer->resolution()).size());
     }
 
     printer->setFullPage(true);
@@ -1169,8 +1185,9 @@ int KDReports::Report::firstPageNumber() const
 void KDReports::Report::setupPrinter(QPrinter *printer)
 {
     printer->setFullPage(true);
-    printer->setOrientation(d->m_orientation);
-    printer->setPaperSize(rawPaperSize(d->m_pageSize, printer), QPrinter::DevicePixel);
+    printer->setPageOrientation(d->m_orientation);
+    // was: printer->setPaperSize(rawPaperSize(d->m_pageSize, printer), QPrinter::DevicePixel);
+    printer->setPageSize(d->m_pageSize);
     printer->setDocName(d->m_documentName);
 }
 

@@ -167,7 +167,7 @@ int main(int argc, char **argv)
     firstHeaderItem->setTextAlignment(Qt::AlignCenter); // works
     model.setHorizontalHeaderItem(0, firstHeaderItem);
     QStandardItem *secondHeaderItem = new QStandardItem(QObject::tr("Icon on the left in this header"));
-    secondHeaderItem->setData(qVariantFromValue(QPixmap(":/system.png")), Qt::DecorationRole);
+    secondHeaderItem->setData(QVariant::fromValue(QPixmap(":/system.png")), Qt::DecorationRole);
     // secondHeaderItem->setTextAlignment( Qt::AlignCenter ); // doesn't work. QTBUG-20041
     model.setHorizontalHeaderItem(1, secondHeaderItem);
     QStandardItem *thirdHeaderItem = new QStandardItem(QObject::tr("Small pixmap on the right"));
@@ -179,7 +179,7 @@ int main(int argc, char **argv)
     model.setItem(0, 0, firstCellItem);
 
     QStandardItem *secondCellItem = new QStandardItem(QObject::tr("Icon on the left in this cell"));
-    secondCellItem->setData(qVariantFromValue(QPixmap(":/system.png")), Qt::DecorationRole);
+    secondCellItem->setData(QVariant::fromValue(QPixmap(":/system.png")), Qt::DecorationRole);
     model.setItem(0, 1, secondCellItem);
 
     QStandardItem *thirdCellItem = new QStandardItem(QObject::tr("Small pixmap on the right"));
