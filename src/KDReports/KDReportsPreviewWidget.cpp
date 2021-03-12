@@ -367,16 +367,16 @@ void KDReports::PreviewWidgetPrivate::_kd_slotLastPage()
 
 void KDReports::PreviewWidgetPrivate::_kd_slotPaperSizeActivated(int index)
 {
-    QPrinter::PageSize qPageSize(static_cast<QPrinter::PageSize>(paperSizeCombo->itemData(index).toInt()));
+    const QPageSize qPageSize(static_cast<QPageSize::PageSizeId>(paperSizeCombo->itemData(index).toInt()));
     m_printer.setPageSize(qPageSize);
-    if (qPageSize == QPrinter::Custom) {
+    if (qPageSize.id() == QPageSize::Custom) {
         m_report->setWidthForEndlessPrinter(m_endlessPrinterWidth);
     } else {
         m_report->setWidthForEndlessPrinter(0);
         m_report->setPageSize(qPageSize);
     }
     pageCountChanged();
-    emit q->pageSizeChanged(qPageSize);
+    emit q->pageSizeChanged(static_cast<QPrinter::PageSize>(qPageSize.id())); // Qt6: pageSizeChanged(qPageSize)
 }
 
 void KDReports::PreviewWidgetPrivate::_kd_slotPaperOrientationActivated(int index)
