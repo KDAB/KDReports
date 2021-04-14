@@ -55,7 +55,7 @@ add_subdirectory(TableBreakingLogic)
 add_subdirectory(SpreadsheetMode)
 add_subdirectory(InThread)
 
-if(${PROJECT_NAME}_EXAMPLES_SQL)
+if(NOT EMSCRIPTEN)
   add_subdirectory(PageLayout)
   add_subdirectory(TextDocument)
 endif()

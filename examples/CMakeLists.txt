@@ -33,7 +33,7 @@ add_subdirectory(BigImage)
 add_subdirectory(MailMergeXML)
 add_subdirectory(ReportSection)
 
-if(${PROJECT_NAME}_EXAMPLES_SQL)
+if(NOT EMSCRIPTEN)
   add_subdirectory(Database)
   add_subdirectory(DatabaseXML)
 endif()
