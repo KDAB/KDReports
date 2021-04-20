@@ -38,7 +38,6 @@
 #include <QStyle>
 #include <QStyleOption>
 #include <QThread>
-#include <QXmlInputSource>
 
 #include <memory>
 
@@ -832,15 +831,10 @@ bool KDReports::Report::loadFromXML(QIODevice *iodevice, ErrorDetails *details)
         iodevice->reset(); // need to do that to allow consecutive calls of loadFromXML()
     else
         iodevice->open(QIODevice::ReadOnly);
-    QXmlInputSource source(iodevice);
-    QXmlSimpleReader reader;
-    reader.setFeature(QLatin1String("http://xml.org/sax/features/namespaces"), false);
-    reader.setFeature(QLatin1String("http://xml.org/sax/features/namespace-prefixes"), true);
-    reader.setFeature(QLatin1String("http://qt-project.org/xml/features/report-whitespace-only-CharData"), true); // krazy:exclude=insecurenet
 
     QString errorMsg;
     int errorLine = 0, errorColumn = 0;
-    bool ret = doc.setContent(&source, &reader, &errorMsg, &errorLine, &errorColumn);
+    bool ret = doc.setContent(iodevice, true, &errorMsg, &errorLine, &errorColumn);
     if (!ret) {
         if (details) {
             details->setLine(errorLine);

@@ -9,3 +9,8 @@ Bug fixes:
 ----------
 * Autotables: returning a QBrush for Qt::BackgroundRole (or ForegroundRole) now works as expected. Previously only QColor was supported.
 
+Behaviour changes:
+-----------------
+* Porting away from deprecated QXmlInputSource means that the parsing of whitespace-only XML elements (in templates) has changed.
+  To preserve whitespace only, use CDATA syntax, see textid.xml for an example. Note that Qt doesn't support xml:space="preserve".
+
