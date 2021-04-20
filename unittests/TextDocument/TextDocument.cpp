@@ -217,13 +217,13 @@ private slots:
         // We could jump to currentFrame().lastCursorPosition() but then it would skip
         // nested tables.
         QTextDocument *clonedDoc = textDoc.clone();
-        QSet<QTextTable *> tablesFound;
+        QList<QTextTable *> tablesFound;
         {
             QTextCursor curs(clonedDoc);
             while (!curs.atEnd()) {
                 QTextTable *currentTable = curs.currentTable();
                 if (currentTable && !tablesFound.contains(currentTable)) {
-                    tablesFound.insert(currentTable);
+                    tablesFound.append(currentTable);
                 }
                 curs.movePosition(QTextCursor::NextCharacter);
             }
@@ -239,14 +239,14 @@ private slots:
             curs.setPosition(firstPos);
             QVERIFY(curs.currentTable());
 
-            // generic loop. works this approach is in TextDocument::breakTables now.
+            // generic loop, works. This approach is in TextDocument::breakTables now.
             Q_FOREACH (QTextTable *origTable, origTables) {
                 QTextCursor curs(clonedDoc);
                 curs.setPosition(origTable->firstCursorPosition().position());
                 tablesByPos.append(curs.currentTable());
             }
             QCOMPARE(tablesByPos.size(), 3);
-            QCOMPARE(tablesByPos.toSet(), tablesFound);
+            QCOMPARE(tablesByPos, tablesFound);
         }
 
         delete clonedDoc;
