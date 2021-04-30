@@ -151,10 +151,10 @@ void KDReports::PreviewWidgetPrivate::init()
     QObject::connect(paperOrientationCombo, SIGNAL(activated(int)), q, SLOT(_kd_slotPaperOrientationActivated(int)));
 
     QShortcut *nextPageShortcut = new QShortcut(q);
-    nextPageShortcut->setKey(Qt::CTRL + Qt::Key_PageDown);
+    nextPageShortcut->setKey(Qt::CTRL | Qt::Key_PageDown);
     QObject::connect(nextPageShortcut, SIGNAL(activated()), q, SLOT(_kd_slotNextPage()));
     QShortcut *prevPageShortcut = new QShortcut(q);
-    prevPageShortcut->setKey(Qt::CTRL + Qt::Key_PageUp);
+    prevPageShortcut->setKey(Qt::CTRL | Qt::Key_PageUp);
     QObject::connect(prevPageShortcut, SIGNAL(activated()), q, SLOT(_kd_slotPrevPage()));
 
     pageNumber->setValidator(new QIntValidator(1, 100000, pageNumber));

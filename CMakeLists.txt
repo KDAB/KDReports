@@ -15,6 +15,10 @@
 # Pass the following variables to cmake to control the build:
 # (See INSTALL-cmake.txt for more information)
 #
+# -DKDReports_QT6=[true|false]
+#  Build against Qt6 rather than Qt5
+#  Default=false (Qt5 will be used even if Qt6 is available)
+#
 # -DKDReports_STATIC=[true|false]
 #  Build static libraries
 #  Default=false
@@ -57,6 +61,7 @@ project(KDReports CXX)
 option(${PROJECT_NAME}_STATIC "Build statically" OFF)
 option(${PROJECT_NAME}_TESTS "Build the tests" ON)
 option(${PROJECT_NAME}_EXAMPLES "Build the examples" ON)
+option(${PROJECT_NAME}_QT6 "Build against Qt 6" OFF)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
@@ -70,27 +75,25 @@ ecm_setup_version("1.9.50"
 # setup default install locations
 include(InstallLocation)
 
-set(REQUIRED_QT_VERSION 5.6.0)
+if(${PROJECT_NAME}_QT6)
+  find_package(Qt6 6.0.0 CONFIG REQUIRED COMPONENTS Core Widgets PrintSupport Xml Test)
+  set(QT_MAJOR_VERSION 6)
+  list(APPEND QT_LIBRARIES Qt6::Core Qt6::PrintSupport Qt6::Xml)
+  set(${PROJECT_NAME}_LIBRARY_QTID "-qt6")
+else()
+  set(REQUIRED_QT_VERSION 5.6.0)
+  find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED COMPONENTS Core Widgets PrintSupport Xml Test)
+  set(QT_MAJOR_VERSION 5)
+  list(APPEND QT_LIBRARIES Qt5::Core Qt5::PrintSupport Qt5::Xml)
+  set(${PROJECT_NAME}_LIBRARY_QTID "")
+endif()
 
-find_package(Qt5Core ${REQUIRED_QT_VERSION} QUIET)
-
-if(Qt5Core_FOUND)
-  find_package(Qt5 ${REQUIRED_QT_VERSION} COMPONENTS Widgets PrintSupport Xml Test REQUIRED)
-  if(${PROJECT_NAME}_TESTS)
-    find_package(Qt5Test REQUIRED)
-  endif()
-  set(QT_LIBRARIES Qt5::Core Qt5::PrintSupport Qt5::Xml)
-  if(NOT EMSCRIPTEN)
-    find_package(Qt5Sql REQUIRED)
-    list(APPEND QT_LIBRARIES Qt5::Sql)
-  endif()
-  set(QT_USE_FILE "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Qt5Portability.cmake")
-
-  if(Qt5_POSITION_INDEPENDENT_CODE)
-    if(Qt5Core_VERSION VERSION_LESS 5.1)
-      set_property(TARGET Qt5::Core PROPERTY INTERFACE_POSITION_INDEPENDENT_CODE ON)
-    endif()
-  endif()
+if(${PROJECT_NAME}_TESTS)
+    find_package(Qt${QT_MAJOR_VERSION}Test REQUIRED)
+endif()
+if(NOT EMSCRIPTEN)
+    find_package(Qt${QT_MAJOR_VERSION}Sql REQUIRED)
+    list(APPEND QT_LIBRARIES Qt${QT_MAJOR_VERSION}::Sql)
 endif()
 
 find_package(KDChart CONFIG) # First try the cmake file provided by kdchart, ideal solution
@@ -100,8 +103,6 @@ endif()
 if (KDChart_FOUND)
   message(STATUS "Enabling KDChart support")
   add_definitions(-DHAVE_KDCHART)
-  # Hack for kdchart versions < kdchart-2.7.1 (when built with cmake)
-  find_package(Qt5Svg CONFIG REQUIRED)
   if (NOT TARGET KDChart::kdchart)
     add_library(KDChart::kdchart SHARED IMPORTED)
     set_target_properties(KDChart::kdchart PROPERTIES

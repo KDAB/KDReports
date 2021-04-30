@@ -45,7 +45,7 @@ macro(add_unittest _source)
   add_executable(${_name} ${_srcs})
 
   add_test(NAME kdreports-${_name} COMMAND ${_name})
-  target_link_libraries(${_name} ${QT_LIBRARIES} Qt5::Test kdreports)
+  target_link_libraries(${_name} ${QT_LIBRARIES} Qt${QT_MAJOR_VERSION}::Test kdreports)
 endmacro()
 
 add_subdirectory(ElementCopying)

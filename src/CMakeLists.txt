@@ -12,19 +12,19 @@
 ## Contact info@kdab.com if any conditions of this licensing are not clear to you.
 ##
 
-set(QT_USE_QTXML TRUE)
-
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-
 set(FORMS
   KDReports/previewdialogbase.ui
   KDReports/tablebreakingdialogbase.ui
 )
-
-qt5_wrap_ui(KDREPORTS_UI ${FORMS})
-
 set(RESOURCES ${CMAKE_CURRENT_SOURCE_DIR}/../pics/pics.qrc)
-qt5_add_resources(KDREPORTS_RES ${RESOURCES})
+
+if (${QT_MAJOR_VERSION} EQUAL 5)
+  qt5_wrap_ui(KDREPORTS_UI ${FORMS})
+  qt5_add_resources(KDREPORTS_RES ${RESOURCES})
+else()
+  qt6_wrap_ui(KDREPORTS_UI ${FORMS})
+  qt6_add_resources(KDREPORTS_RES ${RESOURCES})
+endif()
 
 if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/KDReports)
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/KDReports)
@@ -137,6 +137,7 @@ set(SOURCES
 )
 
 add_library(kdreports ${KDReports_LIBRARY_MODE} ${SOURCES} ${KDREPORTS_UI} ${KDREPORTS_RES})
+set_target_properties(kdreports PROPERTIES OUTPUT_NAME "kdreports${${PROJECT_NAME}_LIBRARY_QTID}")
 if(${PROJECT_NAME}_STATIC)
   target_compile_definitions(kdreports PUBLIC KDREPORTS_STATICLIB)
 else()
