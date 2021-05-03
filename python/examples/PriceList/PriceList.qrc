@@ -1,0 +1,11 @@
+<!DOCTYPE RCC>
+<RCC>
+  <qresource>
+    <file alias="table1">KDReports-Test-NetworkPeripherals.csv</file>
+    <file alias="table2">KDReports-Test-PrinterCartridges.csv</file>
+    <file alias="kdab.jpg">kdab.jpg</file>
+    <file alias="kdab_small.jpg">kdab_small.jpg</file>
+    <file alias="system.png">cr32-device-system.png</file>
+  </qresource>
+</RCC>
+

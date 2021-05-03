@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!-- The package name -->
+<typesystem package="KDReports">
+    <!-- Pre-defined typesystem that contains types used by our class
+        PySide has one typesystem for each module, here we use only the widgets
+        typesystem because it already include gui and core typesystem -->
+    <load-typesystem name="typesystem_widgets.xml" generate="no"/>
+
+    <namespace-type name="KDReports" visible="no">
+        <enum-type name="HeaderLocation" />
+        <enum-type name="HeaderLocation" />
+        <enum-type name="VariableType" />
+        <enum-type name="Unit" />
+        <enum-type name="HeaderLocation" flags="HeaderLocations" />
+
+        <object-type name="AbstractTableElement">
+            <modify-function signature="defaultFont(bool*)const" remove="all" />
+            <add-function signature="defaultFont()" return-type="(QFont, bool)">
+                <inject-code class="target" position="beginning" file="glue.cpp" snippet="abstract_table_element_default_font"/>
+            </add-function>
+        </object-type>
+        <object-type name="Cell" />
+        <object-type name="Frame" />
+        <object-type name="MainTable" />
+        <object-type name="PreviewDialog">
+            <enum-type name="Result" />
+        </object-type>
+        <object-type name="PreviewWidget" />
+        <object-type name="Report">
+            <enum-type name="ReportMode" />
+            <enum-type name="TableBreakingPageOrder" />
+            <modify-function signature="getMargins(qreal *, qreal *, qreal *, qreal *) const" remove="all" />
+            <add-function signature="getMargins()" return-type="(qreal, qreal, qreal, qreal)">
+                <inject-code class="target" position="beginning" file="glue.cpp" snippet="report_get_margins"/>
+            </add-function>
+        </object-type>
+        <object-type name="TableBreakingSettingsDialog" />
+
+        <object-type name="Element" />
+        <object-type name="HLineElement" />
+        <object-type name="HtmlElement" />
+        <object-type name="ImageElement" />
+        <object-type name="TableElement" />
+        <object-type name="TextElement" />
+        <object-type name="AutoTableElement" />
+        <object-type name="ChartElement" />
+        <object-type name="Header" />
+
+        <value-type name="ErrorDetails" />
+        <value-type name="XmlElementHandler" />
+        <value-type name="XmlElementHandlerV2" />
+        <value-type name="XmlHelper" />
+
+        <!-- Private types used by public API -->
+        <object-type name="ReportBuilder"  disable-wrapper="yes" />
+    </namespace-type>
+</typesystem>

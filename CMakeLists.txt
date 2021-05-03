@@ -31,6 +31,12 @@
 #  Build the examples.
 #  Default=true
 #
+# -DKDReports_PYTHON_BINDINGS=[true|false]
+#  Build/Generate python bindings.  Always false for Debug builds
+#  (If your shiboken or pyside is installed in a non-standard locations
+#  try passing the SHIBOKEN_CUSTOM_PREFIX and PYSIDE2_CUSTOM_PREFIX variables.)
+#  Default=false
+#
 
 cmake_minimum_required(VERSION 3.1)
 if(POLICY CMP0020)
@@ -62,6 +68,7 @@ option(${PROJECT_NAME}_STATIC "Build statically" OFF)
 option(${PROJECT_NAME}_TESTS "Build the tests" ON)
 option(${PROJECT_NAME}_EXAMPLES "Build the examples" ON)
 option(${PROJECT_NAME}_QT6 "Build against Qt 6" OFF)
+option(${PROJECT_NAME}_PYTHON_BINDINGS "Build python bindings" OFF)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
@@ -126,6 +133,13 @@ if(${PROJECT_NAME}_STATIC)
   set(${PROJECT_NAME}_LIBRARY_MODE "STATIC")
 else()
   set(${PROJECT_NAME}_LIBRARY_MODE "SHARED")
+endif()
+
+if(NOT DEFINED SHIBOKEN_CUSTOM_PREFIX) #look for shiboken in a custom location
+  set(SHIBOKEN_CUSTOM_PREFIX "")
+endif()
+if(NOT DEFINED PYSIDE2_CUSTOM_PREFIX) #look for pyside in a custom location
+  set(PYSIDE2_CUSTOM_PREFIX "")
 endif()
 
 if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
@@ -202,4 +216,8 @@ if(${PROJECT_NAME}_IS_ROOT_PROJECT)
   if(${PROJECT_NAME}_EXAMPLES)
     add_subdirectory(examples)
   endif()
+endif()
+
+if(${PROJECT_NAME}_PYTHON_BINDINGS)
+  add_subdirectory(python)
 endif()
