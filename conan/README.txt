@@ -12,3 +12,9 @@ Configuration options:
 
  * build_examples
    Build the examples. Default=True
+
+ * build_python_bindings
+   Build/Generate python bindings (always false for Debug or static builds). Default=False
+
+ * python_bindings_install_dir
+   Alternative install path for python bindings. Default=auto detect
