@@ -5,6 +5,10 @@ Goals (not implemented yet):
  * Qt6 support
  * Remove qmake buildsystem
 
+General:
+--------
+* Python3 bindings for Qt5. See INSTALL-bindings.txt for more information.
+
 Bug fixes:
 ----------
 * Autotables: returning a QBrush for Qt::BackgroundRole (or ForegroundRole) now works as expected. Previously only QColor was supported.
