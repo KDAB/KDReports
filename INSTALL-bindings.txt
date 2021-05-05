@@ -1,0 +1,38 @@
+These are the instructions for installing KD Reports bindings using the CMake buildsystem.
+
+Starting with version 2.0 KD Reports can build Python3 bindings.
+
+You need these:
+ - Python3.6 or higher
+ - Qt 5.12 or higher
+ - QtForPython provided by the Qt project.
+
+For QtForPython you install must use the exact same Qt version you are using when building KD Reports.
+
+As this time, you cannot get shiboken2-generator because the wheels are not on PyPi.
+To use the wheels do this:
+  % pip3 install \
+      --index-url=https://download.qt.io/official_releases/QtForPython/ \
+      --trusted-host download.qt.io \
+      shiboken2 pyside2 shiboken2_generator
+
+For more info visit https://doc.qt.io/qtforpython/shiboken2/gettingstarted.html
+
+afterwards run 'pip3 list | grep PySide2'
+Note the version *must* match the same Qt you intend to use when building KD Reports.
+
+Not supported:
+ - Debug builds
+ - static builds
+ - python2 bindings
+ - only some 32-bit platforms are supported.  see https://wiki.qt.io/Qt_for_Python
+
+Also, there are no plans to support the qmake buildsystem.
+
+Tell CMake to build the bindings by passing the `-DKDReports_PYTHON_BINDINGS=True' option.
+
+The bindings will be installed to the passed `-DCMAKE_INSTALL_PREFIX`, which
+might require setting the `PYTHONPATH` env variable to point to that path when
+running applications.  Alternatively, configure the bindings install location by
+passing (for example) `-DKDReports_BINDINGS_INSTALL_PREFIX=/usr/lib/python3.8/site-packages`
+to CMake (adjust to the python path on your system).
