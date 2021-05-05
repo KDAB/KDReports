@@ -37,7 +37,10 @@
 #  try passing the SHIBOKEN_CUSTOM_PREFIX and PYSIDE2_CUSTOM_PREFIX variables.)
 #  Default=false
 #
-
+# -DKDReports_PYTHON_BINDINGS_INSTALL_PREFIX=[path]
+#  Alternative install path for Python bindings.
+#  Default=CMAKE_INSTALL_PREFIX
+#
 cmake_minimum_required(VERSION 3.1)
 if(POLICY CMP0020)
   cmake_policy(SET CMP0020 NEW)
@@ -69,6 +72,9 @@ option(${PROJECT_NAME}_TESTS "Build the tests" ON)
 option(${PROJECT_NAME}_EXAMPLES "Build the examples" ON)
 option(${PROJECT_NAME}_QT6 "Build against Qt 6" OFF)
 option(${PROJECT_NAME}_PYTHON_BINDINGS "Build python bindings" OFF)
+if(${PROJECT_NAME}_PYTHON_BINDINGS AND (CMAKE_BUILD_TYPE MATCHES "^[Dd]eb" OR ${PROJECT_NAME}_STATIC))
+  message(FATAL_ERROR "** Python Bindings are disabled in debug or static builds.")
+endif()
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
@@ -219,5 +225,8 @@ if(${PROJECT_NAME}_IS_ROOT_PROJECT)
 endif()
 
 if(${PROJECT_NAME}_PYTHON_BINDINGS)
+  if(MSVC)
+    set(CMAKE_CXX_STANDARD 14)
+  endif()
   add_subdirectory(python)
 endif()
