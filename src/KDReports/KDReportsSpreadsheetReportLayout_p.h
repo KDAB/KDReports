@@ -64,6 +64,8 @@ public:
     /// \reimp
     qreal userRequestedFontScalingFactor() const override;
     /// \reimp
+    QString anchorAt(int pageNumber, const QPoint &pos) override;
+    /// \reimp
     QString toHtml() const override;
     /// \reimp
     void finishHtmlExport() override;

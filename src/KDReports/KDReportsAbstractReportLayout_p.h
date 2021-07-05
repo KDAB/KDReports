@@ -20,10 +20,11 @@
 #include <QString>
 
 QT_BEGIN_NAMESPACE
+class QFont;
 class QPainter;
+class QPoint;
 class QSizeF;
 class QWidget;
-class QFont;
 QT_END_NAMESPACE
 
 namespace KDReports {
@@ -60,6 +61,8 @@ public:
     virtual qreal idealWidth() = 0;
     virtual void setUserRequestedFontScalingFactor(qreal factor) = 0;
     virtual qreal userRequestedFontScalingFactor() const = 0;
+
+    virtual QString anchorAt(int pageNumber, const QPoint &pos) = 0;
 
     virtual QString toHtml() const = 0;
     virtual void finishHtmlExport() = 0;

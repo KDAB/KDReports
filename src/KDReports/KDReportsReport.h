@@ -581,6 +581,8 @@ public:
      * Paints a given page of the report into the painter.
      * Note that this method can be used for printing and for on-screen rendering
      * so it doesn't fill the background with white, the caller has do to that.
+     * @param pageNumber the page to paint, starting at 0
+     * @param painter the QPainter to paint into
      */
     void paintPage(int pageNumber, QPainter &painter);
 
@@ -852,6 +854,16 @@ public:
      * \since 1.6
      */
     void endEdit();
+
+    /**
+     * Returns the target of the anchor at position pos, or an empty string
+     * if no anchor exists at that position.
+     * @param pageNumber The page on which the mouse is, starting at 0
+     * @param pos The position of the mouse, in pixels
+     *
+     * \since 2.0
+     */
+    QString anchorAt(int pageNumber, const QPoint &pos) const;
 
 private:
     friend class Test;

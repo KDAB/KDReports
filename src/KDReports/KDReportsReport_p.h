@@ -109,6 +109,7 @@ public:
     bool skipHeadersFooters() const;
     qreal rawMainTextDocHeight() const;
     qreal mainTextDocHeight() const;
+    QRect mainTextDocRect() const;
 #ifndef NDEBUG
     // for calling from gdb
     void debugLayoutToPdf(const char *fileName);

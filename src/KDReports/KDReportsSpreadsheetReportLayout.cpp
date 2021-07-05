@@ -592,6 +592,14 @@ qreal KDReports::SpreadsheetReportLayout::userRequestedFontScalingFactor() const
     return m_userRequestedFontScalingFactor;
 }
 
+QString KDReports::SpreadsheetReportLayout::anchorAt(int pageNumber, const QPoint &pos)
+{
+    // Not implemented
+    Q_UNUSED(pageNumber)
+    Q_UNUSED(pos)
+    return {};
+}
+
 void KDReports::SpreadsheetReportLayout::setTableBreakingPageOrder(KDReports::Report::TableBreakingPageOrder order)
 {
     m_tableBreakingPageOrder = order;

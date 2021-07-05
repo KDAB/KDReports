@@ -130,6 +130,11 @@ Q_SIGNALS:
     void pageSizeChanged(QPrinter::PageSize pageSize);
     /// Emitted when the user changes the page orientation.
     void orientationChanged(QPrinter::Orientation orientation);
+    /**
+     * Emitted when the user clicked on a hyperlink
+     * \since 2.0
+     */
+    void linkActivated(const QUrl &url);
 
 public Q_SLOTS:
     /// \reimp

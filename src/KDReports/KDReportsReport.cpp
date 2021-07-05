@@ -205,6 +205,16 @@ qreal KDReports::ReportPrivate::mainTextDocHeight() const
     return height;
 }
 
+QRect KDReports::ReportPrivate::mainTextDocRect() const
+{
+    const int left = qRound(mmToPixels(m_marginLeft));
+    const int top = qRound(mmToPixels(m_marginTop));
+    const int headerHeightWithSpacing = qRound((skipHeadersFooters() ? 0 : m_headers.height()) + mmToPixels(m_headerBodySpacing));
+    const int textDocWidth = qRound(m_paperSize.width() - mmToPixels(m_marginLeft + m_marginRight));
+    const int textDocHeight = qRound(mainTextDocHeight());
+    return {left, top + headerHeightWithSpacing, textDocWidth, textDocHeight};
+}
+
 /*
    [top margin]
    [header]
@@ -294,21 +304,8 @@ void KDReports::ReportPrivate::paintPage(int pageNumber, QPainter &painter)
         footer->preparePaintingPage(pageNumber + m_firstPageNumber - 1);
     }
 
-    const qreal textDocWidth = m_paperSize.width() - mmToPixels(m_marginLeft + m_marginRight);
-    const qreal textDocHeight = mainTextDocHeight();
-
-    const int left = qRound(mmToPixels(m_marginLeft));
-    const int top = qRound(mmToPixels(m_marginTop));
-    // const int right = qRound( mmToPixels( m_marginRight ) );
-    const int bottom = qRound(mmToPixels(m_marginBottom));
+    const QRect textDocRect = mainTextDocRect();
     const bool skipHeadersFooters = this->skipHeadersFooters();
-    const int headerHeightWithSpacing = qRound((skipHeadersFooters ? 0 : m_headers.height()) + mmToPixels(m_headerBodySpacing));
-    const int footerHeight = skipHeadersFooters ? 0 : qRound(m_footers.height());
-    // const int footerHeightWithspacing = qRound( m_footers.height() + mmToPixels( m_footerBodySpacing ) );
-    // const QRect paperRect( 0, 0, qRound( m_paperSize.width() ), qRound( m_paperSize.height() ) );
-    // const QRect textDocRect = paperRect.adjusted( left, top + headerHeightWithSpacing,
-    //                                              -right, - bottom - footerHeightWithspacing);
-    const QRect textDocRect(left, top + headerHeightWithSpacing, textDocWidth, textDocHeight);
 
     /*qDebug() << "paintPage: in pixels: top=" << top << " headerHeight=" << headerHeightWithSpacing
              << " textDoc size:" << textDocRect.size()
@@ -345,7 +342,7 @@ void KDReports::ReportPrivate::paintPage(int pageNumber, QPainter &painter)
     painter.save();
     // painter.setClipRect( textDocRect, Qt::IntersectClip ); // triggers a Qt-Windows bug when printing
     painter.setClipRect(textDocRect);
-    painter.translate(left, top + headerHeightWithSpacing);
+    painter.translate(textDocRect.topLeft());
     m_layout->paintPageContent(pageNumber, painter);
     painter.restore();
 
@@ -353,14 +350,17 @@ void KDReports::ReportPrivate::paintPage(int pageNumber, QPainter &painter)
     ctx.palette.setColor(QPalette::Text, Qt::black);
     if (header && !skipHeadersFooters) {
         painter.save();
-        painter.translate(left, top);
+        const int top = qRound(mmToPixels(m_marginTop));
+        painter.translate(textDocRect.left(), top);
         ctx.clip = painter.clipRegion().boundingRect();
         header->doc().contentDocument().documentLayout()->draw(&painter, ctx);
         painter.restore();
     }
     if (footer && !skipHeadersFooters) {
         painter.save();
-        painter.translate(left, m_paperSize.height() - bottom - footerHeight);
+        const int bottom = qRound(mmToPixels(m_marginBottom));
+        const int footerHeight = skipHeadersFooters ? 0 : qRound(m_footers.height());
+        painter.translate(textDocRect.left(), m_paperSize.height() - bottom - footerHeight);
         ctx.clip = painter.clipRegion().boundingRect();
         footer->doc().contentDocument().documentLayout()->draw(&painter, ctx);
         painter.restore();
@@ -873,6 +873,13 @@ void KDReports::Report::beginEdit()
 void KDReports::Report::endEdit()
 {
     d->builder()->contentDocumentCursor().endEditBlock();
+}
+
+QString KDReports::Report::anchorAt(int pageNumber, const QPoint &pos) const
+{
+    const QRect textDocRect = d->mainTextDocRect();
+    const QPoint textPos = pos - textDocRect.topLeft();
+    return d->m_layout->anchorAt(pageNumber, textPos);
 }
 
 void KDReports::Report::setWatermarkText(const QString &text, int rotation, const QColor &color, const QFont &font)

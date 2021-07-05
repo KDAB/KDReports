@@ -5,6 +5,10 @@ Goals (not implemented yet):
  * Qt6 support
  * Remove qmake buildsystem
 
+New features:
+-------------
+* Report::anchorAt() method to detect hyperlinks, and a linkActivated() signal in PreviewWidget/PreviewDialog to handle clicking on them.
+
 General:
 --------
 * Python3 bindings for Qt5. See INSTALL-bindings.txt for more information.

@@ -35,10 +35,13 @@ enum { PreviewSize = 200 };
 /// The widget showing the large preview on the right
 class PagePreviewWidget : public QWidget
 {
+    Q_OBJECT
 public:
     PagePreviewWidget(QWidget *parent = 0)
         : QWidget(parent)
     {
+        // For link hovered functionality
+        setMouseTracking(true);
     }
     void setPixmap(const QPixmap &pixmap)
     {
@@ -49,13 +52,31 @@ public:
     int pixmapHeight() const { return m_pixmap.height(); }
     QSize pixmapSize() const { return m_pixmap.size(); }
 
+Q_SIGNALS:
+    void mouseMoved(const QPoint &pos);
+    void mouseClicked(const QPoint &pos);
+
 protected:
+    QPoint pixmapOffset() const
+    {
+        return QPoint((width() - m_pixmap.width()) / 2, (height() - m_pixmap.height()) / 2);
+    }
+
     void paintEvent(QPaintEvent *) override
     {
         QPainter painter(this);
-        const QPoint offset((width() - m_pixmap.width()) / 2, (height() - m_pixmap.height()) / 2);
         // painter.fillRect( event->rect(), QColor(224,224,224) );
-        painter.drawPixmap(offset, m_pixmap);
+        painter.drawPixmap(pixmapOffset(), m_pixmap);
+    }
+    /// \reimp
+    void mouseMoveEvent(QMouseEvent *ev) override
+    {
+        Q_EMIT mouseMoved(ev->pos() - pixmapOffset());
+    }
+    /// \reimp
+    void mouseReleaseEvent(QMouseEvent *ev) override
+    {
+        Q_EMIT mouseClicked(ev->pos() - pixmapOffset());
     }
 
 private:
@@ -83,6 +104,8 @@ public:
     void pageNumberReturnPressed();
     void setReport(KDReports::Report *report);
 
+    void handleMouseMove(const QPoint &pos);
+    void handleMouseRelease(const QPoint &pos);
     void _kd_slotCurrentPageChanged();
     void _kd_slotFirstPage();
     void _kd_slotPrevPage();
@@ -97,28 +120,28 @@ public:
 
     PagePreviewWidget *m_previewWidget;
     QPrinter m_printer;
-    qreal m_zoomFactor;
-    qreal m_endlessPrinterWidth;
-    KDReports::Report *m_report;
+    qreal m_zoomFactor = 1.0;
+    qreal m_endlessPrinterWidth = 114.0;
+    KDReports::Report *m_report = nullptr;
     QTimer m_previewTimer;
     KDReports::PreviewWidget *q;
-    int m_pageCount;
-    int m_firstDirtyPreviewItem;
-    bool m_eatPageNumberClick;
+    int m_pageCount = 0;
+    int m_firstDirtyPreviewItem = -1;
+    bool m_eatPageNumberClick = false;
+    bool m_onAnchor = false;
 };
 
 KDReports::PreviewWidgetPrivate::PreviewWidgetPrivate(KDReports::PreviewWidget *w)
     : m_previewWidget(new PagePreviewWidget)
-    , m_printer()
-    , m_zoomFactor(1.0)
-    , m_endlessPrinterWidth(114.0)
-    , m_report(0)
     , q(w)
-    , m_pageCount(0)
-    , m_firstDirtyPreviewItem(-1)
-    , m_eatPageNumberClick(false)
 {
     QObject::connect(&m_previewTimer, SIGNAL(timeout()), q, SLOT(_kd_previewNextItems()));
+    QObject::connect(m_previewWidget, &PagePreviewWidget::mouseMoved, q, [this](const QPoint &pos) {
+        handleMouseMove(pos);
+    });
+    QObject::connect(m_previewWidget, &PagePreviewWidget::mouseClicked, q, [this](const QPoint &pos) {
+        handleMouseRelease(pos);
+    });
 }
 
 void KDReports::PreviewWidgetPrivate::init()
@@ -219,6 +242,28 @@ QPixmap KDReports::PreviewWidgetPrivate::paintPreview(int index)
     painter.drawRect(QRectF(0, 0, paperSize.width(), paperSize.height()));
 
     return pixmap;
+}
+
+void KDReports::PreviewWidgetPrivate::handleMouseMove(const QPoint &pos)
+{
+    const QPoint unscaledPos = pos / m_zoomFactor;
+    const QString link = m_report->anchorAt(pageList->currentRow(), unscaledPos);
+    if (link.isEmpty()) { // restore cursor
+        q->unsetCursor();
+        m_onAnchor = false;
+    } else if (!m_onAnchor) {
+        q->setCursor(Qt::PointingHandCursor);
+        m_onAnchor = true;
+    }
+}
+
+void KDReports::PreviewWidgetPrivate::handleMouseRelease(const QPoint &pos)
+{
+    const QPoint unscaledPos = pos / m_zoomFactor;
+    const QString link = m_report->anchorAt(pageList->currentRow(), unscaledPos);
+    if (!link.isEmpty()) {
+        Q_EMIT q->linkActivated(link);
+    }
 }
 
 void KDReports::PreviewWidgetPrivate::printSelectedPages()
@@ -674,3 +719,4 @@ QSize KDReports::PreviewWidget::sizeHint() const
 }
 
 #include "moc_KDReportsPreviewWidget.cpp"
+#include "KDReportsPreviewWidget.moc"

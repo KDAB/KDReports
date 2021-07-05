@@ -112,6 +112,11 @@ Q_SIGNALS:
     void pageOrientationChanged(QPageLayout::Orientation orientation);
     /// Emitted when the table settings button has been clicked
     void tableSettingsClicked();
+    /**
+     * Emitted when the user clicked on a hyperlink
+     * \since 2.0
+     */
+    void linkActivated(const QUrl &url);
 
 protected:
     /// \reimp

@@ -67,6 +67,7 @@ KDReports::PreviewDialog::PreviewDialog(KDReports::Report *report, QWidget *pare
     topLayout->addLayout(bottomLayout);
 
     connect(d->m_previewWidget, SIGNAL(tableSettingsClicked()), this, SLOT(_kd_slotTableBreakingDialog()));
+    connect(d->m_previewWidget, &KDReports::PreviewWidget::linkActivated, this, &KDReports::PreviewDialog::linkActivated);
 
     d->m_buttonBox = new QDialogButtonBox(Qt::Horizontal, this);
     bottomLayout->addWidget(d->m_buttonBox);
