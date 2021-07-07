@@ -359,7 +359,7 @@ void KDReports::ReportPrivate::paintPage(int pageNumber, QPainter &painter)
     if (footer && !skipHeadersFooters) {
         painter.save();
         const int bottom = qRound(mmToPixels(m_marginBottom));
-        const int footerHeight = skipHeadersFooters ? 0 : qRound(m_footers.height());
+        const int footerHeight = qRound(m_footers.height());
         painter.translate(textDocRect.left(), m_paperSize.height() - bottom - footerHeight);
         ctx.clip = painter.clipRegion().boundingRect();
         footer->doc().contentDocument().documentLayout()->draw(&painter, ctx);
