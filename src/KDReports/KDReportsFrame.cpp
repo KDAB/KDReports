@@ -33,6 +33,10 @@ public:
         , m_border(1.0)
         , m_widthUnit(KDReports::Millimeters)
         , m_heightUnit(KDReports::Millimeters)
+        , m_leftMargin( 0 )
+        , m_rightMargin( 0 )
+        , m_topMargin( 0 )
+        , m_bottomMargin( 0 )
     {
     }
     ~FramePrivate() { }
@@ -43,6 +47,11 @@ public:
     qreal m_border;
     KDReports::Unit m_widthUnit;
     KDReports::Unit m_heightUnit;
+    
+    qreal m_leftMargin;
+    qreal m_rightMargin;
+    qreal m_topMargin;
+    qreal m_bottomMargin;
 };
 
 KDReports::Frame::Frame()
@@ -80,6 +89,51 @@ void KDReports::Frame::setHeight(qreal height, KDReports::Unit unit)
 void KDReports::Frame::setPadding(qreal padding)
 {
     d->m_padding = padding;
+}
+
+
+KDReports::Frame &KDReports::Frame::setTopMargin( qreal topMargin ){
+
+    d->m_topMargin = topMargin;
+    return *this;
+}
+
+KDReports::Frame &KDReports::Frame::setBottomMargin( qreal bottomMargin ){
+    
+    d->m_bottomMargin = bottomMargin;
+    return *this;
+}
+
+KDReports::Frame &KDReports::Frame::setLeftMargin( qreal leftMargin ){
+    
+    d->m_leftMargin = leftMargin;
+    return *this;
+}
+
+KDReports::Frame &KDReports::Frame::setRightMargin( qreal rightMargin ){
+    
+    d->m_rightMargin = rightMargin;
+    return *this;
+}
+
+qreal KDReports::Frame::topMargin() const
+{
+    return d->m_topMargin;
+}
+
+qreal KDReports::Frame::bottomMargin() const
+{
+    return d->m_bottomMargin;
+}
+
+qreal KDReports::Frame::leftMargin() const
+{
+    return d->m_leftMargin;
+}
+
+qreal KDReports::Frame::rightMargin() const
+{
+    return d->m_rightMargin;
 }
 
 qreal KDReports::Frame::padding() const

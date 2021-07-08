@@ -72,6 +72,47 @@ public:
      * The default padding has a size of 0.5 mm.
      */
     void setPadding(qreal padding);
+    
+    
+        /**
+     * Set the frame top margin.
+     */
+    KDReports::Frame& setTopMargin( qreal topMargin );
+
+    /**
+     * Set the frame bottom margin.
+     */
+    KDReports::Frame& setBottomMargin( qreal bottomMargin );
+
+    /**
+     * Set the frame left margin.
+     */
+    KDReports::Frame& setLeftMargin( qreal leftMargin );
+
+    /**
+     * Set the frame right margin.
+     */
+    KDReports::Frame& setRightMargin( qreal rightMargin );
+
+    /**
+     * Get the top margin of frame.
+     */
+    qreal topMargin() const;
+    
+    /**
+     * Get the bottom margin of frame.
+     */
+    qreal bottomMargin() const;
+    
+    /**
+     * Get the left margin of frame.
+     */
+    qreal leftMargin() const;
+    
+    /**
+     * Get the right margin of frame.
+     */
+    qreal rightMargin() const;
 
     /**
      * Returns the width of the frame's internal padding in millimeters.
