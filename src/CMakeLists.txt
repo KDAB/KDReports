@@ -18,7 +18,7 @@ set(FORMS
 )
 set(RESOURCES ${CMAKE_CURRENT_SOURCE_DIR}/../pics/pics.qrc)
 
-if (${QT_MAJOR_VERSION} EQUAL 5)
+if(${QT_MAJOR_VERSION} EQUAL 5)
   qt5_wrap_ui(KDREPORTS_UI ${FORMS})
   qt5_add_resources(KDREPORTS_RES ${RESOURCES})
 else()
@@ -29,75 +29,6 @@ endif()
 if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/KDReports)
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/KDReports)
 endif()
-
-include(ECMGenerateHeaders)
-ecm_generate_headers(kdreports_HEADERS
-  ORIGINAL
-    CAMELCASE
-  HEADER_NAMES
-    KDReportsReport
-    KDReportsElement
-    KDReportsChartElement
-    KDReportsTextElement
-    KDReportsHtmlElement
-    KDReportsTableElement
-    KDReportsAutoTableElement
-    KDReportsAbstractTableElement
-    KDReportsImageElement
-    KDReportsHLineElement
-    KDReportsPreviewDialog
-    KDReportsPreviewWidget
-    KDReportsHeader
-    KDReportsCell
-    KDReportsFrame
-    KDReportsGlobal
-    KDReportsXmlElementHandler
-    KDReportsXmlElementHandlerV2
-    KDReportsVariableType
-    KDReportsUnit
-    KDReportsTableBreakingSettingsDialog
-    KDReportsMainTable
-    KDReportsXmlHelper
-    KDReportsErrorDetails
-  OUTPUT_DIR
-    ${CMAKE_CURRENT_BINARY_DIR}/KDReports
-  RELATIVE
-    KDReports
-  COMMON_HEADER
-    KDReports
-)
-file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReports "#include \"KDReports.h\"\n")
-
-install(FILES
-  ${kdreports_HEADERS}
-  KDReports/KDReportsReport.h
-  KDReports/KDReportsElement.h
-  KDReports/KDReportsChartElement.h
-  KDReports/KDReportsTextElement.h
-  KDReports/KDReportsHtmlElement.h
-  KDReports/KDReportsTableElement.h
-  KDReports/KDReportsAutoTableElement.h
-  KDReports/KDReportsAbstractTableElement.h
-  KDReports/KDReportsImageElement.h
-  KDReports/KDReportsHLineElement.h
-  KDReports/KDReportsPreviewDialog.h
-  KDReports/KDReportsPreviewWidget.h
-  KDReports/KDReportsHeader.h
-  KDReports/KDReportsCell.h
-  KDReports/KDReportsFrame.h
-  KDReports/KDReportsGlobal.h
-  KDReports/KDReportsXmlElementHandler.h
-  KDReports/KDReportsXmlElementHandlerV2.h
-  KDReports/KDReportsVariableType.h
-  KDReports/KDReportsUnit.h
-  KDReports/KDReportsTableBreakingSettingsDialog.h
-  KDReports/KDReportsMainTable.h
-  KDReports/KDReportsXmlHelper.h
-  KDReports/KDReportsErrorDetails.h
-  KDReports/KDReports.h
-  ${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReportsVersion.h # generated
-DESTINATION ${INSTALL_INCLUDE_DIR}/KDReports
-)
 
 set(SOURCES
   KDReports/KDReportsReport.cpp
@@ -145,8 +76,8 @@ else()
 endif()
 
 target_link_libraries(kdreports ${QT_LIBRARIES})
-if (KDChart_FOUND)
-    target_link_libraries(kdreports KDChart::kdchart)
+if(KDChart_FOUND)
+  target_link_libraries(kdreports KDChart::kdchart)
 endif()
 set_target_properties(kdreports PROPERTIES DEFINE_SYMBOL KDREPORTS_BUILD_KDREPORTS_LIB)
 set_target_properties(kdreports PROPERTIES
@@ -167,11 +98,82 @@ if(WIN32)
   endif()
 endif()
 
-install(TARGETS kdreports EXPORT KDReportsTargets
-  RUNTIME DESTINATION ${INSTALL_RUNTIME_DIR}
-  LIBRARY DESTINATION ${INSTALL_LIBRARY_DIR}
-  ARCHIVE DESTINATION ${INSTALL_ARCHIVE_DIR}
-)
-if(MSVC AND NOT KDReports_STATIC)
-  install(FILES "$<TARGET_PDB_FILE_DIR:kdreports>/$<TARGET_PDB_FILE_NAME:kdreports>" DESTINATION ${INSTALL_LIBRARY_DIR} CONFIGURATIONS Debug RelWithDebInfo)
+if(${PROJECT_NAME}_IS_ROOT_PROJECT)
+  include(ECMGenerateHeaders)
+  ecm_generate_headers(kdreports_HEADERS
+    ORIGINAL
+      CAMELCASE
+    HEADER_NAMES
+      KDReportsReport
+      KDReportsElement
+      KDReportsChartElement
+      KDReportsTextElement
+      KDReportsHtmlElement
+      KDReportsTableElement
+      KDReportsAutoTableElement
+      KDReportsAbstractTableElement
+      KDReportsImageElement
+      KDReportsHLineElement
+      KDReportsPreviewDialog
+      KDReportsPreviewWidget
+      KDReportsHeader
+      KDReportsCell
+      KDReportsFrame
+      KDReportsGlobal
+      KDReportsXmlElementHandler
+      KDReportsXmlElementHandlerV2
+      KDReportsVariableType
+      KDReportsUnit
+      KDReportsTableBreakingSettingsDialog
+      KDReportsMainTable
+      KDReportsXmlHelper
+      KDReportsErrorDetails
+    OUTPUT_DIR
+      ${CMAKE_CURRENT_BINARY_DIR}/KDReports
+    RELATIVE
+      KDReports
+    COMMON_HEADER
+      KDReports
+  )
+  file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReports "#include \"KDReports.h\"\n")
+
+  install(FILES
+    ${kdreports_HEADERS}
+    KDReports/KDReportsReport.h
+    KDReports/KDReportsElement.h
+    KDReports/KDReportsChartElement.h
+    KDReports/KDReportsTextElement.h
+    KDReports/KDReportsHtmlElement.h
+    KDReports/KDReportsTableElement.h
+    KDReports/KDReportsAutoTableElement.h
+    KDReports/KDReportsAbstractTableElement.h
+    KDReports/KDReportsImageElement.h
+    KDReports/KDReportsHLineElement.h
+    KDReports/KDReportsPreviewDialog.h
+    KDReports/KDReportsPreviewWidget.h
+    KDReports/KDReportsHeader.h
+    KDReports/KDReportsCell.h
+    KDReports/KDReportsFrame.h
+    KDReports/KDReportsGlobal.h
+    KDReports/KDReportsXmlElementHandler.h
+    KDReports/KDReportsXmlElementHandlerV2.h
+    KDReports/KDReportsVariableType.h
+    KDReports/KDReportsUnit.h
+    KDReports/KDReportsTableBreakingSettingsDialog.h
+    KDReports/KDReportsMainTable.h
+    KDReports/KDReportsXmlHelper.h
+    KDReports/KDReportsErrorDetails.h
+    KDReports/KDReports.h
+    DESTINATION ${INSTALL_INCLUDE_DIR}/KDReports
+  )
+
+  install(TARGETS kdreports EXPORT KDReportsTargets
+    RUNTIME DESTINATION ${INSTALL_RUNTIME_DIR}
+    LIBRARY DESTINATION ${INSTALL_LIBRARY_DIR}
+    ARCHIVE DESTINATION ${INSTALL_ARCHIVE_DIR}
+  )
+
+  if(MSVC AND NOT KDReports_STATIC)
+    install(FILES "$<TARGET_PDB_FILE_DIR:kdreports>/$<TARGET_PDB_FILE_NAME:kdreports>" DESTINATION ${INSTALL_LIBRARY_DIR} CONFIGURATIONS Debug RelWithDebInfo)
+  endif()
 endif()
