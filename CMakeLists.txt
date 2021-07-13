@@ -1,7 +1,7 @@
 ##
 ## This file is part of the KD Reports library.
 ##
-## SPDX-FileCopyrightText: 2015-2020 Klarälvdalens Datakonsult AB, a KDAB Group company <info@kdab.com>
+## SPDX-FileCopyrightText: 2015-2021 Klarälvdalens Datakonsult AB, a KDAB Group company <info@kdab.com>
 ##
 ## SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDAB-KDReports OR LicenseRef-KDAB-KDReports-US
 ##
@@ -173,13 +173,16 @@ if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
   )
 
   # Generate .pri file for qmake users
-  include(ECMGeneratePriFile)
-  set(PROJECT_VERSION_STRING ${${PROJECT_NAME}_VERSION})
-  ecm_generate_pri_file(BASE_NAME KDReports
-                        LIB_NAME KDReports
-                        # DEPS "${PRI_DEPS}" # TODO for kdchart
-                        FILENAME_VAR pri_filename)
-  install(FILES ${pri_filename} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
+  if(QT_MAJOR_VERSION EQUAL 5 AND
+     CMAKE_VERSION VERSION_GREATER "3.11.99" AND NOT CMAKE_CONFIGURATION_TYPES) # Not working with VS generator or older cmake versions
+    include(ECMGeneratePriFile)
+    set(PROJECT_VERSION_STRING ${${PROJECT_NAME}_VERSION})
+    ecm_generate_pri_file(BASE_NAME KDReports
+                          LIB_NAME KDReports
+                          # DEPS "${PRI_DEPS}" # TODO for kdchart
+                          FILENAME_VAR pri_filename)
+    install(FILES ${pri_filename} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
+  endif()
 endif()
 
 add_subdirectory(src)
