@@ -138,7 +138,7 @@ bool KDReports::TextDocReportLayout::scaleTo(int numPagesHorizontally, int numPa
 void KDReports::TextDocReportLayout::setFixedRowHeight(qreal height)
 {
     Q_UNUSED(height);
-    qWarning("fixed row height is only implemened in Spreadsheet mode");
+    qWarning("fixed row height is only implemented in Spreadsheet mode");
 }
 
 int KDReports::TextDocReportLayout::maximumNumberOfPagesForHorizontalScaling() const

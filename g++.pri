@@ -37,10 +37,10 @@
   QMAKE_CXXFLAGS += $$NORMAL_CFLAGS $$NORMAL_CXXFLAGS
 
   # Mirko: removed that during development in trunk, should be
-  # reenabled once going towards a release: -Werror 
+  # re-enabled once going towards a release: -Werror
   QMAKE_CFLAGS_WARN_ON   += $$NORMAL_CFLAGS
   # Mirko: removed that during development in trunk, should be
-  # reenabled once going towards a release: -Werror 
+  # re-enabled once going towards a release: -Werror
   QMAKE_CXXFLAGS_WARN_ON += $$NORMAL_CFLAGS $$NORMAL_CXXFLAGS
 
   #QMAKE_CXXFLAGS_WARN_ON += $$USABLE_CXXFLAGS

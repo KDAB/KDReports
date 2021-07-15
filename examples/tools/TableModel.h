@@ -64,7 +64,7 @@ public:
      * to provide the same number of fields. HINT: This is the default way
      * OO.o-Calc export CSV files.
      * The cell data is expected to be floating point values, except for the
-     * first row and the first column, where string values are exected (those
+     * first row and the first column, where string values are executed (those
      * will be used as axis descriptors). If values cannot be converted to
      * doubles, there string representation will be used.
      *

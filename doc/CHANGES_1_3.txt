@@ -6,7 +6,7 @@ Features:
 * Spreadsheet mode, for faster and more powerful printing of large tables.
   The table can be broken across multiple pages horizontally and vertically, and
   can be forced to fit into N*M pages, using a smaller font if necessary.
-  See Report::setReportMode for the difference betweeen the two modes.
+  See Report::setReportMode for the difference between the two modes.
 
 * New XML tag <hline/> to simplify the use of horizontal lines in XML.
   Support for custom color, configurable thickness and margin.
