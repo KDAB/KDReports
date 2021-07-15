@@ -1,0 +1,3 @@
+[codespell]
+skip = *.ts,./build-*,.git
+interactive = 3
