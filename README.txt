@@ -22,11 +22,11 @@ KD Reports requires Qt 5.0 or newer.
 
 See [INSTALL.txt](INSTALL.txt) for installation instructions using CMake.
 
-After reading the introductory overview files in doc/
+After reading the introductory overview files in docs/
 you will find more information at these places:
 
  * [detailed browsable API reference](https://docs.kdab.com/kdreports)
- * [programmers manual with examples](doc/manual/kdreports.pdf)
+ * [programmers manual with examples](docs/manual/kdreports.pdf)
  * [our sorted example programs](examples/)
 
 Contact
@@ -44,7 +44,7 @@ Stay up-to-date with KDAB product announcements:
 Get Involved
 ============
 KDAB will happily accept external contributions, but substantial contributions require
-a signed [Copyright Assignment Agreement](doc/KDReports-CopyrightAssignmentForm.pdf).
+a signed [Copyright Assignment Agreement](docs/KDReports-CopyrightAssignmentForm.pdf).
 
 Contact info@kdab.com for more information about the Copyright Assignment Agreement.
 
