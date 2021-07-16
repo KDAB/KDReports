@@ -13,10 +13,6 @@ qrc_*.cpp
 
 *-e
 
-.qmake.cache
-.confqmake.cache
-.license.accepted
-
 CPackConfig.cmake
 
 configure.sh

@@ -1,3 +1,0 @@
-[submodule "autogen"]
-	path = autogen
-	url = https://github.com/KDAB/autogen.git

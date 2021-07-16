@@ -3,7 +3,6 @@ What is new in KD Reports 2.0
 
 Goals (not implemented yet):
  * Qt6 support
- * Remove qmake buildsystem
 
 New features:
 -------------
@@ -11,6 +10,7 @@ New features:
 
 General:
 --------
+* Remove qmake buildsystem
 * Python3 bindings for Qt5. See INSTALL-bindings.txt for more information.
 
 Bug fixes:
