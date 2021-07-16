@@ -59,7 +59,7 @@ set(SOURCES
   KDReports/KDReportsXmlHelper.cpp
 )
 
-add_library(kdreports ${KDReports_LIBRARY_MODE} ${SOURCES} ${KDREPORTS_UI} ${KDREPORTS_RES})
+add_library(kdreports ${KDReports_LIBRARY_MODE} ${SOURCES})
 set_target_properties(kdreports PROPERTIES OUTPUT_NAME "kdreports${${PROJECT_NAME}_LIBRARY_QTID}")
 if(${PROJECT_NAME}_STATIC)
   target_compile_definitions(kdreports PUBLIC KDREPORTS_STATICLIB)
