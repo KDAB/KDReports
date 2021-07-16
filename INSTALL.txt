@@ -1,7 +1,13 @@
 These are the instructions for installing KD Reports using the CMake buildsystem.
 CMake version 3.1 or higher is required.
 
-KD Reports requires a Qt version >= 5.0.
+The qmake (via autogen.py) buildsystem is removed starting with KDReports version 2.0.
+
+KD Reports requires Qt with PrintSupport and XML support enabled.
+Qt Version support:
+ * KD Reports 1.8 or below requires Qt4.6 up to Qt5.15
+ * KD Reports 1.9 requires Qt5.6 up to Qt5.15
+ * KD Reports 2.0 or above requires Qt5.9 up to Qt6.x
 
 Please see the comments at the top of CMakeLists.txt for
 the available configuration options you can pass to cmake.

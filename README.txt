@@ -18,7 +18,8 @@ For more information, see https://www.kdab.com/development-resources/qt-tools/kd
 
 Using KD Reports
 ================
-KD Reports requires Qt 5.0 or newer.
+KD Reports requires Qt 5.9.0 or newer, and a compiler with C++11 support.
+Qt6 support is added starting with KD Reports version 2.0.
 
 See [INSTALL.txt](INSTALL.txt) for installation instructions using CMake.
 
