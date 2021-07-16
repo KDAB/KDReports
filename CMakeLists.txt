@@ -234,12 +234,13 @@ if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
   # Generate .pri file for qmake users
   #TODO: ECM does not support Qt6 yet
   if(QT_MAJOR_VERSION EQUAL 5 AND
-     CMAKE_VERSION VERSION_GREATER "3.11.99" AND NOT CMAKE_CONFIGURATION_TYPES) # Not working with VS generator or older cmake versions
+    CMAKE_VERSION VERSION_GREATER "3.11.99" AND NOT CMAKE_CONFIGURATION_TYPES) # Not working with VS generator or older cmake versions
     include(ECMGeneratePriFile)
     ecm_generate_pri_file(BASE_NAME KDReports
                           LIB_NAME KDReports
                           # DEPS "${PRI_DEPS}" # TODO for kdchart
-                          FILENAME_VAR pri_filename)
+                          FILENAME_VAR pri_filename
+    )
     install(FILES ${pri_filename} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
   endif()
 endif()

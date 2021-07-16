@@ -17,4 +17,4 @@ set(SOURCES
 )
 
 add_executable(LongReport ${SOURCES})
-target_link_libraries(LongReport ${QT_LIBRARIES} kdreports) 
+target_link_libraries(LongReport ${QT_LIBRARIES} kdreports)

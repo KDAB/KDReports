@@ -12,7 +12,6 @@
 ## Contact info@kdab.com if any conditions of this licensing are not clear to you.
 ##
 
-
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x000000)
 
 set(SOURCES

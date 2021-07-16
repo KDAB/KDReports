@@ -16,6 +16,7 @@ find_library(KDChart_LIBRARIES
     NAMES KDChart kdchart kdchart2
     HINTS ${KDChart_DIR}/lib $ENV{KDChart_DIR}/lib
     PATH_SUFFIXES lib)
+
 find_path(KDChart_INCLUDE_DIR
     NAMES KDChartGlobal.h
     HINTS ${KDChart_DIR}/include $ENV{KDChart_DIR}/include
@@ -25,7 +26,7 @@ mark_as_advanced(KDChart_LIBRARIES KDChart_INCLUDE_DIR)
 
 find_package_handle_standard_args(KDChart DEFAULT_MSG KDChart_LIBRARIES KDChart_INCLUDE_DIR)
 
-if (KDChart_FOUND)
+if(KDChart_FOUND)
     add_library(KDChart UNKNOWN IMPORTED)
     set_target_properties(KDChart PROPERTIES
         IMPORTED_LOCATION ${KDChart_LIBRARIES}

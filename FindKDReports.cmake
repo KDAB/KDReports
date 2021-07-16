@@ -13,10 +13,10 @@
 include(FindPackageHandleStandardArgs)
 
 find_library(KDReports_LIBRARIES
-	NAMES KDReports kdreports
-	PATH_SUFFIXES bin)
+             NAMES KDReports kdreports
+             PATH_SUFFIXES bin)
 find_path(KDReports_INCLUDE_DIR
-	NAMES KDReports KDReportsGlobal)
+          NAMES KDReports KDReportsGlobal)
 
 mark_as_advanced(KDReports_LIBRARIES KDReports_INCLUDE_DIR)
 

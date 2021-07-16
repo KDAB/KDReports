@@ -17,4 +17,4 @@ set(SOURCES
 )
 
 add_executable(PriceList ${SOURCES})
-target_link_libraries(PriceList ${QT_LIBRARIES} kdreporttesttools kdreports) 
+target_link_libraries(PriceList ${QT_LIBRARIES} kdreporttesttools kdreports)
