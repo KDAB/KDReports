@@ -39,7 +39,7 @@ macro(add_unittest _source)
   endforeach()
 
   if(_resource)
-    qt5_add_resources(_srcs ${_resource})
+    set(_srcs ${_srcs} ${_resource})
   endif()
 
   add_executable(${_name} ${_srcs})

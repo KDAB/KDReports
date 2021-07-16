@@ -18,14 +18,6 @@ set(FORMS
 )
 set(RESOURCES ${CMAKE_CURRENT_SOURCE_DIR}/../pics/pics.qrc)
 
-if(${QT_MAJOR_VERSION} EQUAL 5)
-  qt5_wrap_ui(KDREPORTS_UI ${FORMS})
-  qt5_add_resources(KDREPORTS_RES ${RESOURCES})
-else()
-  qt6_wrap_ui(KDREPORTS_UI ${FORMS})
-  qt6_add_resources(KDREPORTS_RES ${RESOURCES})
-endif()
-
 if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/KDReports)
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/KDReports)
 endif()
