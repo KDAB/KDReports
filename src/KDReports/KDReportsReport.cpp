@@ -94,52 +94,15 @@ bool KDReports::ReportPrivate::wantEndlessPrinting() const
     return m_layoutWidth > 0;
 }
 
-// Copy of Qt's qt_paperSizes
-static const float kdr_paperSizes[][2] = {
-    {210, 297}, // A4
-    {176, 250}, // B5
-    {215.9f, 279.4f}, // Letter
-    {215.9f, 355.6f}, // Legal
-    {190.5f, 254}, // Executive
-    {841, 1189}, // A0
-    {594, 841}, // A1
-    {420, 594}, // A2
-    {297, 420}, // A3
-    {148, 210}, // A5
-    {105, 148}, // A6
-    {74, 105}, // A7
-    {52, 74}, // A8
-    {37, 52}, // A8
-    {1000, 1414}, // B0
-    {707, 1000}, // B1
-    {31, 44}, // B10
-    {500, 707}, // B2
-    {353, 500}, // B3
-    {250, 353}, // B4
-    {125, 176}, // B6
-    {88, 125}, // B7
-    {62, 88}, // B8
-    {33, 62}, // B9
-    {163, 229}, // C5E
-    {105, 241}, // US Common
-    {110, 220}, // DLE
-    {210, 330}, // Folio
-    {431.8f, 279.4f}, // Ledger
-    {279.4f, 431.8f} // Tabloid
-};
-
 QSizeF KDReports::ReportPrivate::paperSize() const
 {
     // determine m_paperSize from m_pageSize if needed
     if (m_paperSize.isEmpty()) {
-        int width_index = 0;
-        int height_index = 1;
+        const auto mmSize = m_pageSize.size(QPageSize::Millimeter);
+        m_paperSize = QSizeF{mmToPixels(mmSize.width()), mmToPixels(mmSize.height())};
         if (m_orientation == QPageLayout::Landscape) {
-            width_index = 1;
-            height_index = 0;
+            m_paperSize.transpose();
         }
-        m_paperSize = QSizeF(mmToPixels(kdr_paperSizes[m_pageSize.id()][width_index]),
-                mmToPixels(kdr_paperSizes[m_pageSize.id()][height_index]));
     }
     // qDebug() << "m_paperSize=" << m_paperSize;
     return m_paperSize;
