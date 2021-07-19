@@ -127,10 +127,20 @@ private slots:
         QCOMPARE(doc.toPlainText(), QString("Page 1 of 1"));
         QCOMPARE(doc.defaultFont().family(), QString("Arial"));
         QTextBlock block = doc.begin();
+#if QT_VERSION < QT_VERSION_CHECK(6, 1, 0)
         QCOMPARE(block.charFormat().fontFamily(), QString());
+#else
+        // What a weird API, fontFamilies returns a QVariant rather than a QStringList!
+        QCOMPARE(block.charFormat().fontFamilies(), QVariant());
+#endif
         QTextCursor cursor(block);
         while (!cursor.atBlockEnd()) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 1, 0)
             QCOMPARE(cursor.charFormat().fontFamily(), QString("Arial"));
+#else
+            // What a weird API, fontFamilies returns a QVariant rather than a QStringList!
+            QCOMPARE(cursor.charFormat().fontFamilies().toStringList(), QStringList{QString("Arial")});
+#endif
             QCOMPARE(cursor.charFormat().font().pointSize(), 8);
             cursor.movePosition(QTextCursor::Right);
         }
@@ -189,8 +199,13 @@ private slots:
         QVERIFY(!report.loadFromXML(&file, &details));
         QCOMPARE(details.line(), 2);
         QCOMPARE(details.column(), 47);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         QCOMPARE(details.driverMessage(), QString("error occurred while parsing element"));
         QCOMPARE(details.message(), QString("Error on line 2, column 47: error occurred while parsing element"));
+#else
+        QCOMPARE(details.driverMessage(), QString("Expected '>' or '/', but got '\"'."));
+        QCOMPARE(details.message(), QString("Error on line 2, column 47: Expected '>' or '/', but got '\"'."));
+#endif
     }
 
     void wrongTopElement()
