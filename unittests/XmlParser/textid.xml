@@ -3,8 +3,7 @@
   <text pointsize="18" alignment="hcenter" id="1"/>
   <ifdef id="2">
     <text inline="true" id="2"/>
-    <text inline="true"><![CDATA[ ]]></text>
-    <text inline="true">.</text>
+    <text inline="true"> .</text>
   </ifdef>
   <ifdef id="not set">
     <text>ERROR, should not appear</text>
