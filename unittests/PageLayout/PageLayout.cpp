@@ -64,11 +64,20 @@ private slots:
         report.setPageSize(QPageSize::A5);
         report.addElement(KDReports::TextElement("Foo"));
         QCOMPARE(report.numberOfPages(), 1);
-        QCOMPARE(report.pageSize(), QPageSize::A5);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+        QCOMPARE(report.pageSize(), QPrinter::A5);
+#else
+        QCOMPARE(report.pageSize().id(), QPageSize::A5);
+#endif
         QCOMPARE(report.pageOrientation(), QPageLayout::Portrait);
         QSizeF paperSize = report.paperSize();
         report.setPageOrientation(QPageLayout::Landscape);
-        QCOMPARE(report.pageSize(), QPageSize::A5);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+        QCOMPARE(report.pageSize(), QPrinter::A5);
+#else
+        QCOMPARE(report.pageSize().id(), QPageSize::A5);
+#endif
+
         QCOMPARE(report.pageOrientation(), QPageLayout::Landscape);
         paperSize.transpose(); // swap width and height
         QCOMPARE(report.paperSize(), paperSize);
