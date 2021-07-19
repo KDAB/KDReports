@@ -93,7 +93,7 @@ void TableLayout::updateColumnWidths()
         m_columnWidths[col] = 0;
         if (m_horizontalHeaderVisible) {
             const QString cellText = m_model->headerData(col, Qt::Horizontal).toString();
-            const qreal textWidth = m_horizontalHeaderFontScaler.fontMetrics().width(cellText);
+            const qreal textWidth = m_horizontalHeaderFontScaler.textWidth(cellText);
             const qreal width = addIconWidth(textWidth, m_model->headerData(col, Qt::Horizontal, Qt::DecorationRole));
             m_columnWidths[col] = qMax(m_columnWidths[col], width);
             m_widestTextPerColumn[col] = cellText;
@@ -130,7 +130,7 @@ void TableLayout::updateColumnWidths()
     if (m_verticalHeaderVisible) {
         for (int row = 0; row < rowCount; ++row) {
             const QString cellText = m_model->headerData(row, Qt::Vertical).toString();
-            const qreal textWidth = m_verticalHeaderFontScaler.fontMetrics().width(cellText);
+            const qreal textWidth = m_verticalHeaderFontScaler.textWidth(cellText);
             const qreal width = addIconWidth(textWidth, m_model->headerData(row, Qt::Vertical, Qt::DecorationRole));
             m_vHeaderWidth = qMax(m_vHeaderWidth, width);
         }

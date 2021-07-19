@@ -91,15 +91,19 @@ public:
      */
     ~Cell() override; // public for QMap
 
+    /**
+     * @internal - do not call
+     */
+    Cell(const Cell &other); // public for QMap
+    /**
+     * @internal - do not call
+     */
+    Cell &operator=(const Cell &other); // public for QMap
+
 private:
-    // TableElement needs to create/copy cells
     friend class TableElement;
     friend class QMap<QPair<int, int>, Cell>;
-    friend struct QMapData<QPair<int, int>, Cell>;
-    friend struct QMapNode<QPair<int, int>, Cell>;
     Cell();
-    Cell(const Cell &other);
-    Cell &operator=(const Cell &other);
 
     CellPrivate *const d;
 };

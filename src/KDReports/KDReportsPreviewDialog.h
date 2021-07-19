@@ -126,10 +126,17 @@ public:
     QString savedFileName() const;
 
 Q_SIGNALS:
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     /// Emitted when the user changes the page size.
     void pageSizeChanged(QPrinter::PageSize pageSize);
     /// Emitted when the user changes the page orientation.
     void orientationChanged(QPrinter::Orientation orientation);
+#else
+    /// Emitted when the user changes the page size.
+    void pageSizeChanged(const QPageSize &pageSize);
+    /// Emitted when the user changes the page orientation.
+    void orientationChanged(QPageLayout::Orientation orientation);
+#endif
     /**
      * Emitted when the user clicked on a hyperlink
      * \since 2.0

@@ -104,12 +104,18 @@ public:
     QSize sizeHint() const override;
 
 Q_SIGNALS:
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     /// Emitted when the user changes the page size.
     void pageSizeChanged(QPrinter::PageSize pageSize);
-    /// Emitted when the user changes the page orientation (deprecated, use pageOrientationChanged)
-    void orientationChanged(QPrinter::Orientation orientation);
     /// Emitted when the user changes the page orientation.
-    void pageOrientationChanged(QPageLayout::Orientation orientation);
+    void orientationChanged(QPrinter::Orientation orientation);
+#else
+    /// Emitted when the user changes the page size.
+    void pageSizeChanged(const QPageSize &pageSize);
+    /// Emitted when the user changes the page orientation.
+    void orientationChanged(QPageLayout::Orientation orientation);
+#endif
+
     /// Emitted when the table settings button has been clicked
     void tableSettingsClicked();
     /**

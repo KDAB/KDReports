@@ -51,10 +51,9 @@ QVariant TableModel::data(const QModelIndex &index, int role) const
 {
     // FIXME kdchart queries (-1, -1) for empty models
     if (index.row() == -1 || index.column() == -1) {
-        qDebug() << "TableModel::data: row: " << index.row() << ", column: " << index.column() << ", rowCount: " << rowCount() << ", columnCount: " << columnCount() << endl
+        qDebug() << "TableModel::data: row: " << index.row() << ", column: " << index.column() << ", rowCount: " << rowCount() << ", columnCount: " << columnCount() << '\n'
                  << "TableModel::data: FIXME fix kdchart views to not query"
-                    " model data for invalid indices!"
-                 << endl;
+                    " model data for invalid indices!";
         return QVariant();
     }
 
@@ -186,13 +185,12 @@ bool TableModel::loadFromCSV(const QString &filename)
             //                      << endl;
         } else {
             qDebug() << "TableModel::loadFromCSV: table loaded, but no "
-                        "model data found."
-                     << endl;
+                        "model data found.";
         }
         endResetModel();
         return true;
     } else {
-        qDebug() << "TableModel::loadFromCSV: file" << filename << "does not exist / or could not be opened" << endl;
+        qDebug() << "TableModel::loadFromCSV: file" << filename << "does not exist / or could not be opened";
         return false;
     }
 }

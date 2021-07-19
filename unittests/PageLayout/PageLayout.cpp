@@ -61,14 +61,14 @@ private slots:
     void testOrientation()
     {
         Report report;
-        report.setPageSize(QPrinter::A5);
+        report.setPageSize(QPageSize::A5);
         report.addElement(KDReports::TextElement("Foo"));
         QCOMPARE(report.numberOfPages(), 1);
-        QCOMPARE(report.pageSize(), QPrinter::A5);
+        QCOMPARE(report.pageSize(), QPageSize::A5);
         QCOMPARE(report.pageOrientation(), QPageLayout::Portrait);
         QSizeF paperSize = report.paperSize();
         report.setPageOrientation(QPageLayout::Landscape);
-        QCOMPARE(report.pageSize(), QPrinter::A5);
+        QCOMPARE(report.pageSize(), QPageSize::A5);
         QCOMPARE(report.pageOrientation(), QPageLayout::Landscape);
         paperSize.transpose(); // swap width and height
         QCOMPARE(report.paperSize(), paperSize);
@@ -85,7 +85,7 @@ private slots:
         QCOMPARE(report.numberOfPages(), 1);
         // Switching back to normal pagination
         report.setWidthForEndlessPrinter(0);
-        report.setPageSize(QPrinter::A6);
+        report.setPageSize(QPageSize::A6);
         QVERIFY(report.numberOfPages() > 1);
     }
 

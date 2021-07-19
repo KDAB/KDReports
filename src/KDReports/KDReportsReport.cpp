@@ -480,7 +480,7 @@ KDReports::Report::Report(QObject *parent)
     : QObject(parent)
     , d(new ReportPrivate(this))
 {
-    setPageSize(QPrinter::A4);
+    setPageSize(QPageSize::A4);
 }
 
 KDReports::Report::~Report()
@@ -517,9 +517,16 @@ void KDReports::Report::addVerticalSpacing(qreal space)
     }
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 void KDReports::Report::setPageSize(const QPrinter::PageSize &size)
 {
-    setPageSize(QPageSize(static_cast<QPageSize::PageSizeId>(size)));
+    setPageSize(static_cast<QPageSize::PageSizeId>(size));
+}
+#endif
+
+void KDReports::Report::setPageSize(const QPageSize::PageSizeId &size)
+{
+    setPageSize(QPageSize{size});
 }
 
 void KDReports::Report::setPageSize(const QPageSize &size)
@@ -551,12 +558,19 @@ void KDReports::Report::setPaperSize(const QSizeF &paperSize, QPrinter::Unit uni
     d->m_pageContentSizeDirty = true;
 }
 
-// Qt6 TODO return QPageSize
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 QPrinter::PageSize KDReports::Report::pageSize() const
 {
     return static_cast<QPrinter::PageSize>(d->m_pageSize.id());
 }
+#else
+QPageSize KDReports::Report::pageSize() const
+{
+    return d->m_pageSize;
+}
+#endif
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 void KDReports::Report::setOrientation(QPrinter::Orientation orientation)
 {
     d->m_orientation = static_cast<QPageLayout::Orientation>(orientation);
@@ -568,6 +582,7 @@ QPrinter::Orientation KDReports::Report::orientation() const
 {
     return static_cast<QPrinter::Orientation>(d->m_orientation);
 }
+#endif
 
 void KDReports::Report::setPageOrientation(QPageLayout::Orientation orientation)
 {
@@ -707,7 +722,7 @@ bool KDReports::Report::printWithDialog(QWidget *parent)
 bool KDReports::Report::print(QPrinter *printer, QWidget *parent)
 {
     // save the old page size
-    QPrinter::PageSize savePageSize = pageSize();
+    const auto savePageSize = pageSize();
     if (d->wantEndlessPrinting()) {
         // ensure that the printer is set up with the right size
         d->ensureLayouted();
@@ -758,7 +773,7 @@ bool KDReports::Report::exportToImage(const QSize &size, const QString &fileName
 {
     // Get the document to fit into one page
 
-    QPrinter::PageSize savePageSize = pageSize();
+    const auto savePageSize = pageSize();
     const qreal saveLayoutWidth = d->m_layoutWidth;
     d->m_layoutWidth = d->m_layout->idealWidth() + mmToPixels(d->m_marginLeft + d->m_marginRight);
     d->m_pageContentSizeDirty = true;
@@ -1146,7 +1161,7 @@ QTextOption::Tab KDReports::Report::rightAlignedTab() const
     QTextOption::Tab tab;
     tab.position = -1;
     tab.type = QTextOption::RightTab;
-    tab.delimiter = QChar::fromLatin1('P'); // a bit hackish, but this is who we tell TextDocumentData::updatePercentSize
+    tab.delimiter = QChar::fromLatin1('P'); // a bit hackish, but this is how we tell TextDocumentData::updatePercentSize
     return tab;
 }
 
@@ -1155,7 +1170,7 @@ QTextOption::Tab KDReports::Report::middleAlignedTab() const
     QTextOption::Tab tab;
     tab.position = -1;
     tab.type = QTextOption::CenterTab;
-    tab.delimiter = QChar::fromLatin1('P'); // a bit hackish, but this is who we tell TextDocumentData::updatePercentSize
+    tab.delimiter = QChar::fromLatin1('P'); // a bit hackish, but this is how we tell TextDocumentData::updatePercentSize
     return tab;
 }
 

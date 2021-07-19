@@ -18,7 +18,6 @@
 #include <QApplication>
 #include <QDebug>
 #include <QFile>
-#include <QTextCodec>
 #include <QThread>
 
 #include <KDReports>

@@ -152,7 +152,7 @@ private slots:
         FontScaler scaler(f);
         const QFontMetricsF fm(f);
         const QString text = "hello";
-        const qreal initialWidth = fm.width(text);
+        const qreal initialWidth = scaler.textWidth(text);
 
         const qreal wantedWidth = 50;
         const qreal wantedHFactor = wantedWidth / initialWidth; // i.e. 0.274
@@ -162,7 +162,7 @@ private slots:
         QVERIFY2(factor < 0.29, qPrintable(QString::number(factor)));
 
         {
-            const qreal scaledWidth = scaler.fontMetrics().width(text);
+            const qreal scaledWidth = scaler.textWidth(text);
             QVERIFY2(scaledWidth <= wantedWidth, qPrintable(QString::number(scaledWidth)));
             QVERIFY2(scaledWidth > wantedWidth - 6, qPrintable(QString::number(scaledWidth)));
         }
@@ -176,12 +176,12 @@ private slots:
         FontScaler scaler(f);
         QFontMetricsF fm(f);
         const QString text = "Column 1";
-        const qreal initialWidth = fm.width(text);
+        const qreal initialWidth = scaler.textWidth(text);
         const qreal wantedHFactor = 0.867968;
         const qreal expectedWidth = initialWidth * wantedHFactor;
         scaler.setFactorForWidth(wantedHFactor, text); // passing "text" here is the fix for this issue
         fm = scaler.fontMetrics();
-        const qreal finalWidth = fm.width(text);
+        const qreal finalWidth = scaler.textWidth(text);
         QVERIFY2(finalWidth <= expectedWidth, QString("finalWidth=%1 bigger than expectedWidth=%2").arg(finalWidth).arg(expectedWidth).toLatin1().constData());
 #endif
     }

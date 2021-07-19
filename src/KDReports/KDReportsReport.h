@@ -256,6 +256,7 @@ public:
      */
     void setParagraphMargins(qreal left, qreal top, qreal right, qreal bottom);
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     /**
      * Sets the page size of the report. Example: setPageSize(QPrinter::A4) or setPageSize(QPrinter::Letter);
      * Note that for performance reasons, it is recommended to do this after
@@ -263,6 +264,14 @@ public:
      * Deprecated, use setPageSize(QPageSize)
      */
     void setPageSize(const QPrinter::PageSize &size);
+#endif
+
+    /**
+     * Sets the page size of the report. Example: setPageSize(QPageSize::A4) or setPageSize(QPageSize::Letter);
+     * Note that for performance reasons, it is recommended to do this after
+     * adding all the elements to the report rather than before.
+     */
+    void setPageSize(const QPageSize::PageSizeId &size);
 
     /**
      * Sets the page size of the report. Example: setPageSize(QPageSize::A4) or setPageSize(QPageSize::Letter);
@@ -271,16 +280,25 @@ public:
      */
     void setPageSize(const QPageSize &size);
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    /**
+     * \return the page size set by setPageSize. The default page size is A4.
+     */
+    QPrinter::PageSize pageSize() const;
+#else
+    /**
+     * \return the page size set by setPageSize. The default page size is A4.
+     */
+    QPageSize pageSize() const;
+#endif
+
     /**
      * Sets a custom paper size for the report.
      * Supported units are DevicePixel, Millimeter, Point and Inch.
      */
     void setPaperSize(const QSizeF &paperSize, QPrinter::Unit unit);
 
-    /**
-     * \return the page size set by setPageSize. The default page size is A4.
-     */
-    QPrinter::PageSize pageSize() const;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     /**
      * Sets the orientation, QPrinter::Portrait or QPrinter::Landscape.
      * Deprecated, use setPageOrientation
@@ -288,9 +306,10 @@ public:
     Q_DECL_DEPRECATED void setOrientation(QPrinter::Orientation orientation);
     /**
      * \return the orientation set by setOrientation. The default orientation is QPrinter::Portrait.
-     * Deprecated, use orientation
+     * Deprecated, use pageOrientation
      */
     Q_DECL_DEPRECATED QPrinter::Orientation orientation() const;
+#endif
 
     /**
      * Sets the orientation, QPageLayout::Portrait or QPageLayout::Landscape.

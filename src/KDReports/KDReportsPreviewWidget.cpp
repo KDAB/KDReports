@@ -314,37 +314,37 @@ void KDReports::PreviewWidgetPrivate::printSelectedPages()
 
 void KDReports::PreviewWidgetPrivate::setupComboBoxes()
 {
-    paperSizeCombo->addItem(q->tr("A0 (841 x 1189 mm)"), QPrinter::A0);
-    paperSizeCombo->addItem(q->tr("A1 (594 x 841 mm)"), QPrinter::A1);
-    paperSizeCombo->addItem(q->tr("A2 (420 x 594 mm)"), QPrinter::A2);
-    paperSizeCombo->addItem(q->tr("A3 (297 x 420 mm)"), QPrinter::A3);
-    paperSizeCombo->addItem(q->tr("A4 (210 x 297 mm)"), QPrinter::A4);
-    paperSizeCombo->addItem(q->tr("A5 (148 x 210 mm)"), QPrinter::A5);
-    paperSizeCombo->addItem(q->tr("A6 (105 x 148 mm)"), QPrinter::A6);
-    paperSizeCombo->addItem(q->tr("A7 (74 x 105 mm)"), QPrinter::A7);
-    paperSizeCombo->addItem(q->tr("A8 (52 x 74 mm)"), QPrinter::A8);
-    // paperSizeCombo->addItem(q->tr("A9 (37 x 52 mm)"), QPrinter::A9);
-    paperSizeCombo->addItem(q->tr("B0 (1000 x 1414 mm)"), QPrinter::B0);
-    paperSizeCombo->addItem(q->tr("B1 (707 x 1000 mm)"), QPrinter::B1);
-    paperSizeCombo->addItem(q->tr("B2 (500 x 707 mm)"), QPrinter::B2);
-    paperSizeCombo->addItem(q->tr("B3 (353 x 500 mm)"), QPrinter::B3);
-    paperSizeCombo->addItem(q->tr("B4 (250 x 353 mm)"), QPrinter::B4);
-    paperSizeCombo->addItem(q->tr("B5 (176 x 250 mm)"), QPrinter::B5);
-    paperSizeCombo->addItem(q->tr("B6 (125 x 176 mm)"), QPrinter::B6);
-    paperSizeCombo->addItem(q->tr("B7 (88 x 125 mm)"), QPrinter::B7);
-    paperSizeCombo->addItem(q->tr("B8 (62 x 88 mm)"), QPrinter::B8);
-    // paperSizeCombo->addItem(q->tr("B9 (44 x 62 mm)"), QPrinter::B9);
-    // paperSizeCombo->addItem(q->tr("B10 (31 x 44 mm)"), QPrinter::B10);
-    paperSizeCombo->addItem(q->tr("C5E (163 x 229 mm)"), QPrinter::C5E);
-    paperSizeCombo->addItem(q->tr("DLE (110 x 220 mm)"), QPrinter::DLE);
-    paperSizeCombo->addItem(q->tr("Executive (7.5 x 10 inches)"), QPrinter::Executive);
-    paperSizeCombo->addItem(q->tr("Folio (210 x 330 mm)"), QPrinter::Folio);
-    paperSizeCombo->addItem(q->tr("Ledger (432 x 279 mm)"), QPrinter::Ledger);
-    paperSizeCombo->addItem(q->tr("Legal (8.5 x 14 inches)"), QPrinter::Legal);
-    paperSizeCombo->addItem(q->tr("Letter (8.5 x 11 inches)"), QPrinter::Letter);
-    paperSizeCombo->addItem(q->tr("Tabloid (279 x 432 mm)"), QPrinter::Tabloid);
-    paperSizeCombo->addItem(q->tr("US #10 Envelope (105 x 241 mm)"), QPrinter::Comm10E);
-    paperSizeCombo->addItem(q->tr("Endless printer (%1 mm wide)").arg(m_endlessPrinterWidth), QPrinter::Custom);
+    paperSizeCombo->addItem(q->tr("A0 (841 x 1189 mm)"), QPageSize::A0);
+    paperSizeCombo->addItem(q->tr("A1 (594 x 841 mm)"), QPageSize::A1);
+    paperSizeCombo->addItem(q->tr("A2 (420 x 594 mm)"), QPageSize::A2);
+    paperSizeCombo->addItem(q->tr("A3 (297 x 420 mm)"), QPageSize::A3);
+    paperSizeCombo->addItem(q->tr("A4 (210 x 297 mm)"), QPageSize::A4);
+    paperSizeCombo->addItem(q->tr("A5 (148 x 210 mm)"), QPageSize::A5);
+    paperSizeCombo->addItem(q->tr("A6 (105 x 148 mm)"), QPageSize::A6);
+    paperSizeCombo->addItem(q->tr("A7 (74 x 105 mm)"), QPageSize::A7);
+    paperSizeCombo->addItem(q->tr("A8 (52 x 74 mm)"), QPageSize::A8);
+    // paperSizeCombo->addItem(q->tr("A9 (37 x 52 mm)"), QPageSize::A9);
+    paperSizeCombo->addItem(q->tr("B0 (1000 x 1414 mm)"), QPageSize::B0);
+    paperSizeCombo->addItem(q->tr("B1 (707 x 1000 mm)"), QPageSize::B1);
+    paperSizeCombo->addItem(q->tr("B2 (500 x 707 mm)"), QPageSize::B2);
+    paperSizeCombo->addItem(q->tr("B3 (353 x 500 mm)"), QPageSize::B3);
+    paperSizeCombo->addItem(q->tr("B4 (250 x 353 mm)"), QPageSize::B4);
+    paperSizeCombo->addItem(q->tr("B5 (176 x 250 mm)"), QPageSize::B5);
+    paperSizeCombo->addItem(q->tr("B6 (125 x 176 mm)"), QPageSize::B6);
+    paperSizeCombo->addItem(q->tr("B7 (88 x 125 mm)"), QPageSize::B7);
+    paperSizeCombo->addItem(q->tr("B8 (62 x 88 mm)"), QPageSize::B8);
+    // paperSizeCombo->addItem(q->tr("B9 (44 x 62 mm)"), QPageSize::B9);
+    // paperSizeCombo->addItem(q->tr("B10 (31 x 44 mm)"), QPageSize::B10);
+    paperSizeCombo->addItem(q->tr("C5E (163 x 229 mm)"), QPageSize::C5E);
+    paperSizeCombo->addItem(q->tr("DLE (110 x 220 mm)"), QPageSize::DLE);
+    paperSizeCombo->addItem(q->tr("Executive (7.5 x 10 inches)"), QPageSize::Executive);
+    paperSizeCombo->addItem(q->tr("Folio (210 x 330 mm)"), QPageSize::Folio);
+    paperSizeCombo->addItem(q->tr("Ledger (432 x 279 mm)"), QPageSize::Ledger);
+    paperSizeCombo->addItem(q->tr("Legal (8.5 x 14 inches)"), QPageSize::Legal);
+    paperSizeCombo->addItem(q->tr("Letter (8.5 x 11 inches)"), QPageSize::Letter);
+    paperSizeCombo->addItem(q->tr("Tabloid (279 x 432 mm)"), QPageSize::Tabloid);
+    paperSizeCombo->addItem(q->tr("US #10 Envelope (105 x 241 mm)"), QPageSize::Comm10E);
+    paperSizeCombo->addItem(q->tr("Endless printer (%1 mm wide)").arg(m_endlessPrinterWidth), QPageSize::Custom);
 
     paperOrientationCombo->addItem(q->tr("Portrait"), QPageLayout::Portrait);
     paperOrientationCombo->addItem(q->tr("Landscape"), QPageLayout::Landscape);
@@ -421,7 +421,11 @@ void KDReports::PreviewWidgetPrivate::_kd_slotPaperSizeActivated(int index)
         m_report->setPageSize(qPageSize);
     }
     pageCountChanged();
-    emit q->pageSizeChanged(static_cast<QPrinter::PageSize>(qPageSize.id())); // Qt6: pageSizeChanged(qPageSize)
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    emit q->pageSizeChanged(static_cast<QPrinter::PageSize>(qPageSize.id()));
+#else
+    emit q->pageSizeChanged(qPageSize);
+#endif
 }
 
 void KDReports::PreviewWidgetPrivate::_kd_slotPaperOrientationActivated(int index)
@@ -430,8 +434,11 @@ void KDReports::PreviewWidgetPrivate::_kd_slotPaperOrientationActivated(int inde
     m_printer.setPageOrientation(orientation);
     m_report->setPageOrientation(orientation);
     pageCountChanged();
-    emit q->orientationChanged(static_cast<QPrinter::Orientation>(orientation)); // deprecated signal
-    emit q->pageOrientationChanged(orientation);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    emit q->orientationChanged(static_cast<QPrinter::Orientation>(orientation));
+#else
+    emit q->orientationChanged(orientation);
+#endif
 }
 
 void KDReports::PreviewWidgetPrivate::pageCountChanged()
@@ -687,7 +694,11 @@ void KDReports::PreviewWidgetPrivate::setReport(KDReports::Report *report)
     actionBar->setEnabled(true);
 
     // initialize combos from report
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     paperSizeCombo->setCurrentIndex(paperSizeCombo->findData(m_report->pageSize()));
+#else
+    paperSizeCombo->setCurrentIndex(paperSizeCombo->findData(m_report->pageSize().id()));
+#endif
     paperOrientationCombo->setCurrentIndex(paperOrientationCombo->findData(m_report->pageOrientation()));
 
     tableBreakingButton->setVisible(m_report->reportMode() == KDReports::Report::SpreadSheet);

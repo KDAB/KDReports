@@ -26,12 +26,6 @@ qreal KDReports::mmToPixels(qreal mm)
         * qt_defaultDpi(); // inch to pixels
 }
 
-qreal KDReports::mmToPixels(qreal mm, double dpi)
-{
-    return mm * 0.039370147 // mm to inch
-        * dpi; // inch to pixels
-}
-
 qreal KDReports::pixelsToPointsMultiplier(double resolution)
 {
     // See Q_GUI_EXPORT qreal qt_pixelMultiplier(int resolution) in Qt

@@ -104,7 +104,7 @@ int main(int argc, char **argv)
 
     KDReports::Report report;
     report.setReportMode(KDReports::Report::SpreadSheet);
-    report.setPageSize(QPrinter::Letter);
+    report.setPageSize(QPageSize::Letter);
     KDReports::MainTable *mainTable = report.mainTable();
 
     LabelModel model(cellWidth, cellHeight);
