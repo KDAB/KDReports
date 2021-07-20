@@ -16,6 +16,8 @@ KD Reports targets C++ programmers who use Qt in their applications.
 
 For more information, see https://www.kdab.com/development-resources/qt-tools/kd-reports
 
+Try KD Reports in your web browser! visit https://demos.kdab.com/wasm/kdreports
+
 Using KD Reports
 ================
 KD Reports requires Qt 5.9.0 or newer, and a compiler with C++11 support.
