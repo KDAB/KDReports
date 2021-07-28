@@ -144,7 +144,7 @@ void KDReports::AbstractTableElement::fillTableFormat(QTextTableFormat &tableFor
     if (!d->m_constraints.isEmpty()) {
         QVector<QTextLength> constraints;
         constraints.reserve(d->m_constraints.size());
-        for (const auto &c : d->m_constraints) {
+        for (const auto &c : qAsConst(d->m_constraints)) {
             QTextLength length;
             if (c.unit == Millimeters) {
                 length = QTextLength(QTextLength::FixedLength, mmToPixels(c.width));

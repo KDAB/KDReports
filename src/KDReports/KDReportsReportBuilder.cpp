@@ -25,12 +25,7 @@
 KDReports::ReportBuilder::ReportBuilder(KDReports::TextDocumentData &contentDocument, const QTextCursor &cursor, KDReports::Report *report)
     : m_contentDocument(contentDocument)
     , m_cursor(cursor)
-    , m_leftMargin(0)
-    , m_rightMargin(0)
-    , m_topMargin(0)
-    , m_bottomMargin(0)
     , m_report(report)
-    , m_first(true)
 {
 }
 

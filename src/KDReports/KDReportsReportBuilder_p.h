@@ -93,13 +93,13 @@ private:
     QTextCursor m_cursor;
     QTextCursor m_layoutDocCursor;
     QList<QTextOption::Tab> m_tabPositions;
-    qreal m_leftMargin;
-    qreal m_rightMargin;
-    qreal m_topMargin;
-    qreal m_bottomMargin;
+    qreal m_leftMargin = 0;
+    qreal m_rightMargin = 0;
+    qreal m_topMargin = 0;
+    qreal m_bottomMargin = 0;
     Report *m_report;
     QFont m_defaultFont;
-    bool m_first;
+    bool m_first = true;
 };
 }
 
