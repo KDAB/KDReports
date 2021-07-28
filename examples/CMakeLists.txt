@@ -12,9 +12,6 @@
 ## Contact info@kdab.com if any conditions of this licensing are not clear to you.
 ##
 
-set(QT_USE_QTXML TRUE)
-set(QT_USE_QTSQL TRUE)
-
 remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 

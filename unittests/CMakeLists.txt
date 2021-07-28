@@ -13,9 +13,6 @@
 ##
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(QT_USE_QTXML TRUE)
-set(QT_USE_QTSQL TRUE)
-set(QT_USE_QTTEST TRUE)
 
 include_directories(../src/KDReports ${CMAKE_CURRENT_BINARY_DIR}/../src/KDReports)
 
