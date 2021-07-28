@@ -13,7 +13,7 @@
 ##
 
 set(SOURCES
-    BigImage.cpp
+    BigImage.cpp BigImage.qrc
 )
 
 add_executable(BigImage ${SOURCES})

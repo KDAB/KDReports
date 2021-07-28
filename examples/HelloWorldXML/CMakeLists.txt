@@ -1,4 +1,4 @@
-##
+ ##
 ## This file is part of the KD Reports library.
 ##
 ## SPDX-FileCopyrightText: 2015-2021 Klarälvdalens Datakonsult AB, a KDAB Group company <info@kdab.com>
@@ -13,7 +13,7 @@
 ##
 
 set(SOURCES
-    HelloWorldXML.cpp
+    HelloWorldXML.cpp HelloWorldXML.qrc
 )
 
 add_executable(HelloWorldXML ${SOURCES})

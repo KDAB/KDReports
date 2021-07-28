@@ -13,7 +13,7 @@
 ##
 
 set(SOURCES
-    PriceList.cpp
+    PriceList.cpp PriceList.qrc
 )
 
 add_executable(PriceList ${SOURCES})

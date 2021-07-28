@@ -13,7 +13,7 @@
 ##
 
 set(SOURCES
-    ChartXML.cpp
+    ChartXML.cpp ChartXML.qrc
 )
 
 add_executable(ChartXML ${SOURCES})

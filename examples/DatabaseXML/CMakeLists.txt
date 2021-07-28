@@ -13,7 +13,7 @@
 ##
 
 set(SOURCES
-    DatabaseXML.cpp
+    DatabaseXML.cpp DatabaseXML.qrc
 )
 
 add_executable(DatabaseXML ${SOURCES})

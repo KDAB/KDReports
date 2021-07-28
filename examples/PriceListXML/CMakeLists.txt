@@ -13,7 +13,7 @@
 ##
 
 set(SOURCES
-    PriceListXML.cpp
+    PriceListXML.cpp ../PriceList/PriceList.qrc PriceListXML.qrc
 )
 
 add_executable(PriceListXML ${SOURCES})

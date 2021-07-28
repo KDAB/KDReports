@@ -13,7 +13,7 @@
 ##
 
 set(SOURCES
-    MailMergeXML.cpp
+    MailMergeXML.cpp MailMergeXML.qrc
 )
 
 add_executable(MailMergeXML ${SOURCES})
