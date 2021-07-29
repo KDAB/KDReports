@@ -14,7 +14,7 @@
 
 from conans import ConanFile, CMake, tools
 
-class KdchartConan(ConanFile):
+class KdReportsConan(ConanFile):
     name = "kdreports"
     version = "1.9.50"
     license = ("https://raw.githubusercontent.com/KDAB/KDReports/master/LICENSES/GPL-2.0-only.txt,"
