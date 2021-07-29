@@ -279,6 +279,9 @@ if(${PROJECT_NAME}_IS_ROOT_PROJECT)
   if(${PROJECT_NAME}_EXAMPLES)
     add_subdirectory(examples)
   endif()
+
+   # Add uninstall target (not for submodules since parent projects typically have uninstall too)
+  include(ECMUninstallTarget)
 endif()
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
