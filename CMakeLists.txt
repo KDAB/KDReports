@@ -94,9 +94,6 @@ option(${PROJECT_NAME}_TESTS "Build the tests" ON)
 option(${PROJECT_NAME}_EXAMPLES "Build the examples" ON)
 option(${PROJECT_NAME}_QT6 "Build against Qt 6" OFF)
 option(${PROJECT_NAME}_PYTHON_BINDINGS "Build python bindings" OFF)
-if(${PROJECT_NAME}_PYTHON_BINDINGS AND (CMAKE_BUILD_TYPE MATCHES "^[Dd]eb" OR ${PROJECT_NAME}_STATIC))
-  message(FATAL_ERROR "** Python Bindings are disabled in debug or static builds.")
-endif()
 
 set(${PROJECT_NAME}_VERSION_MAJOR 1)
 set(${PROJECT_NAME}_VERSION_MINOR 95)
@@ -171,15 +168,23 @@ if(NOT DEFINED PYSIDE2_CUSTOM_PREFIX) #look for pyside in a custom location
   set(PYSIDE2_CUSTOM_PREFIX "")
 endif()
 
+# Set a default build type if none was specified
+set(default_build_type "Release")
+if(EXISTS "${CMAKE_SOURCE_DIR}/.git")
+  set(default_build_type "Debug")
+endif()
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+  message(STATUS "Setting build type to ${default_build_type} as none was specified.")
+  set(CMAKE_BUILD_TYPE "${default_build_type}" CACHE STRING "Choose the type of build." FORCE)
+  # Set the possible values of build type for cmake-gui
+  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
+endif()
+
 if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
   set(${PROJECT_NAME}_IS_ROOT_PROJECT TRUE)
 
   if(CMAKE_BUILD_TYPE MATCHES "Release")
     add_definitions(-DNDEBUG)
-  endif()
-
-  if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "" FORCE)
   endif()
 
   if(USE_DEFAULT_INSTALL_LOCATION)
@@ -252,6 +257,9 @@ add_subdirectory(src)
 if(${PROJECT_NAME}_PYTHON_BINDINGS)
   if(MSVC)
     set(CMAKE_CXX_STANDARD 14)
+  endif()
+  if(CMAKE_BUILD_TYPE MATCHES "^[Dd]eb" OR ${PROJECT_NAME}_STATIC)
+    message(FATAL_ERROR "** Python Bindings are disabled in debug or static builds.")
   endif()
   add_subdirectory(python)
 endif()
