@@ -64,6 +64,12 @@ endif()
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
   set(CMAKE_INSTALL_PREFIX "")
 endif()
+if(NOT DEFINED SHIBOKEN_CUSTOM_PREFIX) #look for shiboken in a custom location
+  set(SHIBOKEN_CUSTOM_PREFIX "")
+endif()
+if(NOT DEFINED PYSIDE2_CUSTOM_PREFIX) #look for pyside in a custom location
+  set(PYSIDE2_CUSTOM_PREFIX "")
+endif()
 
 # Allow using a non-KDAB install location
 set(KDAB_INSTALL True)
@@ -83,24 +89,24 @@ else()
           LANGUAGES CXX)
 endif()
 
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/ECM/modules)
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/KDAB/modules)
-
-include(FeatureSummary)
-
-option(${PROJECT_NAME}_STATIC "Build statically" OFF)
-option(${PROJECT_NAME}_TESTS "Build the tests" ON)
-option(${PROJECT_NAME}_EXAMPLES "Build the examples" ON)
-option(${PROJECT_NAME}_QT6 "Build against Qt 6" OFF)
-option(${PROJECT_NAME}_PYTHON_BINDINGS "Build python bindings" OFF)
-
 set(${PROJECT_NAME}_VERSION_MAJOR 1)
 set(${PROJECT_NAME}_VERSION_MINOR 95)
 set(${PROJECT_NAME}_VERSION_PATCH 0)
 set(${PROJECT_NAME}_VERSION ${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH})
 set(PROJECT_VERSION ${${PROJECT_NAME}_VERSION}) #needed for ECM
 set(${PROJECT_NAME}_SOVERSION ${${PROJECT_NAME}_VERSION_MAJOR})
+
+include(FeatureSummary)
+
+option(${PROJECT_NAME}_QT6 "Build against Qt 6" OFF)
+option(${PROJECT_NAME}_STATIC "Build statically" OFF)
+option(${PROJECT_NAME}_TESTS "Build the tests" ON)
+option(${PROJECT_NAME}_EXAMPLES "Build the examples" ON)
+option(${PROJECT_NAME}_PYTHON_BINDINGS "Build python bindings" OFF)
+
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/ECM/modules)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/KDAB/modules)
 
 if(${PROJECT_NAME}_QT6)
   find_package(Qt6 6.0.0 CONFIG REQUIRED COMPONENTS Core Widgets PrintSupport Xml Test)
@@ -115,9 +121,7 @@ else()
   set(${PROJECT_NAME}_LIBRARY_QTID "")
 endif()
 
-# setup default install locations
-include(InstallLocation)
-
+# extra optional modules
 if(${PROJECT_NAME}_TESTS)
   find_package(Qt${QT_MAJOR_VERSION}Test REQUIRED)
 endif()
@@ -126,6 +130,7 @@ if(NOT EMSCRIPTEN)
   list(APPEND QT_LIBRARIES Qt${QT_MAJOR_VERSION}::Sql)
 endif()
 
+# look for KDChart
 find_package(KDChart CONFIG) # First try the cmake file provided by kdchart, ideal solution
 if(NOT KDChart_FOUND)
   find_package(KDChart MODULE) # use FindKDChart.cmake in case kdchart was built with qmake
@@ -143,8 +148,8 @@ endif()
 
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 set(CMAKE_AUTOMOC TRUE)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC TRUE)
+set(CMAKE_AUTOUIC TRUE)
 
 if(${PROJECT_NAME}_PYTHON_BINDINGS)
   #C++14 is required for Python bindings
@@ -166,13 +171,6 @@ else()
   set(${PROJECT_NAME}_LIBRARY_MODE "SHARED")
 endif()
 
-if(NOT DEFINED SHIBOKEN_CUSTOM_PREFIX) #look for shiboken in a custom location
-  set(SHIBOKEN_CUSTOM_PREFIX "")
-endif()
-if(NOT DEFINED PYSIDE2_CUSTOM_PREFIX) #look for pyside in a custom location
-  set(PYSIDE2_CUSTOM_PREFIX "")
-endif()
-
 # Set a default build type if none was specified
 set(default_build_type "Release")
 if(EXISTS "${CMAKE_SOURCE_DIR}/.git")
@@ -184,6 +182,9 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   # Set the possible values of build type for cmake-gui
   set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
 endif()
+
+# setup default install locations
+include(InstallLocation)
 
 if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
   set(${PROJECT_NAME}_IS_ROOT_PROJECT TRUE)
