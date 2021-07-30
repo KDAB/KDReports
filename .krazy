@@ -19,6 +19,6 @@ SKIP /include/
 #skip generated cmake
 SKIP KDReportsConfig\.cmake\.in
 #skip other cmake
-SKIP FindKDReports.cmake|cmake/FindKDChart.cmake
+SKIP Doxyfile.cmake|FindKDReports.cmake|cmake/FindKDChart.cmake
 #skip the borrowed code in the cmake subdir
 SKIP /cmake/InstallLocation.cmake|/cmake/ECM/|/cmake/KDAB/
