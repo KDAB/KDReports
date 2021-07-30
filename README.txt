@@ -1,4 +1,3 @@
-# <a name="title"></a> KD Reports [![Logo](https://github.com/KDAB/KDReports/blob/master/images/kdreports-medium.png)](https://www.kdab.com/development-resources/qt-tools/kd-reports)
 Introduction
 ============
 KD Reports is a Qt tool that lets you easily create printable reports by
@@ -25,12 +24,13 @@ Qt6 support is added starting with KD Reports version 2.0.
 
 See [INSTALL.txt](INSTALL.txt) for installation instructions using CMake.
 
-After reading the introductory overview files in docs/
-you will find more information at these places:
+Learn more at our:
 
- * [detailed browsable API reference](https://docs.kdab.com/kdreports)
+ * [online API reference](https://docs.kdab.com/kdreports)
  * [programmers manual with examples](docs/manual/kdreports.pdf)
- * [our sorted example programs](examples/)
+ * [sorted example programs](examples/)
+
+ The starting point for using KD Reports is the KDReports::Report class.
 
 Contact
 =======
