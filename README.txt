@@ -10,7 +10,7 @@ directly to a printer, or saved as PDF files.
 
 Additionally, using KDAB's [KD Chart](https://www.kdab.com/development-resources/qt-tools/kd-chart)
 package together with KD Reports allows reports to be garnished with the myriad
-of chart types supported by KD Chart.
+of chart types supported by [KD Chart](https://www.kdab.com/development-resources/qt-tools/kd-chart).
 
 KD Reports targets C++ programmers who use Qt in their applications.
 
