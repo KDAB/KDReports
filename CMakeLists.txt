@@ -200,36 +200,6 @@ if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
   install(FILES README.txt README-commercial.txt kdreports.pri DESTINATION ${INSTALL_DOC_DIR})
   install(DIRECTORY LICENSES DESTINATION ${INSTALL_DOC_DIR})
 
-  include(ECMSetupVersion)
-  ecm_setup_version(
-    ${${PROJECT_NAME}_VERSION}
-    VARIABLE_PREFIX ${PROJECT_NAME}
-    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/src/KDReports/KDReportsVersion.h"
-    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReportsConfigVersion.cmake"
-    SOVERSION ${${PROJECT_NAME}_SOVERSION}
-    COMPATIBILITY AnyNewerVersion
-  )
-  install(FILES "${CMAKE_CURRENT_BINARY_DIR}/src/KDReports/KDReportsVersion.h" DESTINATION ${INSTALL_INCLUDE_DIR}/KDReports)
-
-  include(CMakePackageConfigHelpers)
-
-  configure_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/KDReportsConfig-buildtree.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReportsConfig.cmake"
-    @ONLY
-  )
-  configure_package_config_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/KDReportsConfig.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/install/KDReportsConfig.cmake"
-    INSTALL_DESTINATION "${INSTALL_LIBRARY_DIR}/cmake/KDReports"
-    PATH_VARS INSTALL_INCLUDE_DIR
-  )
-
-  install(FILES
-      "${CMAKE_CURRENT_BINARY_DIR}/install/KDReportsConfig.cmake"
-      "${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReportsConfigVersion.cmake"
-    DESTINATION "${INSTALL_LIBRARY_DIR}/cmake/KDReports"
-  )
   install(EXPORT KDReportsTargets NAMESPACE KDReports::
     DESTINATION "${INSTALL_LIBRARY_DIR}/cmake/KDReports"
   )
@@ -278,7 +248,7 @@ if(${PROJECT_NAME}_IS_ROOT_PROJECT)
       "Re-run cmake with the -DKDReports_DOCS=True option if you want to generate the documentation.")
   endif()
 
-   # Add uninstall target (not for submodules since parent projects typically have uninstall too)
+  # Add uninstall target (not for submodules since parent projects typically have uninstall too)
   include(ECMUninstallTarget)
 endif()
 

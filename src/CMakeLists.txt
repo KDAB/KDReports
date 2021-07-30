@@ -90,7 +90,32 @@ if(WIN32)
   endif()
 endif()
 
+# Generate library version files
+include(ECMSetupVersion)
+ecm_setup_version(
+  ${${PROJECT_NAME}_VERSION}
+  VARIABLE_PREFIX KDREPORTS
+  VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/src/KDReports/KDReportsVersion.h"
+  PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReportsConfigVersion.cmake"
+  SOVERSION ${${PROJECT_NAME}_SOVERSION}
+  COMPATIBILITY AnyNewerVersion
+)
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/src/KDReports/KDReportsVersion.h" DESTINATION ${INSTALL_INCLUDE_DIR}/KDReports)
+
 if(${PROJECT_NAME}_IS_ROOT_PROJECT)
+  configure_package_config_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/KDReportsConfig.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/install/KDReportsConfig.cmake"
+    INSTALL_DESTINATION "${INSTALL_LIBRARY_DIR}/cmake/KDReports"
+    PATH_VARS INSTALL_INCLUDE_DIR
+  )
+
+  install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/install/KDReportsConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReportsConfigVersion.cmake"
+    DESTINATION "${INSTALL_LIBRARY_DIR}/cmake/KDReports"
+  )
+
   include(ECMGenerateHeaders)
   ecm_generate_headers(kdreports_HEADERS
     ORIGINAL
