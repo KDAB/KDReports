@@ -32,8 +32,8 @@ namespace KDReports {
 class Test;
 }
 
-#define FUZZYCOMPARE(a, b)                                                                                                                                                                             \
-    QVERIFY(a >= b - 4);                                                                                                                                                                               \
+#define FUZZYCOMPARE(a, b) \
+    QVERIFY(a >= b - 4);   \
     QVERIFY(a <= b + 4);
 
 class KDReports::Test : public QObject
@@ -54,8 +54,8 @@ private slots:
         // Unfortunately, Qt on Mac OSX hardcodes 72 DPI, so we'll always have different results there.
     }
 
-#define SKIP_IF_FONT_NOT_FOUND                                                                                                                                                                         \
-    if (!fontFound)                                                                                                                                                                                    \
+#define SKIP_IF_FONT_NOT_FOUND \
+    if (!fontFound)            \
         QSKIP(QString("Font %1 not found").arg(s_fontName).toLatin1());
 
     // Tests

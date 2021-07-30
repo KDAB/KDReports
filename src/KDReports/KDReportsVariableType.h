@@ -30,7 +30,7 @@ enum VariableType {
     PageNumber, ///< Page number
     PageCount, ///< Page count
     TextDate, ///< Current date in text format like "Thu Aug 18 2005", with translated
-              ///  names but unlocalized order of names and numbers
+    ///  names but unlocalized order of names and numbers
     ISODate, ///< Current date in ISO 8601 format like "2005-08-18"
     LocaleDate, ///< Current date in locale-dependent format, deprecated in favour of SystemLocaleShortDate or SystemLocaleLongDate.
     TextTime, ///< Current time in text format like "13:42:59"

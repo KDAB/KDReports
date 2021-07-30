@@ -12,7 +12,7 @@
 BasedOnStyle: WebKit
 
 Standard: Cpp11
-ColumnLimit: 200
+ColumnLimit: 0
 
 # Disable reflow of qdoc comments: indentation rules are different.
 # Translation comments are also excluded
@@ -56,7 +56,7 @@ AllowShortFunctionsOnASingleLine: Inline
 # #include <dir/project_includes.h>
 # #include <QIncludes>
 # #include <cpp_includes>
-SortIncludes: true
+SortIncludes: false
 
 # macros for which the opening brace stays attached
 ForEachMacros:   [ foreach, Q_FOREACH, BOOST_FOREACH, forever, Q_FOREVER, QBENCHMARK, QBENCHMARK_ONCE ]

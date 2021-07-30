@@ -556,7 +556,7 @@ void KDReports::Report::setPageOrientation(QPageLayout::Orientation orientation)
 
 QPageLayout::Orientation KDReports::Report::pageOrientation() const
 {
-   return d->m_orientation;
+    return d->m_orientation;
 }
 
 void KDReports::Report::setMargins(qreal top, qreal left, qreal bottom, qreal right)
@@ -680,7 +680,6 @@ bool KDReports::Report::printWithDialog(QWidget *parent)
     delete dialog;
     return ok;
 }
-
 
 bool KDReports::Report::print(QPrinter *printer, QWidget *parent)
 {

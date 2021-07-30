@@ -93,7 +93,8 @@ public:
      */
     ~Report() override;
 
-    enum ReportMode { WordProcessing = 0, SpreadSheet = 1 };
+    enum ReportMode { WordProcessing = 0,
+                      SpreadSheet = 1 };
 
     /**
      * Sets the main mode of the report: word-processing or spread-sheet (one large table).
@@ -634,7 +635,8 @@ public:
      */
     bool isTableBreakingEnabled() const;
 
-    enum TableBreakingPageOrder { DownThenRight, RightThenDown };
+    enum TableBreakingPageOrder { DownThenRight,
+                                  RightThenDown };
 
     /**
      * Sets the page order to use when breaking tables.

@@ -454,7 +454,7 @@ void KDReports::SpreadsheetReportLayout::ensureLayouted()
 #endif
 
 #if 0 // not used right now, but could be useful, especially if we want to goto step 3 again, to resize down
-      // Update the widthPerPage array
+    // Update the widthPerPage array
         int column = 0;
         for ( int page = 0; page < horizPages; ++page ) {
             const int numColumnsInPage = columnsPerPage[page];

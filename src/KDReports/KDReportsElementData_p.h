@@ -40,7 +40,9 @@ namespace KDReports {
  */
 struct ElementData
 {
-    enum Type { Inline, Block, Variable };
+    enum Type { Inline,
+                Block,
+                Variable };
     // inline
     ElementData(Element *elem)
         : m_element(elem)

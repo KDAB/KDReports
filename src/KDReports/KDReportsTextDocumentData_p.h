@@ -50,7 +50,8 @@ public:
 
     void setUsesTabPositions(bool usesTabs);
     void saveResourcesToFiles();
-    enum ModificationMode { Append, Modify };
+    enum ModificationMode { Append,
+                            Modify };
     void aboutToModifyContents(ModificationMode mode);
     void updateTextValue(const QString &id, const QString &newValue);
     void layoutWithTextWidth(qreal w);
@@ -82,7 +83,8 @@ private:
     void dumpTextValueCursors() const;
 
     QTextDocument *m_document; // a pointer because of the clone() API... TODO: cleanup
-    enum ElementType { ElementTypeText, ElementTypeHtml };
+    enum ElementType { ElementTypeText,
+                       ElementTypeHtml };
     struct TextValueData
     {
         int valueLength;
