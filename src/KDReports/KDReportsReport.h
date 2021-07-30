@@ -55,25 +55,6 @@ class TableBreakingSettingsDialog;
 class AutoTableElement;
 class XmlElementHandler;
 
-/*! \mainpage KD Reports
- *
- * \section intro_sec What is KD Reports?
- *
- *  KD Reports, put simply, is a Qt tool that lets you easily create printable reports by
- *  providing all of the necessary features for a variety of applications.
- *  Reports can be created programmatically, using an easy to use C++ API, or they can be data-driven,
- *  creating reports from XML or SQL data sources complete with watermarks, headers and footers. Reports can be previewed
- *  manually, sent directly to a printer, or saved as
- *  PDF files. Additionally, using <a href="https://www.kdab.com">KDAB's</a> <a href="https://www.kdab.com/products/kd-chart">KD Chart</a> package together with KD Reports allows reports
- *  to be garnished with the myriad of chart types supported by <a href="https://www.kdab.com/products/kd-chart">KD Chart</a>.
- *
- *  KD Reports targets C++ programmers who use Qt in their
- *  applications. The following reference assumes familiarity with
- *  the C++ programming language and the basic concepts of Qt.
- *
- *  The starting point for using KD Reports is the KDReports::Report class.
- */
-
 /**
  * If no header was specified for the first and last pages, then the
  * even/odd headers are used for those.

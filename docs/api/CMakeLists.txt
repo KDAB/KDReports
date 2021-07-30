@@ -33,6 +33,20 @@ configure_file(
 add_custom_command(
   OUTPUT ${DOXYGEN_OUTPUT_DIR}/qch/kdreports-api.qch
   COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+
+  #copy some files by-hand that are referred to by the markdown README
+  COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/INSTALL.txt ${DOXYGEN_OUTPUT_DIR}/html
+  COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/README-commercial.txt ${DOXYGEN_OUTPUT_DIR}/html
+
+  COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/LICENSES ${DOXYGEN_OUTPUT_DIR}/html/LICENSES
+  COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/examples ${DOXYGEN_OUTPUT_DIR}/html/examples
+
+  COMMAND ${CMAKE_COMMAND} -E make_directory ${DOXYGEN_OUTPUT_DIR}/html/docs
+  COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/docs/KDReports-CopyrightAssignmentForm.pdf ${DOXYGEN_OUTPUT_DIR}/html/docs
+
+  COMMAND ${CMAKE_COMMAND} -E make_directory ${DOXYGEN_OUTPUT_DIR}/html/docs/manual
+  COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/docs/manual/kdreports.pdf ${DOXYGEN_OUTPUT_DIR}/html/docs/manual
+
   DEPENDS ${_dox_deps} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
   WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 )
