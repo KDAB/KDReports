@@ -11,7 +11,6 @@
 ## Contact info@kdab.com if any conditions of this licensing are not clear to you.
 ##
 
-
 # qhelpgenerator
 find_program(QHELPGEN_EXECUTABLE qhelpgenerator
   HINTS ${QT_INSTALL_BINS}

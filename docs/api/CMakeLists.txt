@@ -11,8 +11,6 @@
 ## Contact info@kdab.com if any conditions of this licensing are not clear to you.
 ##
 
-
-
 find_file(QDOC_QTCORE_TAG qtcore.tags
   HINTS ${QT_INSTALL_DOCS}/qtcore
   HINTS ${QT_INSTALL_DATA}/doc/qtcore
@@ -41,4 +39,5 @@ add_custom_command(
 add_custom_target(kdreports-api.qch ALL DEPENDS ${DOXYGEN_OUTPUT_DIR}/qch/kdreports-api.qch)
 add_custom_target(docs DEPENDS kdreports-api.qch)
 
-install(FILES ${DOXYGEN_OUTPUT_DIR}/qch/kdreports-api.qch DESTINATION ${INSTALL_DOC_DIR})
+set(QCH_INSTALL_DIR ${CMAKE_INSTALL_DOCDIR} CACHE STRING "Install location of Qt Assistant help files.")
+install(FILES ${DOXYGEN_OUTPUT_DIR}/qch/kdreports-api.qch DESTINATION ${QCH_INSTALL_DIR})
