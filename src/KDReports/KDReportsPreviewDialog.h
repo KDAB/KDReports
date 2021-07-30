@@ -43,7 +43,7 @@ public:
     ~PreviewDialog() override;
 
     /**
-     * Shows a [Print on <printer>] button, for quick printing without the print dialog
+     * Shows a [Print on \<printer\>] button, for quick printing without the print dialog
      * \param printerName the name of the printer for the quick print button to use.
      * Setting an empty printer name has no effect.
      *
