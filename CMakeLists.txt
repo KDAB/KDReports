@@ -31,6 +31,10 @@
 #  Build the examples.
 #  Default=true
 #
+# -DKDReports_DOCS=[true|false]
+#  Build the API documentation. Enables the 'docs' build target.
+#  Default=false
+#
 # -DKDReports_PYTHON_BINDINGS=[true|false]
 #  Build/Generate python bindings.  Always false for Debug builds
 #  (If your shiboken or pyside is installed in a non-standard locations
@@ -87,6 +91,7 @@ option(${PROJECT_NAME}_QT6 "Build against Qt 6" OFF)
 option(${PROJECT_NAME}_STATIC "Build statically" OFF)
 option(${PROJECT_NAME}_TESTS "Build the tests" ON)
 option(${PROJECT_NAME}_EXAMPLES "Build the examples" ON)
+option(${PROJECT_NAME}_DOCS "Build the API documentation" OFF)
 option(${PROJECT_NAME}_PYTHON_BINDINGS "Build python bindings" OFF)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
@@ -262,6 +267,14 @@ if(${PROJECT_NAME}_IS_ROOT_PROJECT)
   endif()
   if(${PROJECT_NAME}_EXAMPLES)
     add_subdirectory(examples)
+  endif()
+
+  if(${PROJECT_NAME}_DOCS)
+    add_subdirectory(docs) # needs to go last, in case there are build source files
+  else()
+    add_custom_target(docs
+      COMMAND ${CMAKE_COMMAND} -E echo "Sorry, there is no docs target since KDReports_DOCS=OFF."
+      "Re-run cmake with the -DKDReports_DOCS=True option if you want to generate the documentation.")
   endif()
 
    # Add uninstall target (not for submodules since parent projects typically have uninstall too)
