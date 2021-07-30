@@ -110,6 +110,7 @@ else()
   list(APPEND QT_LIBRARIES Qt5::Core Qt5::PrintSupport Qt5::Xml)
   set(${PROJECT_NAME}_LIBRARY_QTID "")
 endif()
+include(KDQtInstallPaths) #to set QT_INSTALL_FOO variables
 
 # extra optional modules
 if(${PROJECT_NAME}_TESTS)
