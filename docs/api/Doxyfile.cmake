@@ -38,7 +38,7 @@ PROJECT_NAME           = "KD Reports"
 # could be handy for archiving the generated documentation or if some version
 # control system is used.
 
-PROJECT_NUMBER         = @KDReports_VERSION@
+PROJECT_NUMBER         = @KDReports_VERSION_MAJOR@.@KDReports_VERSION_MINOR@
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer a
@@ -482,7 +482,7 @@ NUM_PROC_THREADS       = 1
 # normally produced when WARNINGS is set to YES.
 # The default value is: NO.
 
-EXTRACT_ALL            = NO
+EXTRACT_ALL            = YES
 
 # If the EXTRACT_PRIVATE tag is set to YES, all private members of a class will
 # be included in the documentation.
@@ -726,7 +726,7 @@ SHOW_USED_FILES        = YES
 # (if specified).
 # The default value is: YES.
 
-SHOW_FILES             = NO
+SHOW_FILES             = YES
 
 # Set the SHOW_NAMESPACES tag to NO to disable the generation of the Namespaces
 # page. This will remove the Namespaces entry from the Quick Index and from the
@@ -1023,7 +1023,7 @@ USE_MDFILE_AS_MAINPAGE = "@CMAKE_SOURCE_DIR@/README.md"
 # also VERBATIM_HEADERS is set to NO.
 # The default value is: NO.
 
-SOURCE_BROWSER         = NO
+SOURCE_BROWSER         = YES
 
 # Setting the INLINE_SOURCES tag to YES will include the body of functions,
 # classes and enums directly into the documentation.
@@ -2246,7 +2246,9 @@ SKIP_FUNCTION_MACROS   = YES
 
 TAGFILES               = "@QDOC_TAG_DIR@/qtcore/qtcore.tags=https://doc.qt.io/qt-5/" \
                          "@QDOC_TAG_DIR@/qtgui/qtgui.tags=https://doc.qt.io/qt-5/" \
-                         "@QDOC_TAG_DIR@/qtwidgets/qtwidgets.tags=https://doc.qt.io/qt"
+                         "@QDOC_TAG_DIR@/qtwidgets/qtwidgets.tags=https://doc.qt.io/qt-5/" \
+                         "@QDOC_TAG_DIR@/qtprintsupport/qtprintsupport.tags=https://doc.qt.io/qt-5/" \
+                         "@QDOC_TAG_DIR@/qtxml/qtxml.tags=https://doc.qt.io/qt-5/"
 
 # When a file name is specified after GENERATE_TAGFILE, doxygen will create a
 # tag file that is based on the input files it reads. See section "Linking to
