@@ -11,7 +11,7 @@
 ## Contact info@kdab.com if any conditions of this licensing are not clear to you.
 ##
 
-set(PYTHON_BINDING_NAMESPACE "PyReports")
+set(PYTHON_BINDING_NAMESPACE "PyKDReports")
 
 # Just to fix warnings with --warn-uninitialized
 if(NOT DEFINED SHIBOKEN_CUSTOM_PREFIX) #look for shiboken in a custom location
