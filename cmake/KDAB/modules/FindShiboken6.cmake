@@ -28,7 +28,7 @@ execute_process(
     OUTPUT_STRIP_TRAILING_WHITESPACE
 )
 if(NOT SHIBOKEN_GENERATOR_BASEDIR)
-  message(FATAL_ERROR "The shiboken6_generator module could not be imported. Make sure you have it installed by checking the output of `pip${Python3_VERSION_MAJOR}.${Python3_VERSION_MINOR} list`")
+  message(FATAL_ERROR "The shiboken6_generator module could not be imported. Make sure you have it installed by checking the output of \"pip${Python3_VERSION_MAJOR}.${Python3_VERSION_MINOR} list\"")
 endif()
 execute_process(
     COMMAND ${Python3_EXECUTABLE} -c "if True:
@@ -43,7 +43,7 @@ execute_process(
     OUTPUT_STRIP_TRAILING_WHITESPACE
 )
 if(NOT SHIBOKEN_BASEDIR)
-  message(FATAL_ERROR "The shiboken6 module could not be imported. Make sure you have it installed by checking the output of `pip${Python3_VERSION_MAJOR}.${Python3_VERSION_MINOR} list`")
+  message(FATAL_ERROR "The shiboken6 module could not be imported. Make sure you have it installed by checking the output of \"pip${Python3_VERSION_MAJOR}.${Python3_VERSION_MINOR} list\"")
 endif()
 execute_process(
     COMMAND ${Python3_EXECUTABLE} -c "if True:
