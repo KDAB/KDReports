@@ -17,9 +17,9 @@
 // @snippet abstract_table_element_default_font
 
 bool p;
-%RETURN_TYPE retval = %CPPSELF.%FUNCTION_NAME(&p);
+auto retval = %CPPSELF.%FUNCTION_NAME(&p);
 %PYARG_0 = PyTuple_New(2);
-PyTuple_SET_ITEM(%PYARG_0, 0, %CONVERTTOPYTHON[%RETURN_TYPE](retval));
+PyTuple_SET_ITEM(%PYARG_0, 0, %CONVERTTOPYTHON[QFont](retval));
 PyTuple_SET_ITEM(%PYARG_0, 1, %CONVERTTOPYTHON[bool](p));
 
 // @snippet abstract_table_element_default_font
