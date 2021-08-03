@@ -20,7 +20,10 @@ from PySide2.QtGui import QPixmap, QColor
 from PySide2.QtWidgets import QApplication
 from PyKDReports.KDReports import PreviewDialog, Report, TextElement, TableElement, AutoTableElement, HeaderLocation, Unit, VariableType, ImageElement
 
-import rc_price_list
+try:
+    import rc_price_list
+except:
+    exit("Oops.. rc_price_list needs to be generated first.\nPlease run: rcc -g python PriceList.qrc -o rc_price_list.py\n(Make sure to use the rcc from the Qt version used to generate the bindings!)")
 
 from TableModel import TableModel
 
