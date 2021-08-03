@@ -65,9 +65,9 @@ set(PyKDReports_target_include_directories
 # Libraries that will be necessary to link the target, this will used in the command 'target_link_libraries'
 set(PyKDReports_target_link_libraries
     kdreports
-    Qt${QT_MAJOR_VERSION}::Core
-    Qt${QT_MAJOR_VERSION}::Gui
-    Qt${QT_MAJOR_VERSION}::Widgets
+    Qt${Qt_VERSION_MAJOR}::Core
+    Qt${Qt_VERSION_MAJOR}::Gui
+    Qt${Qt_VERSION_MAJOR}::Widgets
 )
 
 # changes on these files should trigger a new generation

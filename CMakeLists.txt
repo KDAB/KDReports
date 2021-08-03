@@ -94,13 +94,13 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/KDAB/modules)
 
 if(${PROJECT_NAME}_QT6)
   find_package(Qt6 6.0.0 CONFIG REQUIRED COMPONENTS Core Widgets PrintSupport Xml Test)
-  set(QT_MAJOR_VERSION 6)
+  set(Qt_VERSION_MAJOR 6)
   list(APPEND QT_LIBRARIES Qt6::Core Qt6::PrintSupport Qt6::Xml)
   set(${PROJECT_NAME}_LIBRARY_QTID "-qt6")
 else()
   set(REQUIRED_QT_VERSION 5.9.0)
   find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED COMPONENTS Core Widgets PrintSupport Xml Test)
-  set(QT_MAJOR_VERSION 5)
+  set(Qt_VERSION_MAJOR 5)
   list(APPEND QT_LIBRARIES Qt5::Core Qt5::PrintSupport Qt5::Xml)
   set(${PROJECT_NAME}_LIBRARY_QTID "")
 endif()
@@ -108,11 +108,11 @@ include(KDQtInstallPaths) #to set QT_INSTALL_FOO variables
 
 # extra optional modules
 if(${PROJECT_NAME}_TESTS)
-  find_package(Qt${QT_MAJOR_VERSION}Test REQUIRED)
+  find_package(Qt${Qt_VERSION_MAJOR}Test REQUIRED)
 endif()
 if(NOT EMSCRIPTEN)
-  find_package(Qt${QT_MAJOR_VERSION}Sql REQUIRED)
-  list(APPEND QT_LIBRARIES Qt${QT_MAJOR_VERSION}::Sql)
+  find_package(Qt${Qt_VERSION_MAJOR}Sql REQUIRED)
+  list(APPEND QT_LIBRARIES Qt${Qt_VERSION_MAJOR}::Sql)
 endif()
 
 # look for KDChart
@@ -195,7 +195,7 @@ if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
 
   # Generate .pri file for qmake users
   #TODO: ECM does not support Qt6 yet
-  if(QT_MAJOR_VERSION EQUAL 5 AND
+  if(Qt_VERSION_MAJOR EQUAL 5 AND
     CMAKE_VERSION VERSION_GREATER "3.11.99" AND NOT CMAKE_CONFIGURATION_TYPES) # Not working with VS generator or older cmake versions
     include(ECMGeneratePriFile)
     ecm_generate_pri_file(BASE_NAME KDReports
@@ -210,7 +210,7 @@ endif()
 add_subdirectory(src)
 
 if(${PROJECT_NAME}_PYTHON_BINDINGS)
-  if(QT_MAJOR_VERSION EQUAL 5 AND Qt5Core_VERSION VERSION_LESS 5.12)
+  if(Qt_VERSION_MAJOR EQUAL 5 AND Qt5Core_VERSION VERSION_LESS 5.12)
     message(WARNING "** Disabling Python Bindings. Qt version is too old and unsupported.")
     set(${PROJECT_NAME}_PYTHON_BINDINGS OFF)
   elseif(CMAKE_BUILD_TYPE MATCHES "^[Dd]eb" OR ${PROJECT_NAME}_STATIC)
