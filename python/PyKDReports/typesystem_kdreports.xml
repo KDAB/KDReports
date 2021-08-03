@@ -15,7 +15,7 @@
 
         <object-type name="AbstractTableElement">
             <modify-function signature="defaultFont(bool*)const" remove="all" />
-            <add-function signature="defaultFont()" return-type="(QFont, bool)">
+            <add-function signature="defaultFont()" return-type="PyObject*">
                 <inject-code class="target" position="beginning" file="glue.cpp" snippet="abstract_table_element_default_font"/>
             </add-function>
         </object-type>
@@ -30,7 +30,7 @@
             <enum-type name="ReportMode" />
             <enum-type name="TableBreakingPageOrder" />
             <modify-function signature="getMargins(qreal *, qreal *, qreal *, qreal *) const" remove="all" />
-            <add-function signature="getMargins()" return-type="(qreal, qreal, qreal, qreal)">
+            <add-function signature="getMargins()" return-type="PyObject*">
                 <inject-code class="target" position="beginning" file="glue.cpp" snippet="report_get_margins"/>
             </add-function>
         </object-type>
@@ -42,8 +42,16 @@
         <object-type name="ImageElement" />
         <object-type name="TableElement" />
         <object-type name="TextElement" />
-        <object-type name="AutoTableElement" />
-        <object-type name="ChartElement" />
+        <object-type name="AutoTableElement">
+            <!-- FIXME: this contrcutor causes crash on shiboken6 generator (vr. 6.1.2) -->
+            <modify-function signature="AutoTableElement(QAbstractItemModel *)" remove="all" />
+            <enum-type name="Role" />
+        </object-type>
+        <object-type name="ChartElement">
+            <!-- FIXME: this contrcutor causes crash on shiboken6 generator (vr. 6.1.2) -->
+            <modify-function signature="ChartElement(QAbstractItemModel *)" remove="all" />
+        </object-type>
+
         <object-type name="Header" />
 
         <value-type name="ErrorDetails" />
