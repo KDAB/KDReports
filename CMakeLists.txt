@@ -92,28 +92,32 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/ECM/modules)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/KDAB/modules)
 
+# Set a default build type if none was specified
+set(default_build_type "Release")
+if(EXISTS "${CMAKE_SOURCE_DIR}/.git")
+  set(default_build_type "Debug")
+endif()
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+  message(STATUS "Setting build type to ${default_build_type} as none was specified.")
+  set(CMAKE_BUILD_TYPE "${default_build_type}" CACHE STRING "Choose the type of build." FORCE)
+  # Set the possible values of build type for cmake-gui
+  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
+endif()
+
 if(${PROJECT_NAME}_QT6)
-  find_package(Qt6 6.0.0 CONFIG REQUIRED COMPONENTS Core Widgets PrintSupport Xml Test)
   set(Qt_VERSION_MAJOR 6)
-  list(APPEND QT_LIBRARIES Qt6::Core Qt6::PrintSupport Qt6::Xml)
+  set(QT_MIN_VERSION "6.0.0")
+  find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Widgets PrintSupport Xml)
+  list(APPEND QT_LIBRARIES Qt6::Core Qt6::Widgets Qt6::PrintSupport Qt6::Xml)
   set(${PROJECT_NAME}_LIBRARY_QTID "-qt6")
 else()
-  set(REQUIRED_QT_VERSION 5.9.0)
-  find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED COMPONENTS Core Widgets PrintSupport Xml Test)
   set(Qt_VERSION_MAJOR 5)
-  list(APPEND QT_LIBRARIES Qt5::Core Qt5::PrintSupport Qt5::Xml)
+  set(QT_MIN_VERSION 5.9.0)
+  find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Widgets PrintSupport Xml)
+  list(APPEND QT_LIBRARIES Qt5::Core Qt5::Widgets Qt5::PrintSupport Qt5::Xml)
   set(${PROJECT_NAME}_LIBRARY_QTID "")
 endif()
 include(KDQtInstallPaths) #to set QT_INSTALL_FOO variables
-
-# extra optional modules
-if(${PROJECT_NAME}_TESTS)
-  find_package(Qt${Qt_VERSION_MAJOR}Test REQUIRED)
-endif()
-if(NOT EMSCRIPTEN)
-  find_package(Qt${Qt_VERSION_MAJOR}Sql REQUIRED)
-  list(APPEND QT_LIBRARIES Qt${Qt_VERSION_MAJOR}::Sql)
-endif()
 
 # look for KDChart
 find_package(KDChart CONFIG) # First try the cmake file provided by kdchart, ideal solution
@@ -152,18 +156,6 @@ if(${PROJECT_NAME}_STATIC)
   set(${PROJECT_NAME}_LIBRARY_MODE "STATIC")
 else()
   set(${PROJECT_NAME}_LIBRARY_MODE "SHARED")
-endif()
-
-# Set a default build type if none was specified
-set(default_build_type "Release")
-if(EXISTS "${CMAKE_SOURCE_DIR}/.git")
-  set(default_build_type "Debug")
-endif()
-if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
-  message(STATUS "Setting build type to ${default_build_type} as none was specified.")
-  set(CMAKE_BUILD_TYPE "${default_build_type}" CACHE STRING "Choose the type of build." FORCE)
-  # Set the possible values of build type for cmake-gui
-  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
 endif()
 
 if(KDAB_INSTALL)
@@ -224,7 +216,16 @@ if(${PROJECT_NAME}_IS_ROOT_PROJECT)
     FILE "${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReportsTargets.cmake"
   )
 
+  if(${PROJECT_NAME}_TESTS OR ${PROJECT_NAME}_EXAMPLES)
+    if(NOT EMSCRIPTEN)
+      find_package(Qt${Qt_VERSION_MAJOR}Sql REQUIRED)
+      list(APPEND QT_LIBRARIES Qt${Qt_VERSION_MAJOR}::Sql)
+    endif()
+  endif()
+
   if(${PROJECT_NAME}_TESTS)
+    find_package(Qt${Qt_VERSION_MAJOR}Test REQUIRED)
+    list(APPEND QT_LIBRARIES Qt${Qt_VERSION_MAJOR}::Test)
     enable_testing()
     add_subdirectory(unittests)
   endif()
