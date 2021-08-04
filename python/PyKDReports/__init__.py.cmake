@@ -18,7 +18,7 @@ import sys
 
 __all__ = ['KDReports']
 
-# Preload PySide2 libraries to avoid missing libraries while loading KDReports
+# Preload PySide libraries to avoid missing libraries while loading KDReports
 try:
     from PySide@PYSIDE_MAJOR_VERSION@ import QtCore
     # Create a alias for PySide module so we can use a single import in source files
