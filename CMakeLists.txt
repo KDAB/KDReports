@@ -45,7 +45,7 @@
 #  Alternative install path for Python bindings.
 #  Default=CMAKE_INSTALL_PREFIX
 #
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.3)
 if(POLICY CMP0071)
   # Silence warning about automoc/autouic skipping generated files
   cmake_policy(SET CMP0071 NEW)

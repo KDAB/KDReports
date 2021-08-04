@@ -1,5 +1,5 @@
 These are the instructions for installing KD Reports using the CMake buildsystem.
-CMake version 3.1 or higher is required.
+CMake version 3.3 or higher is required.
 
 The qmake (via autogen.py) buildsystem is removed starting with KDReports version 2.0.
 
