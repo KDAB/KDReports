@@ -2254,7 +2254,7 @@ TAGFILES               = "@QDOC_TAG_DIR@/qtcore/qtcore.tags=https://doc.qt.io/qt
 # tag file that is based on the input files it reads. See section "Linking to
 # external documentation" for more information about the usage of tag files.
 
-GENERATE_TAGFILE       = kdreports.tag
+GENERATE_TAGFILE       = "@DOXYGEN_OUTPUT_DIR@/kdreports.tags"
 
 # If the ALLEXTERNALS tag is set to YES, all external class will be listed in
 # the class index. If set to NO, only the inherited external classes will be
