@@ -218,8 +218,7 @@ if(${PROJECT_NAME}_IS_ROOT_PROJECT)
 
   if(${PROJECT_NAME}_TESTS OR ${PROJECT_NAME}_EXAMPLES)
     if(NOT EMSCRIPTEN)
-      find_package(Qt${Qt_VERSION_MAJOR}Sql REQUIRED)
-      list(APPEND QT_LIBRARIES Qt${Qt_VERSION_MAJOR}::Sql)
+      find_package(Qt${Qt_VERSION_MAJOR}Sql)
     endif()
   endif()
 
