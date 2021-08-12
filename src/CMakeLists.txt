@@ -96,7 +96,7 @@ ecm_setup_version(
   ${${PROJECT_NAME}_VERSION}
   VARIABLE_PREFIX KDREPORTS
   VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/src/KDReports/KDReportsVersion.h"
-  PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReportsConfigVersion.cmake"
+  PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReports${${PROJECT_NAME}_LIBRARY_QTID}ConfigVersion.cmake"
   SOVERSION ${${PROJECT_NAME}_SOVERSION}
   COMPATIBILITY AnyNewerVersion
 )
@@ -105,15 +105,15 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/src/KDReports/KDReportsVersion.h" DES
 if(${PROJECT_NAME}_IS_ROOT_PROJECT)
   configure_package_config_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/KDReportsConfig.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/install/KDReportsConfig.cmake"
-    INSTALL_DESTINATION "${INSTALL_LIBRARY_DIR}/cmake/KDReports"
+    "${CMAKE_CURRENT_BINARY_DIR}/install/KDReports${${PROJECT_NAME}_LIBRARY_QTID}Config.cmake"
+    INSTALL_DESTINATION "${INSTALL_LIBRARY_DIR}/cmake/KDReports${${PROJECT_NAME}_LIBRARY_QTID}"
     PATH_VARS INSTALL_INCLUDE_DIR
   )
 
   install(FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/install/KDReportsConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReportsConfigVersion.cmake"
-    DESTINATION "${INSTALL_LIBRARY_DIR}/cmake/KDReports"
+    "${CMAKE_CURRENT_BINARY_DIR}/install/KDReports${${PROJECT_NAME}_LIBRARY_QTID}Config.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReports${${PROJECT_NAME}_LIBRARY_QTID}ConfigVersion.cmake"
+    DESTINATION "${INSTALL_LIBRARY_DIR}/cmake/KDReports${${PROJECT_NAME}_LIBRARY_QTID}"
   )
 
   include(ECMGenerateHeaders)
