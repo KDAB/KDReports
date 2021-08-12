@@ -76,7 +76,7 @@ set_target_properties(kdreports PROPERTIES
   SOVERSION ${${PROJECT_NAME}_SOVERSION}
   VERSION ${${PROJECT_NAME}_VERSION}
 )
-target_include_directories(kdreports INTERFACE "$<INSTALL_INTERFACE:${INSTALL_INCLUDE_DIR}/KDReports/>")
+target_include_directories(kdreports INTERFACE "$<INSTALL_INTERFACE:${INSTALL_INCLUDE_DIR}/KDReports${${PROJECT_NAME}_LIBRARY_QTID}/>")
 
 #version libraries on Windows
 if(WIN32)
@@ -100,7 +100,7 @@ ecm_setup_version(
   SOVERSION ${${PROJECT_NAME}_SOVERSION}
   COMPATIBILITY AnyNewerVersion
 )
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/src/KDReports/KDReportsVersion.h" DESTINATION ${INSTALL_INCLUDE_DIR}/KDReports)
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/src/KDReports/KDReportsVersion.h" DESTINATION ${INSTALL_INCLUDE_DIR}/KDReports${${PROJECT_NAME}_LIBRARY_QTID})
 
 if(${PROJECT_NAME}_IS_ROOT_PROJECT)
   configure_package_config_file(
@@ -181,7 +181,7 @@ if(${PROJECT_NAME}_IS_ROOT_PROJECT)
     KDReports/KDReportsXmlHelper.h
     KDReports/KDReportsErrorDetails.h
     KDReports/KDReports.h
-    DESTINATION ${INSTALL_INCLUDE_DIR}/KDReports
+    DESTINATION ${INSTALL_INCLUDE_DIR}/KDReports${${PROJECT_NAME}_LIBRARY_QTID}
   )
 
   install(TARGETS kdreports EXPORT KDReportsTargets
