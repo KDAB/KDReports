@@ -3,7 +3,7 @@ What is new in KD Reports 2.0
 
 General:
 --------
-* Supports Qt6 in addition to Qt5
+* Supports Qt6 in addition to Qt5 (co-installable)
 * Minimum Qt version is 5.9
 * The qmake buildsystem (via autogen.py) is removed.
 * buildsystem - increase CMake min version to 3.3.0
