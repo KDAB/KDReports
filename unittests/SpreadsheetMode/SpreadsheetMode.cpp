@@ -249,7 +249,7 @@ private slots:
         QVERIFY(report.mainTable()->lastAutoFontScalingFactor() < 0.9);
         // qDebug() << report.mainTable()->pageRects();
         const int columns = report.mainTable()->pageRects()[0].width();
-        QVERIFY2(columns >= 10 || columns <= 15, qPrintable(QString::number(columns)));
+        QVERIFY2(columns >= 10 && columns <= 15, qPrintable(QString::number(columns)));
         QCOMPARE(report.mainTable()->pageRects(), QList<QRect>() << QRect(0, 0, columns, 4) << QRect(columns, 0, totalColumns - columns, 4));
     }
 
