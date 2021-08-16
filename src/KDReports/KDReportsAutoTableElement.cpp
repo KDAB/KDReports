@@ -57,30 +57,30 @@ class FillCellHelper
 {
 public:
     FillCellHelper(QAbstractItemModel *tableModel, int section, Qt::Orientation orientation, const QSize &iconSz)
+        : iconSize(iconSz)
+        , cellDecoration(tableModel->headerData(section, orientation, Qt::DecorationRole))
+        , cellFont(tableModel->headerData(section, orientation, Qt::FontRole))
+        , cellText(tableModel->headerData(section, orientation, Qt::DisplayRole).toString())
+        , foreground(tableModel->headerData(section, orientation, Qt::ForegroundRole))
+        , background(tableModel->headerData(section, orientation, Qt::BackgroundRole))
+        , alignment(Qt::Alignment(tableModel->headerData(section, orientation, Qt::TextAlignmentRole).toInt()))
+        , decorationAlignment(tableModel->headerData(section, orientation, KDReports::AutoTableElement::DecorationAlignmentRole))
+        , nonBreakableLines(tableModel->headerData(section, orientation, KDReports::AutoTableElement::NonBreakableLinesRole).toBool())
+        , span(1, 1)
     {
-        iconSize = iconSz;
-        cellDecoration = tableModel->headerData(section, orientation, Qt::DecorationRole);
-        cellFont = tableModel->headerData(section, orientation, Qt::FontRole);
-        cellText = tableModel->headerData(section, orientation, Qt::DisplayRole).toString();
-        foreground = tableModel->headerData(section, orientation, Qt::ForegroundRole);
-        background = tableModel->headerData(section, orientation, Qt::BackgroundRole);
-        alignment = Qt::Alignment(tableModel->headerData(section, orientation, Qt::TextAlignmentRole).toInt());
-        decorationAlignment = tableModel->headerData(section, orientation, KDReports::AutoTableElement::DecorationAlignmentRole);
-        nonBreakableLines = tableModel->headerData(section, orientation, KDReports::AutoTableElement::NonBreakableLinesRole).toBool();
-        span = QSize(1, 1);
     }
     FillCellHelper(QAbstractItemModel *tableModel, const QModelIndex &index, const QSize &_span, const QSize &iconSz)
+        : iconSize(iconSz)
+        , cellDecoration(tableModel->data(index, Qt::DecorationRole))
+        , cellFont(tableModel->data(index, Qt::FontRole))
+        , cellText(displayText(tableModel->data(index, Qt::DisplayRole)))
+        , foreground(tableModel->data(index, Qt::ForegroundRole))
+        , background(tableModel->data(index, Qt::BackgroundRole))
+        , alignment(Qt::Alignment(tableModel->data(index, Qt::TextAlignmentRole).toInt()))
+        , decorationAlignment(tableModel->data(index, KDReports::AutoTableElement::DecorationAlignmentRole))
+        , nonBreakableLines(tableModel->data(index, KDReports::AutoTableElement::NonBreakableLinesRole).toBool())
+        , span(_span)
     {
-        iconSize = iconSz;
-        cellDecoration = tableModel->data(index, Qt::DecorationRole);
-        cellFont = tableModel->data(index, Qt::FontRole);
-        cellText = displayText(tableModel->data(index, Qt::DisplayRole));
-        foreground = tableModel->data(index, Qt::ForegroundRole);
-        background = tableModel->data(index, Qt::BackgroundRole);
-        alignment = Qt::Alignment(tableModel->data(index, Qt::TextAlignmentRole).toInt());
-        decorationAlignment = tableModel->data(index, KDReports::AutoTableElement::DecorationAlignmentRole);
-        nonBreakableLines = tableModel->data(index, KDReports::AutoTableElement::NonBreakableLinesRole).toBool();
-        span = _span;
     }
     void fill(QTextTable *textTable, KDReports::ReportBuilder &builder, QTextDocument &textDoc, QTextTableCell &cell);
 
