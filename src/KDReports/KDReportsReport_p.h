@@ -115,6 +115,9 @@ public:
     void debugLayoutToPdf(const char *fileName);
 #endif
 
+    ReportPrivate(const ReportPrivate &) = delete;
+    ReportPrivate &operator=(const ReportPrivate &) = delete;
+
     qreal m_layoutWidth; // in pixels; used for layoutAsOnePage only
     qreal m_endlessPrinterWidth; // in mm
     mutable QSizeF m_paperSize; // in pixels

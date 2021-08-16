@@ -45,6 +45,9 @@ public:
     explicit TextDocumentData();
     ~TextDocumentData();
 
+    TextDocumentData(const TextDocumentData &) = delete;
+    TextDocumentData &operator=(const TextDocumentData &) = delete;
+
     QTextDocument &document() { return *m_document; }
     const QTextDocument &document() const { return *m_document; }
 
