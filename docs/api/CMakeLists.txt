@@ -19,6 +19,23 @@ else()
   message(STATUS "Unable to provide inheritance diagrams for the API documentation. To fix, install the graphviz project from https://www.graphviz.org")
 endif()
 
+# latex
+set(HAVE_LATEX "NO")
+find_package(LATEX)
+set_package_properties(LATEX PROPERTIES
+  TYPE OPTIONAL
+  DESCRIPTION "A document preparation system"
+  URL "https://www.latex-project.org"
+  PURPOSE "Provides for building a PS or PDF version of the API documentation"
+)
+if(LATEX_FOUND)
+  if(MAKEINDEX_COMPILER)
+    set(HAVE_LATEX "YES")
+  else()
+    message(STATUS "The LaTeX makeindex compiler could not be located. Unable to generate the buildsystem for LaTex documentation generation.")
+  endif()
+endif()
+
 # qhelpgenerator
 find_program(QHELPGEN_EXECUTABLE qhelpgenerator
   HINTS ${QT_INSTALL_BINS}
