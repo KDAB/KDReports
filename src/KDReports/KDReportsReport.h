@@ -323,7 +323,6 @@ public:
     void setMargins(qreal top, qreal left, qreal bottom, qreal right);
 
     /**
-     * \return the page margins in mm.
      * \since 1.1
      */
     void getMargins(qreal *top, qreal *left, qreal *bottom, qreal *right) const;
@@ -624,10 +623,10 @@ public:
      * table breaking as well, but with different parameters.
      *
      * \since 1.1
-     * \deprecated since 1.3, use scaleTo.
-     *
+     * \deprecated since 1.3
+     * \see scaleTo()
      */
-    void setTableBreakingEnabled(bool tableBreakingEnabled);
+    Q_DECL_DEPRECATED void setTableBreakingEnabled(bool tableBreakingEnabled);
 
     /**
      * \return the value passed to setTableBreakingEnabled,

@@ -42,7 +42,7 @@ public:
      * @brief Creates a LabelModel
      * @param cellWidth the width of the label, in mm
      * @param cellHeight the height of the label, in mm
-     * @param parent
+     * @param parent the QObject parent
      */
     LabelModel(qreal cellWidth, qreal cellHeight, QObject *parent = 0)
         : QAbstractTableModel(parent)
