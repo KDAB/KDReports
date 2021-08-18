@@ -57,6 +57,16 @@ if(QDOC_QTCORE_TAG)
   get_filename_component(QDOC_TAG_DIR ${QDOC_TAG_DIR} DIRECTORY)
 endif()
 
+set(KDCHART_TAG "")
+if(KDChart_FOUND)
+  #temporary hack to find the kdchart tags file
+  get_filename_component(KDCHART_TAG ${KDChart_DIR} DIRECTORY)
+  get_filename_component(KDCHART_TAG ${KDCHART_TAG} DIRECTORY) #up to lib
+  get_filename_component(KDCHART_TAG ${KDCHART_TAG} DIRECTORY) #up to install_prefix
+  set(KDCHART_TAG "${KDCHART_TAG}/share/doc/KDChart/kdchart.tags")
+  set(KDCHART_TAG "${KDCHART_TAG}=https://docs.kdab.com/kdchart/")
+endif()
+
 file(GLOB _dox_deps *.dox *.html)
 set(DOXYGEN_OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR})
 
