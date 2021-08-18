@@ -96,6 +96,7 @@ qreal KDReports::TextDocReportLayout::layoutAsOnePage(qreal docWidth)
         qDebug() << "final newDocHeight=" << newDocHeight << numberOfPages() << "pages";
     }
 
+    /* cppcheck-suppress assertWithSideEffect */
     Q_ASSERT(numberOfPages() == 1);
     return newDocHeight;
 }

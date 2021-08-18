@@ -660,6 +660,7 @@ bool KDReports::PreviewWidget::printWithDialog()
     dialog->setOption(QAbstractPrintDialog::PrintSelection, true);
     dialog->setOption(QAbstractPrintDialog::PrintPageRange, true);
     bool ok = false;
+    /* cppcheck-suppress nullPointerRedundantCheck */
     if (dialog->exec() == QDialog::Accepted && dialog) {
         if (dialog->printRange() == QAbstractPrintDialog::AllPages) {
             // Select all pages

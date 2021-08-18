@@ -123,6 +123,7 @@ void KDReports::ReportPrivate::ensureLayouted()
 
             qDebug() << "setPaperSizeFromPrinter: endless printer. m_layoutWidth=" << m_layoutWidth << "textDocWidth=" << textDocWidth << "single page has size" << m_paperSize << "pixels";
 
+            /* cppcheck-suppress assertWithSideEffect */
             Q_ASSERT(m_layout->numberOfPages() == 1);
         }
         // at this point m_pageContentSizeDirty has been set to false in all cases
