@@ -32,7 +32,7 @@ DOXYFILE_ENCODING      = UTF-8
 # title of most generated pages and in a few other places.
 # The default value is: My Project.
 
-PROJECT_NAME           = "KD Reports"
+PROJECT_NAME           = "KD Reports API Documentation"
 
 # The PROJECT_NUMBER tag can be used to enter a project or revision number. This
 # could be handy for archiving the generated documentation or if some version
@@ -874,7 +874,9 @@ INPUT_ENCODING         = UTF-8
 
 FILE_PATTERNS          = *.cpp \
                          *.h \
-                         *.md
+                         *.dox \
+                         *.md \
+                         *.gif
 
 # The RECURSIVE tag can be used to specify whether or not subdirectories should
 # be searched for input files as well.
@@ -1445,7 +1447,7 @@ QCH_FILE               = "@DOXYGEN_OUTPUT_DIR@/qch/kdreports-api.qch"
 # The default value is: org.doxygen.Project.
 # This tag requires that the tag GENERATE_QHP is set to YES.
 
-QHP_NAMESPACE          = com.kdab.KDReports.api.@KDReports_VERSION@
+QHP_NAMESPACE          = com.kdab.@PROJECT_NAME@.api.@KDReports_VERSION@
 
 # The QHP_VIRTUAL_FOLDER tag specifies the namespace to use when generating Qt
 # Help Project output. For more information please see Qt Help Project / Virtual
@@ -1454,7 +1456,7 @@ QHP_NAMESPACE          = com.kdab.KDReports.api.@KDReports_VERSION@
 # The default value is: doc.
 # This tag requires that the tag GENERATE_QHP is set to YES.
 
-QHP_VIRTUAL_FOLDER     = KDReports-@KDReports_VERSION@
+QHP_VIRTUAL_FOLDER     = @PROJECT_NAME@-@KDReports_VERSION@
 
 # If the QHP_CUST_FILTER_NAME tag is set, it specifies the name of a custom
 # filter to add. For more information please see Qt Help Project / Custom
@@ -1737,7 +1739,7 @@ EXTRA_SEARCH_MAPPINGS  =
 # If the GENERATE_LATEX tag is set to YES, doxygen will generate LaTeX output.
 # The default value is: YES.
 
-GENERATE_LATEX         = YES
+GENERATE_LATEX         = @HAVE_LATEX@
 
 # The LATEX_OUTPUT tag is used to specify where the LaTeX docs will be put. If a
 # relative path is entered the value of OUTPUT_DIRECTORY will be put in front of
@@ -1757,7 +1759,7 @@ LATEX_OUTPUT           = latex
 # the output language.
 # This tag requires that the tag GENERATE_LATEX is set to YES.
 
-LATEX_CMD_NAME         = latex
+LATEX_CMD_NAME         = @LATEX_COMPILER@
 
 # The MAKEINDEX_CMD_NAME tag can be used to specify the command name to generate
 # index for LaTeX.
@@ -1767,7 +1769,7 @@ LATEX_CMD_NAME         = latex
 # The default file is: makeindex.
 # This tag requires that the tag GENERATE_LATEX is set to YES.
 
-MAKEINDEX_CMD_NAME     = makeindex
+MAKEINDEX_CMD_NAME     = @MAKEINDEX_COMPILER@
 
 # The LATEX_MAKEINDEX_CMD tag can be used to specify the command name to
 # generate index for LaTeX. In case there is no backslash (\) as first character
@@ -1777,7 +1779,7 @@ MAKEINDEX_CMD_NAME     = makeindex
 # The default value is: makeindex.
 # This tag requires that the tag GENERATE_LATEX is set to YES.
 
-LATEX_MAKEINDEX_CMD    = makeindex
+LATEX_MAKEINDEX_CMD    = @MAKEINDEX_COMPILER@
 
 # If the COMPACT_LATEX tag is set to YES, doxygen generates more compact LaTeX
 # documents. This may be useful for small projects and may help to save some
