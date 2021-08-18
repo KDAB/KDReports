@@ -3,7 +3,7 @@ These are the instructions for installing KD Reports bindings using the CMake bu
 Starting with version 2.0 KD Reports can build Python3 bindings.
 
 You need these:
- - Python3.6 or higher
+ - Python3.7 or higher
  - Qt 5.12 or higher
  - QtForPython provided by the Qt project.
 
