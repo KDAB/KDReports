@@ -126,7 +126,7 @@ int main(int argc, char **argv)
     KDReports::TableElement tableElement;
     tableElement.setHeaderRowCount(2);
     tableElement.setPadding(3);
-    QColor headerColor("#DADADA");
+    QColor headerColor(218, 218, 218);
     // Merged header in row 0
     KDReports::Cell &topHeader = tableElement.cell(0, 0);
     topHeader.setColumnSpan(2);
@@ -146,7 +146,7 @@ int main(int argc, char **argv)
     headerCell2.setBackground(headerColor);
     KDReports::TextElement expected("Italic with dark gray background");
     expected.setItalic(true);
-    expected.setBackground(QColor("#999999")); // note that this background only applies to this element
+    expected.setBackground(QColor(153, 153, 153)); // note that this background only applies to this element
     headerCell2.addElement(expected);
     headerCell2.addInlineElement(KDReports::TextElement(" Normal text"));
 

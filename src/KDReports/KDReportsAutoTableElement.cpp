@@ -35,7 +35,7 @@ public:
         : m_tableModel(0)
         , m_verticalHeaderVisible(true)
         , m_horizontalHeaderVisible(true)
-        , m_headerBackground(QColor("#DADADA"))
+        , m_headerBackground(QColor(218, 218, 218))
         , m_iconSize(32, 32)
     {
     }

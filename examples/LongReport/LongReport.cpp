@@ -54,10 +54,9 @@ ProxyModel proxyModel;
 
 static KDReports::AutoTableElement largeAutoTable()
 {
-
-    QColor colorRed("#C07070");
-    QColor colorGreen("#70C070");
-    QColor colorBlue("#7070C0");
+    QColor colorRed(119, 112, 112);
+    QColor colorGreen(112, 192, 112);
+    QColor colorBlue(112, 112, 192);
     QPixmap pix(16, 16);
     pix.fill(Qt::green);
 
@@ -121,7 +120,7 @@ static KDReports::TableElement largeTable()
     tableElement.setHeaderRowCount(1);
     tableElement.setHeaderColumnCount(1);
     tableElement.setPadding(3);
-    QColor headerColor("#DADADA");
+    QColor headerColor(218, 218, 218);
     // Horizontal header
     for (int i = 1; i < numColumns; ++i) {
         KDReports::Cell &headerCell = tableElement.cell(0, i);

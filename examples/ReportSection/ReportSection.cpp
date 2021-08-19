@@ -28,7 +28,7 @@ static KDReports::TableElement largeTable()
     tableElement.setHeaderRowCount(1);
     tableElement.setHeaderColumnCount(1);
     tableElement.setPadding(3);
-    QColor headerColor("#DADADA");
+    QColor headerColor(218, 218, 218);
     // Horizontal header
     for (int i = 1; i < numColumns; ++i) {
         KDReports::Cell &headerCell = tableElement.cell(0, i);

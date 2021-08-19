@@ -109,7 +109,7 @@ def main():
     tableElement = TableElement()
     tableElement.setHeaderRowCount(2)
     tableElement.setPadding(3)
-    headerColor = QColor("#DADADA")
+    headerColor = QColor(218, 218, 218)
     # Merged header in row 0
     topHeader = tableElement.cell(0, 0)
     topHeader.setColumnSpan(2)
@@ -128,7 +128,7 @@ def main():
     headerCell2.setBackground(headerColor);
     expected = TextElement("Expected")
     expected.setItalic(True)
-    expected.setBackground(QColor("#999999")) # note that this background only applies to this element
+    expected.setBackground(QColor(153, 153, 153)) # note that this background only applies to this element
     headerCell2.addElement(expected)
     headerCell2.addInlineElement(TextElement(" shipping time"))
 
