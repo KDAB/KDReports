@@ -92,7 +92,7 @@ public:
     void init();
 
     void paintItem(QListWidgetItem *item, int index);
-    QPixmap paintPreview(int index);
+    QPixmap paintPreview(int index) const;
     void printSelectedPages();
     void setupComboBoxes();
     void pageCountChanged();
@@ -106,17 +106,17 @@ public:
 
     void handleMouseMove(QPoint pos);
     void handleMouseRelease(QPoint pos);
-    void _kd_slotCurrentPageChanged();
-    void _kd_slotFirstPage();
-    void _kd_slotPrevPage();
-    void _kd_slotNextPage();
-    void _kd_slotLastPage();
-    void _kd_slotPaperSizeActivated(int);
-    void _kd_slotPaperOrientationActivated(int);
-    void _kd_slotZoomIn();
-    void _kd_slotZoomOut();
-    void _kd_slotZoomChanged();
-    void _kd_previewNextItems();
+    void slotCurrentPageChanged();
+    void slotFirstPage();
+    void slotPrevPage();
+    void slotNextPage();
+    void slotLastPage();
+    void slotPaperSizeActivated(int);
+    void slotPaperOrientationActivated(int);
+    void slotZoomIn();
+    void slotZoomOut();
+    void slotZoomChanged();
+    void previewNextItems();
 
     PagePreviewWidget *m_previewWidget;
     QPrinter m_printer;
@@ -135,7 +135,7 @@ KDReports::PreviewWidgetPrivate::PreviewWidgetPrivate(KDReports::PreviewWidget *
     : m_previewWidget(new PagePreviewWidget)
     , q(w)
 {
-    QObject::connect(&m_previewTimer, &QTimer::timeout, q, [this]() { _kd_previewNextItems(); });
+    QObject::connect(&m_previewTimer, &QTimer::timeout, q, [this]() { previewNextItems(); });
     QObject::connect(m_previewWidget, &PagePreviewWidget::mouseMoved, q, [this](QPoint pos) {
         handleMouseMove(pos);
     });
@@ -162,23 +162,23 @@ void KDReports::PreviewWidgetPrivate::init()
     // m_tableBreakingButton = buttonBox->addButton( tr("Table Breaking / Font Scaling..." ), QDialogButtonBox::ActionRole );
     QObject::connect(tableBreakingButton, &QAbstractButton::clicked, q, &PreviewWidget::tableSettingsClicked);
 
-    QObject::connect(firstPage, &QAbstractButton::clicked, q, [this]() { _kd_slotFirstPage(); });
-    QObject::connect(prevPage, &QAbstractButton::clicked, q, [this]() { _kd_slotPrevPage(); });
-    QObject::connect(nextPage, &QAbstractButton::clicked, q, [this]() { _kd_slotNextPage(); });
-    QObject::connect(lastPage, &QAbstractButton::clicked, q, [this]() { _kd_slotLastPage(); });
-    QObject::connect(zoomIn, &QAbstractButton::clicked, q, [this]() { _kd_slotZoomIn(); });
-    QObject::connect(zoomOut, &QAbstractButton::clicked, q, [this]() { _kd_slotZoomOut(); });
-    QObject::connect(zoomCombo, QOverload<int>::of(&QComboBox::activated), q, [this]() { _kd_slotZoomChanged(); });
-    QObject::connect(pageList, &QListWidget::currentRowChanged, q, [this]() { _kd_slotCurrentPageChanged(); });
-    QObject::connect(paperSizeCombo, QOverload<int>::of(&QComboBox::activated), q, [this](int idx) { _kd_slotPaperSizeActivated(idx); });
-    QObject::connect(paperOrientationCombo, QOverload<int>::of(&QComboBox::activated), q, [this](int idx) { _kd_slotPaperOrientationActivated(idx); });
+    QObject::connect(firstPage, &QAbstractButton::clicked, q, [this]() { slotFirstPage(); });
+    QObject::connect(prevPage, &QAbstractButton::clicked, q, [this]() { slotPrevPage(); });
+    QObject::connect(nextPage, &QAbstractButton::clicked, q, [this]() { slotNextPage(); });
+    QObject::connect(lastPage, &QAbstractButton::clicked, q, [this]() { slotLastPage(); });
+    QObject::connect(zoomIn, &QAbstractButton::clicked, q, [this]() { slotZoomIn(); });
+    QObject::connect(zoomOut, &QAbstractButton::clicked, q, [this]() { slotZoomOut(); });
+    QObject::connect(zoomCombo, QOverload<int>::of(&QComboBox::activated), q, [this]() { slotZoomChanged(); });
+    QObject::connect(pageList, &QListWidget::currentRowChanged, q, [this]() { slotCurrentPageChanged(); });
+    QObject::connect(paperSizeCombo, QOverload<int>::of(&QComboBox::activated), q, [this](int idx) { slotPaperSizeActivated(idx); });
+    QObject::connect(paperOrientationCombo, QOverload<int>::of(&QComboBox::activated), q, [this](int idx) { slotPaperOrientationActivated(idx); });
 
     auto *nextPageShortcut = new QShortcut(q);
     nextPageShortcut->setKey(Qt::CTRL | Qt::Key_PageDown);
-    QObject::connect(nextPageShortcut, &QShortcut::activated, q, [this]() { _kd_slotNextPage(); });
+    QObject::connect(nextPageShortcut, &QShortcut::activated, q, [this]() { slotNextPage(); });
     auto *prevPageShortcut = new QShortcut(q);
     prevPageShortcut->setKey(Qt::CTRL | Qt::Key_PageUp);
-    QObject::connect(prevPageShortcut, &QShortcut::activated, q, [this]() { _kd_slotPrevPage(); });
+    QObject::connect(prevPageShortcut, &QShortcut::activated, q, [this]() { slotPrevPage(); });
     pageNumber->setValidator(new QIntValidator(1, 100000, pageNumber));
     pageNumber->installEventFilter(q);
 }
@@ -208,7 +208,7 @@ void KDReports::PreviewWidgetPrivate::paintItem(QListWidgetItem *item, int index
     item->setIcon(QIcon(QPixmap::fromImage(img)));
 }
 
-void KDReports::PreviewWidgetPrivate::_kd_previewNextItems()
+void KDReports::PreviewWidgetPrivate::previewNextItems()
 {
     if (m_firstDirtyPreviewItem == -1 || m_firstDirtyPreviewItem >= m_pageCount) {
         m_previewTimer.stop();
@@ -220,7 +220,7 @@ void KDReports::PreviewWidgetPrivate::_kd_previewNextItems()
     }
 }
 
-QPixmap KDReports::PreviewWidgetPrivate::paintPreview(int index)
+QPixmap KDReports::PreviewWidgetPrivate::paintPreview(int index) const
 {
     const QSizeF paperSize = m_report->paperSize();
     const int width = qCeil(paperSize.width() * m_zoomFactor);
@@ -349,7 +349,7 @@ void KDReports::PreviewWidgetPrivate::setupComboBoxes()
     paperOrientationCombo->addItem(PreviewWidget::tr("Landscape"), QPageLayout::Landscape);
 }
 
-void KDReports::PreviewWidgetPrivate::_kd_slotCurrentPageChanged()
+void KDReports::PreviewWidgetPrivate::slotCurrentPageChanged()
 {
     updatePreview();
     updatePageButtons();
@@ -383,33 +383,33 @@ void KDReports::PreviewWidgetPrivate::pageNumberReturnPressed()
     pageList->setCurrentRow(newPageNumber);
 }
 
-void KDReports::PreviewWidgetPrivate::_kd_slotFirstPage()
+void KDReports::PreviewWidgetPrivate::slotFirstPage()
 {
     pageList->setCurrentRow(0);
 }
 
-void KDReports::PreviewWidgetPrivate::_kd_slotPrevPage()
+void KDReports::PreviewWidgetPrivate::slotPrevPage()
 {
     if (!pageList->currentItem() || pageList->currentRow() == 0)
         return;
     pageList->setCurrentRow(pageList->currentRow() - 1);
 }
 
-void KDReports::PreviewWidgetPrivate::_kd_slotNextPage()
+void KDReports::PreviewWidgetPrivate::slotNextPage()
 {
     if (!pageList->currentItem() || pageList->currentRow() >= pageList->count() - 1)
         return;
     pageList->setCurrentRow(pageList->currentRow() + 1);
 }
 
-void KDReports::PreviewWidgetPrivate::_kd_slotLastPage()
+void KDReports::PreviewWidgetPrivate::slotLastPage()
 {
     if (pageList->count() == 0) // can't happen
         return;
     pageList->setCurrentRow(pageList->count() - 1);
 }
 
-void KDReports::PreviewWidgetPrivate::_kd_slotPaperSizeActivated(int index)
+void KDReports::PreviewWidgetPrivate::slotPaperSizeActivated(int index)
 {
     const QPageSize qPageSize(static_cast<QPageSize::PageSizeId>(paperSizeCombo->itemData(index).toInt()));
     m_printer.setPageSize(qPageSize);
@@ -427,7 +427,7 @@ void KDReports::PreviewWidgetPrivate::_kd_slotPaperSizeActivated(int index)
 #endif
 }
 
-void KDReports::PreviewWidgetPrivate::_kd_slotPaperOrientationActivated(int index)
+void KDReports::PreviewWidgetPrivate::slotPaperOrientationActivated(int index)
 {
     const QPageLayout::Orientation orientation = static_cast<QPageLayout::Orientation>(paperOrientationCombo->itemData(index).toInt());
     m_printer.setPageOrientation(orientation);
@@ -489,7 +489,7 @@ void KDReports::PreviewWidgetPrivate::pageCountChanged()
     QTime dt;
     dt.start();
     while (m_firstDirtyPreviewItem != -1) {
-        _kd_previewNextItems();
+        previewNextItems();
     }
     // Debug mode:
     // 500 rows, Qt-4.5 or 4.6, no antialiasing, T500 laptop, -O0 or -O2: 42 previews in 8.2s to 8.8s
@@ -519,7 +519,7 @@ void KDReports::PreviewWidgetPrivate::centerPreview()
     m_previewWidget->resize(width, height);
 }
 
-void KDReports::PreviewWidgetPrivate::_kd_slotZoomIn()
+void KDReports::PreviewWidgetPrivate::slotZoomIn()
 {
     if (m_zoomFactor > 1.99)
         m_zoomFactor = qMin<qreal>(4.0, m_zoomFactor + 0.5);
@@ -531,7 +531,7 @@ void KDReports::PreviewWidgetPrivate::_kd_slotZoomIn()
     zoomChanged();
 }
 
-void KDReports::PreviewWidgetPrivate::_kd_slotZoomOut()
+void KDReports::PreviewWidgetPrivate::slotZoomOut()
 {
     if (m_zoomFactor > 1.99)
         m_zoomFactor -= 0.5;
@@ -543,7 +543,7 @@ void KDReports::PreviewWidgetPrivate::_kd_slotZoomOut()
     zoomChanged();
 }
 
-void KDReports::PreviewWidgetPrivate::_kd_slotZoomChanged()
+void KDReports::PreviewWidgetPrivate::slotZoomChanged()
 {
     QString str = zoomCombo->currentText();
     m_zoomFactor = str.remove(str.indexOf(QChar::fromLatin1('%')), 1).toDouble() / 100.0;
@@ -708,7 +708,7 @@ void KDReports::PreviewWidgetPrivate::setReport(KDReports::Report *report)
         // No page selected yet - select the first one
         pageList->setCurrentItem(pageList->item(0));
     }
-    _kd_slotCurrentPageChanged(); // update preview and buttons
+    slotCurrentPageChanged(); // update preview and buttons
     pageList->scrollToTop();
 }
 
@@ -720,7 +720,7 @@ void KDReports::PreviewWidget::setShowPageListWidget(bool show)
 void KDReports::PreviewWidget::repaint()
 {
     d->pageCountChanged();
-    d->_kd_slotCurrentPageChanged(); // update preview and buttons
+    d->slotCurrentPageChanged(); // update preview and buttons
 }
 
 QSize KDReports::PreviewWidget::sizeHint() const

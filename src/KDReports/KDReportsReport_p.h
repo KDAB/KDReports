@@ -104,7 +104,7 @@ public:
     QSizeF layoutAsOnePage(qreal docWidth);
     bool wantEndlessPrinting() const;
     bool hasNonLayoutedTextDocument() const;
-    ReportBuilder *builder();
+    ReportBuilder *builder() const;
 
     void headerChanged(); // called by Header
     qreal textDocumentWidth() const; // called by ImageElement, ChartElement

@@ -66,7 +66,7 @@ KDReports::PreviewDialog::PreviewDialog(KDReports::Report *report, QWidget *pare
     auto *bottomLayout = new QHBoxLayout();
     topLayout->addLayout(bottomLayout);
 
-    connect(d->m_previewWidget, &KDReports::PreviewWidget::tableSettingsClicked, this, [&]() { d->slotTableBreakingDialog(); } );
+    connect(d->m_previewWidget, &KDReports::PreviewWidget::tableSettingsClicked, this, [this]() { d->slotTableBreakingDialog(); } );
     connect(d->m_previewWidget, &KDReports::PreviewWidget::linkActivated, this, &KDReports::PreviewDialog::linkActivated);
 
     d->m_buttonBox = new QDialogButtonBox(Qt::Horizontal, this);
@@ -74,14 +74,14 @@ KDReports::PreviewDialog::PreviewDialog(KDReports::Report *report, QWidget *pare
 
     auto *printWithDialogButton = new QPushButton(tr("&Print..."), this);
     d->m_buttonBox->addButton(printWithDialogButton, QDialogButtonBox::ActionRole);
-    connect(printWithDialogButton, &QPushButton::clicked, this, [&]() { d->slotPrintWithDialog(); } );
+    connect(printWithDialogButton, &QPushButton::clicked, this, [this]() { d->slotPrintWithDialog(); } );
 
     d->m_quickPrintButton = new QPushButton(this); // create it here for the ordering
     d->m_buttonBox->addButton(d->m_quickPrintButton, QDialogButtonBox::ActionRole);
 
     auto *saveButton = new QPushButton(tr("&Save..."), this);
     d->m_buttonBox->addButton(saveButton, QDialogButtonBox::ActionRole);
-    connect(saveButton, &QPushButton::clicked, this, [&]() { d->slotSave(); } );
+    connect(saveButton, &QPushButton::clicked, this, [this]() { d->slotSave(); } );
 
     auto *cancelButton = new QPushButton(tr("Cancel"), this);
     d->m_buttonBox->addButton(cancelButton, QDialogButtonBox::RejectRole);
@@ -104,7 +104,7 @@ void KDReports::PreviewDialog::setQuickPrinterName(const QString &printerName)
         d->m_quickPrinterName = printerName;
         d->m_quickPrintButton->setText(tr("Print &with %1").arg(printerName));
         d->m_quickPrintButton->show();
-        connect(d->m_quickPrintButton, &QPushButton::clicked, this, [&]() { d->slotQuickPrint(); } );
+        connect(d->m_quickPrintButton, &QPushButton::clicked, this, [this]() { d->slotQuickPrint(); } );
     }
 }
 

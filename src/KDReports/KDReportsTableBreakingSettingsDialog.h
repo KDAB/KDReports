@@ -53,7 +53,6 @@ private Q_SLOTS:
     void reject() override;
 
 private:
-    Q_PRIVATE_SLOT(d, void _kd_slotBreakTablesToggled(bool))
     TableBreakingSettingsDialogPrivate *const d;
 };
 

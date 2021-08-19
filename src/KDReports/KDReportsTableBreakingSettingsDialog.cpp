@@ -28,7 +28,7 @@ public:
         : m_report(report)
     {
     }
-    void _kd_slotBreakTablesToggled(bool breakTables)
+    void slotBreakTablesToggled(bool breakTables)
     {
         if (!breakTables) {
             // If we can't break tables, then we can only scale to 1 pages horizontally
@@ -46,7 +46,7 @@ KDReports::TableBreakingSettingsDialog::TableBreakingSettingsDialog(KDReports::R
 {
     d->setupUi(this);
 
-    connect(d->breakTables, SIGNAL(toggled(bool)), this, SLOT(_kd_slotBreakTablesToggled(bool)));
+    connect(d->breakTables, &QAbstractButton::toggled, this, [this](bool b) { d->slotBreakTablesToggled(b); } );
 
     // LOAD SETTINGS
     d->breakTables->setChecked(true); // trigger the toggled signal if the next line sets it back to false

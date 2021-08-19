@@ -431,7 +431,7 @@ qreal KDReports::ReportPrivate::textDocumentWidth() const
     return paperSize().width() - mmToPixels(m_marginLeft + m_marginRight);
 }
 
-KDReports::ReportBuilder *KDReports::ReportPrivate::builder()
+KDReports::ReportBuilder *KDReports::ReportPrivate::builder() const
 {
     if (m_reportMode == KDReports::Report::WordProcessing)
         return static_cast<TextDocReportLayout *>(m_layout)->builder();

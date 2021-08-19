@@ -185,7 +185,7 @@ void KDReports::SpreadsheetReportLayout::paintTextAndIcon(QPainter &painter, con
     }
 }
 
-void KDReports::SpreadsheetReportLayout::drawBorder(const QRectF &cellRect, QPainter &painter)
+void KDReports::SpreadsheetReportLayout::drawBorder(const QRectF &cellRect, QPainter &painter) const
 {
     if (m_tableSettings.m_border > 0) {
         const QPen oldPen = painter.pen();
