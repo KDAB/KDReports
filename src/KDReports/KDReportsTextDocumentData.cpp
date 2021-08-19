@@ -152,7 +152,7 @@ void KDReports::TextDocumentData::updatePercentSizes(QSizeF size)
 
     if (m_usesTabPositions) {
         QTextFrameFormat rootFrameFormat = m_document->rootFrame()->frameFormat();
-        const int rootFrameMargins = rootFrameFormat.leftMargin() + rootFrameFormat.rightMargin();
+        const qreal rootFrameMargins = rootFrameFormat.leftMargin() + rootFrameFormat.rightMargin();
         QTextBlock block = m_document->firstBlock();
         do {
             QTextBlockFormat blockFormat = block.blockFormat();

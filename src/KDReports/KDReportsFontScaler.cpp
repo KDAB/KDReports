@@ -39,7 +39,7 @@ void FontScaler::setFontAndScalingFactor(const QFont &font, qreal scalingFactor)
     if (m_font.pixelSize() == -1)
         m_font.setPointSizeF(m_font.pointSizeF() * scalingFactor);
     else
-        m_font.setPixelSize(m_font.pixelSize() * scalingFactor);
+        m_font.setPixelSize(qRound(m_font.pixelSize() * scalingFactor));
     m_fontMetrics = QFontMetricsF(m_font);
     m_initialFontMetrics = m_fontMetrics;
 }
@@ -58,7 +58,7 @@ void FontScaler::applyAdditionalScalingFactor(qreal factor)
         if (m_font.pixelSize() > 2 && factor > 0.99 && factor < 1.000)
             m_font.setPixelSize(m_font.pixelSize() - 1);
         else
-            m_font.setPixelSize(m_font.pixelSize() * factor);
+            m_font.setPixelSize(int(m_font.pixelSize() * factor));
     }
 #ifdef DEBUG_LAYOUT
     qDebug() << " applyAdditionalScalingFactor" << factor << "combined factor:" << m_scalingFactor << "pointSize:" << m_font.pointSizeF() << "pixelSize:" << m_font.pixelSize();

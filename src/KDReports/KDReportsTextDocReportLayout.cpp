@@ -165,6 +165,6 @@ qreal KDReports::TextDocReportLayout::userRequestedFontScalingFactor() const
 
 QString KDReports::TextDocReportLayout::anchorAt(int pageNumber, QPoint pos)
 {
-    const QPoint posInPage = pos + QPoint(0, pageNumber * m_textDocument.contentDocument().pageSize().height());
+    const QPointF posInPage = pos + QPointF(0, pageNumber * m_textDocument.contentDocument().pageSize().height());
     return m_textDocument.contentDocument().documentLayout()->anchorAt(posInPage);
 }

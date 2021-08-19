@@ -134,22 +134,23 @@ void KDReports::SpreadsheetReportLayout::paintIcon(QPainter &painter, const QRec
     // Apply scaling factor
     if (m_tableLayout.scalingFactor() != 1.) {
         if (!pix.isNull()) {
-            pix = pix.scaledToWidth(pix.width() * m_tableLayout.scalingFactor());
+            pix = pix.scaledToWidth(qRound(pix.width() * m_tableLayout.scalingFactor()));
             height = pix.height();
         } else {
-            img = img.scaledToWidth(img.width() * m_tableLayout.scalingFactor());
+            img = img.scaledToWidth(qRound(img.width() * m_tableLayout.scalingFactor()));
             height = img.height();
         }
     }
 
     // Vertical centering
-    const qreal y = qMax(qreal(0), qreal((cellContentsRect.height() - height) / 2.0));
+    const int y = qMax(0, int((cellContentsRect.height() - height) / 2.0));
+    const QPoint topLeft = cellContentsRect.topLeft().toPoint() + QPoint(0, y);
     if (!img.isNull()) {
         // Draw img
-        painter.drawImage(cellContentsRect.x(), cellContentsRect.y() + y, img);
+        painter.drawImage(topLeft, img);
     } else {
         // Draw pix
-        painter.drawPixmap(cellContentsRect.x(), cellContentsRect.y() + y, pix);
+        painter.drawPixmap(topLeft, pix);
     }
 }
 
@@ -160,7 +161,7 @@ void KDReports::SpreadsheetReportLayout::paintTextAndIcon(QPainter &painter, con
     QRectF textRect = cellContentsRect;
 
     const bool hasIcon = !cellDecoration.isNull();
-    int iconWidth = 0;
+    qreal iconWidth = 0;
     const bool iconAfterText = decorationAlignment.isValid() && (decorationAlignment.toInt() & Qt::AlignRight);
     if (hasIcon) {
         iconWidth = m_tableLayout.decorationSize(cellDecoration).width() * m_tableLayout.scalingFactor();
