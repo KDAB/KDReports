@@ -560,12 +560,11 @@ void KDReports::PreviewWidgetPrivate::zoomChanged()
 
 void KDReports::PreviewWidgetPrivate::fillZoomCombo()
 {
-    static const double s_zoomFactors[] = {0.125, 0.25, 0.333, 0.5, 0.667, 0.75, 1, 1.25, 1.50, 2, 4, 0 /*end*/};
+    static const double s_zoomFactors[] = {0.125, 0.25, 0.333, 0.5, 0.667, 0.75, 1, 1.25, 1.50, 2, 4};
 
     zoomCombo->clear();
     bool currentZoomFound = false;
-    for (int i = 0; s_zoomFactors[i]; ++i) {
-        const qreal val = s_zoomFactors[i];
+    for (const qreal val : s_zoomFactors) {
         if (!currentZoomFound && m_zoomFactor <= val - 0.001) {
             zoomCombo->addItem(QString::number(m_zoomFactor * 100) + QChar::fromLatin1('%'), QVariant(val));
             zoomCombo->setCurrentIndex(zoomCombo->count() - 1);
