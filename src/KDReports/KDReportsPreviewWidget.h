@@ -131,18 +131,6 @@ protected:
     bool eventFilter(QObject *, QEvent *) override;
 
 private:
-    Q_PRIVATE_SLOT(d, void _kd_slotCurrentPageChanged())
-    Q_PRIVATE_SLOT(d, void _kd_slotFirstPage())
-    Q_PRIVATE_SLOT(d, void _kd_slotPrevPage())
-    Q_PRIVATE_SLOT(d, void _kd_slotNextPage())
-    Q_PRIVATE_SLOT(d, void _kd_slotLastPage())
-    Q_PRIVATE_SLOT(d, void _kd_slotPaperSizeActivated(int))
-    Q_PRIVATE_SLOT(d, void _kd_slotPaperOrientationActivated(int))
-    Q_PRIVATE_SLOT(d, void _kd_slotZoomIn())
-    Q_PRIVATE_SLOT(d, void _kd_slotZoomOut())
-    Q_PRIVATE_SLOT(d, void _kd_slotZoomChanged())
-    Q_PRIVATE_SLOT(d, void _kd_previewNextItems())
-
     friend class PreviewWidgetPrivate;
     PreviewWidgetPrivate *const d;
 };

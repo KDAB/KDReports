@@ -135,7 +135,7 @@ KDReports::PreviewWidgetPrivate::PreviewWidgetPrivate(KDReports::PreviewWidget *
     : m_previewWidget(new PagePreviewWidget)
     , q(w)
 {
-    QObject::connect(&m_previewTimer, SIGNAL(timeout()), q, SLOT(_kd_previewNextItems()));
+    QObject::connect(&m_previewTimer, &QTimer::timeout, q, [this]() { _kd_previewNextItems(); });
     QObject::connect(m_previewWidget, &PagePreviewWidget::mouseMoved, q, [this](QPoint pos) {
         handleMouseMove(pos);
     });
@@ -162,24 +162,23 @@ void KDReports::PreviewWidgetPrivate::init()
     // m_tableBreakingButton = buttonBox->addButton( tr("Table Breaking / Font Scaling..." ), QDialogButtonBox::ActionRole );
     QObject::connect(tableBreakingButton, &QAbstractButton::clicked, q, &PreviewWidget::tableSettingsClicked);
 
-    QObject::connect(firstPage, SIGNAL(clicked()), q, SLOT(_kd_slotFirstPage()));
-    QObject::connect(prevPage, SIGNAL(clicked()), q, SLOT(_kd_slotPrevPage()));
-    QObject::connect(nextPage, SIGNAL(clicked()), q, SLOT(_kd_slotNextPage()));
-    QObject::connect(lastPage, SIGNAL(clicked()), q, SLOT(_kd_slotLastPage()));
-    QObject::connect(zoomIn, SIGNAL(clicked()), q, SLOT(_kd_slotZoomIn()));
-    QObject::connect(zoomOut, SIGNAL(clicked()), q, SLOT(_kd_slotZoomOut()));
-    QObject::connect(zoomCombo, SIGNAL(activated(QString)), q, SLOT(_kd_slotZoomChanged()));
-    QObject::connect(pageList, SIGNAL(currentRowChanged(int)), q, SLOT(_kd_slotCurrentPageChanged()));
-    QObject::connect(paperSizeCombo, SIGNAL(activated(int)), q, SLOT(_kd_slotPaperSizeActivated(int)));
-    QObject::connect(paperOrientationCombo, SIGNAL(activated(int)), q, SLOT(_kd_slotPaperOrientationActivated(int)));
+    QObject::connect(firstPage, &QAbstractButton::clicked, q, [this]() { _kd_slotFirstPage(); });
+    QObject::connect(prevPage, &QAbstractButton::clicked, q, [this]() { _kd_slotPrevPage(); });
+    QObject::connect(nextPage, &QAbstractButton::clicked, q, [this]() { _kd_slotNextPage(); });
+    QObject::connect(lastPage, &QAbstractButton::clicked, q, [this]() { _kd_slotLastPage(); });
+    QObject::connect(zoomIn, &QAbstractButton::clicked, q, [this]() { _kd_slotZoomIn(); });
+    QObject::connect(zoomOut, &QAbstractButton::clicked, q, [this]() { _kd_slotZoomOut(); });
+    QObject::connect(zoomCombo, QOverload<int>::of(&QComboBox::activated), q, [this]() { _kd_slotZoomChanged(); });
+    QObject::connect(pageList, &QListWidget::currentRowChanged, q, [this]() { _kd_slotCurrentPageChanged(); });
+    QObject::connect(paperSizeCombo, QOverload<int>::of(&QComboBox::activated), q, [this](int idx) { _kd_slotPaperSizeActivated(idx); });
+    QObject::connect(paperOrientationCombo, QOverload<int>::of(&QComboBox::activated), q, [this](int idx) { _kd_slotPaperOrientationActivated(idx); });
 
     auto *nextPageShortcut = new QShortcut(q);
     nextPageShortcut->setKey(Qt::CTRL | Qt::Key_PageDown);
-    QObject::connect(nextPageShortcut, SIGNAL(activated()), q, SLOT(_kd_slotNextPage()));
+    QObject::connect(nextPageShortcut, &QShortcut::activated, q, [this]() { _kd_slotNextPage(); });
     auto *prevPageShortcut = new QShortcut(q);
     prevPageShortcut->setKey(Qt::CTRL | Qt::Key_PageUp);
-    QObject::connect(prevPageShortcut, SIGNAL(activated()), q, SLOT(_kd_slotPrevPage()));
-
+    QObject::connect(prevPageShortcut, &QShortcut::activated, q, [this]() { _kd_slotPrevPage(); });
     pageNumber->setValidator(new QIntValidator(1, 100000, pageNumber));
     pageNumber->installEventFilter(q);
 }
