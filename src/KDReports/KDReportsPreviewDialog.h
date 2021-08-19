@@ -152,10 +152,6 @@ public Q_SLOTS:
     void reject() override;
 
 private:
-    Q_PRIVATE_SLOT(d, void _kd_slotTableBreakingDialog())
-    Q_PRIVATE_SLOT(d, void _kd_slotPrintWithDialog())
-    Q_PRIVATE_SLOT(d, void _kd_slotQuickPrint())
-    Q_PRIVATE_SLOT(d, void _kd_slotSave())
     PreviewDialogPrivate *const d;
 };
 

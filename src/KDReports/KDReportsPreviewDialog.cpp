@@ -40,10 +40,10 @@ public:
     {
     }
 
-    void _kd_slotTableBreakingDialog();
-    void _kd_slotPrintWithDialog();
-    void _kd_slotQuickPrint();
-    void _kd_slotSave();
+    void slotTableBreakingDialog();
+    void slotPrintWithDialog();
+    void slotQuickPrint();
+    void slotSave();
 
     KDReports::PreviewDialog *q;
     KDReports::PreviewWidget *m_previewWidget;
@@ -66,7 +66,7 @@ KDReports::PreviewDialog::PreviewDialog(KDReports::Report *report, QWidget *pare
     QHBoxLayout *bottomLayout = new QHBoxLayout();
     topLayout->addLayout(bottomLayout);
 
-    connect(d->m_previewWidget, SIGNAL(tableSettingsClicked()), this, SLOT(_kd_slotTableBreakingDialog()));
+    connect(d->m_previewWidget, &KDReports::PreviewWidget::tableSettingsClicked, this, [&]() { d->slotTableBreakingDialog(); } );
     connect(d->m_previewWidget, &KDReports::PreviewWidget::linkActivated, this, &KDReports::PreviewDialog::linkActivated);
 
     d->m_buttonBox = new QDialogButtonBox(Qt::Horizontal, this);
@@ -74,18 +74,18 @@ KDReports::PreviewDialog::PreviewDialog(KDReports::Report *report, QWidget *pare
 
     QPushButton *printWithDialogButton = new QPushButton(tr("&Print..."), this);
     d->m_buttonBox->addButton(printWithDialogButton, QDialogButtonBox::ActionRole);
-    connect(printWithDialogButton, SIGNAL(clicked()), this, SLOT(_kd_slotPrintWithDialog()));
+    connect(printWithDialogButton, &QPushButton::clicked, this, [&]() { d->slotPrintWithDialog(); } );
 
     d->m_quickPrintButton = new QPushButton(this); // create it here for the ordering
     d->m_buttonBox->addButton(d->m_quickPrintButton, QDialogButtonBox::ActionRole);
 
     QPushButton *saveButton = new QPushButton(tr("&Save..."), this);
     d->m_buttonBox->addButton(saveButton, QDialogButtonBox::ActionRole);
-    connect(saveButton, SIGNAL(clicked()), this, SLOT(_kd_slotSave()));
+    connect(saveButton, &QPushButton::clicked, this, [&]() { d->slotSave(); } );
 
     QPushButton *cancelButton = new QPushButton(tr("Cancel"), this);
     d->m_buttonBox->addButton(cancelButton, QDialogButtonBox::RejectRole);
-    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
+    connect(cancelButton, &QPushButton::clicked, this, &QDialog::reject);
 
     d->m_quickPrintButton->hide();
 }
@@ -104,7 +104,7 @@ void KDReports::PreviewDialog::setQuickPrinterName(const QString &printerName)
         d->m_quickPrinterName = printerName;
         d->m_quickPrintButton->setText(tr("Print &with %1").arg(printerName));
         d->m_quickPrintButton->show();
-        connect(d->m_quickPrintButton, SIGNAL(clicked()), this, SLOT(_kd_slotQuickPrint()));
+        connect(d->m_quickPrintButton, &QPushButton::clicked, this, [&]() { d->slotQuickPrint(); } );
     }
 }
 
@@ -124,14 +124,14 @@ bool KDReports::PreviewDialog::showTableSettingsDialog(KDReports::Report *report
     return dialog.exec();
 }
 
-void KDReports::PreviewDialogPrivate::_kd_slotTableBreakingDialog()
+void KDReports::PreviewDialogPrivate::slotTableBreakingDialog()
 {
     if (q->showTableSettingsDialog(m_previewWidget->report())) {
         m_previewWidget->repaint();
     }
 }
 
-void KDReports::PreviewDialogPrivate::_kd_slotPrintWithDialog()
+void KDReports::PreviewDialogPrivate::slotPrintWithDialog()
 {
     if (m_previewWidget->printWithDialog()) {
         q->setResult(KDReports::PreviewDialog::Printed);
@@ -139,7 +139,7 @@ void KDReports::PreviewDialogPrivate::_kd_slotPrintWithDialog()
     }
 }
 
-void KDReports::PreviewDialogPrivate::_kd_slotQuickPrint()
+void KDReports::PreviewDialogPrivate::slotQuickPrint()
 {
     KDReports::Report *report = m_previewWidget->report();
     QPrinter printer;
@@ -150,7 +150,7 @@ void KDReports::PreviewDialogPrivate::_kd_slotQuickPrint()
     q->accept();
 }
 
-void KDReports::PreviewDialogPrivate::_kd_slotSave()
+void KDReports::PreviewDialogPrivate::slotSave()
 {
     KDReports::Report *report = m_previewWidget->report();
     QString file;
