@@ -19,6 +19,9 @@
 
 #include "KDReportsErrorDetails.h"
 #include "KDReportsGlobal.h"
+#include "KDReportsVariableType.h"
+#include <QTextOption>
+#include <memory>
 
 QT_BEGIN_NAMESPACE
 class QDomElement;
@@ -37,6 +40,7 @@ class HLineElement;
 class Header;
 typedef Header Footer;
 class Cell;
+class XmlElementHandlerPrivate;
 
 /**
  * This handler is called for each XML element being parsed
@@ -77,7 +81,7 @@ class Cell;
  *   report.setXmlElementHandler( handler );
  * </code>
  */
-class KDREPORTS_EXPORT XmlElementHandler // krazy:exclude=dpointer TODO fix this
+class KDREPORTS_EXPORT XmlElementHandler
 {
 public:
     XmlElementHandler();
@@ -197,17 +201,12 @@ public:
      */
     virtual bool pageBreak(QDomElement &xmlElement);
 
-#ifdef KDREPORTS_ALLOW_BINARY_INCOMPATIBILITY
     /**
      * Called after parsing a "hline".
      * Returning false skips the whole line. Can be used to change
      * hline attributes.
-     *
-     * This method is only defined and called if -DKDREPORTS_ALLOW_BINARY_INCOMPATIBILITY
-     * is set while compiling both kdreports and your application.
      */
     virtual bool hLineElement(KDReports::HLineElement &hLineElement, QDomElement &xmlElement);
-#endif
 
     /**
      * Called after parsing "custom", whose only purpose is to call this method.
@@ -223,6 +222,30 @@ public:
     virtual void endReport(KDReports::Report &report, const QDomElement &xmlElement);
 
     /**
+     * Called after parsing "variable".
+     */
+    virtual bool variable(KDReports::VariableType &type, QDomElement &xmlElement);
+
+    /**
+     * Called after parsing "vspace"
+     * Can be used to modify vertical space size
+     * Returning false skip the vertical space
+     */
+    virtual bool vspace(int &size, QDomElement &xmlElement);
+
+    /**
+     * Called after parsing a "paragraph-margins".
+     * Returning false skips the paragraph margin.
+     */
+    virtual bool paragraphMargin(qreal &left, qreal &top, qreal &right, qreal &bottom, const QDomElement &xmlElement);
+
+    /**
+     * Called after parsing a "tabs"
+     * Returning false skips tabs
+     */
+    virtual bool tabs(QList<QTextOption::Tab> &tabs, const QDomElement &xmlElement);
+
+    /**
      * @return an ErrorDetails instance.
      */
     KDReports::ErrorDetails errorDetails();
@@ -234,10 +257,14 @@ public:
     void setErrorDetails(const KDReports::ErrorDetails &details);
 
 private:
+    virtual void virtual_hook(int id, void *data);
+
     KDReports::ErrorDetails m_details;
 
-    // BIC TODO: add d pointer
+    std::unique_ptr<XmlElementHandlerPrivate> d;
 };
+
+using XmlElementHandlerPrivateV2 = XmlElementHandlerPrivate; // old compat name from before 2.0
 
 }
 

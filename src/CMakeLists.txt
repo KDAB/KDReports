@@ -55,7 +55,6 @@ set(SOURCES
   KDReports/KDReportsTextDocReportLayout.cpp
   KDReports/KDReportsSpreadsheetReportLayout.cpp
   KDReports/KDReportsTableLayout.cpp
-  KDReports/KDReportsXmlElementHandlerV2.cpp
   KDReports/KDReportsXmlHelper.cpp
 )
 
@@ -138,7 +137,6 @@ if(${PROJECT_NAME}_IS_ROOT_PROJECT)
       KDReportsFrame
       KDReportsGlobal
       KDReportsXmlElementHandler
-      KDReportsXmlElementHandlerV2
       KDReportsVariableType
       KDReportsUnit
       KDReportsTableBreakingSettingsDialog
@@ -173,7 +171,6 @@ if(${PROJECT_NAME}_IS_ROOT_PROJECT)
     KDReports/KDReportsFrame.h
     KDReports/KDReportsGlobal.h
     KDReports/KDReportsXmlElementHandler.h
-    KDReports/KDReportsXmlElementHandlerV2.h
     KDReports/KDReportsVariableType.h
     KDReports/KDReportsUnit.h
     KDReports/KDReportsTableBreakingSettingsDialog.h

@@ -17,10 +17,10 @@
 #ifndef TESTXMLELEMENTHANDLER_H
 #define TESTXMLELEMENTHANDLER_H
 
-#include "KDReportsXmlElementHandlerV2.h"
+#include "KDReportsXmlElementHandler.h"
 #include <QStringList>
 
-class TestXmlElementHandler : public KDReports::XmlElementHandlerV2
+class TestXmlElementHandler : public KDReports::XmlElementHandler
 {
 public:
     explicit TestXmlElementHandler(KDReports::Report &report);

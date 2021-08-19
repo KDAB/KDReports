@@ -31,6 +31,10 @@
 #endif
 #include <QDomElement>
 
+class KDReports::XmlElementHandlerPrivate
+{
+};
+
 KDReports::XmlElementHandler::XmlElementHandler() { }
 
 KDReports::XmlElementHandler::~XmlElementHandler() { }
@@ -137,14 +141,12 @@ bool KDReports::XmlElementHandler::pageBreak(QDomElement &xmlElement)
     return true;
 }
 
-#ifdef KDREPORTS_ALLOW_BINARY_INCOMPATIBILITY
 bool KDReports::XmlElementHandler::hLineElement(KDReports::HLineElement &hLineElement, QDomElement &xmlElement)
 {
     Q_UNUSED(hLineElement);
     Q_UNUSED(xmlElement);
     return true;
 }
-#endif
 
 void KDReports::XmlElementHandler::customElement(const QDomElement &xmlElement)
 {
@@ -157,6 +159,37 @@ void KDReports::XmlElementHandler::endReport(KDReports::Report &report, const QD
     Q_UNUSED(xmlElement);
 }
 
+bool KDReports::XmlElementHandler::vspace(int &size, QDomElement &xmlElement)
+{
+    Q_UNUSED(xmlElement);
+    Q_UNUSED(size);
+    return true;
+}
+
+bool KDReports::XmlElementHandler::variable(KDReports::VariableType &type, QDomElement &xmlElement)
+{
+    Q_UNUSED(type);
+    Q_UNUSED(xmlElement);
+    return true;
+}
+
+bool KDReports::XmlElementHandler::paragraphMargin(qreal &left, qreal &top, qreal &right, qreal &bottom, const QDomElement &xmlElement)
+{
+    Q_UNUSED(left);
+    Q_UNUSED(top);
+    Q_UNUSED(right);
+    Q_UNUSED(bottom);
+    Q_UNUSED(xmlElement)
+    return true;
+}
+
+bool KDReports::XmlElementHandler::tabs(QList<QTextOption::Tab> &tabs, const QDomElement &xmlElement)
+{
+    Q_UNUSED(tabs);
+    Q_UNUSED(xmlElement);
+    return true;
+}
+
 void KDReports::XmlElementHandler::setErrorDetails(const KDReports::ErrorDetails &details)
 {
     m_details = details;
@@ -165,4 +198,10 @@ void KDReports::XmlElementHandler::setErrorDetails(const KDReports::ErrorDetails
 KDReports::ErrorDetails KDReports::XmlElementHandler::errorDetails()
 {
     return m_details;
+}
+
+void KDReports::XmlElementHandler::virtual_hook(int id, void *data)
+{
+    Q_UNUSED(id)
+    Q_UNUSED(data)
 }

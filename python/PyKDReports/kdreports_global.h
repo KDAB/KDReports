@@ -45,7 +45,6 @@
 #include <KDReports/KDReportsUnit.h>
 #include <KDReports/KDReportsVariableType.h>
 #include <KDReports/KDReportsXmlElementHandler.h>
-#include <KDReports/KDReportsXmlElementHandlerV2.h>
 #include <KDReports/KDReportsXmlHelper.h>
 // Private
 #include <KDReports/KDReportsReportBuilder_p.h>

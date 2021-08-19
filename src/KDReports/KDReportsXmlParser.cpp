@@ -28,7 +28,6 @@
 #include "KDReportsTableElement.h"
 #include "KDReportsTextElement.h"
 #include "KDReportsXmlElementHandler.h"
-#include "KDReportsXmlElementHandlerV2.h"
 #include "KDReportsXmlHelper.h"
 
 #include <QDebug>
@@ -371,8 +370,7 @@ bool KDReports::XmlParser::processNode(const QDomNode &node, KDReports::ReportBu
                     return false;
                 }
             }
-            XmlElementHandlerV2 *v2 = dynamic_cast<XmlElementHandlerV2 *>(m_xmlElementHandler);
-            if (v2 && !v2->vspace(size, element))
+            if (m_xmlElementHandler && !m_xmlElementHandler->vspace(size, element))
                 continue;
             m_report->addVerticalSpacing(size);
         } else if (name == QLatin1String("table")) {
@@ -517,8 +515,7 @@ bool KDReports::XmlParser::processNode(const QDomNode &node, KDReports::ReportBu
             if (builder) {
                 const QString type = element.attribute(QStringLiteral("type"));
                 KDReports::VariableType vt = KDReports::XmlHelper::stringToVariableType(type);
-                XmlElementHandlerV2 *v2 = dynamic_cast<XmlElementHandlerV2 *>(m_xmlElementHandler);
-                if (v2 && !v2->variable(vt, element))
+                if (m_xmlElementHandler && !m_xmlElementHandler->variable(vt, element))
                     continue;
                 builder->addVariablePublic(vt);
             }
@@ -556,14 +553,8 @@ bool KDReports::XmlParser::processNode(const QDomNode &node, KDReports::ReportBu
                 hLineElement.setMargin(margin);
             }
 
-#ifdef KDREPORTS_ALLOW_BINARY_INCOMPATIBILITY
             if (m_xmlElementHandler && !m_xmlElementHandler->hLineElement(hLineElement, element))
                 continue;
-#else
-            XmlElementHandlerV2 *v2 = dynamic_cast<XmlElementHandlerV2 *>(m_xmlElementHandler);
-            if (v2 && !v2->hLineElement(hLineElement, element))
-                continue;
-#endif
 
             addElement(hLineElement, builder, element);
         } else {
@@ -610,8 +601,7 @@ void KDReports::XmlParser::parseTabs(KDReports::ReportBuilder *builder, const QD
             tabs.append(tab);
         }
     }
-    XmlElementHandlerV2 *v2 = dynamic_cast<XmlElementHandlerV2 *>(m_xmlElementHandler);
-    if (!v2 || v2->tabs(tabs, tabsElement))
+    if (!m_xmlElementHandler || m_xmlElementHandler->tabs(tabs, tabsElement))
         builder->setTabPositions(tabs);
 }
 
@@ -621,8 +611,7 @@ void KDReports::XmlParser::parseParagraphMargins(KDReports::ReportBuilder *build
     qreal top = element.attribute(QStringLiteral("top")).toDouble();
     qreal right = element.attribute(QStringLiteral("right")).toDouble();
     qreal bottom = element.attribute(QStringLiteral("bottom")).toDouble();
-    XmlElementHandlerV2 *v2 = dynamic_cast<XmlElementHandlerV2 *>(m_xmlElementHandler);
-    if (!v2 || v2->paragraphMargin(left, top, right, bottom, element))
+    if (!m_xmlElementHandler || m_xmlElementHandler->paragraphMargin(left, top, right, bottom, element))
         builder->setParagraphMargins(left, top, right, bottom);
 }
 

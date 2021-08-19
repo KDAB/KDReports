@@ -43,12 +43,12 @@
         <object-type name="TableElement" />
         <object-type name="TextElement" />
         <object-type name="AutoTableElement">
-            <!-- FIXME: this contrcutor causes crash on shiboken6 generator (vr. 6.1.2) -->
+            <!-- FIXME: this constructor causes crash on shiboken6 generator (vr. 6.1.2) -->
             <modify-function signature="AutoTableElement(QAbstractItemModel *)" remove="all" />
             <enum-type name="Role" />
         </object-type>
         <object-type name="ChartElement">
-            <!-- FIXME: this contrcutor causes crash on shiboken6 generator (vr. 6.1.2) -->
+            <!-- FIXME: this constructor causes crash on shiboken6 generator (vr. 6.1.2) -->
             <modify-function signature="ChartElement(QAbstractItemModel *)" remove="all" />
         </object-type>
 
@@ -56,7 +56,6 @@
 
         <value-type name="ErrorDetails" />
         <value-type name="XmlElementHandler" />
-        <value-type name="XmlElementHandlerV2" />
         <value-type name="XmlHelper" />
 
         <!-- Private types used by public API -->

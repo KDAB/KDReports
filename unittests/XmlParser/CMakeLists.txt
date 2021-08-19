@@ -12,4 +12,4 @@
 ## Contact info@kdab.com if any conditions of this licensing are not clear to you.
 ##
 
-add_unittest(XmlParser.cpp TestXmlElementHandlerV1.cpp TestXmlElementHandler.cpp RESOURCE XmlParser.qrc)
+add_unittest(XmlParser.cpp TestXmlElementHandler.cpp RESOURCE XmlParser.qrc)

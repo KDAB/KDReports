@@ -15,7 +15,6 @@
 ****************************************************************************/
 
 #include "TestXmlElementHandler.h"
-#include "TestXmlElementHandlerV1.h"
 #include <KDReports>
 #include <KDReportsTextDocument_p.h>
 #include <QPainter>
@@ -236,66 +235,7 @@ private slots:
         QCOMPARE(details.message(), QString("<vspace> not allowed in headers, footers, or table cells"));
     }
 
-    void testHandlerV1()
-    {
-        QFile file(":/handler.xml");
-        QVERIFY(file.open(QIODevice::ReadOnly));
-        Report report;
-        TestXmlElementHandlerV1 handler(report);
-        report.setXmlElementHandler(&handler);
-
-        QStandardItemModel model;
-        model.setItem(0, 0, new QStandardItem("modelCell"));
-        // HTML cells need to start with "<html>" for KDReportsAutoTable
-        // (not necessary if it's just for <html model="..." row="..." column="...">)
-        model.setItem(0, 1, new QStandardItem("<html><b>htmlCell</b>"));
-        report.associateModel("model1", &model);
-
-        report.associateTextValue("testModification", "SHOULD NOT APPEAR");
-        report.associateTextValue("testModified", "modified");
-
-        QVERIFY(report.loadFromXML(&file));
-        QVERIFY(!handler.errorDetails().hasError());
-        QStringList expectedCallbacks;
-        expectedCallbacks << "startReport"
-                          << "startHeader"
-                          << "imageElement"
-                          << "endHeader"
-                          << "startFooter"
-                          << "textElement"
-                          << "endFooter"
-                          << "textElement"
-                          << "textElement"
-#ifdef KDREPORTS_ALLOW_BINARY_INCOMPATIBILITY
-                          << "hLineElement"
-#endif
-                          << "htmlElement"
-                          << "textElement"
-                          << "htmlElement"
-                          << "startTableElement"
-                          << "startCell"
-                          << "textElement"
-                          << "endCell"
-                          << "endTableElement"
-                          << "textElement"
-                          << "customElement"
-                          << "autoTableElement"
-                          << "endReport";
-        // qDebug() << handler.callbacks();
-        QCOMPARE(handler.callbacks(), expectedCallbacks);
-        QTextDocument &doc = report.doc().contentDocument();
-
-        QString ptext = doc.toPlainText();
-
-        // custom objects (such as HLineTextObject) are represented
-        // as 0xFFFC
-        ptext.replace(QChar(0xFFFC), '#');
-
-        QCOMPARE(ptext, QString("Title\n#\n\nTest used by XmlParser.cpp\nmodelCell\nhtmlCell\n\nTableElement example\n\nmodified\nCustom element\n\nmodelCell\nhtmlCell\n"));
-        QCOMPARE(report.doc().contentDocument().toPlainText(), doc.toPlainText());
-    }
-
-    void testHandlerV2()
+    void testHandler()
     {
         QFile file(":/handler.xml");
         QVERIFY(file.open(QIODevice::ReadOnly));
