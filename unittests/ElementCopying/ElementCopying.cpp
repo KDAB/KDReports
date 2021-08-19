@@ -84,18 +84,20 @@ private slots:
         QBrush brush(Qt::red);
         elem1.setBackground(brush);
         TableElement elem2;
+        elem2.setPadding(42);
         QBrush tableBrush(Qt::green);
         elem2.setBackground(tableBrush);
-        QList<Element *> elemList;
-        elemList.append(elem1.clone());
-        elemList.append(elem2.clone());
+        const QList<Element *> elemList { elem1.clone(), elem2.clone() };
         Element *baseElem1 = elemList[0];
         Element *baseElem2 = elemList[1];
         QCOMPARE(baseElem1->background(), brush);
         QCOMPARE(baseElem2->background(), tableBrush);
         // check no slicing:
         QVERIFY(dynamic_cast<TextElement *>(baseElem1));
-        QVERIFY(dynamic_cast<TableElement *>(baseElem2));
+        auto *clonedTableElement = dynamic_cast<TableElement *>(baseElem2);
+        QVERIFY(clonedTableElement);
+        // check properties were copied
+        QCOMPARE(clonedTableElement->padding(), 42);
     }
 };
 

@@ -111,16 +111,6 @@ public:
      */
     QFont defaultFont(bool *isSet) const;
 
-    /**
-     * Copies a table element.
-     * The model and settings (and cell elements, when using addElement) are copied over.
-     */
-    AbstractTableElement(const AbstractTableElement &other);
-    /**
-     * Copies the table and settings from another table element.
-     */
-    AbstractTableElement &operator=(const AbstractTableElement &other);
-
     struct ColumnConstraint
     {
         qreal width;
@@ -138,6 +128,16 @@ protected:
      * Protected constructor, for derived classes only.
      */
     AbstractTableElement();
+
+    /**
+     * Copies a table element.
+     * The model and settings (and cell elements, when using addElement) are copied over.
+     */
+    AbstractTableElement(const AbstractTableElement &other);
+    /**
+     * Copies the table and settings from another table element.
+     */
+    AbstractTableElement &operator=(const AbstractTableElement &other);
 
     /**
      * Destructor. Deletes internal data.
