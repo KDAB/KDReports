@@ -31,14 +31,15 @@ KDReports::ErrorDetails::ErrorDetails(const QString &message)
 
 QString KDReports::ErrorDetails::message() const
 {
-    if (!hasError())
+    if (!hasError()) {
         return QString();
+    }
 
-    if (d->m_line != -1)
+    if (d->m_line != -1) {
         return QObject::tr("Error on line %1, column %2: %3").arg(line()).arg(column()).arg(driverMessage());
-
-    else
+    } else {
         return driverMessage();
+    }
 }
 
 int KDReports::ErrorDetails::line() const
