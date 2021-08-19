@@ -41,7 +41,7 @@ public:
     bool chartElement(KDReports::ChartElement &chartElement, QDomElement &xmlElement) override;
     bool imageElement(KDReports::ImageElement &imageElement, QDomElement &xmlElement) override;
     bool pageBreak(QDomElement &xmlElement) override;
-    bool hLineElement(KDReports::HLineElement &textElement, QDomElement &xmlElement) override;
+    bool hLineElement(KDReports::HLineElement &hLineElement, QDomElement &xmlElement) override;
     void customElement(const QDomElement &xmlElement) override;
     bool variable(KDReports::VariableType &type, QDomElement &xmlElement) override;
     bool vspace(int &size, QDomElement &xmlElement) override;

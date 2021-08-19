@@ -68,7 +68,7 @@ public:
     /**
      * Sets the line thickness
      */
-    void setThickness(int w);
+    void setThickness(int t);
 
     /**
      * Returns the hline thickness

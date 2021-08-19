@@ -86,12 +86,12 @@ private:
 class KDReports::PreviewWidgetPrivate : public Ui::PreviewWidgetBase
 {
 public:
-    PreviewWidgetPrivate(KDReports::PreviewWidget *q);
+    PreviewWidgetPrivate(KDReports::PreviewWidget *w);
 
     // not in ctor because the init calls q->slotFoo which uses d->, so d must be set first.
     void init();
 
-    void paintItem(QListWidgetItem *item, int index);
+    void paintItem(QListWidgetItem *item, int index) const;
     QPixmap paintPreview(int index) const;
     void printSelectedPages();
     void setupComboBoxes();
@@ -183,7 +183,7 @@ void KDReports::PreviewWidgetPrivate::init()
     pageNumber->installEventFilter(q);
 }
 
-void KDReports::PreviewWidgetPrivate::paintItem(QListWidgetItem *item, int index)
+void KDReports::PreviewWidgetPrivate::paintItem(QListWidgetItem *item, int index) const
 {
     // qDebug() << "paintItem" << index;
 

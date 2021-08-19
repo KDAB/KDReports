@@ -47,7 +47,7 @@ public:
     void setFontAndScalingFactor(const QFont &font, qreal scalingFactor);
 
     void setFactorForHeight(qreal wantedHeight);
-    void setFactorForWidth(qreal wantedFactor, const QString &usingText);
+    void setFactorForWidth(qreal wantedFactor, const QString &sampleText);
     void applyAdditionalScalingFactor(qreal factor);
 
     QFont font() const { return m_font; }

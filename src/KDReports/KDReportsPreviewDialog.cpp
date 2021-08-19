@@ -40,9 +40,9 @@ public:
     {
     }
 
-    void slotTableBreakingDialog();
-    void slotPrintWithDialog();
-    void slotQuickPrint();
+    void slotTableBreakingDialog() const;
+    void slotPrintWithDialog() const;
+    void slotQuickPrint() const;
     void slotSave();
 
     KDReports::PreviewDialog *q;
@@ -124,14 +124,14 @@ bool KDReports::PreviewDialog::showTableSettingsDialog(KDReports::Report *report
     return dialog.exec();
 }
 
-void KDReports::PreviewDialogPrivate::slotTableBreakingDialog()
+void KDReports::PreviewDialogPrivate::slotTableBreakingDialog() const
 {
     if (q->showTableSettingsDialog(m_previewWidget->report())) {
         m_previewWidget->repaint();
     }
 }
 
-void KDReports::PreviewDialogPrivate::slotPrintWithDialog()
+void KDReports::PreviewDialogPrivate::slotPrintWithDialog() const
 {
     if (m_previewWidget->printWithDialog()) {
         q->setResult(KDReports::PreviewDialog::Printed);
@@ -139,7 +139,7 @@ void KDReports::PreviewDialogPrivate::slotPrintWithDialog()
     }
 }
 
-void KDReports::PreviewDialogPrivate::slotQuickPrint()
+void KDReports::PreviewDialogPrivate::slotQuickPrint() const
 {
     KDReports::Report *report = m_previewWidget->report();
     QPrinter printer;
