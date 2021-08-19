@@ -27,6 +27,8 @@ class Test;
 class KDReports::Test : public QObject
 {
     Q_OBJECT
+public:
+    using QObject::QObject;
 private slots:
     void testNoHeaders()
     {

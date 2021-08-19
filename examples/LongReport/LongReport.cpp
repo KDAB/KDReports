@@ -34,6 +34,7 @@ static const int numRows = 300;
 class ProxyModel : public QIdentityProxyModel
 {
 public:
+    using QIdentityProxyModel::QIdentityProxyModel;
     QSize span(const QModelIndex &index) const override
     {
         // Row 2 Column 4 should span over 3 rows and 4 columns.

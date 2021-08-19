@@ -26,6 +26,8 @@ Q_DECLARE_METATYPE(qreals)
 class Test : public QObject
 {
     Q_OBJECT
+public:
+    using QObject::QObject;
 private slots:
     void testBreaking_data()
     {

@@ -26,6 +26,7 @@
 class HelloWorldTableModel : public QAbstractTableModel
 {
 public:
+    using QAbstractTableModel::QAbstractTableModel;
     int columnCount(const QModelIndex &parent = QModelIndex()) const override
     {
         Q_UNUSED(parent);
@@ -57,6 +58,7 @@ public:
 
 class Thread : public QThread
 {
+    using QThread::QThread;
     void run() override
     {
 
@@ -119,6 +121,7 @@ class Thread : public QThread
 
 class XmlThread : public QThread
 {
+    using QThread::QThread;
     void run() override
     {
         KDReports::Report report;

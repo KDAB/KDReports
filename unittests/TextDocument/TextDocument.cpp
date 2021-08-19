@@ -48,6 +48,8 @@ static void setVariableMarker(QTextDocument &textDoc, int pos, VariableType vari
 class KDReports::Test : public QObject
 {
     Q_OBJECT
+public:
+    using QObject::QObject;
 private slots:
     void testTextDocumentInitialState()
     {

@@ -34,6 +34,8 @@ class HLineTextObject : public QObject, public QTextObjectInterface
     Q_INTERFACES(QTextObjectInterface)
 
 public:
+    using QObject::QObject;
+
     enum { HLineTextFormat = QTextFormat::UserObject + 1 };
     enum { Color = 1 };
     enum { Thickness = 2 };
