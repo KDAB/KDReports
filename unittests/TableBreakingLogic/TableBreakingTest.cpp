@@ -18,9 +18,9 @@
 #include <QObject>
 #include <QtTest/QtTest>
 
-typedef QList<int> ints;
+typedef QVector<int> ints;
 Q_DECLARE_METATYPE(ints)
-typedef QList<qreal> qreals;
+typedef QVector<qreal> qreals;
 Q_DECLARE_METATYPE(qreals)
 
 class Test : public QObject
@@ -59,16 +59,16 @@ private slots:
         QFETCH(ints, expectedResult);
         QFETCH(qreals, expectedWidthPerPage);
         KDReports::TableBreakingLogic logic;
-        logic.setColumnWidths(widths.toVector());
+        logic.setColumnWidths(widths);
         logic.setPageCount(pages);
         const QVector<int> res = logic.columnsPerPage();
-        if (res.toList() != expectedResult)
-            qDebug() << "columnsPerPage:" << res.toList() << "expected" << expectedResult;
-        QCOMPARE(res.toList(), expectedResult);
+        if (res != expectedResult)
+            qDebug() << "columnsPerPage:" << res << "expected" << expectedResult;
+        QCOMPARE(res, expectedResult);
         const QVector<qreal> widthPerPage = logic.widthPerPage(res);
-        if (widthPerPage.toList() != expectedWidthPerPage)
-            qDebug() << "widthPerPage:" << widthPerPage.toList() << "expected" << expectedWidthPerPage;
-        QCOMPARE(widthPerPage.toList(), expectedWidthPerPage);
+        if (widthPerPage != expectedWidthPerPage)
+            qDebug() << "widthPerPage:" << widthPerPage << "expected" << expectedWidthPerPage;
+        QCOMPARE(widthPerPage, expectedWidthPerPage);
     }
 };
 

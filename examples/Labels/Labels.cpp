@@ -37,6 +37,7 @@ static qreal inchToMM(qreal inch)
 
 class LabelModel : public QAbstractTableModel
 {
+    Q_OBJECT
 public:
     /**
      * @brief Creates a LabelModel
@@ -147,3 +148,5 @@ int main(int argc, char **argv)
     }
     return 0;
 }
+
+#include "Labels.moc"

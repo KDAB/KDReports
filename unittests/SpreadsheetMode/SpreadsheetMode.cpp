@@ -117,8 +117,6 @@ private slots:
         QFont f(s_fontName);
         f.setPixelSize(86);
         FontScaler scaler(f);
-        const QFontMetricsF fm(f);
-        const QString text = "hello";
 
         const qreal wantedHeight = 50;
         scaler.setFactorForHeight(wantedHeight);
@@ -151,7 +149,6 @@ private slots:
         QFont f(s_fontName);
         f.setPixelSize(86);
         FontScaler scaler(f);
-        const QFontMetricsF fm(f);
         const QString text = "hello";
         const qreal initialWidth = scaler.textWidth(text);
 

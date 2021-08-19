@@ -33,6 +33,7 @@ static const int numRows = 300;
 
 class ProxyModel : public QIdentityProxyModel
 {
+    Q_OBJECT
 public:
     using QIdentityProxyModel::QIdentityProxyModel;
     QSize span(const QModelIndex &index) const override
@@ -54,11 +55,13 @@ ProxyModel proxyModel;
 
 static KDReports::AutoTableElement largeAutoTable()
 {
+#ifdef USE_CUSTOM_ROLES
     QColor colorRed(119, 112, 112);
     QColor colorGreen(112, 192, 112);
     QColor colorBlue(112, 112, 192);
     QPixmap pix(16, 16);
     pix.fill(Qt::green);
+#endif
 
     for (int column = 0; column < numColumns; ++column) {
         for (int row = 0; row < numRows; ++row) {
@@ -194,3 +197,5 @@ int main(int argc, char **argv)
     // report.exportToFile( "testout.pdf" );
     // return 0;
 }
+
+#include "LongReport.moc"
