@@ -73,9 +73,9 @@ KDReports::ReportPrivate::ReportPrivate(Report *report)
 #endif
     m_firstPageNumber(1)
     , m_pageContentSizeDirty(true)
-    , m_xmlElementHandler(0)
+    , m_xmlElementHandler(nullptr)
     , m_currentRow(-1)
-    , m_currentModel(0)
+    , m_currentModel(nullptr)
     , m_reportMode(KDReports::Report::WordProcessing)
     , m_layout(new TextDocReportLayout(report))
     , m_mainTable(new MainTable)
@@ -215,10 +215,10 @@ void KDReports::ReportPrivate::setPaperSizeFromPrinter(QSizeF paperSize)
 
 KDReports::Header *KDReports::HeaderMap::headerForPage(int pageNumber /* 1-based */, int pageCount) const
 {
-    Header *firstPageHeader = 0;
-    Header *lastPageHeader = 0;
-    Header *evenPagesHeader = 0;
-    Header *oddPagesHeader = 0;
+    Header *firstPageHeader = nullptr;
+    Header *lastPageHeader = nullptr;
+    Header *evenPagesHeader = nullptr;
+    Header *oddPagesHeader = nullptr;
     for (const_iterator it = begin(); it != end(); ++it) {
         const KDReports::HeaderLocations loc = it.key();
         Header *const h = it.value();
@@ -412,7 +412,7 @@ void KDReports::ReportPrivate::debugLayoutToPdf(const char *fileName)
     QPrinter printer;
     q->setupPrinter(&printer);
     printer.setOutputFileName(QFile::decodeName(fileName));
-    doPrint(&printer, 0);
+    doPrint(&printer, nullptr);
     printer.setOutputFileName(QString());
     m_pageContentSizeDirty = oldLayoutDirty;
 }
@@ -435,7 +435,7 @@ KDReports::ReportBuilder *KDReports::ReportPrivate::builder()
 {
     if (m_reportMode == KDReports::Report::WordProcessing)
         return static_cast<TextDocReportLayout *>(m_layout)->builder();
-    return 0;
+    return nullptr;
 }
 
 ////

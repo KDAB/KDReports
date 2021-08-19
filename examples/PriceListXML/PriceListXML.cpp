@@ -63,13 +63,13 @@ int main(int argc, char **argv)
 
     QFile reportFile(":/PriceList.xml");
     if (!reportFile.open(QIODevice::ReadOnly)) {
-        QMessageBox::warning(0, QObject::tr("Warning"), QObject::tr("Could not open report description file 'PriceList.xml'. Please start this program from the PriceListXML directory."));
+        QMessageBox::warning(nullptr, QObject::tr("Warning"), QObject::tr("Could not open report description file 'PriceList.xml'. Please start this program from the PriceListXML directory."));
         return -1;
     }
 
     KDReports::ErrorDetails details;
     if (!report.loadFromXML(&reportFile, &details)) {
-        QMessageBox::warning(0, QObject::tr("Warning"), QObject::tr("Could not parse report description file:\n%1").arg(details.message()));
+        QMessageBox::warning(nullptr, QObject::tr("Warning"), QObject::tr("Could not parse report description file:\n%1").arg(details.message()));
         reportFile.close();
         return -2;
     }

@@ -32,7 +32,7 @@ class KDReports::AutoTableElementPrivate
 {
 public:
     AutoTableElementPrivate()
-        : m_tableModel(0)
+        : m_tableModel(nullptr)
         , m_verticalHeaderVisible(true)
         , m_horizontalHeaderVisible(true)
         , m_headerBackground(QColor(218, 218, 218))

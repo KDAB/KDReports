@@ -23,8 +23,8 @@ class KDReports::MainTablePrivate
 {
 public:
     MainTablePrivate()
-        : m_element(0)
-        , m_layout(0)
+        : m_element(nullptr)
+        , m_layout(nullptr)
     {
     }
     AutoTableElement *m_element;

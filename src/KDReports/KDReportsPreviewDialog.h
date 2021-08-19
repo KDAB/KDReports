@@ -38,7 +38,7 @@ public:
     /**
      * Constructs a preview dialog.
      */
-    explicit PreviewDialog(KDReports::Report *report, QWidget *parent = 0);
+    explicit PreviewDialog(KDReports::Report *report, QWidget *parent = nullptr);
 
     ~PreviewDialog() override;
 

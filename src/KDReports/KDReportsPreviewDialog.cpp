@@ -33,9 +33,9 @@ class KDReports::PreviewDialogPrivate
 public:
     PreviewDialogPrivate(KDReports::PreviewDialog *q)
         : q(q)
-        , m_previewWidget(0)
-        , m_buttonBox(0)
-        , m_quickPrintButton(0)
+        , m_previewWidget(nullptr)
+        , m_buttonBox(nullptr)
+        , m_quickPrintButton(nullptr)
         , m_dirBrowsingEnabled(true)
     {
     }

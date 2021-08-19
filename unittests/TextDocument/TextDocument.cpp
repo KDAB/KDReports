@@ -465,7 +465,7 @@ private slots:
         for (int i = 0; i < numRows; i++)
             query.exec(QString("insert into airlines values(%0, 'Test%0', 'T%0')").arg(i));
 
-        QSqlTableModel tableModel(0, db);
+        QSqlTableModel tableModel(nullptr, db);
         tableModel.setTable("airlines");
         tableModel.select();
 

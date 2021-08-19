@@ -24,7 +24,7 @@
 using namespace KDReports;
 
 TableLayout::TableLayout()
-    : m_model(0)
+    : m_model(nullptr)
     , m_cellFont()
     , m_horizontalHeaderFont()
     , m_verticalHeaderFont()

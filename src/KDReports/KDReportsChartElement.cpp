@@ -37,7 +37,7 @@ class KDReports::ChartElementPrivate : public QSharedData
 {
 public:
     ChartElementPrivate()
-        : m_tableModel(0)
+        : m_tableModel(nullptr)
         , m_size(100, 100)
         , m_unit(KDReports::Millimeters)
         ,
@@ -81,7 +81,7 @@ KDReports::ChartElement::ChartElement(const QString &modelKey)
 KDReports::ChartElement::ChartElement(KDChart::Chart *chart)
     : d(new ChartElementPrivate)
 {
-    d->m_tableModel = 0;
+    d->m_tableModel = nullptr;
 #ifdef HAVE_KDCHART
     d->m_chart = chart;
 #else

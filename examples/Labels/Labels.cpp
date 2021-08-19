@@ -45,7 +45,7 @@ public:
      * @param cellHeight the height of the label, in mm
      * @param parent the QObject parent
      */
-    LabelModel(qreal cellWidth, qreal cellHeight, QObject *parent = 0)
+    LabelModel(qreal cellWidth, qreal cellHeight, QObject *parent = nullptr)
         : QAbstractTableModel(parent)
         , m_cellWidth(cellWidth)
         , m_cellHeight(cellHeight)
@@ -137,10 +137,10 @@ int main(int argc, char **argv)
     if (preview.exec()) {
         switch (preview.result()) {
         case KDReports::PreviewDialog::SavedSuccessfully:
-            QMessageBox::information(0, QString("Report saved"), QString("Success saving to %1").arg(preview.savedFileName()));
+            QMessageBox::information(nullptr, QString("Report saved"), QString("Success saving to %1").arg(preview.savedFileName()));
             break;
         case KDReports::PreviewDialog::SaveError:
-            QMessageBox::information(0, QString("Error"), QString("Error while saving to %1").arg(preview.savedFileName()));
+            QMessageBox::information(nullptr, QString("Error"), QString("Error while saving to %1").arg(preview.savedFileName()));
             break;
         default:
             break;

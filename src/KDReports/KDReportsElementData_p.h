@@ -58,7 +58,7 @@ struct ElementData
     }
     // inline variable
     ElementData(KDReports::VariableType variable)
-        : m_element(0)
+        : m_element(nullptr)
         , m_type(Variable)
         , m_variableType(variable)
     {
@@ -67,7 +67,7 @@ struct ElementData
     ElementData(const ElementData &other) { operator=(other); }
     ElementData &operator=(const ElementData &other)
     {
-        m_element = other.m_element ? other.m_element->clone() : 0;
+        m_element = other.m_element ? other.m_element->clone() : nullptr;
         m_type = other.m_type;
         m_variableType = other.m_variableType;
         m_align = other.m_align;

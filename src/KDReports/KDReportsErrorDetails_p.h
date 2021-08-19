@@ -40,7 +40,7 @@ public:
         : m_hasError(false)
         , m_line(-1)
         , m_column(-1)
-        , m_hlineHandler(0)
+        , m_hlineHandler(nullptr)
     {
     }
 

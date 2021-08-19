@@ -378,7 +378,7 @@ void KDReports::TextDocumentData::regenerateOneTable(const KDReports::AutoTableE
     cursor.setBlockFormat(QTextBlockFormat()); // see preciseDump during TextDocument unittest
     m_tables.removeAll(table);
 
-    ReportBuilder builder(*this, cursor, 0 /* hack - assumes Report is not needed */);
+    ReportBuilder builder(*this, cursor, nullptr /* hack - assumes Report is not needed */);
     bool isSet;
     QFont font = tableElement.defaultFont(&isSet);
     if (isSet) {

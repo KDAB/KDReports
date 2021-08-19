@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 
     QFile reportFile(":/MailMerge.xml");
     if (!reportFile.open(QIODevice::ReadOnly)) {
-        QMessageBox::warning(0, QObject::tr("Warning"),
+        QMessageBox::warning(nullptr, QObject::tr("Warning"),
                              QObject::tr("Could not open report description file 'MailMerge.xml'. "
                                          "Please start this program from the HelloWorldXML directory."));
         return -1;
@@ -49,7 +49,7 @@ int main(int argc, char **argv)
         report.setCurrentRow(&members, i);
         KDReports::ErrorDetails details;
         if (!report.loadFromXML(&reportFile, &details)) {
-            QMessageBox::warning(0, QObject::tr("Warning"), QObject::tr("Could not parse report description file:\n%1").arg(details.message()));
+            QMessageBox::warning(nullptr, QObject::tr("Warning"), QObject::tr("Could not parse report description file:\n%1").arg(details.message()));
             reportFile.close();
             return -2;
         }

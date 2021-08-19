@@ -42,7 +42,7 @@ public:
     /**
      * Constructs a settings dialog for \a report as a child window of \a parent.
      */
-    explicit TableBreakingSettingsDialog(KDReports::Report *report, QWidget *parent = 0);
+    explicit TableBreakingSettingsDialog(KDReports::Report *report, QWidget *parent = nullptr);
 
     ~TableBreakingSettingsDialog() override;
 

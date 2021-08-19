@@ -32,7 +32,7 @@ int main(int argc, char **argv)
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(":memory:");
     if (!db.open()) {
-        QMessageBox::critical(0, QObject::tr("Cannot open database"),
+        QMessageBox::critical(nullptr, QObject::tr("Cannot open database"),
                               QObject::tr("Cannot create connection to the requested database. Your Qt is probably lacking the QSQLITE driver. Please check your Qt installation."),
                               QMessageBox::Cancel);
         return -1;
@@ -50,7 +50,7 @@ int main(int argc, char **argv)
 
     // Create a QSqlTableModel, connect to the previously created database, fill
     // the db with some data.
-    QSqlTableModel tableModel(0, db);
+    QSqlTableModel tableModel(nullptr, db);
     tableModel.setTable("airlines");
     tableModel.select();
     tableModel.removeColumn(0);

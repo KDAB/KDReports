@@ -87,7 +87,7 @@ public:
      * Constructs a report.
      * \param parent optional parent object, for memory management
      */
-    explicit Report(QObject *parent = 0);
+    explicit Report(QObject *parent = nullptr);
     /**
      * Destroys the report.
      */
@@ -484,7 +484,7 @@ public:
      * otherwise these elements will stay empty.
      * \return true if the XML document was successfully loaded, false otherwise
      */
-    bool loadFromXML(QIODevice *iodevice, ErrorDetails *details = 0);
+    bool loadFromXML(QIODevice *iodevice, ErrorDetails *details = nullptr);
 
     /**
      * This is an overloaded member function, provided for convenience.
@@ -498,7 +498,7 @@ public:
      * \return true if the XML document was successfully loaded, false otherwise
      * \since 1.1
      */
-    bool loadFromXML(const QDomDocument &doc, ErrorDetails *details = 0);
+    bool loadFromXML(const QDomDocument &doc, ErrorDetails *details = nullptr);
 
     /**
      * Sets an xml element handler.

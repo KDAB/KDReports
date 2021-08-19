@@ -37,7 +37,7 @@ class PagePreviewWidget : public QWidget
 {
     Q_OBJECT
 public:
-    PagePreviewWidget(QWidget *parent = 0)
+    PagePreviewWidget(QWidget *parent = nullptr)
         : QWidget(parent)
     {
         // For link hovered functionality

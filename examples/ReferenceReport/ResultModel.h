@@ -29,7 +29,7 @@ class ResultModel : public QAbstractTableModel
 {
     Q_OBJECT
 public:
-    explicit ResultModel(QObject *parent = 0);
+    explicit ResultModel(QObject *parent = nullptr);
 
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;

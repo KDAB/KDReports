@@ -70,7 +70,7 @@ private:
     static void parseCommonTableAttributes(KDReports::AbstractTableElement &tableElement, QDomElement &element);
     void parseTabs(KDReports::ReportBuilder *builder, const QDomElement &element);
     void parseParagraphMargins(KDReports::ReportBuilder *builder, const QDomElement &element);
-    QString extractText(const QDomElement &element, QString *id, const QAbstractItemModel *currentModel = 0, int currentRow = -1) const;
+    QString extractText(const QDomElement &element, QString *id, const QAbstractItemModel *currentModel = nullptr, int currentRow = -1) const;
     QImage extractImage(const QDomElement &element, QString *pId) const;
     bool testForErrorAndFillErrorDetails();
     void error(const QString &errorString);
