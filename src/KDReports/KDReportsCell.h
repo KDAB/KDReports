@@ -35,7 +35,7 @@ class CellPrivate;
  * To add an element to a cell, first get hold of the
  * right cell using Table::cell(), then add elements to it.
  */
-class KDREPORTS_EXPORT Cell : public Element
+class KDREPORTS_EXPORT Cell final : public Element
 {
 public:
     /**

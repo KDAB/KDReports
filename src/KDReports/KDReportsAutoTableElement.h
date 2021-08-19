@@ -37,7 +37,7 @@ class AutoTableElementPrivate;
  * The header row is repeated on every page if the table is broken across page
  * boundaries.
  */
-class KDREPORTS_EXPORT AutoTableElement : public AbstractTableElement
+class KDREPORTS_EXPORT AutoTableElement final : public AbstractTableElement
 {
 public:
     /**

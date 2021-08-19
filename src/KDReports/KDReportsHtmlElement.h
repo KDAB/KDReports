@@ -28,7 +28,7 @@ class HtmlElementPrivate;
  * This is one way to insert rich text into the report (the other way is with TextElement).
  * This can be used to create bullet-point lists and numbered lists.
  */
-class KDREPORTS_EXPORT HtmlElement : public Element
+class KDREPORTS_EXPORT HtmlElement final : public Element
 {
 public:
     /**
