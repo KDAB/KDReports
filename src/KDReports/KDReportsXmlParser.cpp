@@ -76,8 +76,8 @@ bool KDReports::XmlParser::parseTableContents(KDReports::TableElement &table, co
         if (name == QLatin1String("cell")) {
             const int row = element.attribute(QStringLiteral("row")).toInt();
             const int column = element.attribute(QStringLiteral("column")).toInt();
-            const int rowSpan = element.attribute(QStringLiteral("rowspan"), QLatin1String("1")).toInt();
-            const int colSpan = element.attribute(QStringLiteral("colspan"), QLatin1String("1")).toInt();
+            const int rowSpan = element.attribute(QStringLiteral("rowspan"), QStringLiteral("1")).toInt();
+            const int colSpan = element.attribute(QStringLiteral("colspan"), QStringLiteral("1")).toInt();
             KDReports::Cell &cell = table.cell(row, column);
             cell.setRowSpan(rowSpan);
             cell.setColumnSpan(colSpan);

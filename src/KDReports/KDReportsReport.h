@@ -716,7 +716,7 @@ public:
      * recommended. Also notice that if you choose a watermark color
      * that is too dark, this will make the reports less legible.
      */
-    void setWatermarkText(const QString &text, int rotation = 0, const QColor &color = QColor(204, 204, 204), const QFont &font = QFont(QLatin1String("Helvetica"), 48));
+    void setWatermarkText(const QString &text, int rotation = 0, const QColor &color = QColor(204, 204, 204), const QFont &font = QFont(QStringLiteral("Helvetica"), 48));
 
     /**
      * \return the watermark text.
