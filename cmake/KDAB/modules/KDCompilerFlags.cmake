@@ -14,6 +14,7 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     kd_add_flag_if_supported(-Wsizeof-pointer-memaccess POINTER_MEMACCESS)
     kd_add_flag_if_supported(-Wreorder REORDER)
     kd_add_flag_if_supported(-Wformat-security FORMAT_SECURITY)
+    kd_add_flag_if_supported(-Wsuggest-override SUGGEST_OVERRIDE)
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic -Woverloaded-virtual -Winit-self -Wmissing-include-dirs -Wunused -Wundef -Wpointer-arith -Wmissing-noreturn -Werror=return-type -Wswitch")
     if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
