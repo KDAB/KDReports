@@ -61,7 +61,7 @@ int main(int argc, char **argv)
     tableModel.removeColumn(0);
     tableModel.setHeaderData(0, Qt::Horizontal, QObject::tr("Name"));
     tableModel.setHeaderData(1, Qt::Horizontal, QObject::tr("Home country"));
-    QFont font = app.font();
+    QFont font = QGuiApplication::font();
     font.setBold(true);
     tableModel.setHeaderData(0, Qt::Horizontal, font, Qt::FontRole);
     tableModel.setHeaderData(1, Qt::Horizontal, font, Qt::FontRole);

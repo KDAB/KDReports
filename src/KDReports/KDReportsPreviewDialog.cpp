@@ -155,12 +155,13 @@ void KDReports::PreviewDialogPrivate::slotSave()
     KDReports::Report *report = m_previewWidget->report();
     QString file;
     if (m_dirBrowsingEnabled) {
-        file = QFileDialog::getSaveFileName(q, q->tr("Save Report as PDF"), m_defaultSaveDirectory, q->tr("PDF Files (*.pdf)"));
+        file = QFileDialog::getSaveFileName(q, PreviewDialog::tr("Save Report as PDF"),
+                                            m_defaultSaveDirectory, PreviewDialog::tr("PDF Files (*.pdf)"));
     } else {
         bool ok;
         Q_FOREVER {
-            const QString text = q->tr("Saving as PDF in %1\n\nEnter the file name:").arg(m_defaultSaveDirectory);
-            QString fileName = QInputDialog::getText(q, q->tr("Save Report as PDF"), text, QLineEdit::Normal, report->documentName() + QLatin1String(".pdf"), &ok);
+            const QString text = PreviewDialog::tr("Saving as PDF in %1\n\nEnter the file name:").arg(m_defaultSaveDirectory);
+            QString fileName = QInputDialog::getText(q, PreviewDialog::tr("Save Report as PDF"), text, QLineEdit::Normal, report->documentName() + QLatin1String(".pdf"), &ok);
             if (!fileName.endsWith(QLatin1String(".pdf"), Qt::CaseInsensitive)) {
                 fileName += QLatin1String(".pdf");
             }
@@ -168,8 +169,8 @@ void KDReports::PreviewDialogPrivate::slotSave()
                 return;
             file = m_defaultSaveDirectory + QLatin1Char('/') + fileName;
             if (QFile::exists(file)) {
-                const QString msg = q->tr("%1 already exists. Do you want to replace it?").arg(fileName);
-                if (QMessageBox::warning(q, q->tr("Overwrite?"), msg, QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes) {
+                const QString msg = PreviewDialog::tr("%1 already exists. Do you want to replace it?").arg(fileName);
+                if (QMessageBox::warning(q, PreviewDialog::tr("Overwrite?"), msg, QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes) {
                     break; // overwrite
                 }
             } else {
