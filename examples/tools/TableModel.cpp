@@ -87,14 +87,10 @@ QVariant TableModel::headerData(int section, Qt::Orientation orientation, int ro
             }
         }
         break;
-    case Qt::TextAlignmentRole:
+    //case Qt::TextAlignmentRole:
         //        result = QVariant ( Qt::AlignHCenter | Qt::AlignHCenter );
-        break;
-    case Qt::DecorationRole:
-    case Qt::ToolTipRole:
-        break;
+        //break;
     default:
-        //        qDebug () << "TableModel::headerData: unknown role " << role << "." << endl;
         break;
     }
     return result;
