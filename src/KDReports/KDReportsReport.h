@@ -243,9 +243,9 @@ public:
      * Sets the page size of the report. Example: setPageSize(QPrinter::A4) or setPageSize(QPrinter::Letter);
      * Note that for performance reasons, it is recommended to do this after
      * adding all the elements to the report rather than before.
-     * Deprecated, use setPageSize(QPageSize)
+     * Deprecated, use setPageSize(QPageSize::PageSizeId), or setPageSize(QPageSize)
      */
-    void setPageSize(const QPrinter::PageSize &size);
+    void setPageSize(QPrinter::PageSize size);
 #endif
 
     /**
@@ -253,7 +253,7 @@ public:
      * Note that for performance reasons, it is recommended to do this after
      * adding all the elements to the report rather than before.
      */
-    void setPageSize(const QPageSize::PageSizeId &size);
+    void setPageSize(QPageSize::PageSizeId size);
 
     /**
      * Sets the page size of the report. Example: setPageSize(QPageSize::A4) or setPageSize(QPageSize::Letter);

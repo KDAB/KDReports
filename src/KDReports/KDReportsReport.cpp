@@ -482,13 +482,13 @@ void KDReports::Report::addVerticalSpacing(qreal space)
 }
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-void KDReports::Report::setPageSize(const QPrinter::PageSize &size)
+void KDReports::Report::setPageSize(QPrinter::PageSize size)
 {
     setPageSize(static_cast<QPageSize::PageSizeId>(size));
 }
 #endif
 
-void KDReports::Report::setPageSize(const QPageSize::PageSizeId &size)
+void KDReports::Report::setPageSize(QPageSize::PageSizeId size)
 {
     setPageSize(QPageSize{size});
 }
