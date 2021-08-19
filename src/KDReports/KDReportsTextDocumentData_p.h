@@ -58,9 +58,9 @@ public:
     void aboutToModifyContents(ModificationMode mode);
     void updateTextValue(const QString &id, const QString &newValue);
     void layoutWithTextWidth(qreal w);
-    void setPageSize(const QSizeF &size);
+    void setPageSize(QSizeF size);
     void scaleFontsBy(qreal factor); // TODO remove?
-    void updatePercentSizes(const QSizeF &size);
+    void updatePercentSizes(QSizeF size);
     void setTextValueMarker(int pos, const QString &id, int valueLength, bool html);
     /// Break all tables in the document
     /// @returns the number of horizontal pages used
@@ -77,7 +77,7 @@ public:
     void addResourceName(const QString &resourceName);
     void setHasResizableImages();
 
-    static void updatePercentSize(QTextImageFormat &format, const QSizeF &size);
+    static void updatePercentSize(QTextImageFormat &format, QSizeF size);
 
 private:
     void resolveCursorPositions(ModificationMode mode);

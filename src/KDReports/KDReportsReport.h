@@ -278,7 +278,7 @@ public:
      * Sets a custom paper size for the report.
      * Supported units are DevicePixel, Millimeter, Point and Inch.
      */
-    void setPaperSize(const QSizeF &paperSize, QPrinter::Unit unit);
+    void setPaperSize(QSizeF paperSize, QPrinter::Unit unit);
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     /**
@@ -566,7 +566,7 @@ public:
      * \param fileName the name of the image file
      * \param format the format of the image, for instance: BMP, JPG, PNG.
      */
-    bool exportToImage(const QSize &size, const QString &fileName, const char *format);
+    bool exportToImage(QSize size, const QString &fileName, const char *format);
 
     /**
      * Export the whole report to HTML.
@@ -839,7 +839,7 @@ public:
      *
      * \since 2.0
      */
-    QString anchorAt(int pageNumber, const QPoint &pos) const;
+    QString anchorAt(int pageNumber, QPoint pos) const;
 
 private:
     friend class Test;

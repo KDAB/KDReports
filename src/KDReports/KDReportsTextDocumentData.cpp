@@ -127,7 +127,7 @@ void KDReports::TextDocumentData::updateTextValue(const QString &id, const QStri
     // dumpTextValueCursors();
 }
 
-void KDReports::TextDocumentData::updatePercentSizes(const QSizeF &size)
+void KDReports::TextDocumentData::updatePercentSizes(QSizeF size)
 {
     if (!m_hasResizableImages && !m_usesTabPositions) {
         return;
@@ -190,7 +190,7 @@ void KDReports::TextDocumentData::layoutWithTextWidth(qreal w)
     }
 }
 
-void KDReports::TextDocumentData::setPageSize(const QSizeF &size)
+void KDReports::TextDocumentData::setPageSize(QSizeF size)
 {
     if (size != m_document->pageSize()) {
         // qDebug() << "setPageSize" << size;
@@ -199,7 +199,7 @@ void KDReports::TextDocumentData::setPageSize(const QSizeF &size)
     }
 }
 
-void KDReports::TextDocumentData::updatePercentSize(QTextImageFormat &imageFormat, const QSizeF &size)
+void KDReports::TextDocumentData::updatePercentSize(QTextImageFormat &imageFormat, QSizeF size)
 {
     // "W50" means W=50%.  "H60" means H=60%.
     QString prop = imageFormat.property(ResizableImageProperty).toString();

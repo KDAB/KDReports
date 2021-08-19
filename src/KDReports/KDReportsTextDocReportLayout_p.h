@@ -41,7 +41,7 @@ public:
     /// \reimp
     qreal idealWidth() override;
     /// \reimp
-    void setPageContentSize(const QSizeF &size) override;
+    void setPageContentSize(QSizeF size) override;
     /// \reimp
     void ensureLayouted() override;
     /// \reimp
@@ -61,7 +61,7 @@ public:
     /// \reimp
     qreal userRequestedFontScalingFactor() const override;
     /// \reimp
-    QString anchorAt(int pageNumber, const QPoint &pos) override;
+    QString anchorAt(int pageNumber, QPoint pos) override;
     /// \reimp
     QString toHtml() const override;
     /// \reimp

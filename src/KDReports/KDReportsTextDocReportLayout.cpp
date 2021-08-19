@@ -50,7 +50,7 @@ int KDReports::TextDocReportLayout::numberOfPages()
     return m_textDocument.contentDocument().pageCount();
 }
 
-void KDReports::TextDocReportLayout::setPageContentSize(const QSizeF &size)
+void KDReports::TextDocReportLayout::setPageContentSize(QSizeF size)
 {
     m_textDocument.setPageSize(size);
 }
@@ -163,7 +163,7 @@ qreal KDReports::TextDocReportLayout::userRequestedFontScalingFactor() const
     return 1; // not implemented
 }
 
-QString KDReports::TextDocReportLayout::anchorAt(int pageNumber, const QPoint &pos)
+QString KDReports::TextDocReportLayout::anchorAt(int pageNumber, QPoint pos)
 {
     const QPoint posInPage = pos + QPoint(0, pageNumber * m_textDocument.contentDocument().pageSize().height());
     return m_textDocument.contentDocument().documentLayout()->anchorAt(posInPage);

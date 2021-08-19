@@ -132,7 +132,7 @@ public:
      * the size in the report will simply be the size of the pixmap or image.
      * \since 1.1
      */
-    void setIconSize(const QSize &iconSize);
+    void setIconSize(QSize iconSize);
 
     /**
      * \return the size passed to setIconSize

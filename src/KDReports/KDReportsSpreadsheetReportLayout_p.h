@@ -44,7 +44,7 @@ public:
     /// \reimp
     qreal idealWidth() override;
     /// \reimp
-    void setPageContentSize(const QSizeF &size) override;
+    void setPageContentSize(QSizeF size) override;
     /// \reimp
     void ensureLayouted() override;
     /// \reimp
@@ -64,7 +64,7 @@ public:
     /// \reimp
     qreal userRequestedFontScalingFactor() const override;
     /// \reimp
-    QString anchorAt(int pageNumber, const QPoint &pos) override;
+    QString anchorAt(int pageNumber, QPoint pos) override;
     /// \reimp
     QString toHtml() const override;
     /// \reimp
@@ -74,7 +74,7 @@ public:
     void setVerticalHeaderVisible(bool visible);
     void setHorizontalHeaderVisible(bool visible);
     void setCellPadding(qreal padding);
-    void setIconSize(const QSize &iconSize);
+    void setIconSize(QSize iconSize);
     void setCellBorder(qreal border, const QBrush &borderBrush);
     void setHeaderBackground(const QBrush &headerBackground);
 

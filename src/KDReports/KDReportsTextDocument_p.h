@@ -62,7 +62,7 @@ public:
     void layoutWithTextWidth(qreal w);
 
     // like QTextDocument::setPageSize but also takes care of objects with % sizes
-    void setPageSize(const QSizeF &size);
+    void setPageSize(QSizeF size);
 
 #if 0
     // add user property to char format

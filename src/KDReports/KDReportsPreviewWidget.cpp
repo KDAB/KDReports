@@ -53,8 +53,8 @@ public:
     QSize pixmapSize() const { return m_pixmap.size(); }
 
 Q_SIGNALS:
-    void mouseMoved(const QPoint &pos);
-    void mouseClicked(const QPoint &pos);
+    void mouseMoved(QPoint pos);
+    void mouseClicked(QPoint pos);
 
 protected:
     QPoint pixmapOffset() const
@@ -104,8 +104,8 @@ public:
     void pageNumberReturnPressed();
     void setReport(KDReports::Report *report);
 
-    void handleMouseMove(const QPoint &pos);
-    void handleMouseRelease(const QPoint &pos);
+    void handleMouseMove(QPoint pos);
+    void handleMouseRelease(QPoint pos);
     void _kd_slotCurrentPageChanged();
     void _kd_slotFirstPage();
     void _kd_slotPrevPage();
@@ -136,10 +136,10 @@ KDReports::PreviewWidgetPrivate::PreviewWidgetPrivate(KDReports::PreviewWidget *
     , q(w)
 {
     QObject::connect(&m_previewTimer, SIGNAL(timeout()), q, SLOT(_kd_previewNextItems()));
-    QObject::connect(m_previewWidget, &PagePreviewWidget::mouseMoved, q, [this](const QPoint &pos) {
+    QObject::connect(m_previewWidget, &PagePreviewWidget::mouseMoved, q, [this](QPoint pos) {
         handleMouseMove(pos);
     });
-    QObject::connect(m_previewWidget, &PagePreviewWidget::mouseClicked, q, [this](const QPoint &pos) {
+    QObject::connect(m_previewWidget, &PagePreviewWidget::mouseClicked, q, [this](QPoint pos) {
         handleMouseRelease(pos);
     });
 }
@@ -244,7 +244,7 @@ QPixmap KDReports::PreviewWidgetPrivate::paintPreview(int index)
     return pixmap;
 }
 
-void KDReports::PreviewWidgetPrivate::handleMouseMove(const QPoint &pos)
+void KDReports::PreviewWidgetPrivate::handleMouseMove(QPoint pos)
 {
     const QPoint unscaledPos = pos / m_zoomFactor;
     const QString link = m_report->anchorAt(pageList->currentRow(), unscaledPos);
@@ -257,7 +257,7 @@ void KDReports::PreviewWidgetPrivate::handleMouseMove(const QPoint &pos)
     }
 }
 
-void KDReports::PreviewWidgetPrivate::handleMouseRelease(const QPoint &pos)
+void KDReports::PreviewWidgetPrivate::handleMouseRelease(QPoint pos)
 {
     const QPoint unscaledPos = pos / m_zoomFactor;
     const QString link = m_report->anchorAt(pageList->currentRow(), unscaledPos);

@@ -181,7 +181,7 @@ void KDReports::ReportBuilder::copyStateFrom(ReportBuilder &parentBuilder)
     m_defaultFont = parentBuilder.m_defaultFont;
 }
 
-QDebug operator<<(QDebug &dbg, const QTextOption::Tab &tab)
+QDebug operator<<(QDebug &dbg, QTextOption::Tab tab) // clazy says: pass by value, small enough
 {
     static const char *types[] = {"LeftTab", "RightTab", "CenterTab", "DelimiterTab"};
     dbg.space() << '(' << types[tab.type] << tab.position << "px" << ')';

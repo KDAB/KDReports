@@ -56,7 +56,7 @@ public:
 class FillCellHelper
 {
 public:
-    FillCellHelper(QAbstractItemModel *tableModel, int section, Qt::Orientation orientation, const QSize &iconSz)
+    FillCellHelper(QAbstractItemModel *tableModel, int section, Qt::Orientation orientation, QSize iconSz)
         : iconSize(iconSz)
         , cellDecoration(tableModel->headerData(section, orientation, Qt::DecorationRole))
         , cellFont(tableModel->headerData(section, orientation, Qt::FontRole))
@@ -69,7 +69,7 @@ public:
         , span(1, 1)
     {
     }
-    FillCellHelper(QAbstractItemModel *tableModel, const QModelIndex &index, const QSize &_span, const QSize &iconSz)
+    FillCellHelper(QAbstractItemModel *tableModel, const QModelIndex &index, QSize _span, QSize iconSz)
         : iconSize(iconSz)
         , cellDecoration(tableModel->data(index, Qt::DecorationRole))
         , cellFont(tableModel->data(index, Qt::FontRole))
@@ -381,7 +381,7 @@ bool KDReports::AutoTableElement::isHorizontalHeaderVisible() const
     return d->m_horizontalHeaderVisible;
 }
 
-void KDReports::AutoTableElement::setIconSize(const QSize &iconSize)
+void KDReports::AutoTableElement::setIconSize(QSize iconSize)
 {
     d->m_iconSize = iconSize;
 }

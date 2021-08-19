@@ -188,7 +188,7 @@ QRect KDReports::ReportPrivate::mainTextDocRect() const
    [footer]
    [bottom margin]
  */
-void KDReports::ReportPrivate::setPaperSizeFromPrinter(const QSizeF &paperSize)
+void KDReports::ReportPrivate::setPaperSizeFromPrinter(QSizeF paperSize)
 {
     Q_ASSERT(!wantEndlessPrinting()); // call ensureLayouted instead!
 
@@ -500,7 +500,7 @@ void KDReports::Report::setPageSize(const QPageSize &size)
     d->m_pageContentSizeDirty = true;
 }
 
-void KDReports::Report::setPaperSize(const QSizeF &paperSize, QPrinter::Unit unit)
+void KDReports::Report::setPaperSize(QSizeF paperSize, QPrinter::Unit unit)
 {
     qreal factor = 1.0;
     switch (unit) {
@@ -732,7 +732,7 @@ bool KDReports::Report::exportToHtml(const QString &fileName)
     return false;
 }
 
-bool KDReports::Report::exportToImage(const QSize &size, const QString &fileName, const char *format)
+bool KDReports::Report::exportToImage(QSize size, const QString &fileName, const char *format)
 {
     // Get the document to fit into one page
 
@@ -853,7 +853,7 @@ void KDReports::Report::endEdit()
     d->builder()->contentDocumentCursor().endEditBlock();
 }
 
-QString KDReports::Report::anchorAt(int pageNumber, const QPoint &pos) const
+QString KDReports::Report::anchorAt(int pageNumber, QPoint pos) const
 {
     const QRect textDocRect = d->mainTextDocRect();
     const QPoint textPos = pos - textDocRect.topLeft();

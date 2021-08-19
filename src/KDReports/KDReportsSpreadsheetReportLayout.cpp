@@ -335,7 +335,7 @@ qreal KDReports::SpreadsheetReportLayout::cellWidth(int col, int horizSpan) cons
     return cellWidth;
 }
 
-void KDReports::SpreadsheetReportLayout::setPageContentSize(const QSizeF &size)
+void KDReports::SpreadsheetReportLayout::setPageContentSize(QSizeF size)
 {
     m_pageContentSize = size;
 #ifdef DEBUG_LAYOUT
@@ -592,7 +592,7 @@ qreal KDReports::SpreadsheetReportLayout::userRequestedFontScalingFactor() const
     return m_userRequestedFontScalingFactor;
 }
 
-QString KDReports::SpreadsheetReportLayout::anchorAt(int pageNumber, const QPoint &pos)
+QString KDReports::SpreadsheetReportLayout::anchorAt(int pageNumber, QPoint pos)
 {
     // Not implemented
     Q_UNUSED(pageNumber)
@@ -642,7 +642,7 @@ void KDReports::SpreadsheetReportLayout::setCellPadding(qreal padding)
     setLayoutDirty();
 }
 
-void KDReports::SpreadsheetReportLayout::setIconSize(const QSize &iconSize)
+void KDReports::SpreadsheetReportLayout::setIconSize(QSize iconSize)
 {
     m_tableLayout.m_iconSize = iconSize;
 }

@@ -30,7 +30,7 @@ void KDReports::TextDocument::layoutWithTextWidth(qreal w)
     m_contentDocument.layoutWithTextWidth(w);
 }
 
-void KDReports::TextDocument::setPageSize(const QSizeF &size)
+void KDReports::TextDocument::setPageSize(QSizeF size)
 {
     m_contentDocument.setPageSize(size);
 }

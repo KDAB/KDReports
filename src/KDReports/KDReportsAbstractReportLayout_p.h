@@ -45,7 +45,7 @@ public:
      * not including the page headers+footers.
      * The size is in pixels.
      */
-    virtual void setPageContentSize(const QSizeF &size) = 0;
+    virtual void setPageContentSize(QSizeF size) = 0;
     virtual qreal layoutAsOnePage(qreal width) = 0;
     virtual bool scaleTo(int numPagesHorizontally, int numPagesVertically) = 0;
     virtual void setFixedRowHeight(qreal height) = 0;
@@ -62,7 +62,7 @@ public:
     virtual void setUserRequestedFontScalingFactor(qreal factor) = 0;
     virtual qreal userRequestedFontScalingFactor() const = 0;
 
-    virtual QString anchorAt(int pageNumber, const QPoint &pos) = 0;
+    virtual QString anchorAt(int pageNumber, QPoint pos) = 0;
 
     virtual QString toHtml() const = 0;
     virtual void finishHtmlExport() = 0;

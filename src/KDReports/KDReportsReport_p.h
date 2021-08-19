@@ -94,7 +94,7 @@ public:
     explicit ReportPrivate(Report *report);
     ~ReportPrivate();
 
-    void setPaperSizeFromPrinter(const QSizeF &paperSize);
+    void setPaperSizeFromPrinter(QSizeF paperSize);
     void ensureLayouted();
     QSizeF paperSize() const;
     void paintPage(int pageNumber, QPainter &painter);
