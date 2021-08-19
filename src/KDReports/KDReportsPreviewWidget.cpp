@@ -173,10 +173,10 @@ void KDReports::PreviewWidgetPrivate::init()
     QObject::connect(paperSizeCombo, SIGNAL(activated(int)), q, SLOT(_kd_slotPaperSizeActivated(int)));
     QObject::connect(paperOrientationCombo, SIGNAL(activated(int)), q, SLOT(_kd_slotPaperOrientationActivated(int)));
 
-    QShortcut *nextPageShortcut = new QShortcut(q);
+    auto *nextPageShortcut = new QShortcut(q);
     nextPageShortcut->setKey(Qt::CTRL | Qt::Key_PageDown);
     QObject::connect(nextPageShortcut, SIGNAL(activated()), q, SLOT(_kd_slotNextPage()));
-    QShortcut *prevPageShortcut = new QShortcut(q);
+    auto *prevPageShortcut = new QShortcut(q);
     prevPageShortcut->setKey(Qt::CTRL | Qt::Key_PageUp);
     QObject::connect(prevPageShortcut, SIGNAL(activated()), q, SLOT(_kd_slotPrevPage()));
 
@@ -464,7 +464,7 @@ void KDReports::PreviewWidgetPrivate::pageCountChanged()
     // Ensure that the treewidget has the right number of items
     int numberOfItems = pageList->count();
     while (numberOfItems < m_pageCount) {
-        QListWidgetItem *item = new QListWidgetItem(pageList);
+        auto *item = new QListWidgetItem(pageList);
         item->setText(QString::number(numberOfItems + 1));
         item->setCheckState(Qt::Checked);
         ++numberOfItems;
@@ -625,7 +625,7 @@ bool KDReports::PreviewWidget::eventFilter(QObject *obj, QEvent *ev)
     // We could just connect to returnPressed(), but the dialog's OK button would still trigger.
     if (obj == d->pageNumber) {
         if (ev->type() == QEvent::KeyPress) {
-            QKeyEvent *keyev = static_cast<QKeyEvent *>(ev);
+            auto *keyev = static_cast<QKeyEvent *>(ev);
             if (keyev->key() == Qt::Key_Enter || keyev->key() == Qt::Key_Return) {
                 d->pageNumberReturnPressed();
                 keyev->accept();

@@ -66,7 +66,7 @@ static KDReports::AutoTableElement largeAutoTable()
     for (int column = 0; column < numColumns; ++column) {
         for (int row = 0; row < numRows; ++row) {
             const QString text = QString::number(column + numColumns * row + 1);
-            QStandardItem *item = new QStandardItem(text);
+            auto *item = new QStandardItem(text);
 #ifdef USE_CUSTOM_ROLES
             if (row == 2) {
                 item->setForeground(colorRed);
@@ -89,7 +89,7 @@ static KDReports::AutoTableElement largeAutoTable()
 
     // Horizontal header
     for (int i = 0; i < numColumns; ++i) {
-        QStandardItem *item = new QStandardItem(QString("Column %1").arg(i + 1));
+        auto *item = new QStandardItem(QString("Column %1").arg(i + 1));
 #ifdef USE_CUSTOM_ROLES
         item->setIcon(QIcon(pix));
 #endif
@@ -98,7 +98,7 @@ static KDReports::AutoTableElement largeAutoTable()
 
     // Vertical header
     for (int i = 0; i < numRows; ++i) {
-        QStandardItem *item = new QStandardItem(QString("Row %1").arg(i + 1));
+        auto *item = new QStandardItem(QString("Row %1").arg(i + 1));
 #ifdef USE_CUSTOM_ROLES
         item->setIcon(QIcon(pix));
 #endif

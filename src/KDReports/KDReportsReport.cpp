@@ -1094,7 +1094,7 @@ void KDReports::Report::setReportMode(ReportMode reportMode)
             d->m_layout = new TextDocReportLayout(this);
             break;
         case SpreadSheet:
-            SpreadsheetReportLayout *sslayout = new SpreadsheetReportLayout(this);
+            auto *sslayout = new SpreadsheetReportLayout(this);
             d->m_layout = sslayout;
             mainTable()->setLayout(sslayout);
             break;

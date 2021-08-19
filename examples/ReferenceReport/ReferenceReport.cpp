@@ -163,40 +163,40 @@ int main(int argc, char **argv)
     // Auto table test
 
     QStandardItemModel model;
-    QStandardItem *firstHeaderItem = new QStandardItem(QObject::tr("<html>This auto-table uses <b>QStandardItemModel</b>"));
+    auto *firstHeaderItem = new QStandardItem(QObject::tr("<html>This auto-table uses <b>QStandardItemModel</b>"));
     firstHeaderItem->setTextAlignment(Qt::AlignCenter); // works
     model.setHorizontalHeaderItem(0, firstHeaderItem);
-    QStandardItem *secondHeaderItem = new QStandardItem(QObject::tr("Icon on the left in this header"));
+    auto *secondHeaderItem = new QStandardItem(QObject::tr("Icon on the left in this header"));
     secondHeaderItem->setData(QVariant::fromValue(QPixmap(":/system.png")), Qt::DecorationRole);
     // secondHeaderItem->setTextAlignment( Qt::AlignCenter ); // doesn't work. QTBUG-20041
     model.setHorizontalHeaderItem(1, secondHeaderItem);
-    QStandardItem *thirdHeaderItem = new QStandardItem(QObject::tr("Small pixmap on the right"));
+    auto *thirdHeaderItem = new QStandardItem(QObject::tr("Small pixmap on the right"));
     thirdHeaderItem->setIcon(QPixmap(":/system.png")); // size determined by setIconSize below
     thirdHeaderItem->setData(Qt::AlignRight, KDReports::AutoTableElement::DecorationAlignmentRole);
     model.setHorizontalHeaderItem(2, thirdHeaderItem);
 
-    QStandardItem *firstCellItem = new QStandardItem(QObject::tr("<html>This is <b>bold</b> text"));
+    auto *firstCellItem = new QStandardItem(QObject::tr("<html>This is <b>bold</b> text"));
     model.setItem(0, 0, firstCellItem);
 
-    QStandardItem *secondCellItem = new QStandardItem(QObject::tr("Icon on the left in this cell"));
+    auto *secondCellItem = new QStandardItem(QObject::tr("Icon on the left in this cell"));
     secondCellItem->setData(QVariant::fromValue(QPixmap(":/system.png")), Qt::DecorationRole);
     model.setItem(0, 1, secondCellItem);
 
-    QStandardItem *thirdCellItem = new QStandardItem(QObject::tr("Small pixmap on the right"));
+    auto *thirdCellItem = new QStandardItem(QObject::tr("Small pixmap on the right"));
     thirdCellItem->setIcon(QPixmap(":/system.png")); // size determined by setIconSize below
     thirdCellItem->setData(Qt::AlignRight, KDReports::AutoTableElement::DecorationAlignmentRole);
     model.setItem(0, 2, thirdCellItem);
 
-    QStandardItem *italicItem = new QStandardItem(QObject::tr("10 pt italic blue text"));
+    auto *italicItem = new QStandardItem(QObject::tr("10 pt italic blue text"));
     italicItem->setFont(QFont("Arial", 10, -1, true /*italic*/));
     italicItem->setForeground(Qt::blue);
     model.setItem(1, 0, italicItem);
 
-    QStandardItem *yellowItem = new QStandardItem(QObject::tr("Yellow background"));
+    auto *yellowItem = new QStandardItem(QObject::tr("Yellow background"));
     yellowItem->setBackground(Qt::yellow);
     model.setItem(1, 1, yellowItem);
 
-    QStandardItem *alignedItem = new QStandardItem(QObject::tr("Right-aligned"));
+    auto *alignedItem = new QStandardItem(QObject::tr("Right-aligned"));
     alignedItem->setTextAlignment(Qt::AlignRight);
     model.setItem(1, 2, alignedItem);
 

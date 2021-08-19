@@ -61,9 +61,9 @@ KDReports::PreviewDialog::PreviewDialog(KDReports::Report *report, QWidget *pare
 {
     d->m_previewWidget = new KDReports::PreviewWidget(this);
     d->m_previewWidget->setReport(report);
-    QVBoxLayout *topLayout = new QVBoxLayout(this);
+    auto *topLayout = new QVBoxLayout(this);
     topLayout->addWidget(d->m_previewWidget);
-    QHBoxLayout *bottomLayout = new QHBoxLayout();
+    auto *bottomLayout = new QHBoxLayout();
     topLayout->addLayout(bottomLayout);
 
     connect(d->m_previewWidget, &KDReports::PreviewWidget::tableSettingsClicked, this, [&]() { d->slotTableBreakingDialog(); } );
@@ -72,18 +72,18 @@ KDReports::PreviewDialog::PreviewDialog(KDReports::Report *report, QWidget *pare
     d->m_buttonBox = new QDialogButtonBox(Qt::Horizontal, this);
     bottomLayout->addWidget(d->m_buttonBox);
 
-    QPushButton *printWithDialogButton = new QPushButton(tr("&Print..."), this);
+    auto *printWithDialogButton = new QPushButton(tr("&Print..."), this);
     d->m_buttonBox->addButton(printWithDialogButton, QDialogButtonBox::ActionRole);
     connect(printWithDialogButton, &QPushButton::clicked, this, [&]() { d->slotPrintWithDialog(); } );
 
     d->m_quickPrintButton = new QPushButton(this); // create it here for the ordering
     d->m_buttonBox->addButton(d->m_quickPrintButton, QDialogButtonBox::ActionRole);
 
-    QPushButton *saveButton = new QPushButton(tr("&Save..."), this);
+    auto *saveButton = new QPushButton(tr("&Save..."), this);
     d->m_buttonBox->addButton(saveButton, QDialogButtonBox::ActionRole);
     connect(saveButton, &QPushButton::clicked, this, [&]() { d->slotSave(); } );
 
-    QPushButton *cancelButton = new QPushButton(tr("Cancel"), this);
+    auto *cancelButton = new QPushButton(tr("Cancel"), this);
     d->m_buttonBox->addButton(cancelButton, QDialogButtonBox::RejectRole);
     connect(cancelButton, &QPushButton::clicked, this, &QDialog::reject);
 

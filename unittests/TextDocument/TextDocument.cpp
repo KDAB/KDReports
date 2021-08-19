@@ -350,11 +350,11 @@ private slots:
         Report report;
         report.setDefaultFont(QFont("Arial", 18));
         QStandardItemModel model(2, 2);
-        QStandardItem *headerItem = new QStandardItem(QLatin1String("Header1"));
+        auto *headerItem = new QStandardItem(QLatin1String("Header1"));
         headerItem->setBackground(Qt::red);
         model.setHorizontalHeaderItem(0, headerItem);
         model.setItem(0, 0, new QStandardItem(QLatin1String("TopLeft")));
-        QStandardItem *topRight = new QStandardItem(QLatin1String("TopRight"));
+        auto *topRight = new QStandardItem(QLatin1String("TopRight"));
         QFont font;
         font.setBold(true);
         topRight->setFont(font);
