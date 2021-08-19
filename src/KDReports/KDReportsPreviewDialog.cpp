@@ -234,5 +234,3 @@ QString KDReports::PreviewDialog::savedFileName() const
 {
     return d->m_savedFileName;
 }
-
-#include "moc_KDReportsPreviewDialog.cpp"

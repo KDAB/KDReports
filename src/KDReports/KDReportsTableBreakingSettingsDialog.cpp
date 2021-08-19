@@ -120,5 +120,3 @@ void KDReports::TableBreakingSettingsDialog::reject()
 {
     QDialog::reject();
 }
-
-#include "moc_KDReportsTableBreakingSettingsDialog.cpp"

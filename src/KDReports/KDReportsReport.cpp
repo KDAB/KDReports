@@ -1165,5 +1165,3 @@ void KDReports::Report::setupPrinter(QPrinter *printer)
     printer->setPageSize(d->m_pageSize);
     printer->setDocName(d->m_documentName);
 }
-
-#include "moc_KDReportsReport.cpp"

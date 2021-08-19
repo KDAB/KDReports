@@ -728,5 +728,4 @@ QSize KDReports::PreviewWidget::sizeHint() const
     return QSize(800, 600);
 }
 
-#include "moc_KDReportsPreviewWidget.cpp"
 #include "KDReportsPreviewWidget.moc"
