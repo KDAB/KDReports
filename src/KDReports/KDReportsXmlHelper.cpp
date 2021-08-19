@@ -69,7 +69,9 @@ QColor KDReports::XmlHelper::readBackground(const QDomElement &element)
         const QString name = element.attribute(QStringLiteral("background"));
         ret = QColor(name);
     } else if (element.hasAttribute(QStringLiteral("bgred")) && element.hasAttribute(QStringLiteral("bggreen")) && element.hasAttribute(QStringLiteral("bgblue"))) {
-        int red = 0, green = 0, blue = 0;
+        int red = 0;
+        int green = 0;
+        int blue = 0;
         bool ok = true;
         red = element.attribute(QStringLiteral("bgred")).toInt(&ok);
         if (ok) {

@@ -811,7 +811,8 @@ bool KDReports::Report::loadFromXML(QIODevice *iodevice, ErrorDetails *details)
         iodevice->open(QIODevice::ReadOnly);
 
     QString errorMsg;
-    int errorLine = 0, errorColumn = 0;
+    int errorLine = 0;
+    int errorColumn = 0;
     bool ret = doc.setContent(iodevice, true, &errorMsg, &errorLine, &errorColumn);
     if (!ret) {
         if (details) {

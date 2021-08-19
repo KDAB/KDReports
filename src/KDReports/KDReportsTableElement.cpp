@@ -124,7 +124,8 @@ void KDReports::TableElement::build(ReportBuilder &builder) const
 
     QTextCursor &textDocCursor = builder.cursor();
 
-    int rowCount, columnCount;
+    int rowCount;
+    int columnCount;
     d->m_cellContentMap.getSize(rowCount, columnCount);
 
     QTextTableFormat tableFormat;

@@ -425,7 +425,8 @@ bool KDReports::XmlParser::processNode(const QDomNode &node, KDReports::ReportBu
             QColor bgColor = KDReports::XmlHelper::readBackground(element);
             if (bgColor.isValid())
                 chartElement.setBackground(bgColor);
-            int width = 100, height = 100;
+            int width = 100;
+            int height = 100;
             Unit unit = Millimeters;
             if (element.hasAttribute(QStringLiteral("width"))) {
                 QString str = element.attribute(QStringLiteral("width"));
