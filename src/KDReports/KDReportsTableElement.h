@@ -71,7 +71,7 @@ public:
     /**
      * Declares the first @p count columns of the table as table header.
      * The table header columns get repeated when a table is broken
-     * into multiple pages horizontally (see Report::setTableBreakingEnabled).
+     * into multiple pages horizontally (see Report::scaleTo).
      * The default number of header rows is 0.
      * \since 1.1
      */

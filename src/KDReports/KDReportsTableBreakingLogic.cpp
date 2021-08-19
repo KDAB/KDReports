@@ -43,9 +43,6 @@ QVector<int> TableBreakingLogic::columnsPerPage() const
     for (int i = 0; i < numColumnsForPage; ++i) {
         totalWidth += m_widths[i];
     }
-    // TODO handle m_pages==-1, i.e. the case where we don't care how many pages we get
-    // horizontally, cf Report::setTableBreakingEnabled(true). But for this we need to
-    // pass the page-content-width to this code here [in pixels]...
     const qreal idealPageWidth = totalWidth / m_pages;
     // qDebug() << "idealPageWidth=" << idealPageWidth;
     qreal currentWidth = 0;

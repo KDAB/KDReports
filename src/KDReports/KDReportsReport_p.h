@@ -142,7 +142,7 @@ public:
     int m_firstPageNumber;
     bool m_pageContentSizeDirty;
 
-    // int m_numHorizontalPages; // for scaleTo() and setTableBreakingEnabled(). 1 if not set.
+    // int m_numHorizontalPages; // for scaleTo(). 1 if not set.
     // int m_numVerticalPages;   // for scaleTo(). 0 if not set.
     // qreal m_scaleFontsBy;     // for scaleFontsBy(), 1.0 otherwise.
     // bool m_autoScale;         // if scaleTo() was called.

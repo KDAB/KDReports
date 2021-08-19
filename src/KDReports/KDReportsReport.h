@@ -604,8 +604,7 @@ public:
     int numberOfPages() const;
 
     /**
-     * \return the value passed to setTableBreakingEnabled,
-     * also true when scaleTo was called with numPagesHorizontally > 0
+     * \return true when scaleTo was called with numPagesHorizontally > 0
      */
     bool isTableBreakingEnabled() const;
 
@@ -657,8 +656,6 @@ public:
      *
      * Scaling also means that the font sizes can be reduced (similar to what setFontScalingFactor does)
      * so that the report fits into the number of pages specified by this method.
-     *
-     * NOTE: this is mutually exclusive with setTableBreakingEnabled.
      *
      * \param numPagesHorizontally number of pages in the horizontal direction,
      *         1 for no table breaking in the horizontal direction.
