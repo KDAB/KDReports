@@ -86,7 +86,7 @@ public:
 
 private:
     void insertDecoration(KDReports::ReportBuilder &builder, QTextDocument &textDoc);
-    QString displayText(const QVariant &value) const;
+    static QString displayText(const QVariant &value);
 
     QSize iconSize;
     QVariant cellDecoration;
@@ -188,7 +188,7 @@ void FillCellHelper::insertDecoration(KDReports::ReportBuilder &builder, QTextDo
     }
 }
 
-QString FillCellHelper::displayText(const QVariant &value) const
+QString FillCellHelper::displayText(const QVariant &value)
 {
     QLocale locale; // in QStyledItemDelegate this is configurable, it comes from QWidget::locale()...
     QString text;

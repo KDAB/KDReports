@@ -1113,7 +1113,7 @@ KDReports::MainTable *KDReports::Report::mainTable() const
     return d->m_mainTable;
 }
 
-QTextOption::Tab KDReports::Report::rightAlignedTab() const
+QTextOption::Tab KDReports::Report::rightAlignedTab()
 {
     QTextOption::Tab tab;
     tab.position = -1;
@@ -1122,7 +1122,7 @@ QTextOption::Tab KDReports::Report::rightAlignedTab() const
     return tab;
 }
 
-QTextOption::Tab KDReports::Report::middleAlignedTab() const
+QTextOption::Tab KDReports::Report::middleAlignedTab()
 {
     QTextOption::Tab tab;
     tab.position = -1;

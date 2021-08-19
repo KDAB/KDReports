@@ -160,7 +160,7 @@ void KDReports::PreviewWidgetPrivate::init()
     fillZoomCombo();
 
     // m_tableBreakingButton = buttonBox->addButton( tr("Table Breaking / Font Scaling..." ), QDialogButtonBox::ActionRole );
-    QObject::connect(tableBreakingButton, SIGNAL(clicked()), q, SIGNAL(tableSettingsClicked()));
+    QObject::connect(tableBreakingButton, &QAbstractButton::clicked, q, &PreviewWidget::tableSettingsClicked);
 
     QObject::connect(firstPage, SIGNAL(clicked()), q, SLOT(_kd_slotFirstPage()));
     QObject::connect(prevPage, SIGNAL(clicked()), q, SLOT(_kd_slotPrevPage()));

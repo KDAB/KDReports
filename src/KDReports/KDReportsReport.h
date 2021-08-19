@@ -219,17 +219,17 @@ public:
     /**
      * Returns a tab position that is always right-aligned to the right edge of the paper.
      * This is convenient for having left-aligned and right-aligned text on the same line.
-     * \since 1.3
+     * \since 1.3, static \since 2.0
      */
-    QTextOption::Tab rightAlignedTab() const;
+    static QTextOption::Tab rightAlignedTab();
 
     /**
      * Returns a tab position that is always center-aligned to the middle of the paper.
      * This is convenient for having left-aligned, center-aligned (and potentially right-aligned)
      * text on the same line.
-     * \since 1.3
+     * \since 1.3, static \since 2.0
      */
-    QTextOption::Tab middleAlignedTab() const;
+    static QTextOption::Tab middleAlignedTab();
 
     /**
      * Sets the paragraph margins for all paragraph elements to be created from now on.
