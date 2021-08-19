@@ -25,7 +25,7 @@
 #define USE_AUTO_TABLE
 //#define USE_CUSTOM_ROLES
 
-QStandardItemModel model;
+static QStandardItemModel model;
 static const int numColumns = 10;
 static const int numRows = 300;
 
@@ -51,7 +51,7 @@ public:
         return QIdentityProxyModel::data(proxyIndex, role);
     }
 };
-ProxyModel proxyModel;
+static ProxyModel proxyModel;
 
 static KDReports::AutoTableElement largeAutoTable()
 {
