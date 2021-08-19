@@ -2,4 +2,4 @@
 #SKIP whatever
 
 #clazy checks specification
-CHECKS level2,no-qstring-ref,no-qproperty-without-notify
+CHECKS level2,no-qstring-ref,no-qproperty-without-notify,no-qstring-allocations
