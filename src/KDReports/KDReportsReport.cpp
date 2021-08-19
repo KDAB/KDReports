@@ -1010,12 +1010,6 @@ qreal KDReports::Report::fontScalingFactor() const
     return d->m_layout->userRequestedFontScalingFactor();
 }
 
-void KDReports::Report::setTableBreakingEnabled(bool b)
-{
-    if (b)
-        qWarning("setTableBreakingEnabled() is deprecated and has no effect anymore");
-}
-
 bool KDReports::Report::isTableBreakingEnabled() const
 {
     return maximumNumberOfPagesForHorizontalScaling() != 1 || maximumNumberOfPagesForVerticalScaling() > 0;

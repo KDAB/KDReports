@@ -87,7 +87,6 @@ void KDReports::TableBreakingSettingsDialog::accept()
 {
     // SAVE SETTINGS
     const bool breakTables = d->breakTables->isChecked();
-    d->m_report->setTableBreakingEnabled(breakTables);
     if (d->fit->isChecked()) {
         d->m_report->setFontScalingFactor(1.0);
         d->m_report->scaleTo(breakTables ? d->numHorizontalPages->value() : 1, d->numVerticalPages->value());

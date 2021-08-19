@@ -604,31 +604,6 @@ public:
     int numberOfPages() const;
 
     /**
-     * \short Enable breaking of tables across multiple pages.
-     *
-     * By default tables are layouted so that all columns fit into the page width,
-     * but for large tables this can wrap the text too much.
-     * Table breaking ensures that no wrapping occurs in table cells,
-     * the tables span over as many pages as needed horizontally.
-     *
-     * Table breaking works best for the case where the document
-     * consists of a single table. Otherwise, text after the table
-     * might still be after the end of the table, i.e. not where expected.
-     *
-     * Calling setTableBreakingEnabled(true) is logically equivalent to
-     * calling scaleTo(infinity, 0), i.e. enabling table breaking
-     * without a limit on the number of pages.
-     *
-     * NOTE: this is mutually exclusive with scaleTo, since scaleTo enables
-     * table breaking as well, but with different parameters.
-     *
-     * \since 1.1
-     * \deprecated since 1.3
-     * \see scaleTo()
-     */
-    Q_DECL_DEPRECATED void setTableBreakingEnabled(bool tableBreakingEnabled);
-
-    /**
      * \return the value passed to setTableBreakingEnabled,
      * also true when scaleTo was called with numPagesHorizontally > 0
      */
