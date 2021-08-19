@@ -35,7 +35,7 @@ private slots:
     void testSimplePagination()
     {
         Report report;
-        TextElement elem(QString::fromLatin1("foo"));
+        TextElement elem(QStringLiteral("foo"));
         for (int i = 0; i < 100; ++i) {
             report.addElement(elem);
         }
@@ -86,7 +86,7 @@ private slots:
     void testEndlessPrinter()
     {
         Report report;
-        TextElement elem(QString::fromLatin1("foo"));
+        TextElement elem(QStringLiteral("foo"));
         for (int i = 0; i < 400; ++i) {
             report.addElement(elem);
         }
@@ -101,7 +101,7 @@ private slots:
     void testEndlessPrinterWithPageBreak()
     {
         Report report;
-        TextElement elem(QString::fromLatin1("foo"));
+        TextElement elem(QStringLiteral("foo"));
         for (int i = 0; i < 200; ++i) {
             report.addElement(elem);
         }
@@ -143,7 +143,7 @@ private slots:
         KDReports::Report report;
         int rows = 2;
         int columns = 2;
-        const QString cellText = QString::fromLatin1("HELLO WORLD table %1x%2").arg(rows).arg(columns);
+        const QString cellText = QStringLiteral("HELLO WORLD table %1x%2").arg(rows).arg(columns);
         TableElement tableElement;
         tableElement.setDefaultFont(QFont("Arial", 11));
         tableElement.setBorder(1);

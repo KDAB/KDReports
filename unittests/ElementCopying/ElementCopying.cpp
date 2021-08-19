@@ -29,7 +29,7 @@ class TestCopying : public QObject
 private slots:
     void testCopyingTextElement()
     {
-        TextElement elem1(QString::fromLatin1("foo"));
+        TextElement elem1(QStringLiteral("foo"));
         QBrush brush(Qt::red);
         elem1.setBackground(brush);
         QCOMPARE(elem1.background(), brush);
@@ -78,7 +78,7 @@ private slots:
     }
     void testClone()
     {
-        TextElement elem1(QString::fromLatin1("foo"));
+        TextElement elem1(QStringLiteral("foo"));
         QBrush brush(Qt::red);
         elem1.setBackground(brush);
         TableElement elem2;

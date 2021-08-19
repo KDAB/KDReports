@@ -61,7 +61,7 @@ KDReports::ReportPrivate::ReportPrivate(Report *report)
     , m_footers()
     , m_watermarkRotation(0)
     , m_watermarkColor(QColor(204, 204, 204))
-    , m_watermarkFont(QFont(QLatin1String("Helvetica"), 48))
+    , m_watermarkFont(QFont(QStringLiteral("Helvetica"), 48))
     , m_watermarkImage()
     ,
 #if 0
@@ -401,7 +401,7 @@ void KDReports::ReportPrivate::debugLayoutToPdf(const char *fileName)
 {
     // for calling from gdb
 
-    QFile html(QFile::decodeName(fileName) + QLatin1String(".html"));
+    QFile html(QFile::decodeName(fileName) + QStringLiteral(".html"));
     Q_ASSERT(html.open(QIODevice::WriteOnly));
     const QString htmlText = m_layout->toHtml();
     html.write(htmlText.toUtf8());

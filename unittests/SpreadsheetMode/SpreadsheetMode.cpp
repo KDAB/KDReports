@@ -388,11 +388,11 @@ private slots:
         QFETCH(int, horizontalHeaderFontSize);
         fillModel(numColumns, numRows, true /*small cells*/);
         for (int i = 0; i < numRows; ++i) {
-            m_model.setVerticalHeaderItem(i, new QStandardItem(QString::fromLatin1("Row_%1").arg(i)));
+            m_model.setVerticalHeaderItem(i, new QStandardItem(QStringLiteral("Row_%1").arg(i)));
         }
         Report report;
         report.setReportMode(Report::SpreadSheet);
-        const QString fontName = QString::fromLatin1("Arial");
+        const QString fontName = QStringLiteral("Arial");
         QFont font(fontName);
         font.setPointSize(10);
         report.setDefaultFont(font);
@@ -594,7 +594,7 @@ private:
     }
     static void addTable(KDReports::Report &report, int rows, int columns)
     {
-        const QString cellText = QString::fromLatin1("HELLO WORLD table %1x%2").arg(rows).arg(columns);
+        const QString cellText = QStringLiteral("HELLO WORLD table %1x%2").arg(rows).arg(columns);
         TableElement table;
         table.setBorder(1);
         for (int row = 0; row < rows; ++row) {

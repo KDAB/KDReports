@@ -260,12 +260,12 @@ private slots:
 
         Report report;
         QCOMPARE(report.doc().contentDocument().blockCount(), 1);
-        TextElement elem1(QString::fromLatin1("foo"));
+        TextElement elem1(QStringLiteral("foo"));
         report.addElement(elem1);
         QTextDocument &doc = report.doc().contentDocument();
         QCOMPARE(doc.blockCount(), 1);
         QCOMPARE(doc.toPlainText(), QString("foo"));
-        TextElement elem2(QString::fromLatin1("bar"));
+        TextElement elem2(QStringLiteral("bar"));
         report.addElement(elem2);
         QCOMPARE(doc.blockCount(), 2);
         QCOMPARE(doc.toPlainText(), QString("foo\nbar"));
@@ -384,18 +384,18 @@ private slots:
         QTextTableCell headerCell = table->cellAt(0, 0);
         QVERIFY(headerCell.isValid());
         QTextCursor cc = headerCell.firstCursorPosition();
-        QCOMPARE(cc.block().text(), QString::fromLatin1("Header1"));
+        QCOMPARE(cc.block().text(), QStringLiteral("Header1"));
         QCOMPARE(cc.charFormat().background().color().name(), QColor(Qt::red).name());
 
         QTextTableCell topLeftCell = table->cellAt(1, 0);
         QVERIFY(topLeftCell.isValid());
         cc = topLeftCell.firstCursorPosition();
-        QCOMPARE(cc.block().text(), QString::fromLatin1("TopLeft"));
+        QCOMPARE(cc.block().text(), QStringLiteral("TopLeft"));
 
         QTextTableCell topRightCell = table->cellAt(1, 1);
         QVERIFY(topRightCell.isValid());
         cc = topRightCell.firstCursorPosition();
-        QCOMPARE(cc.block().text(), QString::fromLatin1("TopRight"));
+        QCOMPARE(cc.block().text(), QStringLiteral("TopRight"));
         QVERIFY(cc.charFormat().font().bold());
 #if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
         QCOMPARE(cc.charFormat().font().pointSize(), 18);
@@ -404,7 +404,7 @@ private slots:
         QTextTableCell bottomRightCell = table->cellAt(2, 1);
         QVERIFY(bottomRightCell.isValid());
         cc = bottomRightCell.firstCursorPosition();
-        QCOMPARE(cc.block().text(), QString::fromLatin1("BottomRight"));
+        QCOMPARE(cc.block().text(), QStringLiteral("BottomRight"));
 
         cc.movePosition(QTextCursor::NextCharacter);
         QCOMPARE(cc.charFormat().fontWeight(), int(QFont::Bold));
@@ -429,7 +429,7 @@ private slots:
         topLeftCell = table->cellAt(1, 0);
         QVERIFY(topLeftCell.isValid());
         cc = topLeftCell.firstCursorPosition();
-        QCOMPARE(cc.block().text(), QString::fromLatin1("MODIFIED"));
+        QCOMPARE(cc.block().text(), QStringLiteral("MODIFIED"));
 
         // Regenerate again using the new regenerateAutoTableForModel
         model.setItem(0, 0, new QStandardItem(QLatin1String("MODIFIEDAGAIN")));
@@ -443,7 +443,7 @@ private slots:
         topLeftCell = table->cellAt(1, 0);
         QVERIFY(topLeftCell.isValid());
         cc = topLeftCell.firstCursorPosition();
-        QCOMPARE(cc.block().text(), QString::fromLatin1("MODIFIEDAGAIN"));
+        QCOMPARE(cc.block().text(), QStringLiteral("MODIFIEDAGAIN"));
     }
 
     void testAutoTableWithFetchMore()
@@ -498,7 +498,7 @@ private slots:
     void testSetFontFullyQualified()
     {
         Report report;
-        TextElement elem1(QString::fromLatin1("foo"));
+        TextElement elem1(QStringLiteral("foo"));
         elem1.setFont(QFont("Arial", 18));
         report.addElement(elem1);
         QTextDocument &doc = report.doc().contentDocument();
@@ -511,7 +511,7 @@ private slots:
     {
         Report report;
         report.setDefaultFont(QFont("Arial", 18));
-        TextElement elem1(QString::fromLatin1("foo"));
+        TextElement elem1(QStringLiteral("foo"));
         QFont font;
         font.setBold(true);
         elem1.setFont(font);

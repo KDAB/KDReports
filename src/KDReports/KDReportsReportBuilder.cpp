@@ -87,7 +87,7 @@ void KDReports::ReportBuilder::addVariable(KDReports::VariableType variable)
     const int charPosition = cursor().position();
     // Don't ask for the value of PageCount yet -- it would create a documentlayout
     // which would make any later insertion into the textdocument much, much slower.
-    const QString value = variable == KDReports::PageCount ? QString::fromLatin1("UNKNOWN YET") : variableValue(0 /*pageNumber*/, m_report, variable);
+    const QString value = variable == KDReports::PageCount ? QStringLiteral("UNKNOWN YET") : variableValue(0 /*pageNumber*/, m_report, variable);
     KDReports::TextElement element(value);
 
     const QTextCharFormat origCharFormat = cursor().charFormat();

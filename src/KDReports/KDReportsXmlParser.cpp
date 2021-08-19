@@ -75,10 +75,10 @@ bool KDReports::XmlParser::parseTableContents(KDReports::TableElement &table, co
 
         const QString name = element.tagName();
         if (name == QLatin1String("cell")) {
-            const int row = element.attribute(QLatin1String("row")).toInt();
-            const int column = element.attribute(QLatin1String("column")).toInt();
-            const int rowSpan = element.attribute(QLatin1String("rowspan"), QLatin1String("1")).toInt();
-            const int colSpan = element.attribute(QLatin1String("colspan"), QLatin1String("1")).toInt();
+            const int row = element.attribute(QStringLiteral("row")).toInt();
+            const int column = element.attribute(QStringLiteral("column")).toInt();
+            const int rowSpan = element.attribute(QStringLiteral("rowspan"), QLatin1String("1")).toInt();
+            const int colSpan = element.attribute(QStringLiteral("colspan"), QLatin1String("1")).toInt();
             KDReports::Cell &cell = table.cell(row, column);
             cell.setRowSpan(rowSpan);
             cell.setColumnSpan(colSpan);
@@ -110,10 +110,10 @@ void KDReports::XmlParser::parseCommonTableAttributes(KDReports::AbstractTableEl
     const QColor bgColor = KDReports::XmlHelper::readBackground(element);
     if (bgColor.isValid())
         tableElement.setBackground(bgColor);
-    if (element.hasAttribute(QLatin1String("border")))
-        tableElement.setBorder(element.attribute(QLatin1String("border")).toDouble());
-    if (element.hasAttribute(QLatin1String("width"))) {
-        QString widthStr = element.attribute(QLatin1String("width"));
+    if (element.hasAttribute(QStringLiteral("border")))
+        tableElement.setBorder(element.attribute(QStringLiteral("border")).toDouble());
+    if (element.hasAttribute(QStringLiteral("width"))) {
+        QString widthStr = element.attribute(QStringLiteral("width"));
         if (widthStr.endsWith(QLatin1Char('%'))) {
             widthStr.truncate(widthStr.length() - 1);
             tableElement.setWidth(widthStr.toInt(), KDReports::Percent);
@@ -126,20 +126,20 @@ void KDReports::XmlParser::parseCommonTableAttributes(KDReports::AbstractTableEl
 static QFont parseFontAttributes(const QDomElement &element)
 {
     QFont font;
-    if (element.hasAttribute(QLatin1String("pointsize"))) {
-        const int pointSize = element.attribute(QLatin1String("pointsize")).toInt();
+    if (element.hasAttribute(QStringLiteral("pointsize"))) {
+        const int pointSize = element.attribute(QStringLiteral("pointsize")).toInt();
         if (pointSize)
             font.setPointSize(pointSize);
     }
-    if (element.hasAttribute(QLatin1String("font"))) {
-        font.setFamily(element.attribute(QLatin1String("font")));
+    if (element.hasAttribute(QStringLiteral("font"))) {
+        font.setFamily(element.attribute(QStringLiteral("font")));
     }
     return font;
 }
 
 static void parseHeaderFooterAttribute(KDReports::Header &header, const QDomElement &element)
 {
-    if (element.hasAttribute(QLatin1String("font")) || element.hasAttribute(QLatin1String("pointsize"))) {
+    if (element.hasAttribute(QStringLiteral("font")) || element.hasAttribute(QStringLiteral("pointsize"))) {
         const QFont font = parseFontAttributes(element);
         header.setDefaultFont(font);
     }
@@ -155,8 +155,8 @@ bool KDReports::XmlParser::processDocument(const QDomDocument &doc, KDReports::R
     }
 
     // Support for default page orientation
-    if (docElement.hasAttribute(QLatin1String("orientation"))) {
-        const QString orientation = docElement.attribute(QLatin1String("orientation"));
+    if (docElement.hasAttribute(QStringLiteral("orientation"))) {
+        const QString orientation = docElement.attribute(QStringLiteral("orientation"));
         if (orientation == QLatin1String("landscape"))
             m_report->setPageOrientation(QPageLayout::Landscape);
         else if (orientation == QLatin1String("portrait"))
@@ -165,26 +165,26 @@ bool KDReports::XmlParser::processDocument(const QDomDocument &doc, KDReports::R
 
     // Support for margins
     double marginTop = 20.0; // defaults are duplicated in KDReportsReport.cpp
-    if (docElement.hasAttribute(QLatin1String("margin-top")))
-        marginTop = docElement.attribute(QLatin1String("margin-top")).toDouble();
+    if (docElement.hasAttribute(QStringLiteral("margin-top")))
+        marginTop = docElement.attribute(QStringLiteral("margin-top")).toDouble();
     double marginLeft = 20.0;
-    if (docElement.hasAttribute(QLatin1String("margin-left")))
-        marginLeft = docElement.attribute(QLatin1String("margin-left")).toDouble();
+    if (docElement.hasAttribute(QStringLiteral("margin-left")))
+        marginLeft = docElement.attribute(QStringLiteral("margin-left")).toDouble();
     double marginBottom = 20.0;
-    if (docElement.hasAttribute(QLatin1String("margin-bottom")))
-        marginBottom = docElement.attribute(QLatin1String("margin-bottom")).toDouble();
+    if (docElement.hasAttribute(QStringLiteral("margin-bottom")))
+        marginBottom = docElement.attribute(QStringLiteral("margin-bottom")).toDouble();
     double marginRight = 20.0;
-    if (docElement.hasAttribute(QLatin1String("margin-right")))
-        marginRight = docElement.attribute(QLatin1String("margin-right")).toDouble();
+    if (docElement.hasAttribute(QStringLiteral("margin-right")))
+        marginRight = docElement.attribute(QStringLiteral("margin-right")).toDouble();
     m_report->setMargins(marginTop, marginLeft, marginBottom, marginRight);
 
-    if (docElement.hasAttribute(QLatin1String("header-body-spacing")))
-        m_report->setHeaderBodySpacing(docElement.attribute(QLatin1String("header-body-spacing")).toDouble());
-    if (docElement.hasAttribute(QLatin1String("footer-body-spacing")))
-        m_report->setFooterBodySpacing(docElement.attribute(QLatin1String("footer-body-spacing")).toDouble());
+    if (docElement.hasAttribute(QStringLiteral("header-body-spacing")))
+        m_report->setHeaderBodySpacing(docElement.attribute(QStringLiteral("header-body-spacing")).toDouble());
+    if (docElement.hasAttribute(QStringLiteral("footer-body-spacing")))
+        m_report->setFooterBodySpacing(docElement.attribute(QStringLiteral("footer-body-spacing")).toDouble());
 
     // Support for default font
-    if (docElement.hasAttribute(QLatin1String("font")) || docElement.hasAttribute(QLatin1String("pointsize"))) {
+    if (docElement.hasAttribute(QStringLiteral("font")) || docElement.hasAttribute(QStringLiteral("pointsize"))) {
         const QFont font = parseFontAttributes(docElement);
         m_report->setDefaultFont(font);
     }
@@ -214,12 +214,12 @@ void KDReports::XmlParser::addElement(KDReports::Element &reportElement, KDRepor
         error(QObject::tr("<%1> is only supported in WordProcessing mode").arg(element.tagName()));
         return;
     }
-    if (element.hasAttribute(QLatin1String("inline"))) {
+    if (element.hasAttribute(QStringLiteral("inline"))) {
         builder->addInlineElementPublic(reportElement);
     } else {
         Qt::AlignmentFlag alignment = Qt::AlignLeft;
-        if (element.hasAttribute(QLatin1String("alignment")))
-            alignment = KDReports::XmlHelper::stringToAlignment(element.attribute(QLatin1String("alignment")));
+        if (element.hasAttribute(QStringLiteral("alignment")))
+            alignment = KDReports::XmlHelper::stringToAlignment(element.attribute(QStringLiteral("alignment")));
         builder->addBlockElementPublic(reportElement, alignment);
     }
 }
@@ -243,39 +243,39 @@ bool KDReports::XmlParser::processNode(const QDomNode &node, KDReports::ReportBu
             const QColor bgColor = KDReports::XmlHelper::readBackground(element);
             if (bgColor.isValid())
                 textElement.setBackground(bgColor);
-            if (element.hasAttribute(QLatin1String("pointsize"))) {
-                const int pointSize = element.attribute(QLatin1String("pointsize")).toInt();
+            if (element.hasAttribute(QStringLiteral("pointsize"))) {
+                const int pointSize = element.attribute(QStringLiteral("pointsize")).toInt();
                 if (pointSize)
                     textElement.setPointSize(pointSize);
             }
-            if (element.hasAttribute(QLatin1String("color"))) {
-                const QString name = element.attribute(QLatin1String("color"));
+            if (element.hasAttribute(QStringLiteral("color"))) {
+                const QString name = element.attribute(QStringLiteral("color"));
                 textElement.setTextColor(QColor(name));
             }
-            if (element.hasAttribute(QLatin1String("font"))) {
-                textElement.setFontFamily(element.attribute(QLatin1String("font")));
+            if (element.hasAttribute(QStringLiteral("font"))) {
+                textElement.setFontFamily(element.attribute(QStringLiteral("font")));
             }
-            if (element.hasAttribute(QLatin1String("bold"))) {
+            if (element.hasAttribute(QStringLiteral("bold"))) {
                 bool bold = false;
-                if (element.attribute(QLatin1String("bold")) == QLatin1String("true"))
+                if (element.attribute(QStringLiteral("bold")) == QLatin1String("true"))
                     bold = true;
                 textElement.setBold(bold);
             }
-            if (element.hasAttribute(QLatin1String("italic"))) {
+            if (element.hasAttribute(QStringLiteral("italic"))) {
                 bool italic = false;
-                if (element.attribute(QLatin1String("italic")) == QLatin1String("true"))
+                if (element.attribute(QStringLiteral("italic")) == QLatin1String("true"))
                     italic = true;
                 textElement.setItalic(italic);
             }
-            if (element.hasAttribute(QLatin1String("strikeout"))) {
+            if (element.hasAttribute(QStringLiteral("strikeout"))) {
                 bool strikeOut = false;
-                if (element.attribute(QLatin1String("strikeout")) == QLatin1String("true"))
+                if (element.attribute(QStringLiteral("strikeout")) == QLatin1String("true"))
                     strikeOut = true;
                 textElement.setStrikeOut(strikeOut);
             }
-            if (element.hasAttribute(QLatin1String("underline"))) {
+            if (element.hasAttribute(QStringLiteral("underline"))) {
                 bool underline = false;
-                if (element.attribute(QLatin1String("underline")) == QLatin1String("true"))
+                if (element.attribute(QStringLiteral("underline")) == QLatin1String("true"))
                     underline = true;
                 textElement.setUnderline(underline);
             }
@@ -296,12 +296,12 @@ bool KDReports::XmlParser::processNode(const QDomNode &node, KDReports::ReportBu
             if (!builder) {
                 error(QObject::tr("<text> is only supported in WordProcessing mode"));
             } else {
-                if (element.hasAttribute(QLatin1String("inline"))) {
+                if (element.hasAttribute(QStringLiteral("inline"))) {
                     builder->addInlineElementPublic(textElement);
                 } else {
                     Qt::AlignmentFlag alignment = Qt::AlignLeft;
-                    if (element.hasAttribute(QLatin1String("alignment")))
-                        alignment = KDReports::XmlHelper::stringToAlignment(element.attribute(QLatin1String("alignment")));
+                    if (element.hasAttribute(QStringLiteral("alignment")))
+                        alignment = KDReports::XmlHelper::stringToAlignment(element.attribute(QStringLiteral("alignment")));
                     const QColor bgColor = KDReports::XmlHelper::readColor(element, "paragraph-background");
                     builder->addBlockElementPublic(textElement, alignment, bgColor);
                 }
@@ -352,7 +352,7 @@ bool KDReports::XmlParser::processNode(const QDomNode &node, KDReports::ReportBu
         } else if (name == QLatin1String("hr")) {
             // Handle <hr> element
             KDReports::HtmlElement htmlElement;
-            htmlElement.setHtml(QString::fromLatin1("<hr>"));
+            htmlElement.setHtml(QStringLiteral("<hr>"));
             if (m_xmlElementHandler && !m_xmlElementHandler->htmlElement(htmlElement, element))
                 continue;
 
@@ -360,9 +360,9 @@ bool KDReports::XmlParser::processNode(const QDomNode &node, KDReports::ReportBu
 
         } else if (name == QLatin1String("vspace")) {
             // Handle <vspace> element
-            if (!element.hasAttribute(QLatin1String("size")))
+            if (!element.hasAttribute(QStringLiteral("size")))
                 continue; // size attribute is mandatory for VSpace
-            int size = element.attribute(QLatin1String("size")).toInt();
+            int size = element.attribute(QStringLiteral("size")).toInt();
             if (!builder) {
                 error(QObject::tr("<vspace> is only supported in WordProcessing mode"));
             } else {
@@ -377,17 +377,17 @@ bool KDReports::XmlParser::processNode(const QDomNode &node, KDReports::ReportBu
             m_report->addVerticalSpacing(size);
         } else if (name == QLatin1String("table")) {
             // Handle <table> element
-            const QString model = element.attribute(QLatin1String("model"));
+            const QString model = element.attribute(QStringLiteral("model"));
             if (model.isEmpty()) {
                 if (!builder) {
                     error(QObject::tr("<table> without a model is only supported in WordProcessing mode"));
                     continue;
                 }
                 KDReports::TableElement tableElement;
-                const int headerRowCount = element.attribute(QLatin1String("headerRowCount")).toInt(); // default 0
+                const int headerRowCount = element.attribute(QStringLiteral("headerRowCount")).toInt(); // default 0
                 tableElement.setHeaderRowCount(headerRowCount);
-                if (element.hasAttribute(QLatin1String("cellpadding")))
-                    tableElement.setPadding(element.attribute(QLatin1String("cellpadding")).toInt());
+                if (element.hasAttribute(QStringLiteral("cellpadding")))
+                    tableElement.setPadding(element.attribute(QStringLiteral("cellpadding")).toInt());
                 parseCommonTableAttributes(tableElement, element);
 
                 if (m_xmlElementHandler && !m_xmlElementHandler->startTableElement(tableElement, element))
@@ -403,9 +403,9 @@ bool KDReports::XmlParser::processNode(const QDomNode &node, KDReports::ReportBu
 
             } else {
                 KDReports::AutoTableElement tableElement(model);
-                if (element.attribute(QLatin1String("verticalHeaderVisible")) == QLatin1String("false"))
+                if (element.attribute(QStringLiteral("verticalHeaderVisible")) == QLatin1String("false"))
                     tableElement.setVerticalHeaderVisible(false);
-                if (element.attribute(QLatin1String("horizontalHeaderVisible")) == QLatin1String("false"))
+                if (element.attribute(QStringLiteral("horizontalHeaderVisible")) == QLatin1String("false"))
                     tableElement.setHorizontalHeaderVisible(false);
                 QColor headerBgColor = KDReports::XmlHelper::readColor(element, "header-background");
                 if (headerBgColor.isValid())
@@ -423,22 +423,22 @@ bool KDReports::XmlParser::processNode(const QDomNode &node, KDReports::ReportBu
         } else if (name == QLatin1String("chart")) {
             // Handle <chart> element
 
-            KDReports::ChartElement chartElement(element.attribute(QLatin1String("model")));
+            KDReports::ChartElement chartElement(element.attribute(QStringLiteral("model")));
             QColor bgColor = KDReports::XmlHelper::readBackground(element);
             if (bgColor.isValid())
                 chartElement.setBackground(bgColor);
             int width = 100, height = 100;
             Unit unit = Millimeters;
-            if (element.hasAttribute(QLatin1String("width"))) {
-                QString str = element.attribute(QLatin1String("width"));
+            if (element.hasAttribute(QStringLiteral("width"))) {
+                QString str = element.attribute(QStringLiteral("width"));
                 if (str.endsWith(QLatin1Char('%'))) {
                     str.chop(1);
                     unit = Percent;
                 }
                 width = str.toInt();
             }
-            if (element.hasAttribute(QLatin1String("height"))) {
-                QString str = element.attribute(QLatin1String("height"));
+            if (element.hasAttribute(QStringLiteral("height"))) {
+                QString str = element.attribute(QStringLiteral("height"));
                 if (str.endsWith(QLatin1Char('%'))) {
                     str.chop(1);
                     unit = Percent;
@@ -459,23 +459,23 @@ bool KDReports::XmlParser::processNode(const QDomNode &node, KDReports::ReportBu
             QImage image = extractImage(element, &id);
             KDReports::ImageElement imageElement(image);
             imageElement.setId(id);
-            if (element.hasAttribute(QLatin1String("width"))) {
-                QString widthStr = element.attribute(QLatin1String("width"));
+            if (element.hasAttribute(QStringLiteral("width"))) {
+                QString widthStr = element.attribute(QStringLiteral("width"));
                 if (widthStr.endsWith(QLatin1Char('%'))) {
                     widthStr.truncate(widthStr.length() - 1);
                     imageElement.setWidth(widthStr.toInt(), KDReports::Percent);
                 } else {
                     imageElement.setWidth(widthStr.toInt());
                 }
-            } else if (element.hasAttribute(QLatin1String("height"))) { // mutually exclusive with "width"!
-                QString heightStr = element.attribute(QLatin1String("height"));
+            } else if (element.hasAttribute(QStringLiteral("height"))) { // mutually exclusive with "width"!
+                QString heightStr = element.attribute(QStringLiteral("height"));
                 if (heightStr.endsWith(QLatin1Char('%'))) {
                     heightStr.truncate(heightStr.length() - 1);
                     imageElement.setHeight(heightStr.toInt(), KDReports::Percent);
                 } else {
                     imageElement.setHeight(heightStr.toInt());
                 }
-            } else if (element.hasAttribute(QLatin1String("fitToPage"))) {
+            } else if (element.hasAttribute(QStringLiteral("fitToPage"))) {
                 imageElement.setFitToPage();
             }
 
@@ -485,7 +485,7 @@ bool KDReports::XmlParser::processNode(const QDomNode &node, KDReports::ReportBu
             addElement(imageElement, builder, element);
 
         } else if (name == QLatin1String("header")) {
-            const KDReports::HeaderLocations loc = KDReports::XmlHelper::parseHeaderLocation(element.attribute(QLatin1String("location")));
+            const KDReports::HeaderLocations loc = KDReports::XmlHelper::parseHeaderLocation(element.attribute(QStringLiteral("location")));
             KDReports::Header &header = m_report->header(loc);
             parseHeaderFooterAttribute(header, element);
             if (m_xmlElementHandler && !m_xmlElementHandler->startHeader(header, element))
@@ -495,7 +495,7 @@ bool KDReports::XmlParser::processNode(const QDomNode &node, KDReports::ReportBu
             if (m_xmlElementHandler)
                 m_xmlElementHandler->endHeader(header, element);
         } else if (name == QLatin1String("footer")) {
-            const KDReports::HeaderLocations loc = KDReports::XmlHelper::parseHeaderLocation(element.attribute(QLatin1String("location")));
+            const KDReports::HeaderLocations loc = KDReports::XmlHelper::parseHeaderLocation(element.attribute(QStringLiteral("location")));
             KDReports::Footer &footer = m_report->footer(loc);
             parseHeaderFooterAttribute(footer, element);
             if (m_xmlElementHandler && !m_xmlElementHandler->startFooter(footer, element))
@@ -509,13 +509,13 @@ bool KDReports::XmlParser::processNode(const QDomNode &node, KDReports::ReportBu
                 error(QObject::tr("<variable> tags only allowed in headers and footers"));
                 return false;
             }
-            if (!element.hasAttribute(QLatin1String("type"))) {
+            if (!element.hasAttribute(QStringLiteral("type"))) {
                 error(QObject::tr("<variable> tags must have a 'type' attribute"));
                 return false;
             }
             Q_ASSERT(builder);
             if (builder) {
-                const QString type = element.attribute(QLatin1String("type"));
+                const QString type = element.attribute(QStringLiteral("type"));
                 KDReports::VariableType vt = KDReports::XmlHelper::stringToVariableType(type);
                 XmlElementHandlerV2 *v2 = dynamic_cast<XmlElementHandlerV2 *>(m_xmlElementHandler);
                 if (v2 && !v2->variable(vt, element))
@@ -527,8 +527,8 @@ bool KDReports::XmlParser::processNode(const QDomNode &node, KDReports::ReportBu
                 continue;
             m_report->addPageBreak();
         } else if (name == QLatin1String("ifdef")) {
-            if (element.hasAttribute(QLatin1String("id"))) {
-                const QString id = element.attribute(QLatin1String("id"));
+            if (element.hasAttribute(QStringLiteral("id"))) {
+                const QString id = element.attribute(QStringLiteral("id"));
                 const bool skip = m_textValues.value(id).isEmpty();
                 if (!skip) {
                     if (!processNode(element, builder, inHeader, inFooter))
@@ -541,18 +541,18 @@ bool KDReports::XmlParser::processNode(const QDomNode &node, KDReports::ReportBu
         } else if (name == QLatin1String("hline")) {
             KDReports::HLineElement hLineElement;
 
-            if (element.hasAttribute(QLatin1String("thickness"))) {
-                const double thickness = element.attribute(QLatin1String("thickness")).toDouble();
+            if (element.hasAttribute(QStringLiteral("thickness"))) {
+                const double thickness = element.attribute(QStringLiteral("thickness")).toDouble();
                 hLineElement.setThickness(thickness);
             }
 
-            if (element.hasAttribute(QLatin1String("color"))) {
+            if (element.hasAttribute(QStringLiteral("color"))) {
                 const QColor color = KDReports::XmlHelper::readColor(element, "color");
                 hLineElement.setColor(color);
             }
 
-            if (element.hasAttribute(QLatin1String("margin"))) {
-                const int margin = element.attribute(QLatin1String("margin")).toInt();
+            if (element.hasAttribute(QStringLiteral("margin"))) {
+                const int margin = element.attribute(QStringLiteral("margin")).toInt();
                 hLineElement.setMargin(margin);
             }
 
@@ -584,7 +584,7 @@ void KDReports::XmlParser::parseTabs(KDReports::ReportBuilder *builder, const QD
         if (element.tagName() == QLatin1String("tab")) {
 
             QTextOption::Tab tab;
-            const QString tabType = element.attribute(QLatin1String("type"));
+            const QString tabType = element.attribute(QStringLiteral("type"));
             if (tabType == QLatin1String("right")) {
                 tab.type = QTextOption::RightTab;
             } else if (tabType == QLatin1String("center")) {
@@ -595,11 +595,11 @@ void KDReports::XmlParser::parseTabs(KDReports::ReportBuilder *builder, const QD
                 tab.type = QTextOption::LeftTab;
             }
 
-            const QString delimiter = element.attribute(QLatin1String("delimiter"));
+            const QString delimiter = element.attribute(QStringLiteral("delimiter"));
             if (!delimiter.isEmpty())
                 tab.delimiter = delimiter.at(0);
 
-            const QString strPos = element.attribute(QLatin1String("position"));
+            const QString strPos = element.attribute(QStringLiteral("position"));
             double pos = -1;
             if (strPos == QLatin1String("page")) {
                 tab.delimiter = QChar::fromLatin1('P');
@@ -617,10 +617,10 @@ void KDReports::XmlParser::parseTabs(KDReports::ReportBuilder *builder, const QD
 
 void KDReports::XmlParser::parseParagraphMargins(KDReports::ReportBuilder *builder, const QDomElement &element)
 {
-    qreal left = element.attribute(QLatin1String("left")).toDouble();
-    qreal top = element.attribute(QLatin1String("top")).toDouble();
-    qreal right = element.attribute(QLatin1String("right")).toDouble();
-    qreal bottom = element.attribute(QLatin1String("bottom")).toDouble();
+    qreal left = element.attribute(QStringLiteral("left")).toDouble();
+    qreal top = element.attribute(QStringLiteral("top")).toDouble();
+    qreal right = element.attribute(QStringLiteral("right")).toDouble();
+    qreal bottom = element.attribute(QStringLiteral("bottom")).toDouble();
     XmlElementHandlerV2 *v2 = dynamic_cast<XmlElementHandlerV2 *>(m_xmlElementHandler);
     if (!v2 || v2->paragraphMargin(left, top, right, bottom, element))
         builder->setParagraphMargins(left, top, right, bottom);
@@ -628,8 +628,8 @@ void KDReports::XmlParser::parseParagraphMargins(KDReports::ReportBuilder *build
 
 QImage KDReports::XmlParser::extractImage(const QDomElement &element, QString *pId) const
 {
-    if (element.hasAttribute(QLatin1String("id"))) {
-        const QString id = element.attribute(QLatin1String("id"));
+    if (element.hasAttribute(QStringLiteral("id"))) {
+        const QString id = element.attribute(QStringLiteral("id"));
         *pId = id;
         const QHash<QString, QImage>::const_iterator it = m_imageValues.find(id);
         if (it != m_imageValues.end()) {
@@ -638,8 +638,8 @@ QImage KDReports::XmlParser::extractImage(const QDomElement &element, QString *p
     }
 
     QImage image;
-    if (element.hasAttribute(QLatin1String("file"))) {
-        const QString fileName = element.attribute(QLatin1String("file"));
+    if (element.hasAttribute(QStringLiteral("file"))) {
+        const QString fileName = element.attribute(QStringLiteral("file"));
         if (!image.load(fileName)) {
             qWarning("Image not found or invalid: %s", qPrintable(fileName));
         }
@@ -649,24 +649,24 @@ QImage KDReports::XmlParser::extractImage(const QDomElement &element, QString *p
 
 QString KDReports::XmlParser::extractText(const QDomElement &element, QString *pId, const QAbstractItemModel *currentModel, int currentRow) const
 {
-    if (element.hasAttribute(QLatin1String("id"))) {
-        const QString id = element.attribute(QLatin1String("id"));
+    if (element.hasAttribute(QStringLiteral("id"))) {
+        const QString id = element.attribute(QStringLiteral("id"));
         *pId = id;
         const QHash<QString, QString>::const_iterator it = m_textValues.find(id);
         if (it != m_textValues.end()) {
             return *it;
         }
-    } else if (element.hasAttribute(QLatin1String("model"))) {
-        const QString modelName = element.attribute(QLatin1String("model"));
+    } else if (element.hasAttribute(QStringLiteral("model"))) {
+        const QString modelName = element.attribute(QStringLiteral("model"));
         QAbstractItemModel *model = KDReports::modelForKey(modelName);
         if (model) {
             int row;
             if (model == currentModel && currentRow > -1) {
                 row = currentRow;
             } else {
-                row = element.attribute(QLatin1String("row")).toInt();
+                row = element.attribute(QStringLiteral("row")).toInt();
             }
-            const int column = element.attribute(QLatin1String("column")).toInt();
+            const int column = element.attribute(QStringLiteral("column")).toInt();
             const QModelIndex index = model->index(row, column);
             return model->data(index).toString();
         }

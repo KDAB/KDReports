@@ -152,7 +152,7 @@ void KDReports::ImageElement::build(ReportBuilder &builder) const
         return;
 
     static int imageNumber = 0;
-    const QString name = QString::fromLatin1("image%1.png").arg(++imageNumber);
+    const QString name = QStringLiteral("image%1.png").arg(++imageNumber);
     builder.currentDocument().addResource(QTextDocument::ImageResource, QUrl(name), d->m_pixmap);
     builder.currentDocumentData().addResourceName(name);
 

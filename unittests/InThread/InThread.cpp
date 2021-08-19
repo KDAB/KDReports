@@ -98,7 +98,7 @@ class Thread : public QThread
 
         // Add many paragraphs, to demonstrate page breaking
         for (int i = 1; i < 100; ++i) {
-            report.addElement(KDReports::HtmlElement(QString::fromLatin1("<b>Customer</b> <em>%1</em>").arg(i)), Qt::AlignLeft);
+            report.addElement(KDReports::HtmlElement(QStringLiteral("<b>Customer</b> <em>%1</em>").arg(i)), Qt::AlignLeft);
             report.addInlineElement(KDReports::TextElement("  - 2006"));
         }
 

@@ -181,7 +181,7 @@ void FillCellHelper::insertDecoration(KDReports::ReportBuilder &builder, QTextDo
     }
     if (!img.isNull()) {
         static int imageNumber = 0;
-        const QString name = QString::fromLatin1("cell-image%1.png").arg(++imageNumber);
+        const QString name = QStringLiteral("cell-image%1.png").arg(++imageNumber);
         textDoc.addResource(QTextDocument::ImageResource, QUrl(name), img);
         builder.currentDocumentData().addResourceName(name);
         cellCursor.insertImage(name);

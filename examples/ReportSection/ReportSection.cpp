@@ -96,10 +96,10 @@ int main(int argc, char **argv)
 
     // Fill in the table of contents
     QStringList tocList;
-    tocList << QString::fromLatin1("Chapter one\tpage 1");
-    tocList << QString::fromLatin1("Chapter two\tpage 3");
-    tocList << QString::fromLatin1("Last chapter\tpage 6");
-    QString tocText = tocList.join(QString::fromLatin1("\n"));
+    tocList << QStringLiteral("Chapter one\tpage 1");
+    tocList << QStringLiteral("Chapter two\tpage 3");
+    tocList << QStringLiteral("Last chapter\tpage 6");
+    QString tocText = tocList.join(QStringLiteral("\n"));
     report.associateTextValue(QLatin1String("id_toc"), tocText);
 
     KDReports::PreviewDialog preview(&report);

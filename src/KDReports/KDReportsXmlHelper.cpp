@@ -65,17 +65,17 @@ QColor KDReports::XmlHelper::readColor(const QDomElement &element, const char *a
 QColor KDReports::XmlHelper::readBackground(const QDomElement &element)
 {
     QColor ret;
-    if (element.hasAttribute(QLatin1String("background"))) {
-        const QString name = element.attribute(QLatin1String("background"));
+    if (element.hasAttribute(QStringLiteral("background"))) {
+        const QString name = element.attribute(QStringLiteral("background"));
         ret = QColor(name);
-    } else if (element.hasAttribute(QLatin1String("bgred")) && element.hasAttribute(QLatin1String("bggreen")) && element.hasAttribute(QLatin1String("bgblue"))) {
+    } else if (element.hasAttribute(QStringLiteral("bgred")) && element.hasAttribute(QStringLiteral("bggreen")) && element.hasAttribute(QStringLiteral("bgblue"))) {
         int red = 0, green = 0, blue = 0;
         bool ok = true;
-        red = element.attribute(QLatin1String("bgred")).toInt(&ok);
+        red = element.attribute(QStringLiteral("bgred")).toInt(&ok);
         if (ok) {
-            green = element.attribute(QLatin1String("bggreen")).toInt(&ok);
+            green = element.attribute(QStringLiteral("bggreen")).toInt(&ok);
             if (ok) {
-                blue = element.attribute(QLatin1String("bgblue")).toInt(&ok);
+                blue = element.attribute(QStringLiteral("bgblue")).toInt(&ok);
                 if (ok) {
                     ret.setRed(red);
                     ret.setGreen(green);
@@ -93,7 +93,7 @@ KDReports::HeaderLocations KDReports::XmlHelper::parseHeaderLocation(const QStri
         return KDReports::AllPages;
     KDReports::HeaderLocations loc;
     const QStringList tokens = xmlAttr.toLower().split(QLatin1Char(','));
-    foreach (const QString &s, tokens) {
+    for (const QString &s : tokens) {
         QString token = s.trimmed();
         if (token == QLatin1String("first"))
             loc |= KDReports::FirstPage;

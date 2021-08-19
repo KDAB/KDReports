@@ -210,9 +210,9 @@ void KDReports::TextDocumentData::updatePercentSize(QTextImageFormat &imageForma
     if (prop[0] == QLatin1Char('T')) {
         // qDebug() << "updatePercentSize fitToPage" << imageRatio << pageRatio;
         if (imageRatio < pageRatio) {
-            prop = QString::fromLatin1("W100");
+            prop = QStringLiteral("W100");
         } else {
-            prop = QString::fromLatin1("H100");
+            prop = QStringLiteral("H100");
         }
     }
     const qreal percent = prop.mid(1).toDouble();

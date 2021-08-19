@@ -551,7 +551,7 @@ qreal KDReports::SpreadsheetReportLayout::layoutAsOnePage(qreal width)
 
 QString KDReports::SpreadsheetReportLayout::toHtml() const
 {
-    return QString::fromLatin1("Not implemented");
+    return QStringLiteral("Not implemented");
 }
 
 void KDReports::SpreadsheetReportLayout::finishHtmlExport() { }

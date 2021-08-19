@@ -459,7 +459,7 @@ void KDReports::PreviewWidgetPrivate::pageCountChanged()
 #endif
     pageNumber->setMinimumWidth(numberWidth);
     pageNumber->setMaximumWidth(numberWidth);
-    pageCount->setText(QString::fromLatin1(" / ") + QString::number(m_pageCount));
+    pageCount->setText(QStringLiteral(" / ") + QString::number(m_pageCount));
 
     // Ensure that the treewidget has the right number of items
     int numberOfItems = pageList->count();
