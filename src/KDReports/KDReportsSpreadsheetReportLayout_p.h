@@ -84,7 +84,7 @@ public:
     void setVerticalHeaderFont(const QFont &font);
 
 private:
-    void drawBorder(const QRectF cellRect, QPainter &painter);
+    void drawBorder(const QRectF &cellRect, QPainter &painter);
     void breakHorizontally();
     // Return sum of m_tableLayout.m_columnWidths; caller must ensure updateColumnWidths was called before.
     qreal totalWidth() const;

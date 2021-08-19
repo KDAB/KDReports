@@ -52,13 +52,15 @@ class Header;
 class KDREPORTS_EXPORT HeaderMap : public QMap<HeaderLocations, Header *>
 {
 public:
-    HeaderMap() { }
+    HeaderMap() = default;
     ~HeaderMap()
     {
         for (iterator it = begin(); it != end(); ++it) {
             delete *it;
         }
     }
+    HeaderMap(const HeaderMap &) = delete;
+    HeaderMap &operator=(const HeaderMap &) = delete;
 
     void layoutWithTextWidth(qreal w)
     {

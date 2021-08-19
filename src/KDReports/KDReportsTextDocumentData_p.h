@@ -99,7 +99,7 @@ private:
 
     QList<QTextTable *> m_tables;
 
-    typedef QMap<QTextTable *, KDReports::AutoTableElement> AutoTablesMaps;
+    typedef QHash<QTextTable *, KDReports::AutoTableElement> AutoTablesMaps;
     AutoTablesMaps m_autoTables;
     QList<QString> m_resourceNames;
     bool m_usesTabPositions;
