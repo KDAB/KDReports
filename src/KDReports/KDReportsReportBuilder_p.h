@@ -89,6 +89,9 @@ public:
     int currentPosition();
 
 private:
+    ReportBuilder(const ReportBuilder &other) = delete;
+    ReportBuilder &operator=(const ReportBuilder &other) = delete;
+
     KDReports::TextDocumentData &m_contentDocument;
     QTextCursor m_cursor;
     QTextCursor m_layoutDocCursor;
