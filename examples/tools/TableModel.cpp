@@ -126,7 +126,7 @@ bool TableModel::loadFromCSV(const QString &filename)
             data.append(line);
         }
 
-        if (data.size() > 0) {
+        if (!data.isEmpty()) {
             //             qDebug() << "TableModel::loadFromCSV: " << data.size()
             //                      << " data rows found." << endl;
 
@@ -179,7 +179,7 @@ bool TableModel::loadFromCSV(const QString &filename)
             m_rows.resize(0);
         }
 
-        if (m_rows.size() > 0) {
+        if (!m_rows.isEmpty()) {
             //             qDebug() << "TableModel::loadFromCSV: table loaded, "
             //                      << rowCount() << " rows, " << columnCount() << "columns."
             //                      << endl;
