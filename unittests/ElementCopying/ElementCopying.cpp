@@ -97,7 +97,7 @@ private slots:
         auto *clonedTableElement = dynamic_cast<TableElement *>(baseElem2);
         QVERIFY(clonedTableElement);
         // check properties were copied
-        QCOMPARE(clonedTableElement->padding(), 42);
+        QCOMPARE(int(clonedTableElement->padding()), 42);
     }
 };
 
