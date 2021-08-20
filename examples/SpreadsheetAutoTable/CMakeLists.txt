@@ -13,8 +13,8 @@
 ##
 
 set(SOURCES
-    LongReport.cpp
+    SpreadsheetAutoTable.cpp
 )
 
-add_executable(LongReport ${SOURCES})
-target_link_libraries(LongReport ${QT_LIBRARIES} kdreports)
+add_executable(SpreadsheetAutoTable ${SOURCES})
+target_link_libraries(SpreadsheetAutoTable ${QT_LIBRARIES} kdreports)

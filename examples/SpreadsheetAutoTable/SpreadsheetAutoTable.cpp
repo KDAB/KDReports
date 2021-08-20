@@ -22,14 +22,11 @@
 #include <KDReports>
 #include <QDebug>
 
-#define USE_AUTO_TABLE
 //#define USE_CUSTOM_ROLES
 
 static QStandardItemModel model;
 static const int numColumns = 10;
 static const int numRows = 300;
-
-#ifdef USE_AUTO_TABLE
 
 class ProxyModel : public QIdentityProxyModel
 {
@@ -115,39 +112,6 @@ static KDReports::AutoTableElement largeAutoTable()
     return tableElement;
 }
 
-#else // not using auto tables:
-
-static KDReports::TableElement largeTable()
-{
-    KDReports::TableElement tableElement;
-    tableElement.setHeaderRowCount(1);
-    tableElement.setHeaderColumnCount(1);
-    tableElement.setPadding(3);
-    QColor headerColor(218, 218, 218);
-    // Horizontal header
-    for (int i = 1; i < numColumns; ++i) {
-        KDReports::Cell &headerCell = tableElement.cell(0, i);
-        headerCell.setBackground(headerColor);
-        headerCell.addElement(KDReports::TextElement(QString("Column %1").arg(i + 1)));
-    }
-
-    // Vertical header
-    for (int i = 1; i < numRows; ++i) {
-        KDReports::Cell &headerCell = tableElement.cell(i, 0);
-        headerCell.setBackground(headerColor);
-        headerCell.addElement(KDReports::TextElement(QString("Row %1").arg(i + 1)));
-    }
-
-    for (int column = 1; column < numColumns; ++column) {
-        for (int row = 1; row < numRows; ++row) {
-            const QString text = QString::number((column - 1) + numColumns * (row - 1) + 1);
-            tableElement.cell(row, column).addElement(KDReports::TextElement(text));
-        }
-    }
-    return tableElement;
-}
-#endif
-
 int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
@@ -171,7 +135,6 @@ int main(int argc, char **argv)
     // footer.addInlineElement( KDReports::TextElement( "/" ) );
     // footer.addVariable( KDReports::PageCount );
 
-#ifdef USE_AUTO_TABLE
     KDReports::AutoTableElement largeTableElement = largeAutoTable();
 
     // This example shows the importance of a large enough font initially.
@@ -184,11 +147,6 @@ int main(int argc, char **argv)
     largeTableElement.setDefaultFont(QFont("Arial", 12));
 
     report.mainTable()->setAutoTableElement(largeTableElement);
-#else
-    // not supported
-    KDReports::TableElement largeTableElement = largeTable();
-    report.mainTable()->setTableElement(largeTableElement);
-#endif
 
     KDReports::PreviewDialog preview(&report);
     return preview.exec();
@@ -198,4 +156,4 @@ int main(int argc, char **argv)
     // return 0;
 }
 
-#include "LongReport.moc"
+#include "SpreadsheetAutoTable.moc"
