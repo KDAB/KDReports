@@ -174,8 +174,8 @@ void KDReports::ImageElement::build(ReportBuilder &builder) const
         }
     } else if (d->m_height) {
         if (d->m_unit == Millimeters) {
-            const int pixelHeight = qRound(mmToPixels(d->m_height));
-            const int pixelWidth = pixelHeight * imageFormat.width() / imageFormat.height();
+            const qreal pixelHeight = qRound(mmToPixels(d->m_height));
+            const qreal pixelWidth = pixelHeight * imageFormat.width() / imageFormat.height();
             imageFormat.setHeight(pixelHeight);
             imageFormat.setWidth(pixelWidth);
         } else {

@@ -97,7 +97,7 @@ private slots:
         const QTextDocument &doc = report.doc().contentDocument();
         QCOMPARE(doc.blockCount(), 2);
         QCOMPARE(doc.toPlainText(), QString("Title\nTest used by XmlParser.cpp"));
-        qreal top, left, bottom, right;
+        qreal top; qreal left; qreal bottom; qreal right;
         report.getMargins(&top, &left, &bottom, &right);
         QCOMPARE(static_cast<double>(top), 40.0);
         QCOMPARE(static_cast<double>(left), 0.0);

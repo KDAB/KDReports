@@ -68,12 +68,12 @@ public:
     /**
      * Sets the line thickness
      */
-    void setThickness(int t);
+    void setThickness(qreal t);
 
     /**
      * Returns the hline thickness
      */
-    int thickness() const;
+    qreal thickness() const;
 
     /**
      * Sets the margin (empty space) used above and below the line, in mm.

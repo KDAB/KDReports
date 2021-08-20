@@ -26,7 +26,7 @@ public:
     QString m_id;
     QColor m_color;
 
-    int m_thickness;
+    qreal m_thickness;
     int m_margin;
 };
 
@@ -69,12 +69,12 @@ QColor KDReports::HLineElement::color() const
     return d->m_color;
 }
 
-void KDReports::HLineElement::setThickness(int t)
+void KDReports::HLineElement::setThickness(qreal t)
 {
     d->m_thickness = t;
 }
 
-int KDReports::HLineElement::thickness() const
+qreal KDReports::HLineElement::thickness() const
 {
     return d->m_thickness;
 }
@@ -97,7 +97,7 @@ void KDReports::HLineElement::build(ReportBuilder &builder) const
 
     fmt.setObjectType(HLineTextObject::HLineTextFormat);
     fmt.setProperty(HLineTextObject::Color, d->m_color);
-    fmt.setProperty(HLineTextObject::Thickness, double(d->m_thickness));
+    fmt.setProperty(HLineTextObject::Thickness, d->m_thickness);
     // qDebug() << "Setting Margin to" << d->m_margin << "mm" << mmToPixels( d->m_margin ) << "px";
     fmt.setProperty(HLineTextObject::Margin, double(mmToPixels(d->m_margin)));
 

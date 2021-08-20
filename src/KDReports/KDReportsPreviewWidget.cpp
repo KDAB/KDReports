@@ -591,10 +591,10 @@ KDReports::PreviewWidget::~PreviewWidget()
     delete d;
 }
 
-bool KDReports::PreviewWidget::isSelected(int index) const
+bool KDReports::PreviewWidget::isSelected(int pageNumber) const
 {
-    if (index >= 0 && index < d->pageList->count())
-        return (d->pageList->item(index)->checkState() == Qt::Checked);
+    if (pageNumber >= 0 && pageNumber < d->pageList->count())
+        return (d->pageList->item(pageNumber)->checkState() == Qt::Checked);
     else
         return false;
 }

@@ -95,8 +95,8 @@ int main(int argc, char **argv)
 
     {
         QList<QTextOption::Tab> tabs;
-        tabs.append(report.middleAlignedTab());
-        tabs.append(report.rightAlignedTab());
+        tabs.append(KDReports::Report::middleAlignedTab());
+        tabs.append(KDReports::Report::rightAlignedTab());
         report.setTabPositions(tabs);
     }
 

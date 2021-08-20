@@ -77,7 +77,7 @@ int main(int argc, char **argv)
     footer.addInlineElement(pageCountElement);
 
     QList<QTextOption::Tab> tabs;
-    tabs.append(report.rightAlignedTab());
+    tabs.append(KDReports::Report::rightAlignedTab());
     report.setTabPositions(tabs);
 
     KDReports::TextElement tocElement("<Table of Contents will go here>");
