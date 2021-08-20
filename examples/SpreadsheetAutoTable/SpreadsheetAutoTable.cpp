@@ -24,10 +24,6 @@
 
 //#define USE_CUSTOM_ROLES
 
-static QStandardItemModel model;
-static const int numColumns = 10;
-static const int numRows = 300;
-
 class ProxyModel : public QIdentityProxyModel
 {
     Q_OBJECT
@@ -48,9 +44,18 @@ public:
         return QIdentityProxyModel::data(proxyIndex, role);
     }
 };
-static ProxyModel proxyModel;
 
-static KDReports::AutoTableElement largeAutoTable()
+class MyReportGenerator
+{
+public:
+    KDReports::AutoTableElement largeAutoTable();
+
+private:
+    QStandardItemModel m_model;
+    ProxyModel m_proxyModel;
+};
+
+KDReports::AutoTableElement MyReportGenerator::largeAutoTable()
 {
 #ifdef USE_CUSTOM_ROLES
     QColor colorRed(119, 112, 112);
@@ -59,6 +64,9 @@ static KDReports::AutoTableElement largeAutoTable()
     QPixmap pix(16, 16);
     pix.fill(Qt::green);
 #endif
+
+    const int numColumns = 10;
+    const int numRows = 300;
 
     for (int column = 0; column < numColumns; ++column) {
         for (int row = 0; row < numRows; ++row) {
@@ -80,7 +88,7 @@ static KDReports::AutoTableElement largeAutoTable()
                 }
             }
 #endif
-            model.setItem(row, column, item);
+            m_model.setItem(row, column, item);
         }
     }
 
@@ -90,7 +98,7 @@ static KDReports::AutoTableElement largeAutoTable()
 #ifdef USE_CUSTOM_ROLES
         item->setIcon(QIcon(pix));
 #endif
-        model.setHorizontalHeaderItem(i, item);
+        m_model.setHorizontalHeaderItem(i, item);
     }
 
     // Vertical header
@@ -99,11 +107,11 @@ static KDReports::AutoTableElement largeAutoTable()
 #ifdef USE_CUSTOM_ROLES
         item->setIcon(QIcon(pix));
 #endif
-        model.setVerticalHeaderItem(i, item);
+        m_model.setVerticalHeaderItem(i, item);
     }
 
-    proxyModel.setSourceModel(&model);
-    KDReports::AutoTableElement tableElement(&proxyModel);
+    m_proxyModel.setSourceModel(&m_model);
+    KDReports::AutoTableElement tableElement(&m_proxyModel);
     tableElement.setHorizontalHeaderVisible(true);
     tableElement.setVerticalHeaderVisible(true);
     tableElement.setPadding(2);
@@ -135,7 +143,8 @@ int main(int argc, char **argv)
     // footer.addInlineElement( KDReports::TextElement( "/" ) );
     // footer.addVariable( KDReports::PageCount );
 
-    KDReports::AutoTableElement largeTableElement = largeAutoTable();
+    MyReportGenerator generator;
+    KDReports::AutoTableElement largeTableElement = generator.largeAutoTable();
 
     // This example shows the importance of a large enough font initially.
     // The scaling to 1-page-wide will make sure everything fits anyway, but it will
