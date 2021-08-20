@@ -33,11 +33,16 @@
 
 class KDReports::XmlElementHandlerPrivate
 {
+public:
+    KDReports::ErrorDetails m_details;
 };
 
-KDReports::XmlElementHandler::XmlElementHandler() { }
+KDReports::XmlElementHandler::XmlElementHandler()
+    : d(new XmlElementHandlerPrivate)
+{
+}
 
-KDReports::XmlElementHandler::~XmlElementHandler() { }
+KDReports::XmlElementHandler::~XmlElementHandler() = default;
 
 bool KDReports::XmlElementHandler::startReport(KDReports::Report &report, QDomElement &xmlElement)
 {
@@ -192,12 +197,12 @@ bool KDReports::XmlElementHandler::tabs(QList<QTextOption::Tab> &tabs, const QDo
 
 void KDReports::XmlElementHandler::setErrorDetails(const KDReports::ErrorDetails &details)
 {
-    m_details = details;
+    d->m_details = details;
 }
 
 KDReports::ErrorDetails KDReports::XmlElementHandler::errorDetails()
 {
-    return m_details;
+    return d->m_details;
 }
 
 void KDReports::XmlElementHandler::virtual_hook(int id, void *data)

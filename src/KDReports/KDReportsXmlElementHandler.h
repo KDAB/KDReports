@@ -259,8 +259,6 @@ public:
 private:
     virtual void virtual_hook(int id, void *data);
 
-    KDReports::ErrorDetails m_details;
-
     std::unique_ptr<XmlElementHandlerPrivate> d;
 };
 
