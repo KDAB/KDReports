@@ -1,4 +1,4 @@
-Name:           qt5-kdreports
+Name:           qt6-kdreports
 Version:        2.0.0
 Release:        1
 Summary:        A Qt library for creating printable reports
@@ -14,15 +14,15 @@ Packager:       Klaralvdalens Datakonsult AB (KDAB) <info@kdab.com>
 
 BuildRequires: cmake
 %if %{defined suse_version}
-BuildRequires:  libqt5-qtbase-devel
+BuildRequires:  libqt6-qtbase-devel
 %endif
 
 %if %{defined fedora}
-BuildRequires:  gcc-c++ qt5-qtbase-devel desktop-file-utils
+BuildRequires:  gcc-c++ qt6-qtbase-devel desktop-file-utils
 %endif
 
 %if %{defined rhel}
-BuildRequires:  gcc-c++ qt5-qtbase-devel desktop-file-utils
+BuildRequires:  gcc-c++ qt6-qtbase-devel desktop-file-utils
 %endif
 
 %description
@@ -49,7 +49,7 @@ develop programs using kdreports.
 %setup -q
 
 %build
-cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+cmake . -DCMAKE_INSTALL_PREFIX=/usr -DKDReports_QT6=True -DCMAKE_BUILD_TYPE=Release
 %__make %{?_smp_mflags}
 
 %post -p /sbin/ldconfig
@@ -63,27 +63,17 @@ cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
 
 %files
 %defattr(-,root,root)
-%{_prefix}/share/doc/KDReports
-%{_libdir}/libkdreports.so.*
+%{_prefix}/share/doc/KDReports-qt6
+%{_libdir}/libkdreports-qt6.so.*
 
 %files devel
 %defattr(-,root,root,-)
-%dir %{_includedir}/KDReports
-%{_includedir}/KDReports/*
-%dir %{_libdir}/cmake/KDReports
-%{_libdir}/cmake/KDReports/*
-%{_libdir}/libkdreports.so
-%if %{defined fedora}
-%if 0%{?fedora} > 28
-%{_libdir}/qt5/mkspecs/modules/*
-%else
-%dir %{_prefix}/mkspecs/
-%dir %{_prefix}/mkspecs/modules/
-%{_prefix}/mkspecs/modules/*.pri
-%endif
-%else
-%{_libdir}/qt5/mkspecs/modules/*
-%endif
+%dir %{_includedir}/KDReports-qt6
+%{_includedir}/KDReports-qt6/*
+%dir %{_libdir}/cmake/KDReports-qt6
+%{_libdir}/cmake/KDReports-qt6/*
+%{_libdir}/libkdreports-qt6.so
+#%{_prefix}/mkspecs/modules/* ECMGeneratePriFile isn't ported to Qt6 yet
 
 %changelog
 * Sat Aug 21 2021 Allen Winter <allen.winter@kdab.com> 2.0.0
