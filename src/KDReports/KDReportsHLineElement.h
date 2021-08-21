@@ -33,7 +33,7 @@ class HLineElementPrivate;
  * The KDReports::HLineElement class represents an horizontal line in the report.
  * \since 1.3
  */
-class KDREPORTS_EXPORT HLineElement final : public Element
+class KDREPORTS_EXPORT HLineElement : public Element
 {
 public:
     /**
