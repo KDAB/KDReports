@@ -40,6 +40,7 @@ void HLineTextObject::registerHLineObjectHandler(QTextDocument *doc)
     doc->documentLayout()->registerHandler(HLineTextObject::HLineTextFormat, hLineInterface);
 }
 
+//@cond PRIVATE
 QSizeF HLineTextObject::intrinsicSize(QTextDocument *doc, int posInDocument, const QTextFormat &format)
 {
     Q_UNUSED(posInDocument);
@@ -72,5 +73,5 @@ void HLineTextObject::drawObject(QPainter *painter, const QRectF &r, QTextDocume
 
     painter->drawLine(line);
 }
-
+//@endcond
 }

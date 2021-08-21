@@ -22,12 +22,14 @@
 #include <QDebug>
 #include <QTextBlock>
 
+//@cond PRIVATE
 KDReports::ReportBuilder::ReportBuilder(KDReports::TextDocumentData &contentDocument, const QTextCursor &cursor, KDReports::Report *report)
     : m_contentDocument(contentDocument)
     , m_cursor(cursor)
     , m_report(report)
 {
 }
+//@endcond
 
 void KDReports::ReportBuilder::addInlineElement(const Element &element)
 {
@@ -126,6 +128,7 @@ void KDReports::ReportBuilder::addVerticalSpacing(qreal space)
     cursor.endEditBlock();
 }
 
+//@cond PRIVATE
 void KDReports::ReportBuilder::addInlineElementPublic(const Element &element)
 {
     addInlineElement(element);
@@ -145,6 +148,7 @@ void KDReports::ReportBuilder::addVerticalSpacingPublic(qreal space)
 {
     addVerticalSpacing(space);
 }
+//@endcond
 
 void KDReports::ReportBuilder::addPageBreakPublic()
 {
@@ -188,6 +192,7 @@ QDebug operator<<(QDebug &dbg, QTextOption::Tab tab) // clazy says: pass by valu
     return dbg;
 }
 
+//@cond PRIVATE
 void KDReports::ReportBuilder::setParagraphMargins(qreal left, qreal top, qreal right, qreal bottom)
 {
     m_leftMargin = mmToPixels(left);
@@ -195,6 +200,7 @@ void KDReports::ReportBuilder::setParagraphMargins(qreal left, qreal top, qreal 
     m_rightMargin = mmToPixels(right);
     m_bottomMargin = mmToPixels(bottom);
 }
+//@endcond
 
 void KDReports::ReportBuilder::setupBlockFormat(QTextBlockFormat &blockFormat)
 {

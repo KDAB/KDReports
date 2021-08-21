@@ -917,7 +917,6 @@ EXCLUDE_PATTERNS       = */.svn/* \
                          */test/* \
                          */tests/* \
                          *_p.cpp \
-                         *_p.h \
                          *_export.h
 
 # The EXCLUDE_SYMBOLS tag can be used to specify one or more symbol names

@@ -299,6 +299,7 @@ void KDReports::TextDocumentData::setFontSizeHelper(QTextCursor &lastCursor, int
     lastCursor.mergeCharFormat(newFormat);
 }
 
+//@cond PRIVATE
 QString KDReports::TextDocumentData::asHtml() const
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -313,6 +314,7 @@ QString KDReports::TextDocumentData::asHtml() const
     htmlText.remove(QLatin1String("style=\" \""));
     return htmlText;
 }
+//@endcond
 
 void KDReports::TextDocumentData::registerAutoTable(QTextTable *table, const KDReports::AutoTableElement *element)
 {
@@ -320,6 +322,7 @@ void KDReports::TextDocumentData::registerAutoTable(QTextTable *table, const KDR
     m_autoTables.insert(table, *element); // make copy of the AutoTableElement
 }
 
+//@cond PRIVATE
 QList<KDReports::AutoTableElement *> KDReports::TextDocumentData::autoTableElements()
 {
     QList<KDReports::AutoTableElement *> lst;
@@ -364,6 +367,7 @@ void KDReports::TextDocumentData::regenerateAutoTableForModel(QAbstractItemModel
     }
     QTextCursor(m_document).endEditBlock();
 }
+//@endcond
 
 void KDReports::TextDocumentData::regenerateOneTable(const KDReports::AutoTableElement &tableElement, QTextTable *table)
 {

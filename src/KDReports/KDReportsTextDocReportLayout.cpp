@@ -43,12 +43,14 @@ void KDReports::TextDocReportLayout::paintPageContent(int pageNumber, QPainter &
     m_textDocument.contentDocument().documentLayout()->draw(&painter, ctx);
 }
 
+//@cond PRIVATE
 int KDReports::TextDocReportLayout::numberOfPages()
 {
     // qDebug() << "page height" << m_textDocument.contentDocument().pageSize().height();
     // qDebug() << "doc height" << m_textDocument.contentDocument().size().height();
     return m_textDocument.contentDocument().pageCount();
 }
+//@endcond
 
 void KDReports::TextDocReportLayout::setPageContentSize(QSizeF size)
 {
@@ -122,6 +124,7 @@ void KDReports::TextDocReportLayout::updateTextValue(const QString &id, const QS
     m_textDocument.updateTextValue(id, newValue);
 }
 
+//@cond PRIVATE
 qreal KDReports::TextDocReportLayout::idealWidth()
 {
     // See Database example for the +1, the right border was missing otherwise.
@@ -151,6 +154,7 @@ int KDReports::TextDocReportLayout::maximumNumberOfPagesForVerticalScaling() con
 {
     return 1; // not implemented
 }
+//@endcond
 
 void KDReports::TextDocReportLayout::setUserRequestedFontScalingFactor(qreal factor)
 {

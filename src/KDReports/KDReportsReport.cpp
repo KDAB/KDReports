@@ -241,6 +241,7 @@ KDReports::Header *KDReports::HeaderMap::headerForPage(int pageNumber /* 1-based
         return evenPagesHeader;
 }
 
+//@cond PRIVATE
 KDReports::HeaderLocations KDReports::HeaderMap::headerLocation(Header *header) const
 {
     for (const_iterator it = begin(); it != end(); ++it) {
@@ -330,6 +331,7 @@ void KDReports::ReportPrivate::paintPage(int pageNumber, QPainter &painter)
         painter.restore();
     }
 }
+//@endcond
 
 QSizeF KDReports::ReportPrivate::layoutAsOnePage(qreal docWidth)
 {

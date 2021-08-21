@@ -60,10 +60,12 @@ void KDReports::TextDocument::updateTextValue(const QString &id, const QString &
     m_contentDocument.updateTextValue(id, newValue);
 }
 
+//@cond PRIVATE
 QString KDReports::TextDocument::asHtml() const
 {
     return m_contentDocument.asHtml();
 }
+//@endcond
 
 void KDReports::TextDocument::preciseDump()
 {
@@ -96,11 +98,13 @@ void KDReports::TextDocument::preciseDump()
 #endif
 }
 
+//@cond PRIVATE
 QList<KDReports::AutoTableElement *> KDReports::TextDocument::autoTableElements()
 {
     return m_contentDocument.autoTableElements(); // doesn't matter in which one we call it
 }
 
+//@cond PRIVATE
 void KDReports::TextDocument::regenerateAutoTables()
 {
     m_contentDocument.regenerateAutoTables();
@@ -110,3 +114,4 @@ void KDReports::TextDocument::regenerateAutoTableForModel(QAbstractItemModel *mo
 {
     m_contentDocument.regenerateAutoTableForModel(model);
 }
+//@endcond

@@ -23,10 +23,12 @@ TableBreakingLogic::TableBreakingLogic()
 {
 }
 
+//@cond PRIVATE
 void TableBreakingLogic::setColumnWidths(const WidthVector &widths)
 {
     m_widths = widths;
 }
+//@endcond
 
 void TableBreakingLogic::setPageCount(int pages)
 {

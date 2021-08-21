@@ -296,6 +296,7 @@ void KDReports::SpreadsheetReportLayout::paintPageContent(int pageNumber, QPaint
     }
 }
 
+//@cond PRIVATE
 int KDReports::SpreadsheetReportLayout::numberOfPages()
 {
     ensureLayouted();
@@ -315,6 +316,7 @@ qreal KDReports::SpreadsheetReportLayout::idealWidth()
 #endif
     return total;
 }
+//@endcond
 
 qreal KDReports::SpreadsheetReportLayout::totalWidth() const
 {
@@ -557,6 +559,7 @@ QString KDReports::SpreadsheetReportLayout::toHtml() const
 
 void KDReports::SpreadsheetReportLayout::finishHtmlExport() { }
 
+//@cond PRIVATE
 bool KDReports::SpreadsheetReportLayout::scaleTo(int numPagesHorizontally, int numPagesVertically)
 {
     m_numHorizontalPages = numPagesHorizontally;
@@ -579,6 +582,7 @@ int KDReports::SpreadsheetReportLayout::maximumNumberOfPagesForVerticalScaling()
 {
     return m_numVerticalPages;
 }
+//@endcond
 
 void KDReports::SpreadsheetReportLayout::setUserRequestedFontScalingFactor(qreal factor)
 {
@@ -607,6 +611,7 @@ void KDReports::SpreadsheetReportLayout::setTableBreakingPageOrder(KDReports::Re
     setLayoutDirty();
 }
 
+//@cond PRIVATE
 void KDReports::SpreadsheetReportLayout::setHorizontalHeaderFont(const QFont &font)
 {
     m_tableLayout.m_horizontalHeaderFont = font;
@@ -618,12 +623,14 @@ void KDReports::SpreadsheetReportLayout::setVerticalHeaderFont(const QFont &font
     m_tableLayout.m_verticalHeaderFont = font;
     setLayoutDirty();
 }
+//@endcond
 
 void KDReports::SpreadsheetReportLayout::setModel(QAbstractItemModel *model)
 {
     m_tableLayout.m_model = model;
 }
 
+//@cond PRIVATE
 void KDReports::SpreadsheetReportLayout::setVerticalHeaderVisible(bool visible)
 {
     m_tableLayout.m_verticalHeaderVisible = visible;
@@ -642,6 +649,7 @@ void KDReports::SpreadsheetReportLayout::setCellPadding(qreal padding)
     // qDebug() << "setting cellpadding: mm=" << padding << "pixels=" << m_tableLayout.m_cellPadding;
     setLayoutDirty();
 }
+//@endcond
 
 void KDReports::SpreadsheetReportLayout::setIconSize(QSize iconSize)
 {
@@ -654,7 +662,9 @@ void KDReports::SpreadsheetReportLayout::setCellBorder(qreal border, const QBrus
     m_tableSettings.m_borderBrush = borderBrush;
 }
 
+//@cond PRIVATE
 void KDReports::SpreadsheetReportLayout::setHeaderBackground(const QBrush &headerBackground)
 {
     m_tableSettings.m_headerBackground = headerBackground;
 }
+//@endcond

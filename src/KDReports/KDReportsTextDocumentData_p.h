@@ -65,7 +65,7 @@ public:
     /// Break all tables in the document
     /// @returns the number of horizontal pages used
     // int breakTables( const QSizeF& textDocPageSize, int numHorizontalPages, KDReports::Report::TableBreakingPageOrder pageOrder );
-    /// We need to know about all tables in order to implement table-breaking
+    // We need to know about all tables in order to implement table-breaking
     void registerTable(QTextTable *table);
     QString asHtml() const;
     /// For autotables, let's also remember the AutoTableElement, to be able
