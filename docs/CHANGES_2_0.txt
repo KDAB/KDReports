@@ -9,6 +9,7 @@ General:
 * buildsystem - increase CMake min version to 3.3.0
 * buildsystem - add an 'uninstall' target
 * Python3 bindings for Qt5 and Qt6. See INSTALL-bindings.txt for more information.
+* Removed deprecated method setTableBreakingEnabled() (use scaleTo() instead)
 
 New features:
 -------------
