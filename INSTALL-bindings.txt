@@ -4,7 +4,8 @@ Starting with version 2.0 KD Reports can build Python3 bindings.
 
 You need these:
  - Python3.7 or higher
- - Qt 5.12 or higher
+ - Qt5 version 5.12 or higher
+ - Qt6 version 6.2 or higher
  - QtForPython provided by the Qt project.
 
 For QtForPython you must use the exact same Qt version used when building KD Reports.
