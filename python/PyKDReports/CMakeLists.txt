@@ -34,8 +34,6 @@ set(PyKDReports_SRC
     ${CMAKE_CURRENT_BINARY_DIR}/KDReports/kdreports_tablebreakingsettingsdialog_wrapper.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/KDReports/kdreports_tableelement_wrapper.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/KDReports/kdreports_textelement_wrapper.cpp
-    ${CMAKE_CURRENT_BINARY_DIR}/KDReports/kdreports_xmlelementhandlerv2_wrapper.cpp
-    ${CMAKE_CURRENT_BINARY_DIR}/KDReports/kdreports_xmlelementhandler_wrapper.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/KDReports/kdreports_xmlhelper_wrapper.cpp
 
     # global module wrapper

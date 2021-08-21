@@ -48,7 +48,6 @@
         <object-type name="Header" />
 
         <value-type name="ErrorDetails" />
-        <value-type name="XmlElementHandler" />
         <value-type name="XmlHelper" />
 
         <!-- Private types used by public API -->
