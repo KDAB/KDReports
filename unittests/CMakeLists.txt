@@ -21,7 +21,7 @@ remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 
 macro(add_unittest _source)
   get_filename_component(_name ${_source} NAME_WE)
-  string(PREPEND _name "tst_")
+  set(_name "tst_${_name}") #string(PREPEND _name "tst_") requires CMake 3.10+
   set(_srcs ${_source})
   set(ARGN_COPY ${ARGN})
   set(_resource)
