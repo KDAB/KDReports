@@ -68,22 +68,23 @@ cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
 
 %files devel
 %defattr(-,root,root,-)
+%if 0%{?sle_version} >= 150200 && 0%{?is_opensuse}
+%{_libdir}/qt5/mkspecs/modules/*
+%endif
+%if 0%{?suse_version} > 1500
+%{_libdir}/qt5/mkspecs/modules/*
+%endif
+%if 0%{?fedora} > 28
+%{_libdir}/qt5/mkspecs/modules/*
+%endif
+%if %{defined rhel}
+%{_libdir}/qt5/mkspecs/modules/*
+%endif
 %dir %{_includedir}/KDReports
 %{_includedir}/KDReports/*
 %dir %{_libdir}/cmake/KDReports
 %{_libdir}/cmake/KDReports/*
 %{_libdir}/libkdreports.so
-%if %{defined fedora}
-%if 0%{?fedora} > 28
-%{_libdir}/qt5/mkspecs/modules/*
-%else
-%dir %{_prefix}/mkspecs/
-%dir %{_prefix}/mkspecs/modules/
-%{_prefix}/mkspecs/modules/*.pri
-%endif
-%else
-%{_libdir}/qt5/mkspecs/modules/*
-%endif
 
 %changelog
 * Sat Aug 21 2021 Allen Winter <allen.winter@kdab.com> 2.0.0
