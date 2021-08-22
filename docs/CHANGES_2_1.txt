@@ -1,0 +1,18 @@
+What is new in KD Reports 2.1
+=============================
+
+General:
+--------
+*
+
+New features:
+-------------
+*
+
+Bug fixes:
+----------
+*
+
+Behaviour changes:
+-----------------
+*
