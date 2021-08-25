@@ -19,7 +19,7 @@
 #include <KDReportsTableElement.h>
 #include <KDReportsTextElement.h>
 #include <QStandardItemModel>
-#include <QtTest/QtTest>
+#include <QTest>
 
 using namespace KDReports;
 

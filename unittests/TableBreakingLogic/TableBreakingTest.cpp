@@ -16,7 +16,7 @@
 
 #include <KDReportsTableBreakingLogic_p.h>
 #include <QObject>
-#include <QtTest/QtTest>
+#include <QTest>
 
 typedef QVector<int> ints;
 Q_DECLARE_METATYPE(ints)

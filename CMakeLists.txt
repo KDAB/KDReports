@@ -241,7 +241,6 @@ if(${PROJECT_NAME}_IS_ROOT_PROJECT)
 
   if(${PROJECT_NAME}_TESTS)
     find_package(Qt${Qt_VERSION_MAJOR}Test REQUIRED)
-    list(APPEND QT_LIBRARIES Qt${Qt_VERSION_MAJOR}::Test)
     enable_testing()
     add_subdirectory(unittests)
   endif()

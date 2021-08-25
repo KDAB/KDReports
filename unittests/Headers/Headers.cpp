@@ -17,7 +17,7 @@
 #include <KDReports>
 #include <KDReportsReport_p.h>
 #include <KDReportsTextDocument_p.h>
-#include <QtTest/QtTest>
+#include <QTest>
 
 using namespace KDReports;
 namespace KDReports {

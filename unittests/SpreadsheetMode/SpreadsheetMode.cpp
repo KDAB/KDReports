@@ -19,7 +19,8 @@
 #include <KDReportsReport_p.h>
 #include <KDReportsTextDocument_p.h>
 #include <QStandardItemModel>
-#include <QtTest/QtTest>
+#include <QTest>
+#include <QTemporaryFile>
 #ifdef Q_WS_X11
 #include <QX11Info>
 #endif

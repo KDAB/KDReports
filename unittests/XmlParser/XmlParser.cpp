@@ -21,7 +21,7 @@
 #include <QStandardItemModel>
 #include <QTextBlock>
 #include <QTextCursor>
-#include <QtTest/QtTest>
+#include <QTest>
 
 using namespace KDReports;
 namespace KDReports {

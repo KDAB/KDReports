@@ -22,7 +22,7 @@
 #include <QStandardItemModel>
 #include <QTextCursor>
 #include <QTextTableCell>
-#include <QtTest/QtTest>
+#include <QTest>
 
 using namespace KDReports;
 namespace KDReports {
