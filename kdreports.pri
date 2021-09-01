@@ -26,9 +26,9 @@
     LIBS += -L$$KDREPORTSDIR/lib
     win32*:!static {
       CONFIG(debug, debug|release) {
-        LIBS += -lkdreports1d
+        LIBS += -lkdreports2d
       } else {
-        LIBS += -lkdreports1
+        LIBS += -lkdreports2
       }
     } else {
       !isEmpty(QMAKE_RPATH):LIBS += $$QMAKE_RPATH$$KDREPORTSDIR/lib
