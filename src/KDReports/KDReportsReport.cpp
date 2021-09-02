@@ -863,6 +863,15 @@ QString KDReports::Report::anchorAt(int pageNumber, QPoint pos) const
     return d->m_layout->anchorAt(pageNumber, textPos);
 }
 
+QTextDocument *KDReports::Report::mainTextDocument() const
+{
+    if (d->m_reportMode == WordProcessing) {
+        return &static_cast<TextDocReportLayout *>(d->m_layout)->textDocument().contentDocument();
+    } else {
+        return nullptr;
+    }
+}
+
 void KDReports::Report::setWatermarkText(const QString &text, int rotation, const QColor &color, const QFont &font)
 {
     d->m_watermarkText = text;
@@ -1053,7 +1062,7 @@ QList<KDReports::AutoTableElement *> KDReports::Report::autoTableElements() cons
 {
     if (d->m_reportMode == WordProcessing)
         return doc().autoTableElements();
-    return QList<KDReports::AutoTableElement *>();
+    return {};
 }
 
 void KDReports::Report::setXmlElementHandler(KDReports::XmlElementHandler *handler)

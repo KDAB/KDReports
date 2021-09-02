@@ -67,7 +67,6 @@ public:
     /// \reimp
     void finishHtmlExport() override;
 
-    // for unittests only
     TextDocument &textDocument() { return m_textDocument; }
 
     ReportBuilder *builder() { return &m_builder; }

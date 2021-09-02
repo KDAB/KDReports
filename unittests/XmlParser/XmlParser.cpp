@@ -40,8 +40,8 @@ private slots:
         QVERIFY(file.open(QIODevice::ReadOnly));
         Report report;
         QVERIFY(report.loadFromXML(&file));
-        QCOMPARE(report.doc().contentDocument().blockCount(), 2);
-        QCOMPARE(report.doc().contentDocument().toPlainText(), QString("Title\nTest used by XmlParser.cpp"));
+        QCOMPARE(report.mainTextDocument()->blockCount(), 2);
+        QCOMPARE(report.mainTextDocument()->toPlainText(), QString("Title\nTest used by XmlParser.cpp"));
     }
 
     void testTextId()
@@ -53,23 +53,23 @@ private slots:
         report.associateTextValue("2", "tle");
         report.associateTextValue("3", "textid.xml");
         QVERIFY(report.loadFromXML(&file));
-        QCOMPARE(report.doc().contentDocument().blockCount(), 4);
-        QCOMPARE(report.doc().contentDocument().toPlainText(), QString("Title .\ntextid.xml\n\n"));
+        QCOMPARE(report.mainTextDocument()->blockCount(), 4);
+        QCOMPARE(report.mainTextDocument()->toPlainText(), QString("Title .\ntextid.xml\n\n"));
 
         // Now test changing text values -after- loading.
         report.associateTextValue("1", "New Ti");
-        QCOMPARE(report.doc().contentDocument().toPlainText(), QString("New Title .\ntextid.xml\n\n"));
+        QCOMPARE(report.mainTextDocument()->toPlainText(), QString("New Title .\ntextid.xml\n\n"));
 
         report.associateTextValue("3", "changed");
-        QCOMPARE(report.doc().contentDocument().toPlainText(), QString("New Title .\nchanged\n\n"));
+        QCOMPARE(report.mainTextDocument()->toPlainText(), QString("New Title .\nchanged\n\n"));
         report.associateTextValue("1", "Newer Ti");
-        QCOMPARE(report.doc().contentDocument().toPlainText(), QString("Newer Title .\nchanged\n\n"));
+        QCOMPARE(report.mainTextDocument()->toPlainText(), QString("Newer Title .\nchanged\n\n"));
 
         report.associateTextValue("5", "well");
-        QCOMPARE(report.doc().contentDocument().toPlainText(), QString("Newer Title .\nchanged\n\nwell"));
+        QCOMPARE(report.mainTextDocument()->toPlainText(), QString("Newer Title .\nchanged\n\nwell"));
 
         report.associateTextValue("4", "works");
-        QCOMPARE(report.doc().contentDocument().toPlainText(), QString("Newer Title .\nchanged\nworks\nwell"));
+        QCOMPARE(report.mainTextDocument()->toPlainText(), QString("Newer Title .\nchanged\nworks\nwell"));
     }
 
     void testHtmlId()
@@ -81,7 +81,7 @@ private slots:
         report.associateTextValue("2", "l<i>e</i>");
         report.associateTextValue("3", "htmlid.xml");
         QVERIFY(report.loadFromXML(&file));
-        QTextDocument &doc = report.doc().contentDocument();
+        QTextDocument &doc = *report.mainTextDocument();
         QCOMPARE(doc.blockCount(), 2);
         QCOMPARE(doc.toPlainText(), QString("Title\nhtmlid.xml"));
         QTextCursor c(&doc);
@@ -94,7 +94,7 @@ private slots:
         QVERIFY(file.open(QIODevice::ReadOnly));
         Report report;
         QVERIFY(report.loadFromXML(&file));
-        const QTextDocument &doc = report.doc().contentDocument();
+        const QTextDocument &doc = *report.mainTextDocument();
         QCOMPARE(doc.blockCount(), 2);
         QCOMPARE(doc.toPlainText(), QString("Title\nTest used by XmlParser.cpp"));
         qreal top; qreal left; qreal bottom; qreal right;
@@ -152,9 +152,9 @@ private slots:
         QCOMPARE(footerDoc.toPlainText(), QString("footer"));
         QCOMPARE(footerDoc.defaultFont().pointSize(), 16);
         // Check the document's default font
-        QCOMPARE(report.doc().contentDocument().defaultFont().pointSize(), 16);
+        QCOMPARE(report.mainTextDocument()->defaultFont().pointSize(), 16);
         // Check the document's actual font (for each char, including the autotable)
-        cursor = QTextCursor(report.doc().contentDocument().begin());
+        cursor = QTextCursor(report.mainTextDocument()->begin());
         while (!cursor.atEnd()) {
             int fontSize = cursor.charFormat().fontPointSize();
             QVERIFY(fontSize == 0 || fontSize == 16); // 0 gets resolved against the document font, so that's fine
@@ -168,7 +168,7 @@ private slots:
         QVERIFY(file.open(QIODevice::ReadOnly));
         Report report;
         QVERIFY(report.loadFromXML(&file));
-        QTextDocument &doc = report.doc().contentDocument();
+        QTextDocument &doc = *report.mainTextDocument();
         QCOMPARE(doc.blockCount(), 3);
         QCOMPARE(doc.toPlainText(), QString("Left\tmiddle\tright\n0\t100\t200\nOnly a right margin"));
         QTextBlock block1 = doc.firstBlock();
@@ -283,7 +283,7 @@ private slots:
                           << "endReport";
         // qDebug() << handler.callbacks();
         QCOMPARE(handler.callbacks(), expectedCallbacks);
-        QTextDocument &doc = report.doc().contentDocument();
+        QTextDocument &doc = *report.mainTextDocument();
 
         QString ptext = doc.toPlainText();
 
@@ -292,7 +292,7 @@ private slots:
         ptext.replace(QChar(0xFFFC), '#');
 
         QCOMPARE(ptext, QString("Title\n#\n\nTest used by XmlParser.cpp\nmodelCell\nhtmlCell\n\nTableElement example\n\nmodified\nCustom element\n\nmodelCell\nhtmlCell\n"));
-        QCOMPARE(report.doc().contentDocument().toPlainText(), doc.toPlainText());
+        QCOMPARE(report.mainTextDocument()->toPlainText(), doc.toPlainText());
     }
 
     void testHandlerWithError()

@@ -7,7 +7,9 @@ General:
 
 New features:
 -------------
-*
+* Added report.mainTextDocument() which returns the QTextDocument for the main part of the report
+  (no headers, footers, or watermark). This can be used to display the report in a readonly QTextEdit
+  or a QTextBrowser.
 
 Bug fixes:
 ----------

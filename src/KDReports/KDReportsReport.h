@@ -838,6 +838,20 @@ public:
      */
     QString anchorAt(int pageNumber, QPoint pos) const;
 
+    /**
+     * Returns the QTextDocument that contains the main part of the report,
+     * assuming reportMode() is WordProcessing.
+     * Note that this does not include any headers or footers, nor watermark.
+     *
+     * This method can be used to display the report in a readonly QTextEdit
+     * or in a QTextBrowser.
+     *
+     * Modifying this QTextDocument will lead to undefined behaviour in KDReports.
+     * Returns nullptr if reportMode() is set to SpreadSheet.
+     * @since 2.1
+     */
+    QTextDocument *mainTextDocument() const;
+
 private:
     friend class Test;
     friend class ::ReportData;

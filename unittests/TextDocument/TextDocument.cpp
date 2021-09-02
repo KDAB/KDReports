@@ -261,10 +261,11 @@ private slots:
         QVERIFY(qApp);
 
         Report report;
-        QCOMPARE(report.doc().contentDocument().blockCount(), 1);
+        QVERIFY(report.mainTextDocument());
+        QCOMPARE(report.mainTextDocument()->blockCount(), 1);
         TextElement elem1(QStringLiteral("foo"));
         report.addElement(elem1);
-        QTextDocument &doc = report.doc().contentDocument();
+        QTextDocument &doc = *report.mainTextDocument();
         QCOMPARE(doc.blockCount(), 1);
         QCOMPARE(doc.toPlainText(), QString("foo"));
         TextElement elem2(QStringLiteral("bar"));
@@ -285,7 +286,7 @@ private slots:
 
         // Check that the "point size 1" used for that block doesn't affect the next block
         report.addElement(TextElement("Some text"));
-        QTextCursor cursor(&report.doc().contentDocument());
+        QTextCursor cursor(report.mainTextDocument());
         cursor.setPosition(10);
         QCOMPARE(cursor.charFormat().font().pointSize(), 18);
     }
@@ -378,7 +379,7 @@ private slots:
         // KDReports::PreviewDialog preview( &report );
         // preview.exec();
 
-        QTextCursor c(&report.doc().contentDocument());
+        QTextCursor c(report.mainTextDocument());
         c.movePosition(QTextCursor::NextCharacter);
         QTextTable *table = c.currentTable();
         QVERIFY(table);
@@ -424,7 +425,7 @@ private slots:
         // KDReports::PreviewDialog preview( &report );
         // preview.exec();
 
-        c = QTextCursor(&report.doc().contentDocument());
+        c = QTextCursor(report.mainTextDocument());
         c.movePosition(QTextCursor::NextCharacter);
         table = c.currentTable();
         QVERIFY(table);
@@ -438,7 +439,7 @@ private slots:
         report.regenerateAutoTableForModel(&model);
         QCOMPARE(report.numberOfPages(), 2);
 
-        c = QTextCursor(&report.doc().contentDocument());
+        c = QTextCursor(report.mainTextDocument());
         c.movePosition(QTextCursor::NextCharacter);
         table = c.currentTable();
         QVERIFY(table);
@@ -478,7 +479,7 @@ private slots:
         // trigger a layout
         QVERIFY(report.numberOfPages() >= 5);
 
-        QTextCursor c(&report.doc().contentDocument());
+        QTextCursor c(report.mainTextDocument());
         c.movePosition(QTextCursor::NextCharacter);
         QTextTable *table = c.currentTable();
         QVERIFY(table);
@@ -503,8 +504,7 @@ private slots:
         TextElement elem1(QStringLiteral("foo"));
         elem1.setFont(QFont("Arial", 18));
         report.addElement(elem1);
-        QTextDocument &doc = report.doc().contentDocument();
-        QTextCursor c(&doc);
+        QTextCursor c(report.mainTextDocument());
         c.setPosition(1);
         QCOMPARE(c.charFormat().font().pointSize(), 18);
     }
@@ -518,8 +518,7 @@ private slots:
         font.setBold(true);
         elem1.setFont(font);
         report.addElement(elem1);
-        QTextDocument &doc = report.doc().contentDocument();
-        QTextCursor c(&doc);
+        QTextCursor c(report.mainTextDocument());
         c.setPosition(1);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
         QCOMPARE(c.charFormat().font().pointSize(), 18);

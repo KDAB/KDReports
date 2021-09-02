@@ -157,7 +157,7 @@ private slots:
         report.addElement(tableElement);
         // trigger a layout
         QCOMPARE(report.numberOfPages(), 1);
-        QTextCursor c(&report.doc().contentDocument());
+        QTextCursor c(report.mainTextDocument());
         c.movePosition(QTextCursor::NextCharacter);
         QTextTable *table = c.currentTable();
         QVERIFY(table);
