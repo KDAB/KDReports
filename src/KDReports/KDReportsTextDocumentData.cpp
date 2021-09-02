@@ -23,30 +23,27 @@
 
 #include <QAbstractTextDocumentLayout>
 #include <QDebug>
-#include <QTextDocument>
 #include <QTextTable>
 #include <QUrl>
 
 KDReports::TextDocumentData::TextDocumentData()
     : m_usesTabPositions(false)
 {
-    m_document = new QTextDocument;
-    m_document->setUseDesignMetrics(true);
+    m_document.setUseDesignMetrics(true);
 
-    HLineTextObject::registerHLineObjectHandler(m_document);
+    HLineTextObject::registerHLineObjectHandler(&m_document);
 #ifdef HAVE_KDCHART
-    ChartTextObject::registerChartTextObjectHandler(m_document);
+    ChartTextObject::registerChartTextObjectHandler(&m_document);
 #endif
 }
 
 KDReports::TextDocumentData::~TextDocumentData()
 {
-    delete m_document;
 }
 
 void KDReports::TextDocumentData::dumpTextValueCursors() const
 {
-    qDebug() << "Text value cursors:  (document size=" << m_document->characterCount() << ")";
+    qDebug() << "Text value cursors:  (document size=" << m_document.characterCount() << ")";
     QMultiMap<QString, TextValueData>::const_iterator it = m_textValueCursors.begin();
     while (it != m_textValueCursors.end()) {
         const TextValueData &data = *it;
@@ -76,10 +73,10 @@ void KDReports::TextDocumentData::resolveCursorPositions(ModificationMode mode)
         if (data.cursor.isNull()) {
             // When appending, leave cursors "at end of document" unresolved.
             // Otherwise they'll keep moving with insertions.
-            if (mode == Append && data.initialPosition >= m_document->characterCount() - 1) {
+            if (mode == Append && data.initialPosition >= m_document.characterCount() - 1) {
                 continue;
             }
-            data.cursor = QTextCursor(m_document);
+            data.cursor = QTextCursor(&m_document);
             data.cursor.setPosition(data.initialPosition);
             // qDebug() << "Cursor for" << it.key() << "resolved at position" << data.initialPosition;
         }
@@ -132,7 +129,7 @@ void KDReports::TextDocumentData::updatePercentSizes(QSizeF size)
     if (!m_hasResizableImages && !m_usesTabPositions) {
         return;
     }
-    QTextCursor c(m_document);
+    QTextCursor c(&m_document);
     c.beginEditBlock();
     if (m_hasResizableImages) {
         do {
@@ -151,9 +148,9 @@ void KDReports::TextDocumentData::updatePercentSizes(QSizeF size)
     }
 
     if (m_usesTabPositions) {
-        QTextFrameFormat rootFrameFormat = m_document->rootFrame()->frameFormat();
+        QTextFrameFormat rootFrameFormat = m_document.rootFrame()->frameFormat();
         const qreal rootFrameMargins = rootFrameFormat.leftMargin() + rootFrameFormat.rightMargin();
-        QTextBlock block = m_document->firstBlock();
+        QTextBlock block = m_document.firstBlock();
         do {
             QTextBlockFormat blockFormat = block.blockFormat();
             QList<QTextOption::Tab> tabs = blockFormat.tabPositions();
@@ -183,18 +180,18 @@ void KDReports::TextDocumentData::updatePercentSizes(QSizeF size)
 
 void KDReports::TextDocumentData::layoutWithTextWidth(qreal w)
 {
-    if (w != m_document->textWidth()) {
+    if (w != m_document.textWidth()) {
         // qDebug() << "setTextWidth" << w;
-        m_document->setTextWidth(w);
-        updatePercentSizes(m_document->size());
+        m_document.setTextWidth(w);
+        updatePercentSizes(m_document.size());
     }
 }
 
 void KDReports::TextDocumentData::setPageSize(QSizeF size)
 {
-    if (size != m_document->pageSize()) {
+    if (size != m_document.pageSize()) {
         // qDebug() << "setPageSize" << size;
-        m_document->setPageSize(size);
+        m_document.setPageSize(size);
         updatePercentSizes(size);
     }
 }
@@ -247,9 +244,9 @@ void KDReports::TextDocumentData::registerTable(QTextTable *table)
 
 void KDReports::TextDocumentData::scaleFontsBy(qreal factor)
 {
-    QTextCursor cursor(m_document);
+    QTextCursor cursor(&m_document);
     qreal currentPointSize = -1.0;
-    QTextCursor lastCursor(m_document);
+    QTextCursor lastCursor(&m_document);
     Q_FOREVER {
         qreal cursorFontPointSize = cursor.charFormat().fontPointSize();
         // qDebug() << cursorFontPointSize << "last=" << currentPointSize << cursor.block().text() << "position=" << cursor.position();
@@ -289,7 +286,7 @@ void KDReports::TextDocumentData::scaleFontsBy(qreal factor)
 void KDReports::TextDocumentData::setFontSizeHelper(QTextCursor &lastCursor, int endPosition, qreal pointSize, qreal factor)
 {
     if (pointSize == 0) {
-        pointSize = m_document->defaultFont().pointSize();
+        pointSize = m_document.defaultFont().pointSize();
     }
     pointSize *= factor;
     QTextCharFormat newFormat;
@@ -303,9 +300,9 @@ void KDReports::TextDocumentData::setFontSizeHelper(QTextCursor &lastCursor, int
 QString KDReports::TextDocumentData::asHtml() const
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QString htmlText = m_document->toHtml("utf-8");
+    QString htmlText = m_document.toHtml("utf-8");
 #else
-    QString htmlText = m_document->toHtml();
+    QString htmlText = m_document.toHtml();
 #endif
     htmlText.remove(QLatin1String("margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; "));
     htmlText.remove(QLatin1String("-qt-block-indent:0; "));
@@ -337,7 +334,7 @@ void KDReports::TextDocumentData::regenerateAutoTables()
     if (m_autoTables.isEmpty())
         return;
     aboutToModifyContents(Modify);
-    QTextCursor(m_document).beginEditBlock();
+    QTextCursor(&m_document).beginEditBlock();
     // preciseDump();
     AutoTablesMaps autoTables = m_autoTables; // make copy since it will be modified below.
     m_autoTables.clear();
@@ -348,13 +345,13 @@ void KDReports::TextDocumentData::regenerateAutoTables()
         regenerateOneTable(tableElement, table);
     }
     // preciseDump();
-    QTextCursor(m_document).endEditBlock();
+    QTextCursor(&m_document).endEditBlock();
 }
 
 void KDReports::TextDocumentData::regenerateAutoTableForModel(QAbstractItemModel *model)
 {
     aboutToModifyContents(Modify);
-    QTextCursor(m_document).beginEditBlock();
+    QTextCursor(&m_document).beginEditBlock();
     AutoTablesMaps::iterator it = m_autoTables.begin();
     for (; it != m_autoTables.end(); ++it) {
         KDReports::AutoTableElement tableElement = it.value();
@@ -365,7 +362,7 @@ void KDReports::TextDocumentData::regenerateAutoTableForModel(QAbstractItemModel
             break;
         }
     }
-    QTextCursor(m_document).endEditBlock();
+    QTextCursor(&m_document).endEditBlock();
 }
 //@endcond
 
@@ -397,7 +394,7 @@ void KDReports::TextDocumentData::regenerateOneTable(const KDReports::AutoTableE
 void KDReports::TextDocumentData::saveResourcesToFiles()
 {
     Q_FOREACH (const QString &name, m_resourceNames) {
-        const QVariant v = m_document->resource(QTextDocument::ImageResource, QUrl(name));
+        const QVariant v = m_document.resource(QTextDocument::ImageResource, QUrl(name));
         QPixmap pix = v.value<QPixmap>();
         if (!pix.isNull()) {
             pix.save(name);

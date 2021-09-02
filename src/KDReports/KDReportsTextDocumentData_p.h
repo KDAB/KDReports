@@ -20,6 +20,7 @@
 #include "KDReportsReport.h"
 #include <QMultiMap>
 #include <QTextCursor>
+#include <QTextDocument>
 
 //
 //  W A R N I N G
@@ -48,8 +49,8 @@ public:
     TextDocumentData(const TextDocumentData &) = delete;
     TextDocumentData &operator=(const TextDocumentData &) = delete;
 
-    QTextDocument &document() { return *m_document; }
-    const QTextDocument &document() const { return *m_document; }
+    QTextDocument &document() { return m_document; }
+    const QTextDocument &document() const { return m_document; }
 
     void setUsesTabPositions(bool usesTabs);
     void saveResourcesToFiles();
@@ -85,7 +86,7 @@ private:
     void regenerateOneTable(const KDReports::AutoTableElement &tableElement, QTextTable *table);
     void dumpTextValueCursors() const;
 
-    QTextDocument *m_document; // a pointer because of the clone() API... TODO: cleanup
+    QTextDocument m_document;
     enum ElementType { ElementTypeText,
                        ElementTypeHtml };
     struct TextValueData
