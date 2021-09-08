@@ -142,7 +142,8 @@ void KDReports::TableElement::build(ReportBuilder &builder) const
         Q_ASSERT(tableCell.isValid());
         QTextCursor cellCursor = tableCell.firstCursorPosition();
         QTextCharFormat tableCellFormat = charFormat;
-        tableCellFormat.setBackground(cell.background());
+        if (cell.background().style() != Qt::NoBrush)
+            tableCellFormat.setBackground(cell.background());
         tableCellFormat.setTableCellColumnSpan(cell.columnSpan());
         tableCellFormat.setTableCellRowSpan(cell.rowSpan());
         tableCell.setFormat(tableCellFormat);
