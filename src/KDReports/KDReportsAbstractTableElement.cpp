@@ -23,22 +23,13 @@
 class KDReports::AbstractTableElementPrivate
 {
 public:
-    AbstractTableElementPrivate()
-        : m_border(1.0)
-        , m_borderBrush(Qt::darkGray /*like Qt does*/)
-        , m_padding(0.5)
-        , m_width(0)
-        , m_unit(KDReports::Millimeters)
-        , m_fontSpecified(false)
-    {
-    }
-    qreal m_border;
-    QBrush m_borderBrush;
-    qreal m_padding;
-    qreal m_width;
-    KDReports::Unit m_unit;
+    qreal m_border = 1.0;
+    QBrush m_borderBrush = QBrush(Qt::darkGray /*like Qt does*/);
+    qreal m_padding = 0.5;
+    qreal m_width = 0;
+    KDReports::Unit m_unit = KDReports::Millimeters;
     QFont m_defaultFont;
-    bool m_fontSpecified;
+    bool m_fontSpecified = false;
     QVector<KDReports::AbstractTableElement::ColumnConstraint> m_constraints;
 };
 

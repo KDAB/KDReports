@@ -27,21 +27,14 @@
 class KDReports::ImageElementPrivate
 {
 public:
-    ImageElementPrivate()
-        : m_width(0)
-        , m_height(0)
-        , m_fitToPage(false)
-        , m_unit(KDReports::Millimeters)
-    {
-    }
     QVariant m_pixmap; // pixmap or image, can't use QPixmap directly in threads
     QSize m_pixmapSize; // = m_pixmap.size()
 
     // size in final document, chosen by the user:
-    qreal m_width;
-    qreal m_height;
-    bool m_fitToPage;
-    KDReports::Unit m_unit;
+    qreal m_width = 0;
+    qreal m_height = 0;
+    bool m_fitToPage = false;
+    KDReports::Unit m_unit = KDReports::Millimeters;
     QString m_id;
 };
 

@@ -22,34 +22,20 @@
 class KDReports::TextElementPrivate
 {
 public:
-    TextElementPrivate()
-        : m_bold(false)
-        , m_boldIsSet(false)
-        , m_italic(false)
-        , m_italicIsSet(false)
-        , m_underline(false)
-        , m_underlineIsSet(false)
-        , m_strikeout(false)
-        , m_strikeoutIsSet(false)
-        , m_fontSet(false)
-        , m_pointSize(0)
-    {
-    }
-
     QString m_string;
     QString m_id;
 
     QString m_fontFamily;
-    bool m_bold;
-    bool m_boldIsSet;
-    bool m_italic;
-    bool m_italicIsSet;
-    bool m_underline;
-    bool m_underlineIsSet;
-    bool m_strikeout;
-    bool m_strikeoutIsSet;
-    bool m_fontSet;
-    qreal m_pointSize;
+    bool m_bold = false;
+    bool m_boldIsSet = false;
+    bool m_italic = false;
+    bool m_italicIsSet = false;
+    bool m_underline = false;
+    bool m_underlineIsSet = false;
+    bool m_strikeout = false;
+    bool m_strikeoutIsSet = false;
+    bool m_fontSet = false;
+    qreal m_pointSize = 0;
     QColor m_foreground;
     QFont m_font;
 };

@@ -46,16 +46,9 @@ public:
 class KDReports::TableElementPrivate
 {
 public:
-    TableElementPrivate()
-        : m_headerRowCount(0)
-        , m_headerColumnCount(0)
-    {
-    }
-    ~TableElementPrivate() { }
-
     KDReports::CellContentMap m_cellContentMap;
-    int m_headerRowCount;
-    int m_headerColumnCount;
+    int m_headerRowCount = 0;
+    int m_headerColumnCount = 0;
 };
 
 ////

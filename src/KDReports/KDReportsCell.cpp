@@ -22,15 +22,9 @@
 class KDReports::CellPrivate
 {
 public:
-    CellPrivate()
-        : m_columnSpan(1)
-        , m_rowSpan(1)
-    {
-    }
-    ~CellPrivate() { }
     QList<ElementData> m_elements;
-    int m_columnSpan;
-    int m_rowSpan;
+    int m_columnSpan = 1;
+    int m_rowSpan = 1;
 };
 
 KDReports::Cell::Cell()

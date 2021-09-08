@@ -31,25 +31,15 @@
 class KDReports::AutoTableElementPrivate
 {
 public:
-    AutoTableElementPrivate()
-        : m_tableModel(nullptr)
-        , m_verticalHeaderVisible(true)
-        , m_horizontalHeaderVisible(true)
-        , m_headerBackground(QColor(218, 218, 218))
-        , m_iconSize(32, 32)
-    {
-    }
-    ~AutoTableElementPrivate() { }
-
     void fillCellFromHeaderData(int section, Qt::Orientation orientation, QTextTableCell &cell, QTextDocument &textDoc, QTextTable *textTable, ReportBuilder &builder) const;
     QSize fillTableCell(int row, int column, QTextTableCell &cell, QTextDocument &textDoc, QTextTable *textTable, ReportBuilder &builder) const;
 
-    QAbstractItemModel *m_tableModel;
+    QAbstractItemModel *m_tableModel = nullptr;
     QString m_modelKey;
-    bool m_verticalHeaderVisible;
-    bool m_horizontalHeaderVisible;
-    QBrush m_headerBackground;
-    QSize m_iconSize;
+    bool m_verticalHeaderVisible = true;
+    bool m_horizontalHeaderVisible = true;
+    QBrush m_headerBackground = QColor(218, 218, 218);
+    QSize m_iconSize = QSize(32, 32);
 };
 
 // Helper for fillCellFromHeaderData and fillTableCell
