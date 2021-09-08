@@ -72,7 +72,9 @@ KDReports::ImageElement::~ImageElement()
 
 void KDReports::ImageElement::setPixmap(const QPixmap &pixmap)
 {
-    d->m_pixmap = QVariant::fromValue(pixmap);
+    // the call to toImage() is a workaround for a bug in QTextOdfWriter
+    // https://codereview.qt-project.org/c/qt/qtbase/+/369642
+    d->m_pixmap = QVariant::fromValue(pixmap.toImage());
     d->m_pixmapSize = pixmap.size();
 }
 
@@ -153,6 +155,10 @@ void KDReports::ImageElement::build(ReportBuilder &builder) const
     imageFormat.setName(name);
     imageFormat.setWidth(d->m_pixmapSize.width());
     imageFormat.setHeight(d->m_pixmapSize.height());
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+    // Another workaround for https://codereview.qt-project.org/c/qt/qtbase/+/369642
+    imageFormat.setQuality(100);
+#endif
 
     if (d->m_width) {
         if (d->m_unit == Millimeters) {
