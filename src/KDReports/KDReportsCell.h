@@ -22,6 +22,7 @@
 #include <QMap>
 #include <QPair>
 #include <QtCore/Qt>
+#include <memory>
 
 namespace KDReports {
 class ReportBuilder;
@@ -105,7 +106,7 @@ private:
     friend class QMap<QPair<int, int>, Cell>;
     Cell();
 
-    CellPrivate *const d;
+    std::unique_ptr<CellPrivate> d;
 };
 
 }

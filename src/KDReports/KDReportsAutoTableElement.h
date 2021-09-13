@@ -157,7 +157,7 @@ public:
     };
 
 private:
-    AutoTableElementPrivate *const d;
+    std::unique_ptr<AutoTableElementPrivate> d;
 };
 
 }

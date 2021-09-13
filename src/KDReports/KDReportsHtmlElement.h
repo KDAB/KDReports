@@ -90,7 +90,7 @@ public:
     Element *clone() const override;
 
 private:
-    HtmlElementPrivate *const d;
+    std::unique_ptr<HtmlElementPrivate> d;
 };
 
 }

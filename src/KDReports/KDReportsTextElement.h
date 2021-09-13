@@ -138,7 +138,7 @@ private:
     friend class ReportBuilder;
     void setCharFormat(const QTextCharFormat &format);
 
-    TextElementPrivate *const d;
+    std::unique_ptr<TextElementPrivate> d;
 };
 
 }

@@ -80,7 +80,6 @@ KDReports::TableBreakingSettingsDialog::TableBreakingSettingsDialog(KDReports::R
 
 KDReports::TableBreakingSettingsDialog::~TableBreakingSettingsDialog()
 {
-    delete d;
 }
 
 void KDReports::TableBreakingSettingsDialog::accept()

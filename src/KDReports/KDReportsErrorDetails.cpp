@@ -82,7 +82,6 @@ void KDReports::ErrorDetails::setDriverMessage(const QString &message)
 
 KDReports::ErrorDetails::~ErrorDetails()
 {
-    delete d;
 }
 
 KDReports::ErrorDetails::ErrorDetails(const ErrorDetails &other)

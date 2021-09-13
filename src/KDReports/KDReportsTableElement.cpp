@@ -75,7 +75,6 @@ KDReports::TableElement &KDReports::TableElement::operator=(const TableElement &
 
 KDReports::TableElement::~TableElement()
 {
-    delete d;
 }
 
 KDReports::Element *KDReports::TableElement::clone() const

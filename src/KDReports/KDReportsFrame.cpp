@@ -99,7 +99,6 @@ qreal KDReports::Frame::border() const
 
 KDReports::Frame::~Frame()
 {
-    delete d;
 }
 
 void KDReports::Frame::addInlineElement(const Element &element)

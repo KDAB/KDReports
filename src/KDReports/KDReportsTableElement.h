@@ -102,7 +102,7 @@ public:
     Element *clone() const override;
 
 private:
-    TableElementPrivate *const d;
+    std::unique_ptr<TableElementPrivate> d;
 };
 
 }

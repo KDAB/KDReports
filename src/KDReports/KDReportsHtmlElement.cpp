@@ -49,7 +49,6 @@ KDReports::HtmlElement &KDReports::HtmlElement::operator=(const HtmlElement &oth
 
 KDReports::HtmlElement::~HtmlElement()
 {
-    delete d;
 }
 
 void KDReports::HtmlElement::build(ReportBuilder &builder) const

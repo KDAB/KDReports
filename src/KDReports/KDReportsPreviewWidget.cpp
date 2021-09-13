@@ -588,7 +588,6 @@ KDReports::PreviewWidget::PreviewWidget(QWidget *parent)
 
 KDReports::PreviewWidget::~PreviewWidget()
 {
-    delete d;
 }
 
 bool KDReports::PreviewWidget::isSelected(int pageNumber) const

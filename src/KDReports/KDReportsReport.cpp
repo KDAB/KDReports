@@ -451,7 +451,6 @@ KDReports::Report::Report(QObject *parent)
 
 KDReports::Report::~Report()
 {
-    delete d;
 }
 
 void KDReports::Report::addInlineElement(const Element &element)

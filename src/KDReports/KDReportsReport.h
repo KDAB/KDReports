@@ -872,7 +872,7 @@ private:
     friend class PreviewDialogPrivate; // setupPrinter
     friend class PreviewWidgetPrivate; // setupPrinter
     friend class ReportPrivate; // setupPrinter
-    ReportPrivate *const d;
+    std::unique_ptr<ReportPrivate> d;
 };
 
 }

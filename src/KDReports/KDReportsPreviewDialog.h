@@ -152,7 +152,7 @@ public Q_SLOTS:
     void reject() override;
 
 private:
-    PreviewDialogPrivate *const d;
+    std::unique_ptr<PreviewDialogPrivate> d;
 };
 
 }

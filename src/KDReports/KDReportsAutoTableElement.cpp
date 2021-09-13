@@ -244,7 +244,6 @@ KDReports::AutoTableElement &KDReports::AutoTableElement::operator=(const AutoTa
 
 KDReports::AutoTableElement::~AutoTableElement()
 {
-    delete d;
 }
 
 void KDReports::AutoTableElementPrivate::fillCellFromHeaderData(int section, Qt::Orientation orientation, QTextTableCell &cell, QTextDocument &textDoc, QTextTable *textTable,

@@ -43,7 +43,6 @@ KDReports::Element &KDReports::Element::operator=(const Element &other)
 
 KDReports::Element::~Element()
 {
-    delete d;
 }
 
 void KDReports::Element::setBackground(const QBrush &brush)

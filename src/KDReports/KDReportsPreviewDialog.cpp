@@ -92,7 +92,6 @@ KDReports::PreviewDialog::PreviewDialog(KDReports::Report *report, QWidget *pare
 
 KDReports::PreviewDialog::~PreviewDialog()
 {
-    delete d;
 }
 
 void KDReports::PreviewDialog::setQuickPrinterName(const QString &printerName)

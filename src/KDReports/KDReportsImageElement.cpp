@@ -67,7 +67,6 @@ KDReports::ImageElement &KDReports::ImageElement::operator=(const ImageElement &
 
 KDReports::ImageElement::~ImageElement()
 {
-    delete d;
 }
 
 void KDReports::ImageElement::setPixmap(const QPixmap &pixmap)

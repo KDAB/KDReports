@@ -96,7 +96,7 @@ private:
     qreal lastAutoFontScalingFactor() const; // for unittests
 
     Q_DISABLE_COPY(MainTable)
-    MainTablePrivate *const d;
+    std::unique_ptr<MainTablePrivate> d;
 };
 
 }

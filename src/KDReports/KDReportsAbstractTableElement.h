@@ -150,7 +150,7 @@ protected:
     void fillTableFormat(QTextTableFormat &tableFormat, QTextCursor &textDocCursor) const;
 
 private:
-    AbstractTableElementPrivate *const d;
+    std::unique_ptr<AbstractTableElementPrivate> d;
 };
 
 }

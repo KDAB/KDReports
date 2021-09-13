@@ -93,7 +93,7 @@ public:
     Element *clone() const override;
 
 private:
-    HLineElementPrivate *const d;
+    std::unique_ptr<HLineElementPrivate> d;
 };
 
 }

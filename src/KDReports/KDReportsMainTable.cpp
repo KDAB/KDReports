@@ -39,7 +39,6 @@ KDReports::MainTable::MainTable()
 KDReports::MainTable::~MainTable()
 {
     delete d->m_element;
-    delete d;
 }
 
 void KDReports::MainTable::setAutoTableElement(const AutoTableElement &element)

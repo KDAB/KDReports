@@ -36,7 +36,6 @@ KDReports::Header::Header(KDReports::Report *report)
 
 KDReports::Header::~Header()
 {
-    delete d;
 }
 
 void KDReports::Header::addInlineElement(const Element &element)

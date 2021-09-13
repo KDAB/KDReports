@@ -49,7 +49,6 @@ KDReports::Cell &KDReports::Cell::operator=(const Cell &other)
 
 KDReports::Cell::~Cell()
 {
-    delete d;
 }
 
 void KDReports::Cell::setColumnSpan(int columnSpan)

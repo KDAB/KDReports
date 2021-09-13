@@ -18,6 +18,7 @@
 #define KDREPORTSELEMENT_H
 
 #include "KDReportsGlobal.h"
+#include <memory>
 
 QT_BEGIN_NAMESPACE
 class QBrush;
@@ -78,7 +79,7 @@ protected:
     Element &operator=(const Element &other);
 
 private:
-    ElementPrivate *const d;
+    std::unique_ptr<ElementPrivate> d;
 };
 
 }

@@ -172,7 +172,7 @@ public:
     Element *clone() const override;
 
 private:
-    ImageElementPrivate *const d;
+    std::unique_ptr<ImageElementPrivate> d;
 };
 
 }

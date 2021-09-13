@@ -132,7 +132,7 @@ protected:
 
 private:
     friend class PreviewWidgetPrivate;
-    PreviewWidgetPrivate *const d;
+    std::unique_ptr<PreviewWidgetPrivate> d;
 };
 
 }

@@ -64,7 +64,6 @@ KDReports::TextElement &KDReports::TextElement::operator=(const TextElement &oth
 
 KDReports::TextElement::~TextElement()
 {
-    delete d;
 }
 
 void KDReports::TextElement::build(ReportBuilder &builder) const

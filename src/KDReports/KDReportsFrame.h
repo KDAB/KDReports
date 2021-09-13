@@ -120,7 +120,7 @@ public:
     Element *clone() const override;
 
 private:
-    FramePrivate *const d;
+    std::unique_ptr<FramePrivate> d;
 };
 
 }

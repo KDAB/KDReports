@@ -19,6 +19,7 @@
 
 #include "KDReportsGlobal.h"
 #include <QtAlgorithms>
+#include <memory>
 
 namespace KDReports {
 class ErrorDetailsPrivate;
@@ -63,7 +64,7 @@ public:
     inline void swap(ErrorDetails &other); // krazy:exclude=inline
 private:
     friend class XmlElementHandler;
-    ErrorDetailsPrivate *d; // krazy:exclude=dpointer make this const
+    std::unique_ptr<ErrorDetailsPrivate> d;
 };
 
 void ErrorDetails::swap(ErrorDetails &other)

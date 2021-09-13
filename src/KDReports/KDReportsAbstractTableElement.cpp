@@ -61,7 +61,6 @@ void KDReports::AbstractTableElement::setColumnConstraints(const QVector<KDRepor
 
 KDReports::AbstractTableElement::~AbstractTableElement()
 {
-    delete d;
 }
 
 void KDReports::AbstractTableElement::setBorder(qreal border)

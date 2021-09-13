@@ -21,6 +21,7 @@
 #include "KDReportsVariableType.h"
 #include <QTextOption>
 #include <QtCore/Qt>
+#include <memory>
 
 QT_BEGIN_NAMESPACE
 template <class T>
@@ -121,7 +122,7 @@ private:
 
     Q_DISABLE_COPY(Header)
 
-    HeaderPrivate *const d;
+    std::unique_ptr<HeaderPrivate> d;
 };
 
 typedef Header Footer;

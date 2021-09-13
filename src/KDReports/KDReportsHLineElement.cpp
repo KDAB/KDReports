@@ -56,7 +56,6 @@ KDReports::HLineElement &KDReports::HLineElement::operator=(const HLineElement &
 
 KDReports::HLineElement::~HLineElement()
 {
-    delete d;
 }
 
 void KDReports::HLineElement::setColor(const QColor &color)

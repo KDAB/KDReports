@@ -53,7 +53,7 @@ private Q_SLOTS:
     void reject() override;
 
 private:
-    TableBreakingSettingsDialogPrivate *const d;
+    std::unique_ptr<TableBreakingSettingsDialogPrivate> d;
 };
 
 }
