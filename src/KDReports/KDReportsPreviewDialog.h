@@ -20,6 +20,7 @@
 #include "KDReportsGlobal.h"
 #include <QDialog>
 #include <QPrinter>
+#include <memory>
 
 namespace KDReports {
 class Report;
