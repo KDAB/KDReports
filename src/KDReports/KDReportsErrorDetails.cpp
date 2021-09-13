@@ -95,3 +95,8 @@ KDReports::ErrorDetails &KDReports::ErrorDetails::operator=(const ErrorDetails &
     swap(copy);
     return *this;
 }
+
+void KDReports::ErrorDetails::swap(ErrorDetails &other)
+{
+    qSwap(d, other.d);
+}

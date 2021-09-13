@@ -61,16 +61,11 @@ public:
 
     bool hasError() const;
 
-    inline void swap(ErrorDetails &other); // krazy:exclude=inline
+    void swap(ErrorDetails &other); // krazy:exclude=inline
 private:
     friend class XmlElementHandler;
     std::unique_ptr<ErrorDetailsPrivate> d;
 };
-
-void ErrorDetails::swap(ErrorDetails &other)
-{
-    qSwap(d, other.d);
-}
 
 } // namespace KDReports
 

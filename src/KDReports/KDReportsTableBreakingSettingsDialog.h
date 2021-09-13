@@ -19,6 +19,7 @@
 
 #include "KDReportsGlobal.h"
 #include <QDialog>
+#include <memory>
 
 namespace KDReports {
 class TableBreakingSettingsDialogPrivate;
