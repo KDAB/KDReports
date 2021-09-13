@@ -36,7 +36,7 @@ public:
     ErrorDetails(const ErrorDetails &other);
 
     ~ErrorDetails();
-    inline ErrorDetails &operator=(const ErrorDetails &other);
+    ErrorDetails &operator=(const ErrorDetails &other);
 
     /**
      * @return a message including line and column number if available.
@@ -70,13 +70,6 @@ private:
 void ErrorDetails::swap(ErrorDetails &other)
 {
     qSwap(d, other.d);
-}
-
-ErrorDetails &ErrorDetails::operator=(const ErrorDetails &other)
-{
-    ErrorDetails copy(other);
-    swap(copy);
-    return *this;
 }
 
 } // namespace KDReports

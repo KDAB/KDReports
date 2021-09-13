@@ -88,3 +88,10 @@ KDReports::ErrorDetails::ErrorDetails(const ErrorDetails &other)
     : d(new ErrorDetailsPrivate(*other.d))
 {
 }
+
+KDReports::ErrorDetails &KDReports::ErrorDetails::operator=(const ErrorDetails &other)
+{
+    ErrorDetails copy(other);
+    swap(copy);
+    return *this;
+}
