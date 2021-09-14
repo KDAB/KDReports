@@ -175,7 +175,7 @@ void KDReports::ReportBuilder::setTabPositions(const QList<QTextOption::Tab> &ta
     m_contentDocument.setUsesTabPositions(true);
 }
 
-void KDReports::ReportBuilder::copyStateFrom(ReportBuilder &parentBuilder)
+void KDReports::ReportBuilder::copyStateFrom(const ReportBuilder &parentBuilder)
 {
     m_tabPositions = parentBuilder.m_tabPositions;
     m_leftMargin = parentBuilder.m_leftMargin;
@@ -202,7 +202,7 @@ void KDReports::ReportBuilder::setParagraphMargins(qreal left, qreal top, qreal 
 }
 //@endcond
 
-void KDReports::ReportBuilder::setupBlockFormat(QTextBlockFormat &blockFormat)
+void KDReports::ReportBuilder::setupBlockFormat(QTextBlockFormat &blockFormat) const
 {
     blockFormat.setTabPositions(m_tabPositions);
     blockFormat.setLeftMargin(m_leftMargin);

@@ -101,6 +101,8 @@ static QTextCharFormat::VerticalAlignment toVerticalAlignment(Qt::Alignment alig
         return QTextCharFormat::AlignBottom;
     case Qt::AlignVCenter:
         return QTextCharFormat::AlignMiddle;
+    case Qt::AlignBaseline:
+        return QTextCharFormat::AlignBaseline;
     }
     return QTextCharFormat::AlignNormal;
 }

@@ -80,12 +80,12 @@ public:
     TextDocumentData &contentDocumentData() { return m_contentDocument; }
     QTextCursor &contentDocumentCursor() { return m_cursor; }
 
-    void setupBlockFormat(QTextBlockFormat &blockFormat);
+    void setupBlockFormat(QTextBlockFormat &blockFormat) const;
 
     void setTabPositions(const QList<QTextOption::Tab> &tabs); // in mm
     // const QList<QTextOption::Tab>& tabPositions() const { return m_tabPositions; }
     void setParagraphMargins(qreal left, qreal top, qreal right, qreal bottom); // in mm
-    void copyStateFrom(ReportBuilder &parentBuilder);
+    void copyStateFrom(const ReportBuilder &parentBuilder);
     int currentPosition();
 
 private:
