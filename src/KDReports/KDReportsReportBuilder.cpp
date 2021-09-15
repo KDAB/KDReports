@@ -33,15 +33,16 @@ KDReports::ReportBuilder::ReportBuilder(KDReports::TextDocumentData &contentDocu
 
 void KDReports::ReportBuilder::addInlineElement(const Element &element)
 {
-    cursor().beginEditBlock();
+    QTextCursor &cursor = this->cursor();
+    cursor.beginEditBlock();
     // Save/restore the char format, otherwise insertHtml("<font size=\"+8\">My Title</font>")
     // leaves us with a large-font char format, which would affect subsequent insertText().
     // So: char format change must be done inside a single html element, not across.
     // This is also true for charts and images, and variables, which all set things into the char format.
-    const QTextCharFormat origCharFormat = cursor().charFormat();
+    const QTextCharFormat origCharFormat = cursor.charFormat();
     element.build(*this);
-    cursor().setCharFormat(origCharFormat);
-    cursor().endEditBlock();
+    cursor.setCharFormat(origCharFormat);
+    cursor.endEditBlock();
 }
 
 void KDReports::ReportBuilder::addBlockElement(const Element &element, Qt::AlignmentFlag horizontalAlignment, const QColor &backgroundColor)
@@ -86,26 +87,27 @@ void KDReports::ReportBuilder::addBlockElement(const Element &element, Qt::Align
 
 void KDReports::ReportBuilder::addVariable(KDReports::VariableType variable)
 {
-    const int charPosition = cursor().position();
+    QTextCursor &cursor = this->cursor();
+    const int charPosition = cursor.position();
     // Don't ask for the value of PageCount yet -- it would create a documentlayout
     // which would make any later insertion into the textdocument much, much slower.
     const QString value = variable == KDReports::PageCount ? QStringLiteral("UNKNOWN YET") : variableValue(0 /*pageNumber*/, m_report, variable);
     KDReports::TextElement element(value);
 
-    const QTextCharFormat origCharFormat = cursor().charFormat();
+    const QTextCharFormat origCharFormat = cursor.charFormat();
 
     // Keep the current font (KDRE-91).
     QTextCursor docCursor(&currentDocument());
     docCursor.setPosition(charPosition);
-    cursor().setCharFormat(docCursor.charFormat());
+    cursor.setCharFormat(docCursor.charFormat());
 
-    cursor().beginEditBlock();
+    cursor.beginEditBlock();
     element.build(*this);
-    cursor().endEditBlock();
+    cursor.endEditBlock();
 
     setVariableMarker(currentDocument(), charPosition, variable, value.length());
 
-    cursor().setCharFormat(origCharFormat); // restore the orig format
+    cursor.setCharFormat(origCharFormat); // restore the orig format
 }
 
 void KDReports::ReportBuilder::addVerticalSpacing(qreal space)
