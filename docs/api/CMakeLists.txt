@@ -99,6 +99,6 @@ add_custom_command(
 add_custom_target(kdreports-api.qch ALL DEPENDS ${DOXYGEN_OUTPUT_DIR}/qch/kdreports-api.qch)
 add_custom_target(docs DEPENDS kdreports-api.qch)
 
-set(QCH_INSTALL_DIR ${CMAKE_INSTALL_DOCDIR} CACHE STRING "Install location of Qt Assistant help files.")
+set(QCH_INSTALL_DIR ${INSTALL_DOC_DIR} CACHE STRING "Install location of Qt Assistant help files.")
 install(FILES ${DOXYGEN_OUTPUT_DIR}/qch/kdreports-api.qch DESTINATION ${QCH_INSTALL_DIR})
-install(FILES ${DOXYGEN_OUTPUT_DIR}/kdreports.tags DESTINATION ${CMAKE_INSTALL_DOCDIR})
+install(FILES ${DOXYGEN_OUTPUT_DIR}/kdreports.tags DESTINATION ${INSTALL_DOC_DIR})
