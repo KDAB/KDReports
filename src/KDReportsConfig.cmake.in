@@ -12,8 +12,18 @@
 ## Contact info@kdab.com if any conditions of this licensing are not clear to you.
 ##
 
-
 @PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+find_dependency(Qt@Qt_VERSION_MAJOR@Core @QT_MIN_VERSION@)
+find_dependency(Qt@Qt_VERSION_MAJOR@Widgets @QT_MIN_VERSION@)
+find_dependency(Qt@Qt_VERSION_MAJOR@PrintSupport @QT_MIN_VERSION@)
+find_dependency(Qt@Qt_VERSION_MAJOR@Xml @QT_MIN_VERSION@)
+
+if (@KDChart_FOUND@)
+    find_dependency(KDChart)
+endif()
 
 include("${CMAKE_CURRENT_LIST_DIR}/KDReportsTargets.cmake")
 
