@@ -59,6 +59,7 @@ set(SOURCES
 )
 
 add_library(kdreports ${KDReports_LIBRARY_MODE} ${SOURCES})
+add_library(KDAB::kdreports ALIAS kdreports)
 set_target_properties(kdreports PROPERTIES OUTPUT_NAME "kdreports${${PROJECT_NAME}_LIBRARY_QTID}")
 if(${PROJECT_NAME}_STATIC)
   target_compile_definitions(kdreports PUBLIC KDREPORTS_STATICLIB)
@@ -113,6 +114,10 @@ if(${PROJECT_NAME}_IS_ROOT_PROJECT)
     "${CMAKE_CURRENT_BINARY_DIR}/install/KDReports${${PROJECT_NAME}_LIBRARY_QTID}Config.cmake"
     "${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReports${${PROJECT_NAME}_LIBRARY_QTID}ConfigVersion.cmake"
     DESTINATION "${INSTALL_LIBRARY_DIR}/cmake/KDReports${${PROJECT_NAME}_LIBRARY_QTID}"
+  )
+
+  export(TARGETS kdreports NAMESPACE KDReports::
+    FILE "${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReportsTargets.cmake"
   )
 
   include(ECMGenerateHeaders)

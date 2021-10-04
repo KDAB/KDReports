@@ -209,6 +209,16 @@ if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
     )
     install(FILES ${pri_filename} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
   endif()
+else()
+  #Always disable tests, examples, docs when used as a submodule
+  set(${PROJECT_NAME}_IS_ROOT_PROJECT FALSE)
+  set(${PROJECT_NAME}_TESTS FALSE)
+  set(${PROJECT_NAME}_EXAMPLES FALSE)
+  set(${PROJECT_NAME}_DOCS FALSE)
+endif()
+
+if(${PROJECT_NAME}_TESTS)
+  enable_testing()
 endif()
 
 add_subdirectory(src)
@@ -228,34 +238,30 @@ if(${PROJECT_NAME}_PYTHON_BINDINGS)
   add_subdirectory(python)
 endif()
 
+if(${PROJECT_NAME}_TESTS OR ${PROJECT_NAME}_EXAMPLES)
+  if(NOT EMSCRIPTEN)
+    find_package(Qt${Qt_VERSION_MAJOR}Sql)
+  endif()
+endif()
+
+if(${PROJECT_NAME}_TESTS)
+  find_package(Qt${Qt_VERSION_MAJOR}Test REQUIRED)
+  add_subdirectory(unittests)
+endif()
+
+if(${PROJECT_NAME}_EXAMPLES)
+  add_subdirectory(examples)
+endif()
+
+if(${PROJECT_NAME}_DOCS)
+  add_subdirectory(docs) # needs to go last, in case there are build source files
+else()
+  add_custom_target(docs
+    COMMAND ${CMAKE_COMMAND} -E echo "Sorry, there is no docs target since KDReports_DOCS=OFF."
+    "Re-run cmake with the -DKDReports_DOCS=True option if you want to generate the documentation.")
+endif()
+
 if(${PROJECT_NAME}_IS_ROOT_PROJECT)
-  export(TARGETS kdreports NAMESPACE KDReports::
-    FILE "${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReportsTargets.cmake"
-  )
-
-  if(${PROJECT_NAME}_TESTS OR ${PROJECT_NAME}_EXAMPLES)
-    if(NOT EMSCRIPTEN)
-      find_package(Qt${Qt_VERSION_MAJOR}Sql)
-    endif()
-  endif()
-
-  if(${PROJECT_NAME}_TESTS)
-    find_package(Qt${Qt_VERSION_MAJOR}Test REQUIRED)
-    enable_testing()
-    add_subdirectory(unittests)
-  endif()
-  if(${PROJECT_NAME}_EXAMPLES)
-    add_subdirectory(examples)
-  endif()
-
-  if(${PROJECT_NAME}_DOCS)
-    add_subdirectory(docs) # needs to go last, in case there are build source files
-  else()
-    add_custom_target(docs
-      COMMAND ${CMAKE_COMMAND} -E echo "Sorry, there is no docs target since KDReports_DOCS=OFF."
-      "Re-run cmake with the -DKDReports_DOCS=True option if you want to generate the documentation.")
-  endif()
-
   # Add uninstall target (not for submodules since parent projects typically have uninstall too)
   include(ECMUninstallTarget)
 endif()
