@@ -50,4 +50,4 @@ except Exception:
     print("Failed to load PySide")
     raise
 
-setupLibraryPath
+setupLibraryPath()
