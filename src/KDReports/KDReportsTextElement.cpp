@@ -93,8 +93,12 @@ void KDReports::TextElement::build(ReportBuilder &builder) const
         charFormat.setFontFamily(d->m_fontFamily);
     if (d->m_foreground.isValid())
         charFormat.setForeground(d->m_foreground);
+    else
+        charFormat.clearForeground();
     if (background().style() != Qt::NoBrush)
         charFormat.setBackground(background());
+    else
+        charFormat.clearBackground();
     cursor.setCharFormat(charFormat);
     cursor.insertText(d->m_string);
     if (!d->m_id.isEmpty())
