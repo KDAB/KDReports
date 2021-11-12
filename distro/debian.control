@@ -6,7 +6,7 @@ Build-Depends: debhelper (>=9), cdbs, cmake
 Standards-Version: 3.9.6
 Homepage: https://github.com/KDAB/KDReports
 
-Package: kdreports
+Package: qt5-kdreports
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Description: KDAB's KD Reports is a Qt toolkit that lets you easily
