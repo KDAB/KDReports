@@ -89,6 +89,10 @@ From your CMake project, add
 
     find_package(KDReports CONFIG REQUIRED)
 
+or for Qt6
+
+    find_package(KDReports-qt6 CONFIG)
+
 and link to the imported target KDReports::kdreports.
 That's all you need to do (the imported target also brings in the include directories)
 
