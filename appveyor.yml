@@ -64,6 +64,7 @@ build_script:
   - cmd: set PATH=.\bin;%PATH%
   #temporarily disable testing on Windows
   #- ctest --test-dir .
+  - sh: if [ "`uname -s`" != "Darwin" ]; export LD_LIBRARY_PATH=./lib:$HOME/Qt/6.2/gcc_64/lib:$HOME/Qt/5.15/gcc_64/lib; fi
   - sh: ctest --test-dir .
 
 # to disable automatic builds
