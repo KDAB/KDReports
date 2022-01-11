@@ -20,7 +20,8 @@ Try KD Reports in your web browser! visit https://demos.kdab.com/wasm/kdreports
 Using KD Reports
 ================
 KD Reports requires Qt 5.9.0 or newer, and a compiler with C++11 support.
-Qt6 support is added starting with KD Reports version 2.0.
+Qt6 support is added starting with KD Reports version 2.0, and requires
+a compiler with C++17 support.
 
 See [INSTALL.txt](INSTALL.txt) for installation instructions using CMake.
 
