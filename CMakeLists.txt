@@ -201,7 +201,9 @@ if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
   )
 
   # Generate .pri file for qmake users
-  if(CMAKE_VERSION VERSION_GREATER "3.11.99" AND NOT CMAKE_CONFIGURATION_TYPES) # Not working with VS generator or older cmake versions
+  #TODO: ECM does not support Qt6 yet
+  if(Qt_VERSION_MAJOR EQUAL 5 AND
+    CMAKE_VERSION VERSION_GREATER "3.11.99" AND NOT CMAKE_CONFIGURATION_TYPES) # Not working with VS generator or older cmake versions
     include(ECMGeneratePriFile)
     ecm_generate_pri_file(BASE_NAME KDReports
                           LIB_NAME KDReports
