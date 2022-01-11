@@ -144,6 +144,9 @@ set(CMAKE_AUTOUIC TRUE)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+if(TARGET Qt6::Core)
+  set(CMAKE_CXX_STANDARD 17)
+endif()
 
 # Default to hidden visibility for symbols
 set(CMAKE_C_VISIBILITY_PRESET hidden)

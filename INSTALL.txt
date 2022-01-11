@@ -9,6 +9,9 @@ Qt Version support:
  * KD Reports 1.9 requires Qt5.6 up to Qt5.15
  * KD Reports 2.0 or above requires Qt5.9 up to Qt6.x
 
+Also note that Qt6 builds require a C++17 compliant compiler,
+whereas Qt5 builds can get by with C++11 compliance.
+
 Please see the comments at the top of CMakeLists.txt for
 the available configuration options you can pass to cmake.
 
