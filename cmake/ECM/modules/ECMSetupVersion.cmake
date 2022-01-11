@@ -132,9 +132,10 @@ function(ecm_setup_version _version)
 
     if(use_project_version)
         set(_version "${PROJECT_VERSION}")
-        set(_major "${PROJECT_VERSION_MAJOR}")
-        set(_minor "${PROJECT_VERSION_MINOR}")
-        set(_patch "${PROJECT_VERSION_PATCH}")
+        # drop leading 0 from values to avoid bogus octal values in c/C++ e.g. with 08 or 09
+        string(REGEX REPLACE "0*([0-9]+)" "\\1" _major "${PROJECT_VERSION_MAJOR}")
+        string(REGEX REPLACE "0*([0-9]+)" "\\1" _minor "${PROJECT_VERSION_MINOR}")
+        string(REGEX REPLACE "0*([0-9]+)" "\\1" _patch "${PROJECT_VERSION_PATCH}")
     else()
         string(REGEX REPLACE "^0*([0-9]+)\\.[0-9]+\\.[0-9]+.*" "\\1" _major "${_version}")
         string(REGEX REPLACE "^[0-9]+\\.0*([0-9]+)\\.[0-9]+.*" "\\1" _minor "${_version}")
