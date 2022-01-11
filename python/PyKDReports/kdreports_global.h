@@ -21,6 +21,7 @@
 
 #include <QTextDocumentFragment>
 #include <QTextCursor>
+#include <QAbstractItemModel>
 
 #include <KDReports/KDReports.h>
 #include <KDReports/KDReportsAbstractTableElement.h>
