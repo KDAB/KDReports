@@ -1,5 +1,5 @@
 Name:           qt5-kdreports
-Version:        2.0.0
+Version:        2.1.0
 Release:        1
 Summary:        A Qt library for creating printable reports
 Source:         %{name}-%{version}.tar.gz
@@ -87,6 +87,8 @@ cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
 %{_libdir}/libkdreports.so
 
 %changelog
+* Tue Jan 11 2022 Allen Winter <allen.winter@kdab.com> 2.1.0
+  2.1.0 final
 * Sat Aug 21 2021 Allen Winter <allen.winter@kdab.com> 2.0.0
   2.0.0 final
 * Wed Nov 04 2020 Allen Winter <allen.winter@kdab.com> 1.9.0

@@ -3,7 +3,7 @@ What is new in KD Reports 2.1
 
 General:
 --------
-*
+* CMakeLists.txt - don't create a docs target if KDReports is used as a subdirectory in another CMake project
 
 New features:
 -------------
@@ -11,10 +11,3 @@ New features:
   (no headers, footers, or watermark). This can be used to display the report in a readonly QTextEdit
   or a QTextBrowser.
 
-Bug fixes:
-----------
-*
-
-Behaviour changes:
------------------
-*

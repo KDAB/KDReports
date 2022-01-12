@@ -23,7 +23,8 @@ afterwards run 'pip3 list | grep PySide2'
 Note the version *must* match the same Qt you intend to use when building KD Reports.
 
 Not supported:
- - Debug builds
+ - debug builds
+ - builds against Qt debug libraries
  - static builds
  - python2 bindings
  - only some 32-bit platforms are supported.  see https://wiki.qt.io/Qt_for_Python
@@ -59,3 +60,6 @@ Build Issues:
      copy libclang.dll libclang.dll.save
      copy "C:\Program Files\llvm\bin\libclang.dll" libclang.dll
      (eg. Python3 installation in C:\Python37 and llvm in c:\Program Files\llvm. adjust as needed)
+
+ * Make sure you are have Qt release libraries installed -- linking to
+   Qt debug libraries does not work.
