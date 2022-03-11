@@ -28,7 +28,7 @@ execute_process(
     OUTPUT_VARIABLE ALL_VARS
 )
 if(NOT return_code EQUAL 0)
-    message(WARNING "Failed call: ${QMAKE_EXECUTABLE} -query")
+    message(WARNING "Failed call: ${QT_QMAKE_EXECUTABLE} -query")
     message(FATAL_ERROR "QMake call failed: ${return_code}")
 endif()
 
