@@ -43,6 +43,7 @@ public:
     qreal m_border;
     KDReports::Unit m_widthUnit;
     KDReports::Unit m_heightUnit;
+    KDReports::Frame::Position m_position = KDReports::Frame::InFlow;
 };
 
 KDReports::Frame::Frame()
@@ -97,6 +98,16 @@ qreal KDReports::Frame::border() const
     return d->m_border;
 }
 
+void KDReports::Frame::setPosition(Position pos)
+{
+    d->m_position = pos;
+}
+
+KDReports::Frame::Position KDReports::Frame::position() const
+{
+    return d->m_position;
+}
+
 KDReports::Frame::~Frame()
 {
 }
@@ -138,7 +149,7 @@ void KDReports::Frame::build(ReportBuilder &builder) const
     format.setPadding(mmToPixels(padding()));
     format.setBorder(d->m_border);
     // TODO borderBrush like in AbstractTableElement
-    format.setPosition(QTextFrameFormat::InFlow);
+    format.setPosition(static_cast<QTextFrameFormat::Position>(d->m_position)); // those enums have the same value
 
     QTextCursor &textDocCursor = builder.cursor();
 

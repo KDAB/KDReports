@@ -1,0 +1,11 @@
+What is new in KD Reports 2.1
+=============================
+
+General:
+--------
+*
+
+New features:
+-------------
+* Added KDReportsFrame::setPosition, in order to implement floating frames on the left or right side of the document.
+

@@ -90,6 +90,23 @@ public:
      */
     qreal border() const;
 
+    enum Position {
+        InFlow, ///< The frame is part of the flow of the paragraph (default)
+        FloatLeft, ///< The frame floats on the left side of the text
+        FloatRight, ///< The frame floats on the right side of the text
+    };
+    /**
+     * Specifies the position of the frame in the document
+     * \since 2.2
+     */
+    void setPosition(Position pos);
+
+    /**
+     * Returns the position of the frame in the document
+     * \since 2.2
+     */
+    Position position() const;
+
     /**
      * Adds an element to the frame, next to the previous element, in the same paragraph.
      */
