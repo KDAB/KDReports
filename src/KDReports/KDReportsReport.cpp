@@ -269,6 +269,10 @@ void KDReports::ReportPrivate::paintPage(int pageNumber, QPainter &painter)
         footer->preparePaintingPage(pageNumber + m_firstPageNumber - 1);
     }
 
+    if (m_watermarkFunction) {
+        m_watermarkFunction(painter, pageNumber);
+    }
+
     const QRect textDocRect = mainTextDocRect();
     const bool skipHeadersFooters = this->skipHeadersFooters();
 
@@ -797,6 +801,11 @@ void KDReports::Report::setFooterLocation(HeaderLocations hl, Footer *footer)
     d->m_footers.insert(hl, footer);
 }
 
+qreal KDReports::Report::mmToPixels(qreal mm)
+{
+    return KDReports::mmToPixels(mm);
+}
+
 bool KDReports::Report::loadFromXML(QIODevice *iodevice, ErrorDetails *details)
 {
     QDomDocument doc;
@@ -923,6 +932,16 @@ void KDReports::Report::setWatermarkImage(const QImage &image)
 QImage KDReports::Report::watermarkImage() const
 {
     return d->m_watermarkImage;
+}
+
+void KDReports::Report::setWatermarkFunction(WatermarkFunction function)
+{
+    d->m_watermarkFunction = function;
+}
+
+KDReports::Report::WatermarkFunction KDReports::Report::watermarkFunction() const
+{
+    return d->m_watermarkFunction;
 }
 
 void KDReports::Report::addPageBreak()

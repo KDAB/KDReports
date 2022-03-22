@@ -769,6 +769,22 @@ public:
      */
     QImage watermarkImage() const;
 
+    using WatermarkFunction = std::function<void(QPainter &, int)>;
+    /**
+     * Sets a function to be called for painting the watermark with QPainter
+     * The page area to be painted is defined by (0,0) and paperSize().
+     * To draw at an absolute position in millimeters, use mmToPixels() for conversion.
+     * The arguments to the function are: QPainter *painter, int pageNumber
+     * \since 2.2
+     */
+    void setWatermarkFunction(WatermarkFunction function);
+
+    /**
+     * \return the watermark function passed to setWatermarkFunction
+    * \since 2.2
+     */
+    WatermarkFunction watermarkFunction() const;
+
     /**
      * \return the location for the given header.
      * \since 1.4
@@ -792,6 +808,14 @@ public:
      * \since 1.4
      */
     void setFooterLocation(HeaderLocations hl, Footer *footer);
+
+    /**
+     * mmToPixels converts a distance in millimeters, to pixels, for drawing in the watermarkFunction.
+     * @param mm distance in millimeters
+     * @return distance in pixels
+     * \since 2.2
+     */
+    static qreal mmToPixels(qreal mm);
 
     /**
      * \internal Returns the paper size in pixels.

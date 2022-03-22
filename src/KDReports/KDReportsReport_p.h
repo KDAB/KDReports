@@ -139,6 +139,7 @@ public:
     QColor m_watermarkColor;
     QFont m_watermarkFont;
     QImage m_watermarkImage;
+    Report::WatermarkFunction m_watermarkFunction;
     int m_firstPageNumber;
     bool m_pageContentSizeDirty;
 
