@@ -23,6 +23,7 @@
 #include <QFont>
 #include <QTextOption>
 #include <QtCore/QSizeF>
+#include <functional>
 
 #include <QtPrintSupport/QPrinter>
 
