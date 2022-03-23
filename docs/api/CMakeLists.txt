@@ -64,7 +64,7 @@ if(KDChart_FOUND)
   get_filename_component(KDCHART_TAG ${KDCHART_TAG} DIRECTORY) #up to lib
   get_filename_component(KDCHART_TAG ${KDCHART_TAG} DIRECTORY) #up to install_prefix
   set(KDCHART_TAG "${KDCHART_TAG}/share/doc/KDChart/kdchart.tags")
-  set(KDCHART_TAG "${KDCHART_TAG}=https://docs.kdab.com/kdchart/")
+  set(KDCHART_TAG "${KDCHART_TAG}=https://docs.kdab.com/kdchart/latest/")
 endif()
 
 file(GLOB _dox_deps *.dox *.html)
