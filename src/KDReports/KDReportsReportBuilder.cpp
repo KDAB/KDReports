@@ -72,6 +72,7 @@ void KDReports::ReportBuilder::addBlockElement(const Element &element, Qt::Align
 
     element.build(*this);
 
+    cursor.setCharFormat(charFormat); // restore, we don't want addElement(bold text) + addInline(normal text) to make the normal text bold
     cursor.endEditBlock();
 
 #if 0 // DEBUG CODE for tab positions

@@ -274,6 +274,23 @@ private slots:
         QCOMPARE(doc.toPlainText(), QString("foo\nbar"));
     }
 
+    void testAddInlineElement()
+    {
+        Report report;
+        report.setDefaultFont(QFont("Arial", 18));
+        TextElement bold("bold");
+        bold.setBold(true);
+        report.addElement(bold);
+        report.addInlineElement(TextElement("normal"));
+
+        // Check that the "normal" text isn't bold
+        QTextCursor cursor(report.mainTextDocument());
+        cursor.setPosition(1);
+        QVERIFY(cursor.charFormat().font().bold());
+        cursor.setPosition(5);
+        QVERIFY(!cursor.charFormat().font().bold());
+    }
+
     void testAddVerticalSpacing()
     {
         Report report;
@@ -282,7 +299,6 @@ private slots:
         report.addElement(TextElement("foo"));
         report.addVerticalSpacing(10);
         report.addElement(TextElement("bar"));
-        // We can't QCOMPARE anything here, but at least we checked that it doesn't crash
 
         // Check that the "point size 1" used for that block doesn't affect the next block
         report.addElement(TextElement("Some text"));

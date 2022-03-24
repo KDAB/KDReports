@@ -5,6 +5,12 @@ General:
 --------
 *
 
+Bugfixes:
+-------------
+* Adding an inline element honours the formatting of that inline element only, the previous element
+now has no effect. Previously, addElement() with bold text followed by addInlineElement() with no
+formatting, would make the inline element bold erroneously.
+
 New features:
 -------------
 * Added Frame::setPosition, in order to implement floating frames on the left or right side of the document.
