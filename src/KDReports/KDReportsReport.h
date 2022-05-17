@@ -19,13 +19,15 @@
 
 #include "KDReportsErrorDetails.h"
 #include "KDReportsGlobal.h"
+
 #include <QColor>
 #include <QFont>
 #include <QTextOption>
-#include <QtCore/QSizeF>
-#include <functional>
+#include <QSizeF>
+#include <QObject>
+#include <QPrinter>
 
-#include <QtPrintSupport/QPrinter>
+#include <functional>
 
 QT_BEGIN_NAMESPACE
 class QDomDocument;
