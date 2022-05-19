@@ -86,6 +86,11 @@ void KDReports::Cell::addVariable(VariableType variable)
     d->m_elements.append(KDReports::ElementData(variable));
 }
 
+void KDReports::Cell::addVerticalSpacing(qreal space)
+{
+    d->m_elements.append(KDReports::ElementData(KDReports::ElementData::VerticalSpacing, space));
+}
+
 void KDReports::Cell::build(ReportBuilder &builder) const
 {
     foreach (const KDReports::ElementData &ed, d->m_elements) {
@@ -98,6 +103,9 @@ void KDReports::Cell::build(ReportBuilder &builder) const
             break;
         case KDReports::ElementData::Variable:
             builder.addVariable(ed.m_variableType);
+            break;
+        case KDReports::ElementData::VerticalSpacing:
+            builder.addVerticalSpacing(ed.m_value);
             break;
         }
     }

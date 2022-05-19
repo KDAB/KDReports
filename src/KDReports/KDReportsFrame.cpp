@@ -171,6 +171,9 @@ void KDReports::Frame::build(ReportBuilder &builder) const
         case KDReports::ElementData::Variable:
             contentsBuilder.addVariable(ed.m_variableType);
             break;
+        case KDReports::ElementData::VerticalSpacing:
+            contentsBuilder.addVerticalSpacing(ed.m_value);
+            break;
         }
     }
 

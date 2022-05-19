@@ -14,6 +14,7 @@ formatting, would make the inline element bold erroneously.
 
 New features:
 -------------
+* Added Cell::addVerticalSpacing, to insert spacing between paragraphs in table cells
 * Added Frame::setPosition, in order to implement floating frames on the left or right side of the document.
 * Added Report::setWatermarkFunction, so applications can customize the drawing of the watermark with QPainter.
   This can be useful for company letterhead that involves drawing a few pixmaps here and there, for instance.

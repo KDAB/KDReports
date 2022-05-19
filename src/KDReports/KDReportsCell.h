@@ -77,6 +77,14 @@ public:
     void addVariable(VariableType variable);
 
     /**
+     * Adds vertical spacing between paragraphs.
+     * Make sure to call addElement after that, not addInlineElement.
+     * \param space the space in millimeters
+     * \since 2.2
+     */
+    void addVerticalSpacing(qreal space);
+
+    /**
      * @internal
      * @reimp
      */

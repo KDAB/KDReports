@@ -42,7 +42,8 @@ struct ElementData
 {
     enum Type { Inline,
                 Block,
-                Variable };
+                Variable,
+                VerticalSpacing };
     // inline
     ElementData(Element *elem)
         : m_element(elem)
@@ -63,14 +64,33 @@ struct ElementData
         , m_variableType(variable)
     {
     }
+    // vertical spacing
+    ElementData(Type type, qreal value)
+        : m_element(nullptr)
+        , m_type(type)
+        , m_value(value)
+    {
+    }
+
     // copy ctor
     ElementData(const ElementData &other) { operator=(other); }
     ElementData &operator=(const ElementData &other)
     {
         m_element = other.m_element ? other.m_element->clone() : nullptr;
         m_type = other.m_type;
-        m_variableType = other.m_variableType;
-        m_align = other.m_align;
+        switch (m_type) {
+        case Block:
+            m_align = other.m_align;
+            break;
+        case Inline:
+            break;
+        case Variable:
+            m_variableType = other.m_variableType;
+            break;
+        case VerticalSpacing:
+            m_value = other.m_value;
+            break;
+        }
         return *this;
     }
     ~ElementData() { delete m_element; }
@@ -80,6 +100,7 @@ struct ElementData
     union {
         KDReports::VariableType m_variableType;
         Qt::AlignmentFlag m_align;
+        qreal m_value;
     };
 };
 }

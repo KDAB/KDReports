@@ -57,8 +57,7 @@ public:
     /*reimp*/ void addVariablePublic(KDReports::VariableType variable) override { m_cell.addVariable(variable); }
     /*reimp*/ void addVerticalSpacingPublic(qreal space) override
     {
-        Q_UNUSED(space);
-        qWarning("Unexpected vspace inside cell!");
+        m_cell.addVerticalSpacing(space);
     }
 
 private:
