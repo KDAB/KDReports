@@ -291,7 +291,7 @@ private slots:
         // as 0xFFFC
         ptext.replace(QChar(0xFFFC), '#');
 
-        QCOMPARE(ptext, QString("Title\n#\n\nTest used by XmlParser.cpp\nmodelCell\nhtmlCell\n\nTableElement example\n\nmodified\nCustom element\n\nmodelCell\nhtmlCell\n"));
+        QCOMPARE(ptext, QString("Title\n#\n \nTest used by XmlParser.cpp\nmodelCell\nhtmlCell\n\nTableElement example\n\nmodified\nCustom element\n\nmodelCell\nhtmlCell\n"));
         QCOMPARE(report.mainTextDocument()->toPlainText(), doc.toPlainText());
     }
 

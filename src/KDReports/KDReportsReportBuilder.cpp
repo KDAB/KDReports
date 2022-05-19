@@ -123,11 +123,13 @@ void KDReports::ReportBuilder::addVerticalSpacing(qreal space)
     }
 
     QTextBlockFormat blockFormat;
-    blockFormat.setBottomMargin(KDReports::mmToPixels(space));
+    blockFormat.setTopMargin(KDReports::mmToPixels(space / 2));
+    blockFormat.setBottomMargin(KDReports::mmToPixels(space / 2));
     cursor.setBlockFormat(blockFormat);
     QTextCharFormat charFormat;
     charFormat.setFontPointSize(1);
     cursor.setCharFormat(charFormat);
+    cursor.insertText(QStringLiteral(" ")); // this ensures the point size 1 is actually used, making the paragraph much smaller
     cursor.endEditBlock();
 }
 

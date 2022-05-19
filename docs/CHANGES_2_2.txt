@@ -11,6 +11,8 @@ Bugfixes:
 now has no effect. Previously, addElement() with bold text followed by addInlineElement() with no
 formatting, would make the inline element bold erroneously.
 * Fix missing icons in the preview dialog
+* Change the way addVerticalSpacing sets up the empty paragraph. It would sometimes lead to
+the height of the default font to be added to the requested spacing, now it's always exactly the requested spacing.
 
 New features:
 -------------
