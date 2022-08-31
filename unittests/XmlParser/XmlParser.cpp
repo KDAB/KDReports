@@ -19,9 +19,9 @@
 #include <KDReportsTextDocument_p.h>
 #include <QPainter>
 #include <QStandardItemModel>
+#include <QTest>
 #include <QTextBlock>
 #include <QTextCursor>
-#include <QTest>
 
 using namespace KDReports;
 namespace KDReports {
@@ -97,7 +97,10 @@ private slots:
         const QTextDocument &doc = *report.mainTextDocument();
         QCOMPARE(doc.blockCount(), 2);
         QCOMPARE(doc.toPlainText(), QString("Title\nTest used by XmlParser.cpp"));
-        qreal top; qreal left; qreal bottom; qreal right;
+        qreal top;
+        qreal left;
+        qreal bottom;
+        qreal right;
         report.getMargins(&top, &left, &bottom, &right);
         QCOMPARE(static_cast<double>(top), 40.0);
         QCOMPARE(static_cast<double>(left), 0.0);
@@ -140,7 +143,7 @@ private slots:
             QCOMPARE(cursor.charFormat().fontFamily(), QString("Arial"));
 #else
             // What a weird API, fontFamilies returns a QVariant rather than a QStringList!
-            QCOMPARE(cursor.charFormat().fontFamilies().toStringList(), QStringList{QString("Arial")});
+            QCOMPARE(cursor.charFormat().fontFamilies().toStringList(), QStringList {QString("Arial")});
 #endif
             QCOMPARE(cursor.charFormat().font().pointSize(), 8);
             cursor.movePosition(QTextCursor::Right);

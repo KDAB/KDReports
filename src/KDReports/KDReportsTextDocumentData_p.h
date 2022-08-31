@@ -49,13 +49,22 @@ public:
     TextDocumentData(const TextDocumentData &) = delete;
     TextDocumentData &operator=(const TextDocumentData &) = delete;
 
-    QTextDocument &document() { return m_document; }
-    const QTextDocument &document() const { return m_document; }
+    QTextDocument &document()
+    {
+        return m_document;
+    }
+    const QTextDocument &document() const
+    {
+        return m_document;
+    }
 
     void setUsesTabPositions(bool usesTabs);
     void saveResourcesToFiles();
-    enum ModificationMode { Append,
-                            Modify };
+    enum ModificationMode
+    {
+        Append,
+        Modify
+    };
     void aboutToModifyContents(ModificationMode mode);
     void updateTextValue(const QString &id, const QString &newValue);
     void layoutWithTextWidth(qreal w);
@@ -87,8 +96,11 @@ private:
     void dumpTextValueCursors() const;
 
     QTextDocument m_document;
-    enum ElementType { ElementTypeText,
-                       ElementTypeHtml };
+    enum ElementType
+    {
+        ElementTypeText,
+        ElementTypeHtml
+    };
     struct TextValueData
     {
         int valueLength;

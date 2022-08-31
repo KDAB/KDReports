@@ -27,7 +27,9 @@ KDReports::TextDocReportLayout::TextDocReportLayout(KDReports::Report *report)
 {
 }
 
-void KDReports::TextDocReportLayout::setLayoutDirty() { }
+void KDReports::TextDocReportLayout::setLayoutDirty()
+{
+}
 
 void KDReports::TextDocReportLayout::paintPageContent(int pageNumber, QPainter &painter)
 {
@@ -57,7 +59,9 @@ void KDReports::TextDocReportLayout::setPageContentSize(QSizeF size)
     m_textDocument.setPageSize(size);
 }
 
-void KDReports::TextDocReportLayout::ensureLayouted() { }
+void KDReports::TextDocReportLayout::ensureLayouted()
+{
+}
 
 QString KDReports::TextDocReportLayout::toHtml() const
 {

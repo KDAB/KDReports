@@ -20,8 +20,8 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlTableModel>
-#include <QTextTableCell>
 #include <QTest>
+#include <QTextTableCell>
 
 using namespace KDReports;
 namespace KDReports {

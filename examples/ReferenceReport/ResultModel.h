@@ -52,7 +52,10 @@ private:
             list << _param << _error << QString("hidden");
             merged = true;
         }
-        Data() { merged = false; }
+        Data()
+        {
+            merged = false;
+        }
 
         QStringList list;
         bool merged;

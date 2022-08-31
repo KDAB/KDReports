@@ -50,10 +50,22 @@ public:
     void setFactorForWidth(qreal wantedFactor, const QString &sampleText);
     void applyAdditionalScalingFactor(qreal factor);
 
-    QFont font() const { return m_font; }
-    QFontMetricsF fontMetrics() const { return m_fontMetrics; }
-    qreal scalingFactor() const { return m_scalingFactor; }
-    QFontMetricsF initialFontMetrics() const { return m_initialFontMetrics; }
+    QFont font() const
+    {
+        return m_font;
+    }
+    QFontMetricsF fontMetrics() const
+    {
+        return m_fontMetrics;
+    }
+    qreal scalingFactor() const
+    {
+        return m_scalingFactor;
+    }
+    QFontMetricsF initialFontMetrics() const
+    {
+        return m_initialFontMetrics;
+    }
     qreal textWidth(const QString &text) const;
 
 private:

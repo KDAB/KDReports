@@ -29,7 +29,10 @@
 
 #include "ui_previewdialogbase.h"
 
-enum { PreviewSize = 200 };
+enum
+{
+    PreviewSize = 200
+};
 
 /// @internal
 /// The widget showing the large preview on the right
@@ -48,9 +51,18 @@ public:
         m_pixmap = pixmap;
         update();
     }
-    int pixmapWidth() const { return m_pixmap.width(); }
-    int pixmapHeight() const { return m_pixmap.height(); }
-    QSize pixmapSize() const { return m_pixmap.size(); }
+    int pixmapWidth() const
+    {
+        return m_pixmap.width();
+    }
+    int pixmapHeight() const
+    {
+        return m_pixmap.height();
+    }
+    QSize pixmapSize() const
+    {
+        return m_pixmap.size();
+    }
 
 Q_SIGNALS:
     void mouseMoved(QPoint pos);

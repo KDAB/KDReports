@@ -31,7 +31,9 @@ TableModel::TableModel(QObject *parent)
 {
 }
 
-TableModel::~TableModel() { }
+TableModel::~TableModel()
+{
+}
 
 int TableModel::rowCount(const QModelIndex &) const
 {
@@ -87,9 +89,9 @@ QVariant TableModel::headerData(int section, Qt::Orientation orientation, int ro
             }
         }
         break;
-    //case Qt::TextAlignmentRole:
-        //        result = QVariant ( Qt::AlignHCenter | Qt::AlignHCenter );
-        //break;
+    // case Qt::TextAlignmentRole:
+    //         result = QVariant ( Qt::AlignHCenter | Qt::AlignHCenter );
+    // break;
     default:
         break;
     }

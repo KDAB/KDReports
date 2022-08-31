@@ -34,8 +34,8 @@ class AbstractReportLayout
 public:
     AbstractReportLayout();
     virtual ~AbstractReportLayout();
-    AbstractReportLayout(const AbstractReportLayout& other) = delete;
-    AbstractReportLayout& operator=(const AbstractReportLayout& other) = delete;
+    AbstractReportLayout(const AbstractReportLayout &other) = delete;
+    AbstractReportLayout &operator=(const AbstractReportLayout &other) = delete;
 
     virtual void setLayoutDirty() = 0;
     virtual void setDefaultFont(const QFont &font) = 0;

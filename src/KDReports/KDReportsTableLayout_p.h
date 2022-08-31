@@ -37,23 +37,47 @@ public:
     // Determine "ideal" column widths, based on contents
     void updateColumnWidths();
     // Return row height (determined during call to columnWidths), padding included
-    qreal rowHeight() const { return m_rowHeight; }
+    qreal rowHeight() const
+    {
+        return m_rowHeight;
+    }
     // Return the width of the vertical header, 0 if not shown
-    qreal vHeaderWidth() const { return m_vHeaderWidth; }
+    qreal vHeaderWidth() const
+    {
+        return m_vHeaderWidth;
+    }
     // Return the height of the horizontal header, 0 if not shown
-    qreal hHeaderHeight() const { return m_hHeaderHeight; }
+    qreal hHeaderHeight() const
+    {
+        return m_hHeaderHeight;
+    }
 
     // void updateColumnWidthsByFactor( qreal factor );
 
-    QFont scaledFont() const { return m_cellFontScaler.font(); }
-    QFont horizontalHeaderScaledFont() const { return m_horizontalHeaderFontScaler.font(); }
-    QFont verticalHeaderScaledFont() const { return m_verticalHeaderFontScaler.font(); }
+    QFont scaledFont() const
+    {
+        return m_cellFontScaler.font();
+    }
+    QFont horizontalHeaderScaledFont() const
+    {
+        return m_horizontalHeaderFontScaler.font();
+    }
+    QFont verticalHeaderScaledFont() const
+    {
+        return m_verticalHeaderFontScaler.font();
+    }
 
     // QFontMetricsF scaledFontMetrics() const { return m_cellFontScaler.fontMetrics(); }
-    qreal scalingFactor() const { return m_cellFontScaler.scalingFactor(); }
+    qreal scalingFactor() const
+    {
+        return m_cellFontScaler.scalingFactor();
+    }
     void ensureScalingFactorForWidth(qreal scalingFactor);
     void ensureScalingFactorForHeight(qreal maxRowHeight);
-    qreal scaledCellPadding() const { return m_cellPadding * scalingFactor(); }
+    qreal scaledCellPadding() const
+    {
+        return m_cellPadding * scalingFactor();
+    }
 
     QSize decorationSize(const QVariant &cellDecoration) const;
 

@@ -90,7 +90,8 @@ public:
      */
     qreal border() const;
 
-    enum Position {
+    enum Position
+    {
         InFlow, ///< The frame is part of the flow of the paragraph (default)
         FloatLeft, ///< The frame floats on the left side of the text
         FloatRight, ///< The frame floats on the right side of the text

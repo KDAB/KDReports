@@ -20,9 +20,9 @@
 #include <QSqlQuery>
 #include <QSqlTableModel>
 #include <QStandardItemModel>
+#include <QTest>
 #include <QTextCursor>
 #include <QTextTableCell>
-#include <QTest>
 
 using namespace KDReports;
 namespace KDReports {
@@ -123,7 +123,8 @@ private slots:
         QList<qreal> initialPointSizes;
         {
             QTextCursor cursor(&textDoc);
-            Q_FOREVER {
+            Q_FOREVER
+            {
                 qreal cursorFontPointSize = cursor.charFormat().fontPointSize();
                 if (cursorFontPointSize == 0)
                     cursorFontPointSize = textDoc.defaultFont().pointSize();
@@ -140,7 +141,8 @@ private slots:
             QTextCursor cursor(&textDoc);
             qreal currentPointSize = -1.0;
             QTextCursor lastCursor(&textDoc);
-            Q_FOREVER {
+            Q_FOREVER
+            {
                 qreal cursorFontPointSize = cursor.charFormat().fontPointSize();
                 // qDebug() << cursorFontPointSize << "last=" << currentPointSize << cursor.block().text() << "position=" << cursor.position();
                 if (cursorFontPointSize != currentPointSize) {
@@ -165,7 +167,8 @@ private slots:
 
             QTextCursor cursor(&textDoc);
             int i = 0;
-            Q_FOREVER {
+            Q_FOREVER
+            {
                 // qDebug() << i << cursor.charFormat().fontPointSize();
                 QCOMPARE(cursor.charFormat().fontPointSize(), initialPointSizes[i] * 1.2);
                 if (cursor.atEnd())
@@ -187,7 +190,8 @@ private slots:
 
             QTextCursor cursor(&myTextDoc.contentDocument());
             int i = 0;
-            Q_FOREVER {
+            Q_FOREVER
+            {
                 // qDebug() << i << cursor.charFormat().fontPointSize();
                 QCOMPARE(cursor.charFormat().fontPointSize(), initialPointSizes[i] * 1.2);
                 if (cursor.atEnd())

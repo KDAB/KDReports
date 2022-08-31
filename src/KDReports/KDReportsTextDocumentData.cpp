@@ -14,12 +14,12 @@
 **
 ****************************************************************************/
 
-#include "KDReportsTextDocumentData_p.h"
-#include "KDReportsReportBuilder_p.h"
 #include "KDReportsAutoTableElement.h"
 #include "KDReportsChartTextObject_p.h"
 #include "KDReportsHLineTextObject_p.h"
 #include "KDReportsLayoutHelper_p.h"
+#include "KDReportsReportBuilder_p.h"
+#include "KDReportsTextDocumentData_p.h"
 
 #include <QAbstractTextDocumentLayout>
 #include <QDebug>
@@ -247,7 +247,8 @@ void KDReports::TextDocumentData::scaleFontsBy(qreal factor)
     QTextCursor cursor(&m_document);
     qreal currentPointSize = -1.0;
     QTextCursor lastCursor(&m_document);
-    Q_FOREVER {
+    Q_FOREVER
+    {
         qreal cursorFontPointSize = cursor.charFormat().fontPointSize();
         // qDebug() << cursorFontPointSize << "last=" << currentPointSize << cursor.block().text() << "position=" << cursor.position();
         if (cursorFontPointSize != currentPointSize) {

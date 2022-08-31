@@ -21,7 +21,7 @@
 #include "KDReportsUnit.h"
 
 QT_BEGIN_NAMESPACE
-template <typename T>
+template<typename T>
 class QList;
 class QFont;
 class QTextTableFormat;

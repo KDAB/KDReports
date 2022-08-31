@@ -22,7 +22,8 @@ namespace KDReports {
 /**
  * Units used when setting a size.
  */
-enum Unit {
+enum Unit
+{
     Millimeters, ///< Millimeters (the default)
     Percent ///< Percentage of the text width, i.e. the page width minus margins
 };

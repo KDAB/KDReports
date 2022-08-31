@@ -93,7 +93,10 @@ public:
     /**
      * @internal - not supported
      */
-    Element *clone() const override { return nullptr; } // krazy:exclude=inline
+    Element *clone() const override // krazy:exclude=inline
+    {
+        return nullptr;
+    }
 
     /**
      * @internal - do not call

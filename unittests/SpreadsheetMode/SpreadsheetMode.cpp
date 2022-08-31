@@ -19,8 +19,8 @@
 #include <KDReportsReport_p.h>
 #include <KDReportsTextDocument_p.h>
 #include <QStandardItemModel>
-#include <QTest>
 #include <QTemporaryFile>
+#include <QTest>
 #ifdef Q_WS_X11
 #include <QX11Info>
 #endif
@@ -33,8 +33,8 @@ namespace KDReports {
 class Test;
 }
 
-#define FUZZYCOMPARE(a, b) \
-    QVERIFY((a) >= (b) - 4);   \
+#define FUZZYCOMPARE(a, b)   \
+    QVERIFY((a) >= ( b )-4); \
     QVERIFY((a) <= (b) + 4);
 
 class KDReports::Test : public QObject

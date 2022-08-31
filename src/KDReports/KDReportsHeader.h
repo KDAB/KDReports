@@ -24,7 +24,7 @@
 #include <memory>
 
 QT_BEGIN_NAMESPACE
-template <class T>
+template<class T>
 class QList;
 class QFont;
 class QTextDocument;

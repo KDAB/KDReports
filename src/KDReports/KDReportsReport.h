@@ -22,10 +22,10 @@
 
 #include <QColor>
 #include <QFont>
-#include <QTextOption>
-#include <QSizeF>
 #include <QObject>
 #include <QPrinter>
+#include <QSizeF>
+#include <QTextOption>
 
 #include <functional>
 
@@ -62,7 +62,8 @@ class XmlElementHandler;
  * If no header was specified for the first and last pages, then the
  * even/odd headers are used for those.
  */
-enum HeaderLocation {
+enum HeaderLocation
+{
     FirstPage = 1, ///< The first page of the report
     EvenPages = 2, ///< The even pages of the report: 2, 4, 6 etc.
     OddPages = 4, ///< The odd pages of the report: 1 (unless FirstPage has its own header), 3, 5, 7 etc.
@@ -96,8 +97,11 @@ public:
      */
     ~Report() override;
 
-    enum ReportMode { WordProcessing = 0,
-                      SpreadSheet = 1 };
+    enum ReportMode
+    {
+        WordProcessing = 0,
+        SpreadSheet = 1
+    };
 
     /**
      * Sets the main mode of the report: word-processing or spread-sheet (one large table).
@@ -611,8 +615,11 @@ public:
      */
     bool isTableBreakingEnabled() const;
 
-    enum TableBreakingPageOrder { DownThenRight,
-                                  RightThenDown };
+    enum TableBreakingPageOrder
+    {
+        DownThenRight,
+        RightThenDown
+    };
 
     /**
      * Sets the page order to use when breaking tables.
@@ -784,7 +791,7 @@ public:
 
     /**
      * \return the watermark function passed to setWatermarkFunction
-    * \since 2.2
+     * \since 2.2
      */
     WatermarkFunction watermarkFunction() const;
 

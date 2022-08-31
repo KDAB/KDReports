@@ -30,7 +30,9 @@ namespace KDReports {
 class CellContentMap : public QMap<QPair<int /*row*/, int /*column*/>, Cell>
 {
 public:
-    CellContentMap() { }
+    CellContentMap()
+    {
+    }
     void getSize(int &rows, int &columns) const
     {
         rows = 0;

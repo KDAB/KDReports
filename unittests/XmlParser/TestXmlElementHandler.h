@@ -24,7 +24,10 @@ class TestXmlElementHandler : public KDReports::XmlElementHandler
 {
 public:
     explicit TestXmlElementHandler(KDReports::Report &report);
-    QStringList callbacks() const { return cb; }
+    QStringList callbacks() const
+    {
+        return cb;
+    }
 
     bool startReport(KDReports::Report &report, QDomElement &xmlElement) override;
     bool startHeader(KDReports::Header &header, QDomElement &xmlElement) override;

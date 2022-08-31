@@ -62,6 +62,7 @@ class Thread : public QThread
     Q_OBJECT
 public:
     using QThread::QThread;
+
 protected:
     void run() override
     {
@@ -128,6 +129,7 @@ class XmlThread : public QThread
     Q_OBJECT
 public:
     using QThread::QThread;
+
 protected:
     void run() override
     {

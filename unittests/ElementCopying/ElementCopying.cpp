@@ -87,7 +87,7 @@ private slots:
         elem2.setPadding(42);
         QBrush tableBrush(Qt::green);
         elem2.setBackground(tableBrush);
-        const QList<Element *> elemList { elem1.clone(), elem2.clone() };
+        const QList<Element *> elemList {elem1.clone(), elem2.clone()};
         Element *baseElem1 = elemList[0];
         Element *baseElem2 = elemList[1];
         QCOMPARE(baseElem1->background(), brush);

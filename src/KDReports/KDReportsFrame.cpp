@@ -35,7 +35,9 @@ public:
         , m_heightUnit(KDReports::Millimeters)
     {
     }
-    ~FramePrivate() { }
+    ~FramePrivate()
+    {
+    }
     QList<KDReports::ElementData> m_elements;
     qreal m_width;
     qreal m_height;

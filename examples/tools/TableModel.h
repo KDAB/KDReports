@@ -78,16 +78,25 @@ public:
     /**
      * Set to false if the data has no horizontal header
      */
-    void setDataHasHorizontalHeaders(bool value) { m_dataHasHorizontalHeaders = value; }
+    void setDataHasHorizontalHeaders(bool value)
+    {
+        m_dataHasHorizontalHeaders = value;
+    }
     /**
      * Set to false if the data has no vertical header
      */
-    void setDataHasVerticalHeaders(bool value) { m_dataHasVerticalHeaders = value; }
+    void setDataHasVerticalHeaders(bool value)
+    {
+        m_dataHasVerticalHeaders = value;
+    }
     /**
      * setSupplyHeaderData(false) allows to prevent the model from supplying header data,
      * even if parsing found any
      */
-    void setSupplyHeaderData(bool value) { m_supplyHeaderData = value; }
+    void setSupplyHeaderData(bool value)
+    {
+        m_supplyHeaderData = value;
+    }
 
 private:
     // the vector of rows:

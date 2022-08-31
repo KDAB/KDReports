@@ -26,7 +26,8 @@ namespace KDReports {
 /**
  * Type of variable
  */
-enum VariableType {
+enum VariableType
+{
     PageNumber, ///< Page number
     PageCount, ///< Page count
     TextDate, ///< Current date in text format like "Thu Aug 18 2005", with translated

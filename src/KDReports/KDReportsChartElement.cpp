@@ -105,7 +105,9 @@ KDReports::ChartElement &KDReports::ChartElement::operator=(const ChartElement &
     return *this;
 }
 
-KDReports::ChartElement::~ChartElement() { }
+KDReports::ChartElement::~ChartElement()
+{
+}
 
 void KDReports::ChartElement::setChart(KDChart::Chart *chart)
 {

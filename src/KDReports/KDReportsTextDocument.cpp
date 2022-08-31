@@ -14,16 +14,20 @@
 **
 ****************************************************************************/
 
-#include "KDReportsTextDocument_p.h"
 #include "KDReportsLayoutHelper_p.h"
+#include "KDReportsTextDocument_p.h"
 
 #include <QDebug>
 
 //#define DEBUG_TABLEBREAKING
 
-KDReports::TextDocument::TextDocument() { }
+KDReports::TextDocument::TextDocument()
+{
+}
 
-KDReports::TextDocument::~TextDocument() { }
+KDReports::TextDocument::~TextDocument()
+{
+}
 
 void KDReports::TextDocument::layoutWithTextWidth(qreal w)
 {

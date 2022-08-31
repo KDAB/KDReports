@@ -67,9 +67,15 @@ public:
     /// \reimp
     void finishHtmlExport() override;
 
-    TextDocument &textDocument() { return m_textDocument; }
+    TextDocument &textDocument()
+    {
+        return m_textDocument;
+    }
 
-    ReportBuilder *builder() { return &m_builder; }
+    ReportBuilder *builder()
+    {
+        return &m_builder;
+    }
 
 private:
     TextDocument m_textDocument;

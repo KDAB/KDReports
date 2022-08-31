@@ -15,11 +15,11 @@
 ****************************************************************************/
 
 #include "KDReportsReport.h"
-#include "KDReportsReport_p.h"
 #include "KDReportsElement.h"
 #include "KDReportsHeader.h"
 #include "KDReportsLayoutHelper_p.h"
 #include "KDReportsMainTable.h"
+#include "KDReportsReport_p.h"
 #include "KDReportsSpreadsheetReportLayout_p.h"
 #include "KDReportsTextDocReportLayout_p.h"
 #include "KDReportsXmlParser_p.h"
@@ -99,7 +99,7 @@ QSizeF KDReports::ReportPrivate::paperSize() const
     // determine m_paperSize from m_pageSize if needed
     if (m_paperSize.isEmpty()) {
         const auto mmSize = m_pageSize.size(QPageSize::Millimeter);
-        m_paperSize = QSizeF{mmToPixels(mmSize.width()), mmToPixels(mmSize.height())};
+        m_paperSize = QSizeF {mmToPixels(mmSize.width()), mmToPixels(mmSize.height())};
         if (m_orientation == QPageLayout::Landscape) {
             m_paperSize.transpose();
         }
@@ -495,7 +495,7 @@ void KDReports::Report::setPageSize(QPrinter::PageSize size)
 
 void KDReports::Report::setPageSize(QPageSize::PageSizeId size)
 {
-    setPageSize(QPageSize{size});
+    setPageSize(QPageSize {size});
 }
 
 void KDReports::Report::setPageSize(const QPageSize &size)
@@ -747,7 +747,7 @@ bool KDReports::Report::exportToImage(QSize size, const QString &fileName, const
     d->m_pageContentSizeDirty = true;
     d->ensureLayouted();
 
-    const qreal zoomFactor = qMin((qreal)size.width() / d->m_paperSize.width(), (qreal)size.height() / d->m_paperSize.height());
+    const qreal zoomFactor = qMin(( qreal )size.width() / d->m_paperSize.width(), ( qreal )size.height() / d->m_paperSize.height());
     // qDebug() << "zoomFactor=" << zoomFactor;
 
     QImage image(size, QImage::Format_ARGB32_Premultiplied);

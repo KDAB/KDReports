@@ -19,9 +19,9 @@
 // Make "signals:", "slots:" visible as access specifiers
 #define QT_ANNOTATE_ACCESS_SPECIFIER(a) __attribute__((annotate(#a)))
 
-#include <QTextDocumentFragment>
-#include <QTextCursor>
 #include <QAbstractItemModel>
+#include <QTextCursor>
+#include <QTextDocumentFragment>
 
 #include <KDReports/KDReports.h>
 #include <KDReports/KDReportsAbstractTableElement.h>

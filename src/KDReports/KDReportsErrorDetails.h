@@ -70,7 +70,7 @@ private:
 } // namespace KDReports
 
 QT_BEGIN_NAMESPACE
-template <>
+template<>
 inline void qSwap(KDReports::ErrorDetails &lhs, KDReports::ErrorDetails &rhs)
 {
     lhs.swap(rhs);

@@ -29,10 +29,16 @@ class ChartTextObject : public QObject, public QTextObjectInterface
     Q_INTERFACES(QTextObjectInterface)
 
 public:
-    enum { ChartObjectTextFormat = QTextFormat::UserObject + 2 };
-    enum { ChartObject = 1,
-           Size = 2,
-           Unit = 3 };
+    enum
+    {
+        ChartObjectTextFormat = QTextFormat::UserObject + 2
+    };
+    enum
+    {
+        ChartObject = 1,
+        Size = 2,
+        Unit = 3
+    };
 
     static void registerChartTextObjectHandler(QTextDocument *doc);
 

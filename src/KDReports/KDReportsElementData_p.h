@@ -40,10 +40,13 @@ namespace KDReports {
  */
 struct ElementData
 {
-    enum Type { Inline,
-                Block,
-                Variable,
-                VerticalSpacing };
+    enum Type
+    {
+        Inline,
+        Block,
+        Variable,
+        VerticalSpacing
+    };
     // inline
     ElementData(Element *elem)
         : m_element(elem)
@@ -73,7 +76,10 @@ struct ElementData
     }
 
     // copy ctor
-    ElementData(const ElementData &other) { operator=(other); }
+    ElementData(const ElementData &other)
+    {
+        operator=(other);
+    }
     ElementData &operator=(const ElementData &other)
     {
         m_element = other.m_element ? other.m_element->clone() : nullptr;
@@ -93,7 +99,10 @@ struct ElementData
         }
         return *this;
     }
-    ~ElementData() { delete m_element; }
+    ~ElementData()
+    {
+        delete m_element;
+    }
 
     Element *m_element;
     Type m_type : 3;

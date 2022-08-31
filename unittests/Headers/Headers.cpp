@@ -35,8 +35,8 @@ private slots:
         Report report;
         HeaderMap &headers = report.d->m_headers;
         QVERIFY(headers.isEmpty());
-        QCOMPARE(headers.headerForPage(1, 2), (Header *)nullptr);
-        QCOMPARE(headers.headerForPage(2, 2), (Header *)nullptr);
+        QCOMPARE(headers.headerForPage(1, 2), ( Header * )nullptr);
+        QCOMPARE(headers.headerForPage(2, 2), ( Header * )nullptr);
     }
 
     void testSingleHeader()
@@ -70,12 +70,12 @@ private slots:
         QVERIFY(!headers.isEmpty());
         QCOMPARE(headers.headerForPage(1, 1), &firstHeader);
         QCOMPARE(headers.headerForPage(1, 2), &firstHeader);
-        QCOMPARE(headers.headerForPage(2, 2), (Header *)nullptr);
+        QCOMPARE(headers.headerForPage(2, 2), ( Header * )nullptr);
         Header &lastHeader = report.header(LastPage);
         QCOMPARE(headers.headerForPage(1, 1), &firstHeader); // only one page -> use first header
         QCOMPARE(headers.headerForPage(1, 2), &firstHeader); // unchanged
         QCOMPARE(headers.headerForPage(2, 2), &lastHeader);
-        QCOMPARE(headers.headerForPage(2, 3), (Header *)nullptr);
+        QCOMPARE(headers.headerForPage(2, 3), ( Header * )nullptr);
         Header &normalHeader = report.header(AllPages);
         QCOMPARE(headers.headerForPage(1, 1), &firstHeader); // unchanged
         QCOMPARE(headers.headerForPage(2, 2), &lastHeader); // unchanged

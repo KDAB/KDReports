@@ -46,7 +46,7 @@ KDReports::TableBreakingSettingsDialog::TableBreakingSettingsDialog(KDReports::R
 {
     d->setupUi(this);
 
-    connect(d->breakTables, &QAbstractButton::toggled, this, [this](bool b) { d->slotBreakTablesToggled(b); } );
+    connect(d->breakTables, &QAbstractButton::toggled, this, [this](bool b) { d->slotBreakTablesToggled(b); });
 
     // LOAD SETTINGS
     d->breakTables->setChecked(true); // trigger the toggled signal if the next line sets it back to false

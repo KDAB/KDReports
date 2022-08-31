@@ -14,7 +14,6 @@
 **
 ****************************************************************************/
 
-#include "KDReportsXmlParser_p.h"
 #include "KDReportsAutoTableElement.h"
 #include "KDReportsCell.h"
 #include "KDReportsChartElement.h"
@@ -29,6 +28,7 @@
 #include "KDReportsTextElement.h"
 #include "KDReportsXmlElementHandler.h"
 #include "KDReportsXmlHelper.h"
+#include "KDReportsXmlParser_p.h"
 
 #include <QDebug>
 #include <QDomDocument>
@@ -48,13 +48,19 @@ public:
     {
     }
 
-    /*reimp*/ void addInlineElementPublic(const KDReports::Element &element) override { m_cell.addInlineElement(element); }
+    /*reimp*/ void addInlineElementPublic(const KDReports::Element &element) override
+    {
+        m_cell.addInlineElement(element);
+    }
     /*reimp*/ void addBlockElementPublic(const KDReports::Element &element, Qt::AlignmentFlag horizontalAlignment, const QColor &color = QColor()) override
     {
         Q_UNUSED(color);
         m_cell.addElement(element, horizontalAlignment);
     }
-    /*reimp*/ void addVariablePublic(KDReports::VariableType variable) override { m_cell.addVariable(variable); }
+    /*reimp*/ void addVariablePublic(KDReports::VariableType variable) override
+    {
+        m_cell.addVariable(variable);
+    }
     /*reimp*/ void addVerticalSpacingPublic(qreal space) override
     {
         m_cell.addVerticalSpacing(space);

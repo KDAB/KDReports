@@ -43,14 +43,19 @@ class KDREPORTS_EXPORT ReportBuilder
 
 public:
     ReportBuilder(KDReports::TextDocumentData &contentDocument, const QTextCursor &cursor, Report *report);
-    virtual ~ReportBuilder() { }
+    virtual ~ReportBuilder()
+    {
+    }
 
     QTextCursor &cursor()
     {
         m_contentDocument.aboutToModifyContents(TextDocumentData::Append);
         return m_cursor;
     }
-    Report *report() { return m_report; }
+    Report *report()
+    {
+        return m_report;
+    }
 
     // Warning, changes to those virtual methods must be propagated to CellReportBuilder.
     virtual void addPageBreakPublic();
@@ -66,19 +71,37 @@ public:
     virtual void addVariable(KDReports::VariableType variable);
     virtual void addVerticalSpacing(qreal space);
 
-    TextDocumentData &currentDocumentData() { return m_contentDocument; }
+    TextDocumentData &currentDocumentData()
+    {
+        return m_contentDocument;
+    }
 
-    QTextDocument &currentDocument() { return currentDocumentData().document(); }
+    QTextDocument &currentDocument()
+    {
+        return currentDocumentData().document();
+    }
 
     // Store default font in builder, so that toplevel text elements use the report's default font
     // but table cells use the table's default font (if any)
-    void setDefaultFont(const QFont &font) { m_defaultFont = font; }
+    void setDefaultFont(const QFont &font)
+    {
+        m_defaultFont = font;
+    }
 
-    QFont defaultFont() const { return m_defaultFont; }
+    QFont defaultFont() const
+    {
+        return m_defaultFont;
+    }
 
     // should not be used directly, apart for creating another builder (e.g. cell builder)
-    TextDocumentData &contentDocumentData() { return m_contentDocument; }
-    QTextCursor &contentDocumentCursor() { return m_cursor; }
+    TextDocumentData &contentDocumentData()
+    {
+        return m_contentDocument;
+    }
+    QTextCursor &contentDocumentCursor()
+    {
+        return m_cursor;
+    }
 
     void setupBlockFormat(QTextBlockFormat &blockFormat) const;
 

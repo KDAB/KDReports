@@ -14,9 +14,9 @@
 **
 ****************************************************************************/
 
-#include "KDReportsSpreadsheetReportLayout_p.h"
 #include "KDReportsAutoTableElement.h"
 #include "KDReportsLayoutHelper_p.h"
+#include "KDReportsSpreadsheetReportLayout_p.h"
 #include "KDReportsTableBreakingLogic_p.h"
 #include <QAbstractItemModel>
 
@@ -557,7 +557,9 @@ QString KDReports::SpreadsheetReportLayout::toHtml() const
     return QStringLiteral("Not implemented");
 }
 
-void KDReports::SpreadsheetReportLayout::finishHtmlExport() { }
+void KDReports::SpreadsheetReportLayout::finishHtmlExport()
+{
+}
 
 //@cond PRIVATE
 bool KDReports::SpreadsheetReportLayout::scaleTo(int numPagesHorizontally, int numPagesVertically)

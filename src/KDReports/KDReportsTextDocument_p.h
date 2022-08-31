@@ -45,7 +45,10 @@ class QTextTable;
 QT_END_NAMESPACE
 
 namespace KDReports {
-enum { HeaderColumnsProperty = QTextFormat::UserProperty + 248 };
+enum
+{
+    HeaderColumnsProperty = QTextFormat::UserProperty + 248
+};
 
 /**
  * @internal  (exported for unit tests)

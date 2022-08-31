@@ -78,7 +78,10 @@ public:
     void setCellBorder(qreal border, const QBrush &borderBrush);
     void setHeaderBackground(const QBrush &headerBackground);
 
-    KDReports::Report::TableBreakingPageOrder tableBreakingPageOrder() const { return m_tableBreakingPageOrder; }
+    KDReports::Report::TableBreakingPageOrder tableBreakingPageOrder() const
+    {
+        return m_tableBreakingPageOrder;
+    }
     void setTableBreakingPageOrder(KDReports::Report::TableBreakingPageOrder order);
     void setHorizontalHeaderFont(const QFont &font);
     void setVerticalHeaderFont(const QFont &font);
