@@ -198,17 +198,23 @@ if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
     DESTINATION "${INSTALL_LIBRARY_DIR}/cmake/KDReports${${PROJECT_NAME}_LIBRARY_QTID}"
   )
 
-  # Generate .pri file for qmake users
-  #TODO: ECM does not support Qt6 yet
-  if(Qt_VERSION_MAJOR EQUAL 5 AND
-    NOT CMAKE_CONFIGURATION_TYPES) # Not working with VS generator or older cmake versions
-    include(ECMGeneratePriFile)
-    ecm_generate_pri_file(BASE_NAME KDReports
-                          LIB_NAME KDReports
-                          # DEPS "${PRI_DEPS}" # TODO for kdchart
-                          FILENAME_VAR pri_filename
-    )
-    install(FILES ${pri_filename} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
+  # Generate .pri file for qmake users (except when using the VS generator)
+  if(NOT CMAKE_CONFIGURATION_TYPES)
+    if(Qt_VERSION_MAJOR EQUAL 5 OR (Qt_VERSION_MAJOR EQUAL 6 AND Qt6Core_VERSION VERSION_GREATER "6.2"))
+      include(ECMGeneratePriFile) #not available for Qt6.2 or lower
+      set(PROJECT_VERSION_STRING ${${PROJECT_NAME}_VERSION})
+      ecm_generate_pri_file(
+        BASE_NAME
+        ${PROJECT_NAME}
+        LIB_NAME
+        kdreports${${PROJECT_NAME}_LIBRARY_QTID}
+        FILENAME_VAR
+        pri_filename
+        INCLUDE_INSTALL_DIR
+        ${INSTALL_INCLUDE_DIR}
+      )
+      install(FILES ${pri_filename} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
+    endif()
   endif()
 else()
   #Always disable tests, examples, docs when used as a submodule
