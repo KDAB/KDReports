@@ -16,7 +16,7 @@ from conans import ConanFile, CMake, tools
 
 class KdReportsConan(ConanFile):
     name = "kdreports"
-    version = "2.1.1"
+    version = "2.2.0"
     license = ("https://raw.githubusercontent.com/KDAB/KDReports/master/LICENSES/GPL-2.0-only.txt,"
                "https://raw.githubusercontent.com/KDAB/KDReports/master/LICENSES/GPL-3.0-only.txt,"
                "https://raw.githubusercontent.com/KDAB/KDReports/master/LICENSES/LGPL-2.1-only.txt,"
