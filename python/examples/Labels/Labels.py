@@ -23,7 +23,7 @@ from PyKDReports.KDReports import PreviewDialog, Report, TextElement, AutoTableE
 
 def inchToMM(inch):
     return inch * 25.4
-    
+
 class LabelModel(QAbstractTableModel):
     def __init__(self, cellWidth, cellHeight, parent = None):
         super().__init__(parent)
@@ -47,7 +47,7 @@ class LabelModel(QAbstractTableModel):
             return QSizeF(self.m_cellWidth, self.m_cellHeight)
         elif role == Qt.TextAlignmentRole:
             return Qt.AlignCenter
-        
+
         return None
 
 def main():
@@ -97,9 +97,9 @@ def main():
             QMessageBox.information(0, "Report saved", "Success saving to " + preview.savedFileName())
         elif result == PreviewDialog.SaveError:
             QMessageBox.information(0, "Error", "Error while saving to " + preview.savedFileName())
-            
+
     return 0
-    
+
 if __name__ == "__main__":
     main()
 

@@ -20,8 +20,8 @@ Features:
 * Support for configurable column widths in tables, see AbstractTableElement::setColumnWidths.
   This also leads to faster table breaking.
 
-* Improved error handling when parsing XML files. 
-  KDReports::Report::loadFromXML now takes an optional ErrorDetails pointer, 
+* Improved error handling when parsing XML files.
+  KDReports::Report::loadFromXML now takes an optional ErrorDetails pointer,
   which will be filled with the error message from the parser.
 
 * Support for changing named values with associateTextValue even after the report has been constructed.

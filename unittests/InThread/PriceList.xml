@@ -51,7 +51,7 @@
   <text bold="true" paragraph-background="#CCCCFF" id="table1_title"/>
   <table model="table1" width="100%"/>
   <vspace size="5"/>
-  
+
   <text bold="true" paragraph-background="#CCCCFF" id="table2_title"/>
   <table model="table2" width="100%"/>
 
@@ -60,7 +60,7 @@
   <text bold="true" paragraph-background="#CCCCFF" id="table1_title"/>
   <table model="table1" width="100%"/>
   <vspace size="5"/>
-  
+
   <text bold="true" paragraph-background="#CCCCFF" id="table2_title"/>
   <table model="table2" width="100%"/>
   <vspace size="5"/>

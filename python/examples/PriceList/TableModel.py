@@ -41,7 +41,7 @@ class TableModel(QAbstractTableModel):
             return 0
         else:
             return len(self.m_rows[0])
-          
+
     def data(self, index, role):
         # FIXME kdchart queries (-1, -1) for empty models
         if (index.row() == -1 or index.column() == -1):
@@ -86,7 +86,7 @@ class TableModel(QAbstractTableModel):
                 data.append(line)
 
             if len(data) > 0:
-                self.m_rows = resizeArray(self.m_rows, len(data) -1) 
+                self.m_rows = resizeArray(self.m_rows, len(data) -1)
                 for row in range(len(data)):
                     parts = data[row].split(',')
 
