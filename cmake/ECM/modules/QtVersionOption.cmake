@@ -1,23 +1,21 @@
-#.rst:
-# QtVersionOption
-# ---------------
-#
-# Adds a build option to select the major Qt version if necessary,
-# that is, if the major Qt version has not yet been determined otherwise
-# (e.g. by a corresponding find_package() call).
-#
-# This module is typically included by other modules requiring knowledge
-# about the major Qt version.
-#
-# ``QT_MAJOR_VERSION`` is defined to either be "5" or "6".
-#
-#
-# Since 5.82.0.
-
-#=============================================================================
 # SPDX-FileCopyrightText: 2021 Volker Krause <vkrause@kde.org>
 #
 # SPDX-License-Identifier: BSD-3-Clause
+
+#[=======================================================================[.rst:
+QtVersionOption
+---------------
+
+Adds a build option to select the major Qt version if necessary,
+that is, if the major Qt version has not yet been determined otherwise
+(e.g. by a corresponding ``find_package()`` call).
+This module is typically included by other modules requiring knowledge
+about the major Qt version.
+
+``QT_MAJOR_VERSION`` is defined to either be "5" or "6".
+
+Since 5.82.0.
+#]=======================================================================]
 
 if (DEFINED QT_MAJOR_VERSION)
     return()
