@@ -39,4 +39,3 @@ foreach(test_file ${TEST_FILES})
   add_test(${test_name} ${Python3_EXECUTABLE} ${test_file})
   set_tests_properties(${test_name} PROPERTIES ENVIRONMENT "${PYTHON_ENV_COMMON}")
 endforeach()
-

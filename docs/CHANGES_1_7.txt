@@ -37,4 +37,3 @@ Bug fixes:
 * Setting the report to Landscape and then using KDReports::PreviewDialog now sets the print to Landscape.
 
 * Printing to PDF as Landscape now generates a correct paper size.
-

@@ -31,4 +31,3 @@ Performance fixes:
 ------------------
 
 * KDRE-74: Remove internal QPrinter object in Report class, to gain some performance.
-

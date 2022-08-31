@@ -72,4 +72,3 @@ What is new in KD Reports 1.1
 * Fix linking with KDChart on Windows
 
 * Made xml examples work standalone, using a resource file
-

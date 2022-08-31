@@ -65,4 +65,3 @@ Bugfixes:
 * Preview dialog: hide "Paper Size" and "Orientation" labels when setPageSizeChangeAllowed(false) is called.
 
 * Preserve page breaks after autotables when calling regenerateAutoTables().
-

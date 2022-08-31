@@ -26,4 +26,3 @@ if (@KDChart_FOUND@)
 endif()
 
 include("${CMAKE_CURRENT_LIST_DIR}/KDReportsTargets.cmake")
-

@@ -17,5 +17,3 @@ Bug fixes:
 * Fix compilation with Qt 5 (KDRE-150)
 
 * Fix out of bounds crash in example code (TableModel) (KDCH-995)
-
-

@@ -24,4 +24,3 @@ Behaviour changes:
 * Porting away from deprecated QXmlInputSource means that the parsing of whitespace-only XML elements (in templates) has changed.
   This means that an element like <text inline="true"> </text> (whitespace only) is no longer supported (it is parsed as being empty), it needs to be merged with other text elements. A workaround, which unfortunately only works with Qt5, is <![CDATA[ ]]> inside the text element.
   Note that Qt doesn't support xml:space="preserve", which is the reason for this issue.
-

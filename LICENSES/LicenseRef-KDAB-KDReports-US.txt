@@ -138,4 +138,3 @@ Sweden, the venue to be Sunne Tingsratt.  The EULA gives you specific
 legal rights; you may have others, which vary from state to state and
 from country to country.  KDAB reserves all rights not specifically
 granted in this EULA.
-

@@ -149,4 +149,3 @@ class TableModel(QAbstractTableModel):
 
     def setSupplyHeaderData(self, value):
         self.m_supplyHeaderData = value
-

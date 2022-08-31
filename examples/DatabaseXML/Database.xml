@@ -2,4 +2,3 @@
 <report xmlns="https://www.kdab.com/kdreports">
   <table model="airlines" verticalHeaderVisible="false"/>
 </report>
-
