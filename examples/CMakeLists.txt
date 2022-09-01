@@ -35,6 +35,8 @@ if(NOT EMSCRIPTEN)
     else()
         message(STATUS "QtSql not found.  skipping the Sql examples")
     endif()
+else()
+    add_subdirectory(DemoWasm)
 endif()
 
 if(KDChart_FOUND)

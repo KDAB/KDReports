@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>KDReportsWindow</class>
+ <widget class="QMainWindow" name="KDReportsWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>KDReportsWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>-1</number>
+      </property>
+      <property name="documentMode">
+       <bool>true</bool>
+      </property>
+      <property name="tabsClosable">
+       <bool>true</bool>
+      </property>
+      <property name="movable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuExamples">
+    <property name="title">
+     <string>Examples</string>
+    </property>
+    <addaction name="actionReference_Report"/>
+    <addaction name="actionLetter"/>
+    <addaction name="actionMain_Merge"/>
+    <addaction name="actionPrice_List_XML"/>
+   </widget>
+   <addaction name="menuExamples"/>
+  </widget>
+  <action name="actionReference_Report">
+   <property name="text">
+    <string>Reference Report</string>
+   </property>
+  </action>
+  <action name="actionLetter">
+   <property name="text">
+    <string>Letter</string>
+   </property>
+  </action>
+  <action name="actionMain_Merge">
+   <property name="text">
+    <string>Mail Merge XML</string>
+   </property>
+  </action>
+  <action name="actionPrice_List_XML">
+   <property name="text">
+    <string>Price List XML</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

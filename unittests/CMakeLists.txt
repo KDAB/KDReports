@@ -42,10 +42,14 @@ macro(add_unittest _source)
         ${_name}
         Qt${Qt_VERSION_MAJOR}::Core
         Qt${Qt_VERSION_MAJOR}::Gui
-        Qt${Qt_VERSION_MAJOR}::Sql
         Qt${Qt_VERSION_MAJOR}::Test
         kdreports
     )
+    if(NOT EMSCRIPTEN)
+        target_link_libraries(${_name}
+            Qt${Qt_VERSION_MAJOR}::Sql
+        )
+    endif()
 endmacro()
 
 add_subdirectory(ElementCopying)
