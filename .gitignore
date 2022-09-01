@@ -13,6 +13,7 @@ qrc_*.cpp
 
 *-e
 
+rc_price_list.py
 CPackConfig.cmake
 
 configure.sh
