@@ -6,9 +6,12 @@
 # SPDX-License-Identifier: MIT
 #
 
-set(SOURCES
-    BigImage.cpp BigImage.qrc
-)
+set(SOURCES BigImage.cpp BigImage.qrc)
 
-add_executable(BigImage ${SOURCES})
-target_link_libraries(BigImage ${QT_LIBRARIES} kdreporttesttools kdreports)
+add_executable(
+    BigImage
+    ${SOURCES}
+)
+target_link_libraries(
+    BigImage ${QT_LIBRARIES} kdreporttesttools kdreports
+)

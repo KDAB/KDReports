@@ -6,9 +6,12 @@
 # SPDX-License-Identifier: MIT
 #
 
-set(SOURCES
-    Labels.cpp
-)
+set(SOURCES Labels.cpp)
 
-add_executable(Labels ${SOURCES})
-target_link_libraries(Labels ${QT_LIBRARIES} kdreports)
+add_executable(
+    Labels
+    ${SOURCES}
+)
+target_link_libraries(
+    Labels ${QT_LIBRARIES} kdreports
+)

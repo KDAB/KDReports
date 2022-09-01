@@ -6,9 +6,12 @@
 # SPDX-License-Identifier: MIT
 #
 
-set(SOURCES
-    MailMergeXML.cpp MailMergeXML.qrc
-)
+set(SOURCES MailMergeXML.cpp MailMergeXML.qrc)
 
-add_executable(MailMergeXML ${SOURCES})
-target_link_libraries(MailMergeXML ${QT_LIBRARIES} kdreports kdreporttesttools)
+add_executable(
+    MailMergeXML
+    ${SOURCES}
+)
+target_link_libraries(
+    MailMergeXML ${QT_LIBRARIES} kdreports kdreporttesttools
+)

@@ -6,9 +6,12 @@
 # SPDX-License-Identifier: MIT
 #
 
-set(SOURCES
-    DatabaseXML.cpp DatabaseXML.qrc
-)
+set(SOURCES DatabaseXML.cpp DatabaseXML.qrc)
 
-add_executable(DatabaseXML ${SOURCES})
-target_link_libraries(DatabaseXML ${QT_LIBRARIES} kdreports)
+add_executable(
+    DatabaseXML
+    ${SOURCES}
+)
+target_link_libraries(
+    DatabaseXML ${QT_LIBRARIES} kdreports
+)

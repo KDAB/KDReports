@@ -30,6 +30,13 @@ repos:
   rev: v2.1.0
   hooks:
   - id: codespell
+- repo: https://github.com/cheshirekow/cmake-format-precommit
+  rev: v0.6.13
+  hooks:
+  - id: cmake-lint
+    exclude: (.py.cmake|Doxyfile.cmake)
+  - id: cmake-format
+    exclude: (.py.cmake|Doxyfile.cmake)
 - repo: https://github.com/fsfe/reuse-tool
   rev: v1.0.0
   hooks:

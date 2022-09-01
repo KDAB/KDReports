@@ -1,4 +1,4 @@
- ##
+##
 #
 # This file is part of the KD Reports library.
 #
@@ -7,9 +7,12 @@
 # SPDX-License-Identifier: MIT
 #
 
-set(SOURCES
-    HelloWorldXML.cpp HelloWorldXML.qrc
-)
+set(SOURCES HelloWorldXML.cpp HelloWorldXML.qrc)
 
-add_executable(HelloWorldXML ${SOURCES})
-target_link_libraries(HelloWorldXML ${QT_LIBRARIES} kdreports)
+add_executable(
+    HelloWorldXML
+    ${SOURCES}
+)
+target_link_libraries(
+    HelloWorldXML ${QT_LIBRARIES} kdreports
+)

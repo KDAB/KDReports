@@ -215,9 +215,8 @@ include(KDInstallLocation)
 if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
     set(${PROJECT_NAME}_IS_ROOT_PROJECT TRUE)
 
-    message(
-        STATUS
-            "Building ${PROJECT_NAME} ${${PROJECT_NAME}_VERSION} in ${CMAKE_BUILD_TYPE} mode. Installing to ${CMAKE_INSTALL_PREFIX}"
+    message(STATUS "Building ${PROJECT_NAME} ${${PROJECT_NAME}_VERSION} in ${CMAKE_BUILD_TYPE} mode. "
+                   "Installing to ${CMAKE_INSTALL_PREFIX}"
     )
 
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin")
@@ -303,13 +302,6 @@ if(${PROJECT_NAME}_DOCS)
 endif()
 
 if(${PROJECT_NAME}_IS_ROOT_PROJECT)
-    if(NOT ${PROJECT_NAME}_DOCS)
-        add_custom_target(
-            docs
-            COMMAND ${CMAKE_COMMAND} -E echo "Sorry, there is no docs target since KDReports_DOCS=OFF."
-                    "Re-run cmake with the -DKDReports_DOCS=True option if you want to generate the documentation."
-        )
-    endif()
     # Add uninstall target (not for submodules since parent projects typically have uninstall too)
     include(ECMUninstallTarget)
 endif()

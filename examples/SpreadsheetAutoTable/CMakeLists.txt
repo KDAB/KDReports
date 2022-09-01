@@ -6,9 +6,12 @@
 # SPDX-License-Identifier: MIT
 #
 
-set(SOURCES
-    SpreadsheetAutoTable.cpp
-)
+set(SOURCES SpreadsheetAutoTable.cpp)
 
-add_executable(SpreadsheetAutoTable ${SOURCES})
-target_link_libraries(SpreadsheetAutoTable ${QT_LIBRARIES} kdreports)
+add_executable(
+    SpreadsheetAutoTable
+    ${SOURCES}
+)
+target_link_libraries(
+    SpreadsheetAutoTable ${QT_LIBRARIES} kdreports
+)

@@ -6,9 +6,12 @@
 # SPDX-License-Identifier: MIT
 #
 
-set(SOURCES
-    PriceList.cpp PriceList.qrc
-)
+set(SOURCES PriceList.cpp PriceList.qrc)
 
-add_executable(PriceList ${SOURCES})
-target_link_libraries(PriceList ${QT_LIBRARIES} kdreporttesttools kdreports)
+add_executable(
+    PriceList
+    ${SOURCES}
+)
+target_link_libraries(
+    PriceList ${QT_LIBRARIES} kdreporttesttools kdreports
+)
