@@ -3,12 +3,12 @@ CHECKSETS qt5,c++,foss
 #KDAB-specific checks
 EXTRA kdabcopyright-reuse,fosslicense-reuse
 
-#additional checks
-#EXTRA defines,null
-
 #exclude checks now being done by clazy or clang-tools
-EXCLUDE includes,strings,explicit,normalize,passbyvalue,operators,nullstrcompare,nullstrassign,doublequote_chars,qobject,sigsandslots,staticobjects,inline,postfixop
+EXCLUDE includes,strings,explicit,normalize,passbyvalue,operators,nullstrcompare,nullstrassign,doublequote_chars,qobject,sigsandslots,staticobjects,cpp
 #exclude more checks
+EXCLUDE qminmax,captruefalse,dpointer,inline,constref
+#exclude spelling as codespell is much, much better tool
+EXCLUDE spelling
 EXCLUDE style
 
 #skip the combined header
