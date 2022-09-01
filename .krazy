@@ -17,4 +17,4 @@ SKIP /src/KDReports/KDReports.h
 #skip other cmake
 SKIP Doxyfile.cmake
 #skip the borrowed code in the cmake subdir
-SKIP /cmake/InstallLocation.cmake|/cmake/ECM/|/cmake/KDAB/
+SKIP /cmake/ECM/|/cmake/KDAB/
