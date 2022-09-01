@@ -1,11 +1,7 @@
 License
 =======
 The KD Reports Software is Copyright 2007-2022 Klarälvdalens Datakonsult AB (KDAB),
-and is available under the terms of:
+and is available under the terms of the MIT license.
 
-* LGPL-2.1 or LGPL-3.0
-* GPL-2.0 or GPL-3.0
-* the KDAB commercial license, provided that you buy a license.
-  please contact info@kdab.com if you are interested in buying commercial licenses.
-
+See the full license text in the LICENSES folder.
 See the licenses in the LICENSES folder.

@@ -47,29 +47,17 @@ Stay up-to-date with KDAB product announcements:
 
 Get Involved
 ============
-KDAB will happily accept external contributions, but substantial contributions require
-a signed [Copyright Assignment Agreement](docs/KDReports-CopyrightAssignmentForm.pdf).
-
-Contact info@kdab.com for more information about the Copyright Assignment Agreement.
+KDAB will happily accept external contributions.
 
 Please submit your contributions or issue reports from our GitHub space at
-https://github.com/KDAB/KDReports
+https://github.com/KDAB/KDReports.
 
 License
 =======
 The KD Reports Software is Copyright 2007-2022 Klarälvdalens Datakonsult AB (KDAB),
-and is available under the terms of:
+and is available under the terms of the [MIT](LICENSES/MIT.txt) license.
 
-* [LGPL-2.1](LICENSES/LGPL-2.1-only.txt) or [LGPL-3.0](LICENSES/LGPL-3.0-only.txt)
-* [GPL-2.0](LICENSES/GPL-2.0-only.txt) or [GPL-3.0](LICENSES/GPL-3.0-only.txt)
-* the KDAB commercial license, provided that you buy a license.
-  please contact info@kdab.com if you are interested in buying commercial licenses.
-
-Commercial licensing terms are available in
-[LicenseRef-KDAB-KDReports.txt](LICENSES/LicenseRef-KDAB-KDReports.txt),
-[LicenseRef-KDAB-KDReports-US.txt](LICENSES/LicenseRef-KDAB-KDReports-US.txt).
-
-See [README-commercial.txt](README-commercial.txt) for more details.
+Contact KDAB at <info@kdab.com> to inquire about commercial licensing.
 
 About KDAB
 ==========

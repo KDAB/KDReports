@@ -1,15 +1,10 @@
-## This file is part of the KD Reports library.
-##
-## SPDX-FileCopyrightText: 2021-2022 Klarälvdalens Datakonsult AB, a KDAB Group company <info@kdab.com>
-##
-## SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDAB-KDReports OR LicenseRef-KDAB-KDReports-US
-##
-## Licensees holding valid commercial KD Reports licenses may use this file in
-## accordance with the KD Reports Commercial License Agreement provided with
-## the Software.
-##
-## Contact info@kdab.com if any conditions of this licensing are not clear to you.
-##
+#
+# This file is part of the KD Reports library.
+#
+# SPDX-FileCopyrightText: 2021-2022 Klarälvdalens Datakonsult AB, a KDAB Group company <info@kdab.com>
+#
+# SPDX-License-Identifier: MIT
+#
 
 # dot should come with Doxygen find_package(Doxygen)
 if(DOXYGEN_DOT_EXECUTABLE)
@@ -82,14 +77,10 @@ add_custom_command(
 
   #copy some files by-hand that are referred to by the markdown README
   COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/INSTALL.txt ${DOXYGEN_OUTPUT_DIR}/html
-  COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/README-commercial.txt ${DOXYGEN_OUTPUT_DIR}/html
-
   COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/LICENSES ${DOXYGEN_OUTPUT_DIR}/html/LICENSES
   COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/examples ${DOXYGEN_OUTPUT_DIR}/html/examples
 
   COMMAND ${CMAKE_COMMAND} -E make_directory ${DOXYGEN_OUTPUT_DIR}/html/docs
-  COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/docs/KDReports-CopyrightAssignmentForm.pdf ${DOXYGEN_OUTPUT_DIR}/html/docs
-
   COMMAND ${CMAKE_COMMAND} -E make_directory ${DOXYGEN_OUTPUT_DIR}/html/docs/manual
   COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/docs/manual/kdreports.pdf ${DOXYGEN_OUTPUT_DIR}/html/docs/manual
 
