@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/">
+        <file>files/logo.png</file>
+        <file>files/MailMerge.xml</file>
+        <file>files/members.csv</file>
+        <file alias="system.png">files/cr32-device-system.png</file>
+        <file>files/kdab_small.jpg</file>
+        <file>files/kdab.jpg</file>
+        <file>files/PriceList.xml</file>
+        <file alias="table1">files/KDReports-Test-NetworkPeripherals.csv</file>
+        <file alias="table2">files/KDReports-Test-PrinterCartridges.csv</file>
+        <file alias="1leftarrow.png">files/1leftarrow.png</file>
+        <file alias="1rightarrow.png">files/1rightarrow.png</file>
+        <file alias="2leftarrow.png">files/2leftarrow.png</file>
+        <file alias="2rightarrow.png">files/2rightarrow.png</file>
+        <file alias="zoom-.png">files/zoom-.png</file>
+        <file alias="zoom+.png">files/zoom+.png</file>
+    </qresource>
+</RCC>
