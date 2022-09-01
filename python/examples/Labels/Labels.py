@@ -8,45 +8,52 @@
 # SPDX-License-Identifier: MIT
 #
 
+''' Labels Example '''
+
+# pylint: disable=missing-class-docstring,missing-function-docstring
+
 import sys
 
 from PySide2.QtCore import Qt, QAbstractTableModel, QSizeF
 from PySide2.QtGui import QFont
 from PySide2.QtWidgets import QApplication, QMessageBox
-from PyKDReports.KDReports import PreviewDialog, Report, TextElement, AutoTableElement
+from PyKDReports.KDReports import PreviewDialog, Report, AutoTableElement
 
 
 def inchToMM(inch):
     return inch * 25.4
 
-class LabelModel(QAbstractTableModel):
-    def __init__(self, cellWidth, cellHeight, parent = None):
-        super().__init__(parent)
-        self.m_cellWidth = cellWidth
-        self.m_cellHeight = cellHeight
 
-    def rowCount(self, parent):
-        if (parent.isValid()):
-            return 0;
+class LabelModel(QAbstractTableModel):
+    def __init__(self, cellWidth, cellHeight, parent=None):
+        super().__init__(parent)
+        self.cellWidth = cellWidth
+        self.cellHeight = cellHeight
+
+    def rowCount(self, parent):  # pylint: disable=no-self-use
+        if parent.isValid():
+            return 0
         return 10
 
-    def columnCount(self, parent):
-        if (parent.isValid()):
+    def columnCount(self, parent):  # pylint: disable=no-self-use
+        if parent.isValid():
             return 0
         return 3
 
     def data(self, index, role):
+        del index
         if role == Qt.DisplayRole:
             return "Klarälvdalens Datakonsult AB\n" + "Rysktorp\n" + "Sweden\n"
-        elif role == Qt.SizeHintRole:
-            return QSizeF(self.m_cellWidth, self.m_cellHeight)
-        elif role == Qt.TextAlignmentRole:
+        if role == Qt.SizeHintRole:
+            return QSizeF(self.cellWidth, self.cellHeight)
+        if role == Qt.TextAlignmentRole:
             return Qt.AlignCenter
 
         return None
 
+
 def main():
-    app = QApplication(sys.argv)
+    QApplication(sys.argv)
 
     # This example shows how to print address labels
     # on the popular Avery label size of 2.625 in x 1 in which is the white label #5160.
@@ -83,10 +90,9 @@ def main():
     report.setMargins(verticalPageMargin, horizontalPageMargin, verticalPageMargin, horizontalPageMargin)
     report.setFixedRowHeight(cellHeight)
 
-
     # To show a print preview:
     preview = PreviewDialog(report)
-    if (preview.exec_()):
+    if preview.exec_():
         result = preview.result()
         if result == PreviewDialog.SavedSuccessfully:
             QMessageBox.information(0, "Report saved", "Success saving to " + preview.savedFileName())
@@ -94,6 +100,7 @@ def main():
             QMessageBox.information(0, "Error", "Error while saving to " + preview.savedFileName())
 
     return 0
+
 
 if __name__ == "__main__":
     main()

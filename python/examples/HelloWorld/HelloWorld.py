@@ -8,6 +8,10 @@
 # SPDX-License-Identifier: MIT
 #
 
+''' Show a Print Preview Dialog Example '''
+
+# pylint: disable=missing-class-docstring,missing-function-docstring
+
 import sys
 
 from PySide2.QtCore import Qt
@@ -16,10 +20,10 @@ from PyKDReports.KDReports import PreviewDialog, Report, TextElement
 
 
 def main():
-    app = QApplication(sys.argv)
+    QApplication(sys.argv)
 
     # create a report
-    report = Report();
+    report = Report()
 
     # Add a text element for the title
     titleElement = TextElement("Hello World!")
@@ -36,6 +40,7 @@ def main():
     # show a print preview
     preview = PreviewDialog(report)
     return preview.exec_()
+
 
 if __name__ == "__main__":
     main()

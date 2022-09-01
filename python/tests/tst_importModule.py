@@ -6,11 +6,16 @@
 # SPDX-License-Identifier: MIT
 #
 
+''' Test loading some KDReports classes '''
+
+# pylint: disable=missing-function-docstring,missing-class-docstring
+
 import unittest
 import importlib
 import inspect
 
 from config import TstConfig
+
 
 class TestImportModules(unittest.TestCase):
     def test_importModules(self):
@@ -22,6 +27,7 @@ class TestImportModules(unittest.TestCase):
         symbols = ['ChartElement', 'PageCount', 'Report']
         for symbol in symbols:
             self.assertIn(symbol, moduleSymbols)
+
 
 if __name__ == '__main__':
     TstConfig.initLibraryPath()

@@ -8,26 +8,34 @@
 # SPDX-License-Identifier: MIT
 #
 
+''' PriceList Example '''
+
+# pylint: disable=missing-class-docstring,missing-function-docstring
+
 import sys
+
+from TableModel import TableModel
 
 from PySide2.QtCore import Qt
 from PySide2.QtGui import QPixmap, QColor
 from PySide2.QtWidgets import QApplication
-from PyKDReports.KDReports import PreviewDialog, Report, TextElement, TableElement, AutoTableElement, HeaderLocation, Unit, VariableType, ImageElement
+from PyKDReports.KDReports import PreviewDialog, TextElement, TableElement, AutoTableElement
+from PyKDReports.KDReports import Report, HeaderLocation, Unit, VariableType, ImageElement
 
 try:
-    import rc_price_list
-except:
-    exit("Oops.. rc_price_list needs to be generated first.\nPlease run: rcc -g python PriceList.qrc -o rc_price_list.py\n(Make sure to use the rcc from the Qt version used to generate the bindings!)")
+    import rc_price_list  # pylint: disable=unused-import
+except ImportError:
+    sys.exit("Oops.. rc_price_list needs to be generated first.\n"
+             "Please run: rcc -g python PriceList.qrc -o rc_price_list.py\n"
+             "(Make sure to use the rcc from the Qt version used to generate the bindings!)")
 
-from TableModel import TableModel
 
 def main():
-    app = QApplication(sys.argv)
+    QApplication(sys.argv)
 
     report = Report()
-    report.setHeaderBodySpacing(10) # mm
-    report.setFooterBodySpacing(10) # mm
+    report.setHeaderBodySpacing(10)  # mm
+    report.setFooterBodySpacing(10)  # mm
 
     header = report.header(HeaderLocation.OddPages)
     kdab = QPixmap(":/kdab_small.jpg")
@@ -46,7 +54,7 @@ def main():
     evenPagesHeader = report.header(HeaderLocation.EvenPages)
     evenPagesHeader.addElement(imageElement)
     evenPagesHeader.addInlineElement(TextElement("Even pages header: "))
-    evenPagesHeader.addVariable(VariableType.PageNumber);
+    evenPagesHeader.addVariable(VariableType.PageNumber)
     evenPagesHeader.addInlineElement(TextElement(" / "))
     evenPagesHeader.addVariable(VariableType.PageCount)
 
@@ -58,7 +66,7 @@ def main():
     titleElement.setPointSize(18)
     report.addElement(titleElement, Qt.AlignHCenter)
 
-    report.addVerticalSpacing(10) # 1 cm
+    report.addVerticalSpacing(10)  # 1 cm
 
     titleElementColor = QColor(204, 204, 255)
 
@@ -80,7 +88,7 @@ def main():
 
     # Notice how elements can be copied and modified
     # This way, we use the same font attributes for all title elements
-    tableTitleElement2 = tableTitleElement;
+    tableTitleElement2 = tableTitleElement
     tableTitleElement2.setText("Printer Cartridges")
     report.addElement(tableTitleElement2, Qt.AlignLeft, titleElementColor)
 
@@ -92,7 +100,7 @@ def main():
     report.addElement(autoTableElement2)
 
     # and again, on the second page
-    report.addPageBreak();
+    report.addPageBreak()
     report.addElement(tableTitleElement, Qt.AlignLeft, titleElementColor)
     report.addElement(autoTableElement1)
     report.addVerticalSpacing(5)
@@ -120,13 +128,13 @@ def main():
     # This would look better if centered vertically. This feature is only available since
     # Qt-4.3 though (QTextCharFormat::AlignMiddle)
     systemPixmap = QPixmap(":/system.png")
-    headerCell1.addElement(ImageElement(systemPixmap));
+    headerCell1.addElement(ImageElement(systemPixmap))
     headerCell1.addInlineElement(TextElement(" Item"))
-    headerCell2 = tableElement.cell(1, 1);
-    headerCell2.setBackground(headerColor);
+    headerCell2 = tableElement.cell(1, 1)
+    headerCell2.setBackground(headerColor)
     expected = TextElement("Expected")
     expected.setItalic(True)
-    expected.setBackground(QColor(153, 153, 153)) # note that this background only applies to this element
+    expected.setBackground(QColor(153, 153, 153))  # note that this background only applies to this element
     headerCell2.addElement(expected)
     headerCell2.addInlineElement(TextElement(" shipping time"))
 
@@ -136,10 +144,11 @@ def main():
     tableElement.cell(3, 0).addElement(TextElement("Printer Cartridges"))
     tableElement.cell(3, 1).addElement(TextElement("3 days"))
 
-    report.addElement(tableElement);
+    report.addElement(tableElement)
 
     preview = PreviewDialog(report)
     return preview.exec_()
+
 
 if __name__ == "__main__":
     main()
