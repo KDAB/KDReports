@@ -1,3 +1,13 @@
+/****************************************************************************
+**
+** This file is part of the KD Reports library.
+**
+** SPDX-FileCopyrightText: 2022 Klarälvdalens Datakonsult AB, a KDAB Group company <info@kdab.com>
+**
+** SPDX-License-Identifier: MIT
+**
+****************************************************************************/
+
 #include "kdreportswindow.h"
 
 #include <QApplication>

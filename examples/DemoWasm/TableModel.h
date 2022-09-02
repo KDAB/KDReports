@@ -2,15 +2,9 @@
 **
 ** This file is part of the KD Reports library.
 **
-** SPDX-FileCopyrightText: 2007-2021 Klarälvdalens Datakonsult AB, a KDAB Group company <info@kdab.com>
+** SPDX-FileCopyrightText: 2007-2022 Klarälvdalens Datakonsult AB, a KDAB Group company <info@kdab.com>
 **
-** SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDAB-KDReports OR LicenseRef-KDAB-KDReports-US
-**
-** Licensees holding valid commercial KD Reports licenses may use this file in
-** accordance with the KD Reports Commercial License Agreement provided with
-** the Software.
-**
-** Contact info@kdab.com if any conditions of this licensing are not clear to you.
+** SPDX-License-Identifier: MIT
 **
 ****************************************************************************/
 
@@ -78,16 +72,25 @@ public:
     /**
      * Set to false if the data has no horizontal header
      */
-    void setDataHasHorizontalHeaders(bool value) { m_dataHasHorizontalHeaders = value; }
+    void setDataHasHorizontalHeaders(bool value)
+    {
+        m_dataHasHorizontalHeaders = value;
+    }
     /**
      * Set to false if the data has no vertical header
      */
-    void setDataHasVerticalHeaders(bool value) { m_dataHasVerticalHeaders = value; }
+    void setDataHasVerticalHeaders(bool value)
+    {
+        m_dataHasVerticalHeaders = value;
+    }
     /**
      * setSupplyHeaderData(false) allows to prevent the model from supplying header data,
      * even if parsing found any
      */
-    void setSupplyHeaderData(bool value) { m_supplyHeaderData = value; }
+    void setSupplyHeaderData(bool value)
+    {
+        m_supplyHeaderData = value;
+    }
 
 private:
     // the vector of rows:

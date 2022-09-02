@@ -46,9 +46,7 @@ macro(add_unittest _source)
         kdreports
     )
     if(NOT EMSCRIPTEN)
-        target_link_libraries(${_name}
-            Qt${Qt_VERSION_MAJOR}::Sql
-        )
+        target_link_libraries(${_name} Qt${Qt_VERSION_MAJOR}::Sql)
     endif()
 endmacro()
 

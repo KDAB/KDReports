@@ -104,4 +104,3 @@ and adjust to the PYTHONPATH accordingly, as necessary.
     copy "C:\Program Files\llvm\bin\libclang.dll" libclang.dll
     (Python3 installation in C:\Python37 and llvm in c:\Program Files\llvm. adjust as needed)
 ```
-

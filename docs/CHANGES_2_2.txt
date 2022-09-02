@@ -4,6 +4,7 @@ What is new in KD Reports 2.2
 General:
 --------
 * buildsystem - increase CMake min version to 3.12.0
+* Add WebAssembly demo-example
 
 Bugfixes:
 -------------

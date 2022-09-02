@@ -1,3 +1,13 @@
+/****************************************************************************
+**
+** This file is part of the KD Reports library.
+**
+** SPDX-FileCopyrightText: 2022 Klarälvdalens Datakonsult AB, a KDAB Group company <info@kdab.com>
+**
+** SPDX-License-Identifier: MIT
+**
+****************************************************************************/
+
 #include "kdreportswindow.h"
 #include "ui_kdreportswindow.h"
 
@@ -384,10 +394,10 @@ void KDReportsWindow::priceListXml()
     // not only as complete (generated) reports.
     report->associateTextValue("title_element", "Price list example");
     report->associateTextValue("company_address",
-                              QString::fromUtf8("Klarälvdalens Datakonsult AB\n"
-                                                "Rysktorp\n"
-                                                "SE-68392 Hagfors\n"
-                                                "Sweden"));
+                               QString::fromUtf8("Klarälvdalens Datakonsult AB\n"
+                                                 "Rysktorp\n"
+                                                 "SE-68392 Hagfors\n"
+                                                 "Sweden"));
     // Note how id="table1_title" is used twice in the xml, both places get the right value
     report->associateTextValue("table1_title", "Network Peripherals");
     report->associateTextValue("table2_title", "Printer Cartridges");
