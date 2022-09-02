@@ -14,13 +14,12 @@
 
 import sys
 
-from TableModel import TableModel
-
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap, QColor
 from PySide6.QtWidgets import QApplication
 from PyKDReportsQt6.KDReports import PreviewDialog, TextElement, TableElement, AutoTableElement
 from PyKDReportsQt6.KDReports import Report, HeaderLocation, Unit, VariableType, ImageElement
+from TableModel import TableModel
 
 try:
     import rc_price_list  # pylint: disable=unused-import
