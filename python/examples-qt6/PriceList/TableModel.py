@@ -72,7 +72,7 @@ class TableModel(QAbstractTableModel):
     def setData(self, index, value, role):
         if role == Qt.EditRole:
             self.rows[index.row()][index.column()] = value
-            self.dataChanged.emit(index, index)
+            self.dataChanged.emit(index, index) # pylint: disable=no-member
             return True
         return False
 
