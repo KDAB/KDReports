@@ -68,12 +68,17 @@ cmake . -DCMAKE_INSTALL_PREFIX=/usr -DKDReports_QT6=True -DCMAKE_BUILD_TYPE=Rele
 
 %files devel
 %defattr(-,root,root,-)
+%if 0%{?fedora} > 35
+%{_libdir}/qt6/mkspecs/modules/*
+%endif
+#%dir %{_prefix}/share/mkspecs
+#%dir %{_prefix}/share/mkspecs/features
+#%{_prefix}/share/mkspecs/features/kdreports.prf
 %dir %{_includedir}/KDReports-qt6
 %{_includedir}/KDReports-qt6/*
 %dir %{_libdir}/cmake/KDReports-qt6
 %{_libdir}/cmake/KDReports-qt6/*
 %{_libdir}/libkdreports-qt6.so
-#%{_prefix}/mkspecs/modules/* ECMGeneratePriFile isn't ported to Qt6 yet
 
 %changelog
 * Sat Sep 03 2022 Allen Winter <allen.winter@kdab.com> 2.2.0
