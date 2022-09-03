@@ -4,4 +4,3 @@ The KD Reports Software is Copyright 2007-2022 Klarälvdalens Datakonsult AB (KD
 and is available under the terms of the MIT license.
 
 See the full license text in the LICENSES folder.
-See the licenses in the LICENSES folder.

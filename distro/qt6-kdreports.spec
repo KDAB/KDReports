@@ -1,5 +1,5 @@
 Name:           qt6-kdreports
-Version:        2.1.0
+Version:        2.2.0
 Release:        1
 Summary:        A Qt library for creating printable reports
 Source:         %{name}-%{version}.tar.gz
@@ -7,7 +7,7 @@ Source1:        %{name}-rpmlintrc
 Source2:        %{name}-%{version}.tar.gz.asc
 URL:            https://github.com/KDAB/KDReports
 Group:          System/Libraries
-License:        LGPL-2.1-only OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+License:        MIT
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Vendor:         Klaralvdalens Datakonsult AB (KDAB)
 Packager:       Klaralvdalens Datakonsult AB (KDAB) <info@kdab.com>
@@ -68,14 +68,21 @@ cmake . -DCMAKE_INSTALL_PREFIX=/usr -DKDReports_QT6=True -DCMAKE_BUILD_TYPE=Rele
 
 %files devel
 %defattr(-,root,root,-)
+%if 0%{?fedora} > 35
+%{_libdir}/qt6/mkspecs/modules/*
+%endif
+#%dir %{_prefix}/share/mkspecs
+#%dir %{_prefix}/share/mkspecs/features
+#%{_prefix}/share/mkspecs/features/kdreports.prf
 %dir %{_includedir}/KDReports-qt6
 %{_includedir}/KDReports-qt6/*
 %dir %{_libdir}/cmake/KDReports-qt6
 %{_libdir}/cmake/KDReports-qt6/*
 %{_libdir}/libkdreports-qt6.so
-#%{_prefix}/mkspecs/modules/* ECMGeneratePriFile isn't ported to Qt6 yet
 
 %changelog
+* Sat Sep 03 2022 Allen Winter <allen.winter@kdab.com> 2.2.0
+  2.2.0 final
 * Tue Jan 11 2022 Allen Winter <allen.winter@kdab.com> 2.1.0
   2.1.0 final
 * Sat Aug 21 2021 Allen Winter <allen.winter@kdab.com> 2.0.0
