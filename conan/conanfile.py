@@ -10,7 +10,7 @@ from conans import ConanFile, CMake, tools
 
 class KdReportsConan(ConanFile):
     name = "kdreports"
-    version = "2.2.0"
+    version = "2.2.1"
     license = ("https://raw.githubusercontent.com/KDAB/KDReports/master/LICENSES/MIT.txt")
     author = "Klaralvdalens Datakonsult AB (KDAB) info@kdab.com"
     url = "https://github.com/KDAB/KDReports.git"
