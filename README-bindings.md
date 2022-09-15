@@ -73,7 +73,7 @@ and adjust to the PYTHONPATH accordingly, as necessary.
 To run the KDReports python examples:
 
 ```bash
-   export PYTHONPATH=/usr/local/KDAB/KDReports-2.2.0/lib64/python3.10/site-packages # Only if needed
+   export PYTHONPATH=/usr/local/KDAB/KDReports-2.2.0/lib64/python3.10/site-packages # adapt as needed
    cd python/examples/PriceList
    rcc -g python PriceList.qrc -o rc_price_list.py
    python3 PriceList.py
