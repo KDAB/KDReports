@@ -1,3 +1,5 @@
+![alt text](https://github.com/KDAB/KDReports/blob/kdreports-2.2/images/kdreports-trademark.png?raw=true)
+
 # Introduction
 
 KD Reports is a Qt tool that lets you easily create printable reports by
