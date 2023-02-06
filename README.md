@@ -1,4 +1,7 @@
-![alt text](https://github.com/KDAB/KDReports/blob/kdreports-2.2/images/kdreports-trademark.png?raw=true)
+<div>
+<img src="images/kdreports-trademark.png" width="70%"/>
+<img src="images/kdreports.png" align="right"/>
+</div>
 
 # Introduction
 
