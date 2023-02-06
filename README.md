@@ -1,6 +1,6 @@
 <div>
-<img src="images/kdreports-trademark.png" width="70%"/>
-<img src="images/kdreports.png" align="right"/>
+<img src="images/kdreports-trademark.png" width="68%"/>
+<img src="images/kdreports.png" height="200px"/>
 </div>
 
 # Introduction
