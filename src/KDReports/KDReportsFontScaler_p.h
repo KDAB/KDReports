@@ -29,7 +29,7 @@
 
 // Enable this to get debug output about the layouting
 // (font scaling, table layout, spreadsheet layout)
-//#define DEBUG_LAYOUT
+// #define DEBUG_LAYOUT
 
 namespace KDReports {
 
