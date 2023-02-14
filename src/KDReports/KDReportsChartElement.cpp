@@ -18,7 +18,7 @@
 #ifdef HAVE_KDCHART
 #include <KDChartBarDiagram>
 #include <KDChartChart>
-//#include <KDChartSerializer>
+// #include <KDChartSerializer>
 #endif
 #include <QDebug>
 #include <QFile>

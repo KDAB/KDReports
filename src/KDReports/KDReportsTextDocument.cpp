@@ -13,7 +13,7 @@
 
 #include <QDebug>
 
-//#define DEBUG_TABLEBREAKING
+// #define DEBUG_TABLEBREAKING
 
 KDReports::TextDocument::TextDocument()
 {
