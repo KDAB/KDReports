@@ -1,3 +1,8 @@
+<div>
+<img src="images/kdreports-trademark.png" width="68%"/>
+<img src="images/kdreports.png" height="200px"/>
+</div>
+
 # Introduction
 
 KD Reports is a Qt tool that lets you easily create printable reports by

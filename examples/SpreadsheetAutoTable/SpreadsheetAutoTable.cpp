@@ -16,7 +16,7 @@
 #include <KDReports>
 #include <QDebug>
 
-//#define USE_CUSTOM_ROLES
+// #define USE_CUSTOM_ROLES
 
 class ProxyModel : public QIdentityProxyModel
 {
