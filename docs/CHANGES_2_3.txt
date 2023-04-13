@@ -1,0 +1,13 @@
+What is new in KD Reports 2.3
+=============================
+
+General:
+--------
+
+Bugfixes:
+-------------
+* Preserve resolution in watermark image (issue #42)
+
+New features:
+-------------
+
