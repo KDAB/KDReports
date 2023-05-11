@@ -42,7 +42,7 @@ The starting point for using KD Reports is the KDReports::Report class.
 
 * See our official home page: <https://www.kdab.com/development-resources/qt-tools/kd-reports>
 * Visit us on GitHub: <https://github.com/KDAB/KDReports>
-* Email info@kdab.com for questions about copyright, licensing or commercial support.
+* Email info@kdab.com for questions about this product.
 
 Stay up-to-date with KDAB product announcements:
 
@@ -62,7 +62,7 @@ Please submit your contributions or issue reports from our GitHub space at
 The KD Reports Software is Copyright 2007-2023 Klarälvdalens Datakonsult AB (KDAB),
 and is available under the terms of the [MIT](LICENSES/MIT.txt) license.
 
-Contact KDAB at <info@kdab.com> to inquire about commercial licensing.
+Contact KDAB at <info@kdab.com> for any licensing queries.
 
 ## About KDAB
 
