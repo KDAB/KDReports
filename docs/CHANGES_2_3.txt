@@ -10,3 +10,6 @@ Bugfixes:
 
 New features:
 -------------
+* AutoTableElement: add customization functions for header styling, see setHorizontalHeaderFormatFunction and setVerticalHeaderFormatFunction, and their use in the PriceList example.
+
+
