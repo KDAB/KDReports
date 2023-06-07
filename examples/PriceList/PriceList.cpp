@@ -18,6 +18,7 @@
 static void setHorizontalHeaderFormat(int column, QTextTableCellFormat &format)
 {
     Q_UNUSED(column)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     format.setTopBorder(1);
     format.setBottomBorder(1);
     format.setTopBorderStyle(QTextFrameFormat::BorderStyle_Solid);
@@ -26,6 +27,7 @@ static void setHorizontalHeaderFormat(int column, QTextTableCellFormat &format)
     format.setBottomBorderBrush(QColor(0x326090));
     format.setLeftBorder(0);
     format.setRightBorder(0);
+#endif
     format.setPadding(0);
 }
 
