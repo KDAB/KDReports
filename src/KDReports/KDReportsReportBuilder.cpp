@@ -163,14 +163,10 @@ void KDReports::ReportBuilder::insertFragmentPublic(const QTextDocumentFragment 
 
 void KDReports::ReportBuilder::setTabPositions(const QList<QTextOption::Tab> &tabs)
 {
-    QList<QTextOption::Tab> tabsInPixels;
-    Q_FOREACH (QTextOption::Tab tab, tabs) { // krazy:exclude=foreach
+    m_tabPositions = tabs;
+    for (QTextOption::Tab &tab : m_tabPositions) {
         tab.position = mmToPixels(tab.position);
-        tabsInPixels.append(tab);
     }
-    // qDebug() << "setTabPositions" << tabsInPixels;
-
-    m_tabPositions = tabsInPixels;
     m_contentDocument.setUsesTabPositions(true);
 }
 

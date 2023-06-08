@@ -47,6 +47,7 @@ int main(int argc, char **argv)
 
     KDReports::Report report;
     report.setDocumentName("Reference report");
+    report.setParagraphMargins(3, 3, 3, 3);
 
     report.setWatermarkPixmap(QPixmap(":/background.jpg"));
     report.setWatermarkText(QString());
