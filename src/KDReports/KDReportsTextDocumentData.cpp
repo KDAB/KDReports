@@ -150,7 +150,7 @@ void KDReports::TextDocumentData::updatePercentSizes(QSizeF size)
             QList<QTextOption::Tab> tabs = blockFormat.tabPositions();
             // qDebug() << "Looking at block" << block.blockNumber() << "tabs:" << tabs.count();
             if (!tabs.isEmpty()) {
-                for(QTextOption::Tab &tab : tabs) {
+                for (QTextOption::Tab &tab : tabs) {
                     if (tab.delimiter == QLatin1Char('P') /* means Page -- see rightAlignedTab*/) {
                         const auto availableWidth = size.width() - rootFrameMargins - block.blockFormat().leftMargin() - block.blockFormat().rightMargin();
                         if (tab.type == QTextOption::RightTab) {
