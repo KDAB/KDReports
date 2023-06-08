@@ -90,21 +90,6 @@ private:
     QTextCursor cellCursor;
 };
 
-static QTextCharFormat::VerticalAlignment toVerticalAlignment(Qt::Alignment alignment)
-{
-    switch (alignment & Qt::AlignVertical_Mask) {
-    case Qt::AlignTop:
-        return QTextCharFormat::AlignTop;
-    case Qt::AlignBottom:
-        return QTextCharFormat::AlignBottom;
-    case Qt::AlignVCenter:
-        return QTextCharFormat::AlignMiddle;
-    case Qt::AlignBaseline:
-        return QTextCharFormat::AlignBaseline;
-    }
-    return QTextCharFormat::AlignNormal;
-}
-
 void FillCellHelper::fill(QTextTable *textTable, KDReports::ReportBuilder &builder, QTextDocument &textDoc, QTextTableCell &cell)
 {
     cellCursor = cell.firstCursorPosition();
@@ -112,7 +97,7 @@ void FillCellHelper::fill(QTextTable *textTable, KDReports::ReportBuilder &build
     if (background.canConvert<QBrush>()) {
         cellFormat.setBackground(qvariant_cast<QBrush>(background));
     }
-    cellFormat.setVerticalAlignment(toVerticalAlignment(alignment));
+    cellFormat.setVerticalAlignment(KDReports::ReportBuilder::toVerticalAlignment(alignment));
     cell.setFormat(cellFormat);
 
     QTextBlockFormat blockFormat = cellCursor.blockFormat();

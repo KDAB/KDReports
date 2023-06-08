@@ -105,6 +105,8 @@ public:
     void copyStateFrom(const ReportBuilder &parentBuilder);
     int currentPosition();
 
+    static QTextCharFormat::VerticalAlignment toVerticalAlignment(Qt::Alignment alignment);
+
 private:
     ReportBuilder(const ReportBuilder &other) = delete;
     ReportBuilder &operator=(const ReportBuilder &other) = delete;

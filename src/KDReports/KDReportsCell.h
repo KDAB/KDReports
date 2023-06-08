@@ -78,6 +78,17 @@ public:
      */
     void addVerticalSpacing(qreal space);
 
+    /*!
+     * Set the vertical alignment of the cell contents
+     * \since 2.3
+     */
+    void setVerticalAlignment(Qt::AlignmentFlag verticalAlignment);
+    /*!
+     * Returns the vertical alignment of the cell contents
+     * \since 2.3
+     */
+    Qt::AlignmentFlag verticalAlignment() const;
+
     /**
      * @internal
      * @reimp

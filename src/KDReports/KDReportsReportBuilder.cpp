@@ -210,3 +210,18 @@ int KDReports::ReportBuilder::currentPosition()
 {
     return m_cursor.position();
 }
+
+QTextCharFormat::VerticalAlignment KDReports::ReportBuilder::toVerticalAlignment(Qt::Alignment alignment)
+{
+    switch (alignment & Qt::AlignVertical_Mask) {
+    case Qt::AlignTop:
+        return QTextCharFormat::AlignTop;
+    case Qt::AlignBottom:
+        return QTextCharFormat::AlignBottom;
+    case Qt::AlignVCenter:
+        return QTextCharFormat::AlignMiddle;
+    case Qt::AlignBaseline:
+        return QTextCharFormat::AlignBaseline;
+    }
+    return QTextCharFormat::AlignNormal;
+}

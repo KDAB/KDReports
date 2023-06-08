@@ -42,6 +42,8 @@ public:
 class KDReports::TableElementPrivate
 {
 public:
+    void createCell(QTextTable *textTable, ReportBuilder &builder, int row, int column, const Cell &cell, QTextCharFormat charFormat) const;
+
     KDReports::CellContentMap m_cellContentMap;
     int m_headerRowCount = 0;
     int m_headerColumnCount = 0;
@@ -105,6 +107,28 @@ KDReports::Cell &KDReports::TableElement::cell(int row, int column)
     return d->m_cellContentMap[coord]; // find or create
 }
 
+void KDReports::TableElementPrivate::createCell(QTextTable *textTable, ReportBuilder &builder, int row, int column, const Cell &cell, QTextCharFormat charFormat) const
+{
+    if (cell.columnSpan() > 1 || cell.rowSpan() > 1)
+        textTable->mergeCells(row, column, cell.rowSpan(), cell.columnSpan());
+    QTextTableCell tableCell = textTable->cellAt(row, column);
+    Q_ASSERT(tableCell.isValid());
+    QTextCursor cellCursor = tableCell.firstCursorPosition();
+    QTextCharFormat tableCellFormat = charFormat;
+    if (cell.background().style() != Qt::NoBrush)
+        tableCellFormat.setBackground(cell.background());
+    tableCellFormat.setTableCellColumnSpan(cell.columnSpan());
+    tableCellFormat.setTableCellRowSpan(cell.rowSpan());
+    if (cell.verticalAlignment() != 0)
+        tableCellFormat.setVerticalAlignment(ReportBuilder::toVerticalAlignment(cell.verticalAlignment()));
+    tableCell.setFormat(tableCellFormat);
+    cellCursor.setCharFormat(tableCellFormat);
+    ReportBuilder cellBuilder(builder.currentDocumentData(), cellCursor, builder.report());
+    cellBuilder.copyStateFrom(builder);
+    cellBuilder.setDefaultFont(charFormat.font());
+    cell.build(cellBuilder);
+}
+
 void KDReports::TableElement::build(ReportBuilder &builder) const
 {
     if (d->m_cellContentMap.isEmpty())
@@ -131,22 +155,7 @@ void KDReports::TableElement::build(ReportBuilder &builder) const
         const int row = it.key().first;
         const int column = it.key().second;
         const Cell &cell = it.value();
-        if (cell.columnSpan() > 1 || cell.rowSpan() > 1)
-            textTable->mergeCells(row, column, cell.rowSpan(), cell.columnSpan());
-        QTextTableCell tableCell = textTable->cellAt(row, column);
-        Q_ASSERT(tableCell.isValid());
-        QTextCursor cellCursor = tableCell.firstCursorPosition();
-        QTextCharFormat tableCellFormat = charFormat;
-        if (cell.background().style() != Qt::NoBrush)
-            tableCellFormat.setBackground(cell.background());
-        tableCellFormat.setTableCellColumnSpan(cell.columnSpan());
-        tableCellFormat.setTableCellRowSpan(cell.rowSpan());
-        tableCell.setFormat(tableCellFormat);
-        cellCursor.setCharFormat(tableCellFormat);
-        ReportBuilder cellBuilder(builder.currentDocumentData(), cellCursor, builder.report());
-        cellBuilder.copyStateFrom(builder);
-        cellBuilder.setDefaultFont(charFormat.font());
-        cell.build(cellBuilder);
+        d->createCell(textTable, builder, row, column, cell, charFormat);
     }
 
     textDocCursor.movePosition(QTextCursor::End);
