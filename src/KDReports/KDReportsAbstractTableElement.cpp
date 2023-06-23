@@ -123,7 +123,7 @@ void KDReports::AbstractTableElementPrivate::fillConstraints(QTextTableFormat *t
         QVector<QTextLength> constraints;
         constraints.reserve(m_constraints.size());
         for (const auto &c : qAsConst(m_constraints)) {
-            QTextLength length;
+            QTextLength length; // Variable by default
             switch (c.unit) {
             case Millimeters:
                 length = QTextLength(QTextLength::FixedLength, mmToPixels(c.width));

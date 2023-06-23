@@ -105,13 +105,29 @@ public:
      */
     QFont defaultFont(bool *isSet) const;
 
+    enum // separate because we don't want "Variable" in other uses of Unit
+    {
+        Variable = Unit::Percent + 1 /// < no constraint, \since 2.3
+    };
+
     struct ColumnConstraint
     {
+        ColumnConstraint()
+            : width(0)
+            , unit(static_cast<Unit>(Variable))
+        {
+        }
+        ColumnConstraint(qreal w, Unit u)
+            : width(w)
+            , unit(u)
+        {
+        }
         qreal width;
         Unit unit;
     };
+
     /**
-     * Sets constraints on the column widths (fixed or proportional)
+     * Sets constraints on the column widths (for each column: fixed, proportional, or no constraint)
      * \param constraints vector of constraints
      * \since 1.9
      */
