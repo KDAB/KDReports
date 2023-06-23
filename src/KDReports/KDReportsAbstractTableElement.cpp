@@ -17,6 +17,8 @@
 class KDReports::AbstractTableElementPrivate
 {
 public:
+    void fillConstraints(QTextTableFormat *tableFormat) const;
+
     qreal m_border = 1.0;
     QBrush m_borderBrush = QBrush(Qt::darkGray /*like Qt does*/);
     qreal m_padding = 0.5;
@@ -115,6 +117,27 @@ QFont KDReports::AbstractTableElement::defaultFont(bool *isSet) const
     return d->m_defaultFont;
 }
 
+void KDReports::AbstractTableElementPrivate::fillConstraints(QTextTableFormat *tableFormat) const
+{
+    if (!m_constraints.isEmpty()) {
+        QVector<QTextLength> constraints;
+        constraints.reserve(m_constraints.size());
+        for (const auto &c : qAsConst(m_constraints)) {
+            QTextLength length;
+            switch (c.unit) {
+            case Millimeters:
+                length = QTextLength(QTextLength::FixedLength, mmToPixels(c.width));
+                break;
+            case Percent:
+                length = QTextLength(QTextLength::PercentageLength, c.width);
+                break;
+            }
+            constraints.append(length);
+        }
+        tableFormat->setColumnWidthConstraints(constraints);
+    }
+}
+
 void KDReports::AbstractTableElement::fillTableFormat(QTextTableFormat &tableFormat, QTextCursor &textDocCursor) const
 {
     if (d->m_width) {
@@ -125,20 +148,7 @@ void KDReports::AbstractTableElement::fillTableFormat(QTextTableFormat &tableFor
         }
     }
 
-    if (!d->m_constraints.isEmpty()) {
-        QVector<QTextLength> constraints;
-        constraints.reserve(d->m_constraints.size());
-        for (const auto &c : qAsConst(d->m_constraints)) {
-            QTextLength length;
-            if (c.unit == Millimeters) {
-                length = QTextLength(QTextLength::FixedLength, mmToPixels(c.width));
-            } else {
-                length = QTextLength(QTextLength::PercentageLength, c.width);
-            }
-            constraints.append(length);
-        }
-        tableFormat.setColumnWidthConstraints(constraints);
-    }
+    d->fillConstraints(&tableFormat);
 
     tableFormat.setBorder(border());
     tableFormat.setBorderBrush(borderBrush());
