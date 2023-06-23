@@ -114,13 +114,15 @@ void KDReports::TableElementPrivate::createCell(QTextTable *textTable, ReportBui
     QTextTableCell tableCell = textTable->cellAt(row, column);
     Q_ASSERT(tableCell.isValid());
     QTextCursor cellCursor = tableCell.firstCursorPosition();
-    QTextCharFormat tableCellFormat = charFormat;
+    QTextTableCellFormat tableCellFormat(charFormat.toTableCellFormat());
     if (cell.background().style() != Qt::NoBrush)
         tableCellFormat.setBackground(cell.background());
     tableCellFormat.setTableCellColumnSpan(cell.columnSpan());
     tableCellFormat.setTableCellRowSpan(cell.rowSpan());
     if (cell.verticalAlignment() != 0)
         tableCellFormat.setVerticalAlignment(ReportBuilder::toVerticalAlignment(cell.verticalAlignment()));
+    if (auto func = cell.cellFormatFunction())
+        func(row, column, tableCellFormat);
     tableCell.setFormat(tableCellFormat);
     cellCursor.setCharFormat(tableCellFormat);
     ReportBuilder cellBuilder(builder.currentDocumentData(), cellCursor, builder.report());

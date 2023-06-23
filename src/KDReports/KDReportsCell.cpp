@@ -20,6 +20,7 @@ public:
     int m_columnSpan = 1;
     int m_rowSpan = 1;
     Qt::AlignmentFlag m_verticalAlignment = Qt::AlignmentFlag(0);
+    Cell::CellFormatFunc m_cellFormatFunc;
 };
 
 KDReports::Cell::Cell()
@@ -94,6 +95,16 @@ void KDReports::Cell::setVerticalAlignment(Qt::AlignmentFlag verticalAlignment)
 Qt::AlignmentFlag KDReports::Cell::verticalAlignment() const
 {
     return d->m_verticalAlignment;
+}
+
+void KDReports::Cell::setCellFormatFunction(const CellFormatFunc &func)
+{
+    d->m_cellFormatFunc = func;
+}
+
+KDReports::Cell::CellFormatFunc KDReports::Cell::cellFormatFunction() const
+{
+    return d->m_cellFormatFunc;
 }
 
 void KDReports::Cell::build(ReportBuilder &builder) const

@@ -26,13 +26,37 @@
 
 static void fillEvenPagesHeader(KDReports::Header &evenPagesHeader)
 {
-    evenPagesHeader.addElement(KDReports::TextElement("This header should be on even pages, and contain a 2x2 table with blue borders"));
+    evenPagesHeader.addElement(KDReports::TextElement("This header should be on even pages, and contain a 2x2 table with a blue border around"));
     KDReports::TableElement table;
-    table.setBorder(1); // if you see no borders in this table, upgrade to Qt >= 4.3.1
-    table.setBorderBrush(Qt::blue);
+    table.setBorder(0);
     table.setHeaderRowCount(0);
     table.cell(0, 0).addInlineElement(KDReports::TextElement("1"));
     table.cell(0, 1).addInlineElement(KDReports::TextElement("2"));
+
+    const auto cellFormatFunc = [](int row, int column, QTextTableCellFormat &format) {
+        if (row == 0) {
+            format.setTopBorderStyle(QTextFrameFormat::BorderStyle_Solid); // don't forget this
+            format.setTopBorder(1);
+            format.setTopBorderBrush(Qt::blue);
+        } else if (row == 1) {
+            format.setBottomBorderStyle(QTextFrameFormat::BorderStyle_Solid); // don't forget this
+            format.setBottomBorder(1);
+            format.setBottomBorderBrush(Qt::blue);
+        }
+        if (column == 0) {
+            format.setLeftBorderStyle(QTextFrameFormat::BorderStyle_Solid); // don't forget this
+            format.setLeftBorder(1);
+            format.setLeftBorderBrush(Qt::blue);
+        } else if (column == 1) {
+            format.setRightBorderStyle(QTextFrameFormat::BorderStyle_Solid); // don't forget this
+            format.setRightBorder(1);
+            format.setRightBorderBrush(Qt::blue);
+        }
+    };
+    for (int row = 0; row < 2; ++row)
+        for (int col = 0; col < 2; ++col)
+            table.cell(row, col).setCellFormatFunction(cellFormatFunc);
+
     KDReports::Cell &cell = table.cell(1, 0);
     cell.addElement(KDReports::TextElement("This should say 2/2: "));
     cell.addVariable(KDReports::PageNumber);
