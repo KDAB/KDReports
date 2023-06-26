@@ -33,6 +33,7 @@ static void fillEvenPagesHeader(KDReports::Header &evenPagesHeader)
     table.cell(0, 0).addInlineElement(KDReports::TextElement("1"));
     table.cell(0, 1).addInlineElement(KDReports::TextElement("2"));
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     const auto cellFormatFunc = [](int row, int column, QTextTableCellFormat &format) {
         if (row == 0) {
             format.setTopBorderStyle(QTextFrameFormat::BorderStyle_Solid); // don't forget this
@@ -56,6 +57,7 @@ static void fillEvenPagesHeader(KDReports::Header &evenPagesHeader)
     for (int row = 0; row < 2; ++row)
         for (int col = 0; col < 2; ++col)
             table.cell(row, col).setCellFormatFunction(cellFormatFunc);
+#endif
 
     KDReports::Cell &cell = table.cell(1, 0);
     cell.addElement(KDReports::TextElement("This should say 2/2: "));
