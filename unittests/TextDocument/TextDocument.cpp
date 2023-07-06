@@ -360,6 +360,17 @@ private slots:
         QCOMPARE(header.doc().contentDocument().toPlainText(), QString("\nPage 2\n"));
     }
 
+    void testTableCells()
+    {
+        Report report;
+        TableElement table;
+        table.cell(1, 3).addElement(KDReports::TextElement("1, 3"));
+        table.cell(5, 1).addElement(KDReports::TextElement("5, 1"));
+        QCOMPARE(table.rowCount(), 6);
+        QCOMPARE(table.columnCount(), 4);
+        report.addElement(table);
+    }
+
     void testAutoTable()
     {
         Report report;

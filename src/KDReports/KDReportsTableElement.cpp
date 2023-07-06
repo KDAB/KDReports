@@ -21,22 +21,7 @@
 #include <QTextTableCell>
 
 namespace KDReports {
-class CellContentMap : public QMap<QPair<int /*row*/, int /*column*/>, Cell>
-{
-public:
-    CellContentMap()
-    {
-    }
-    void getSize(int &rows, int &columns) const
-    {
-        rows = 0;
-        columns = 0;
-        for (const_iterator it = begin(); it != end(); ++it) {
-            rows = qMax(rows, it.key().first + 1);
-            columns = qMax(columns, it.key().second + 1);
-        }
-    }
-};
+using CellContentMap = QMap<QPair<int /*row*/, int /*column*/>, Cell>;
 }
 
 class KDReports::TableElementPrivate
@@ -45,6 +30,8 @@ public:
     void createCell(QTextTable *textTable, ReportBuilder &builder, int row, int column, const Cell &cell, QTextCharFormat charFormat) const;
 
     KDReports::CellContentMap m_cellContentMap;
+    int m_rowCount = 0;
+    int m_columnCount = 0;
     int m_headerRowCount = 0;
     int m_headerColumnCount = 0;
 };
@@ -101,8 +88,21 @@ int KDReports::TableElement::headerColumnCount() const
     return d->m_headerColumnCount;
 }
 
+int KDReports::TableElement::rowCount() const
+{
+    return d->m_rowCount;
+}
+
+int KDReports::TableElement::columnCount() const
+{
+    return d->m_columnCount;
+}
+
 KDReports::Cell &KDReports::TableElement::cell(int row, int column)
 {
+    d->m_rowCount = std::max(d->m_rowCount, row + 1);
+    d->m_columnCount = std::max(d->m_columnCount, column + 1);
+
     const QPair<int, int> coord = qMakePair(row, column);
     return d->m_cellContentMap[coord]; // find or create
 }
@@ -138,10 +138,6 @@ void KDReports::TableElement::build(ReportBuilder &builder) const
 
     QTextCursor &textDocCursor = builder.cursor();
 
-    int rowCount;
-    int columnCount;
-    d->m_cellContentMap.getSize(rowCount, columnCount);
-
     QTextTableFormat tableFormat;
     tableFormat.setHeaderRowCount(d->m_headerRowCount);
     tableFormat.setProperty(KDReports::HeaderColumnsProperty, d->m_headerColumnCount);
@@ -150,7 +146,7 @@ void KDReports::TableElement::build(ReportBuilder &builder) const
     fillTableFormat(tableFormat, textDocCursor);
     QTextCharFormat charFormat = textDocCursor.charFormat();
 
-    QTextTable *textTable = textDocCursor.insertTable(rowCount, columnCount, tableFormat);
+    QTextTable *textTable = textDocCursor.insertTable(d->m_rowCount, d->m_columnCount, tableFormat);
 
     CellContentMap::const_iterator it = d->m_cellContentMap.constBegin();
     for (; it != d->m_cellContentMap.constEnd(); ++it) {

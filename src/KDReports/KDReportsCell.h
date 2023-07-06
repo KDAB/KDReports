@@ -25,7 +25,6 @@ QT_END_NAMESPACE
 namespace KDReports {
 class ReportBuilder;
 class Element;
-class CellContentMap;
 class TableElement;
 class CellPrivate;
 

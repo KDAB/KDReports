@@ -15,3 +15,4 @@ New features:
 * Cell: add setCellFormatFunction for customizing cell borders and padding individually, see example in ReferenceReport.
 * Cell: add setVerticalAlignment, for vertical centering (or top alignment) of text in table cells, e.g. when using different font sizes in the same row.
 * AbstractTablElement: setColumnsConstraints now supports columns with no constraints (just pass {}). The point is to specify a constraint for a column further right than the one without a constraint.
+* TableElement: add rowCount() and columnCount(). These methods can be useful in a generic function that takes a TableElement and changes background colors on alternate rows, for instance.
