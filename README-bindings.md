@@ -18,7 +18,7 @@ Also, there are no plans to support the qmake buildsystem.
 
 You will need:
 
-- a compiler with C++14 support (C++17 for Qt6 builds)
+- a C++17 compliant C++ compiler
 - Python3.7 or higher
 - Qt5 version 5.12 or higher
 - Qt6 version 6.2 or higher
