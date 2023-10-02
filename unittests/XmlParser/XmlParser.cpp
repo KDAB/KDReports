@@ -196,6 +196,8 @@ private slots:
         KDReports::ErrorDetails details;
         QVERIFY(!report.loadFromXML(&file, &details));
         QCOMPARE(details.line(), 2);
+        // The column number is broken in 6.5.x and 6.6.x see https://codereview.qt-project.org/c/qt/qtbase/+/508768
+#if QT_VERSION < QT_VERSION_CHECK(6, 5, 0) || QT_VERSION > QT_VERSION_CHECK(6, 6, 1)
         QCOMPARE(details.column(), 47);
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         QCOMPARE(details.driverMessage(), QString("error occurred while parsing element"));
@@ -203,6 +205,7 @@ private slots:
 #else
         QCOMPARE(details.driverMessage(), QString("Expected '>' or '/', but got '\"'."));
         QCOMPARE(details.message(), QString("Error on line 2, column 47: Expected '>' or '/', but got '\"'."));
+#endif
 #endif
     }
 
