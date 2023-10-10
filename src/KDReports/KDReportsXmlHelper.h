@@ -14,7 +14,10 @@
 #include "KDReportsGlobal.h"
 #include "KDReportsReport.h"
 #include "KDReportsVariableType.h"
+
+QT_BEGIN_NAMESPACE
 class QDomElement;
+QT_END_NAMESPACE
 
 namespace KDReports {
 
