@@ -14,7 +14,7 @@
 #include "KDReportsGlobal.h"
 #include "KDReportsReport.h"
 #include "KDReportsVariableType.h"
-#include <QDomElement>
+class QDomElement;
 
 namespace KDReports {
 
