@@ -27,7 +27,7 @@ class TestImportModules(unittest.TestCase):
         symbols = ['AbstractTableElement', 'AutoTableElement', 'Cell', 'ChartElement',
                    'Element', 'ErrorDetails', 'Frame', 'HLineElement', 'Header',
                    'HeaderLocation', 'HtmlElement', 'ImageElement', 'MainTable',
-                   'PreviewDialog', 'PreviewWidget', 'QIntList', 'Report', 'ReportBuilder',
+                   'PreviewDialog', 'PreviewWidget', 'Report', 'ReportBuilder',
                    'TableBreakingSettingsDialog', 'TableElement', 'TextElement', 'Unit',
                    'VariableType', 'XmlHelper']
         for symbol in symbols:
