@@ -4,7 +4,14 @@
 
 name: CI
 
-on: [push, pull_request]
+  push:
+    branches:
+      - master
+      - kdreports-2.2
+  pull_request:
+    branches:
+      - master
+      - kdreports-2.2
 
 jobs:
   build:
@@ -14,19 +21,24 @@ jobs:
       matrix:
         os:
           - ubuntu-22.04
-          #- ubuntu-20.04
           - windows-2022
-          #- windows-2019
-          - macos-12
-          #- macos-11
+          - macos-13
+
         build_type:
           - Debug
           - Release
+
         qt:
           - version: "5.15.2"
             requested: "5.15"
           - version: "6.3.2"  # Qt 6.3 is not an LTS version, so '6.3.*' always resolves to '6.3.2'
             requested: "6.3.*"
+
+            commonCMakeArgs=["--warn-uninitialized",
+                 "-Werror=dev",
+                 "-DKDReports_TESTS=TRUE",
+                 "-DKDReports_EXAMPLES=TRUE"
+                ]
 
     steps:
       - name: Install Qt with options and default aqtversion
@@ -40,9 +52,6 @@ jobs:
       - name: Checkout sources
         uses: actions/checkout@v4
 
-      - name: Create build directory
-        run: mkdir build
-
       - name: Install ninja-build tool (must be after Qt due PATH changes)
         uses: turtlesec-no/get-ninja@main
 
@@ -53,6 +62,8 @@ jobs:
         run: >
           cmake -S . -B ./build -G Ninja
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          --warn-uninitialized
+          -Werror=dev
           -DKDReports_QT6=${{ startsWith(matrix.qt.version, '6.') }}
           -DKDReports_TESTS=${{ matrix.build_type == 'Debug' }}
           -DKDReports_EXAMPLES=${{ matrix.build_type == 'Debug' }}
@@ -62,17 +73,19 @@ jobs:
         run: cmake --build ./build
 
       - name: Run tests on Linux (offscreen)
+        id: ctest_linux
         if: ${{ matrix.build_type == 'Debug' && runner.os == 'Linux' }}
         run: ctest --test-dir ./build -C ${{ matrix.build_type }} --output-on-failure
         env:
           QT_QPA_PLATFORM: offscreen
 
       - name: Run tests on Windown/macOS
+        id: ctest_non_linux
         if: ${{ matrix.build_type == 'Debug' && runner.os != 'Linux' }}
         run: ctest --test-dir ./build -C ${{ matrix.build_type }} --output-on-failure
 
       - name: Read tests log when it fails
         uses: andstor/file-reader-action@v1
-        if: ${{ failure() && matrix.build_type == 'Debug' }}
+        if: ${{ steps.ctest_non_linux.conclusion == 'failure' || steps.ctest_linux.conclusion == 'failure' }}
         with:
           path: "./build/Testing/Temporary/LastTest.log"
