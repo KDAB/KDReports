@@ -4,6 +4,7 @@
 
 name: CI
 
+on:
   push:
     branches:
       - master
@@ -28,29 +29,49 @@ jobs:
           - Debug
           - Release
 
-        qt:
-          - version: "5.15.2"
-            requested: "5.15"
-          - version: "6.3.2"  # Qt 6.3 is not an LTS version, so '6.3.*' always resolves to '6.3.2'
-            requested: "6.3.*"
+        config:
+          - qt_version: "5.15"
+          - qt_version: "6.6.0"
 
-            commonCMakeArgs=["--warn-uninitialized",
-                 "-Werror=dev",
-                 "-DKDReports_TESTS=TRUE",
-                 "-DKDReports_EXAMPLES=TRUE"
-                ]
+        include:
+          - os: ubuntu-22.04
+            build_type: Release
+            config:
+                qt_version: "6.6.0"
+                apt_pgks:
+                  - llvm
+                pip_pgks:
+                  - shiboken6-generator==6.6.0 pyside6==6.6.0
 
     steps:
       - name: Install Qt with options and default aqtversion
         uses: jurplel/install-qt-action@v3
         with:
           aqtversion: null # use whatever the default is
-          modules: ${{ matrix.qt.modules }}
-          version: ${{ matrix.qt.requested }}
+          modules: ${{ matrix.config.modules }}
+          version: ${{ matrix.config.qt_version }}
           cache: true
 
       - name: Checkout sources
         uses: actions/checkout@v4
+
+      - name: Install dependencies on Ubuntu (${{ join(matrix.config.apt_pgks, ' ') }})
+        if: ${{ runner.os == 'Linux' && matrix.config.apt_pgks }}
+        run: |
+          sudo apt update -qq
+          echo ${{ join(matrix.config.apt_pgks, ' ') }} | xargs sudo apt install -y
+
+      - name: Install Python dependencies (${{ join(matrix.config.pip_pgks, ' ') }})
+        if: ${{ matrix.config.pip_pgks }}
+        run: echo ${{ join(matrix.config.pip_pgks, ' ') }} | xargs pip install
+
+      - name: Hackery due Shiboken hardcoded paths
+        if: ${{ matrix.config.pip_pgks }}
+        run: |
+          sudo mkdir -p /opt/rh/gcc-toolset-10/root/usr/bin/
+          sudo cp /usr/bin/g++-10 /opt/rh/gcc-toolset-10/root/usr/bin/c++
+          sudo mkdir -p /opt/rh/gcc-toolset-10/root/usr/lib/gcc/x86_64-linux-gnu/10/
+          sudo cp /usr/lib/gcc/x86_64-linux-gnu/10/cc1plus /opt/rh/gcc-toolset-10/root/usr/lib/gcc/x86_64-linux-gnu/10/
 
       - name: Install ninja-build tool (must be after Qt due PATH changes)
         uses: turtlesec-no/get-ninja@main
@@ -64,7 +85,9 @@ jobs:
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
           --warn-uninitialized
           -Werror=dev
-          -DKDReports_QT6=${{ startsWith(matrix.qt.version, '6.') }}
+          -DKDReports_QT6=${{ startsWith(matrix.config.qt_version, '6.') }}
+          -DKDReports_PYTHON_BINDINGS=${{ matrix.config.pip_pgks }}
+          -DPython3_FIND_VIRTUALENV=ONLY
           -DKDReports_TESTS=${{ matrix.build_type == 'Debug' }}
           -DKDReports_EXAMPLES=${{ matrix.build_type == 'Debug' }}
           -DKDReports_DOCS=${{ matrix.build_type == 'Debug' && runner.os == 'Linux' }}
