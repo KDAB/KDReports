@@ -29,6 +29,10 @@ jobs:
           - Debug
           - Release
 
+        link_type:
+          - static
+          - dynamic
+
         config:
           - qt_version: "5.15"
           - qt_version: "6.6.0"
@@ -36,6 +40,7 @@ jobs:
         include:
           - os: ubuntu-22.04
             build_type: Release
+            link_type: dynamic
             config:
                 qt_version: "6.6.0"
                 apt_pgks:
@@ -89,6 +94,7 @@ jobs:
           -DKDReports_PYTHON_BINDINGS=${{ matrix.config.pip_pgks }}
           -DPython3_FIND_VIRTUALENV=ONLY
           -DKDReports_TESTS=${{ matrix.build_type == 'Debug' }}
+          -DKDReports_STATIC=${{ matrix.link_type == 'static' }}
           -DKDReports_EXAMPLES=${{ matrix.build_type == 'Debug' }}
           -DKDReports_DOCS=${{ matrix.build_type == 'Debug' && runner.os == 'Linux' }}
 
