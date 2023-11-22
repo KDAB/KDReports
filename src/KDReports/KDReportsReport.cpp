@@ -926,7 +926,7 @@ QImage KDReports::Report::watermarkImage() const
 
 void KDReports::Report::setWatermarkFunction(WatermarkFunction function)
 {
-    d->m_watermarkFunction = function;
+    d->m_watermarkFunction = std::move(function);
 }
 
 KDReports::Report::WatermarkFunction KDReports::Report::watermarkFunction() const

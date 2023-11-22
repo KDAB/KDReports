@@ -164,7 +164,7 @@ bool TableModel::loadFromCSV(const QString &filename)
                 }
                 if (row > 0) {
                     const int destRow = m_dataHasHorizontalHeaders ? row - 1 : row;
-                    m_rows[destRow] = values;
+                    m_rows[destRow] = std::move(values);
                 }
             }
         } else {
