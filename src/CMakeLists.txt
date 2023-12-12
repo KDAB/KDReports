@@ -71,9 +71,12 @@ if(KDChart_FOUND)
 endif()
 set_target_properties(kdreports PROPERTIES DEFINE_SYMBOL KDREPORTS_BUILD_KDREPORTS_LIB)
 set_target_properties(kdreports PROPERTIES SOVERSION ${${PROJECT_NAME}_SOVERSION} VERSION ${${PROJECT_NAME}_VERSION})
-target_include_directories(
-    kdreports
+target_include_directories(kdreports
     INTERFACE "$<INSTALL_INTERFACE:${INSTALL_INCLUDE_DIR}/KDReports${${PROJECT_NAME}_LIBRARY_QTID}/>"
+)
+target_include_directories(kdreports
+    INTERFACE "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/KDReports>"
+              "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/KDReports>"
 )
 
 #version libraries on Windows

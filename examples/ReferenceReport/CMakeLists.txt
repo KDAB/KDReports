@@ -8,7 +8,6 @@
 
 set(SOURCES ReferenceReport.cpp ResultModel.cpp ReferenceReport.qrc)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../src/KDReports)
 add_executable(
     ReferenceReport
     ${SOURCES}
