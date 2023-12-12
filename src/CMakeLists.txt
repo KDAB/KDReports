@@ -129,13 +129,14 @@ if(${PROJECT_NAME}_IS_ROOT_PROJECT)
         NAMESPACE KDReports::
         FILE "${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReportsTargets.cmake"
     )
+endif()
 
-    include(ECMGenerateHeaders)
-    ecm_generate_headers(
-        kdreports_HEADERS
-        ORIGINAL
-        CAMELCASE
-        HEADER_NAMES
+include(ECMGenerateHeaders)
+ecm_generate_headers(
+    kdreports_HEADERS
+    ORIGINAL
+    CAMELCASE
+    HEADER_NAMES
         KDReportsReport
         KDReportsElement
         KDReportsChartElement
@@ -159,15 +160,16 @@ if(${PROJECT_NAME}_IS_ROOT_PROJECT)
         KDReportsMainTable
         KDReportsXmlHelper
         KDReportsErrorDetails
-        OUTPUT_DIR
+    OUTPUT_DIR
         ${CMAKE_CURRENT_BINARY_DIR}/KDReports
-        RELATIVE
+    RELATIVE
         KDReports
-        COMMON_HEADER
+    COMMON_HEADER
         KDReports
-    )
-    file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReports "#include \"KDReports.h\"\n")
+)
+file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReports "#include \"KDReports.h\"\n")
 
+if(${PROJECT_NAME}_IS_ROOT_PROJECT)
     install(
         FILES ${kdreports_HEADERS}
               KDReports/KDReportsReport.h
