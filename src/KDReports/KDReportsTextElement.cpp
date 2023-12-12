@@ -84,7 +84,11 @@ void KDReports::TextElement::build(ReportBuilder &builder) const
     if (d->m_pointSize > 0)
         charFormat.setFontPointSize(d->m_pointSize);
     if (!d->m_fontFamily.isEmpty())
+#if QT_VERSION >= QT_VERSION_CHECK(6, 1, 0)
+        charFormat.setFontFamilies({d->m_fontFamily});
+#else
         charFormat.setFontFamily(d->m_fontFamily);
+#endif
     if (d->m_foreground.isValid())
         charFormat.setForeground(d->m_foreground);
     else
