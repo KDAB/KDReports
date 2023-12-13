@@ -142,15 +142,21 @@ else()
 endif()
 include(KDQtInstallPaths) #to set QT_INSTALL_FOO variables
 
+set(KDChartPackageName KDChart${${PROJECT_NAME}_LIBRARY_QTID})
 # look for KDChart
-find_package(KDChart${${PROJECT_NAME}_LIBRARY_QTID} CONFIG
-)# First try the cmake file provided by kdchart, ideal solution
+if(TARGET KDChart::kdchart)
+    # already defined => it's probably in another gitsubmodule in the same overall cmake project
+    set(${KDChartPackageName}_FOUND TRUE)
+else()
+    find_package(${KDChartPackageName} CONFIG)
+endif()
+# First try the cmake file provided by kdchart, ideal solution
 if(NOT ${PROJECT_NAME}_QT6)
     if(NOT KDChart_FOUND)
         find_package(KDChart MODULE) # use FindKDChart.cmake in case kdchart was built with qmake
     endif()
 endif()
-if(KDChart_FOUND)
+if(${KDChartPackageName}_FOUND)
     message(STATUS "Enabling KDChart support")
     add_definitions(-DHAVE_KDCHART)
     if(NOT TARGET KDChart::kdchart)
