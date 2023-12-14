@@ -54,7 +54,7 @@ add_library(
     ${KDReports_LIBRARY_MODE} ${SOURCES} ${RESOURCES}
 )
 add_library(
-    KDAB::kdreports ALIAS kdreports
+    KDReports::kdreports ALIAS kdreports
 )
 set_target_properties(kdreports PROPERTIES OUTPUT_NAME "kdreports${${PROJECT_NAME}_LIBRARY_QTID}")
 if(${PROJECT_NAME}_STATIC)
