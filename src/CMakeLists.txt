@@ -71,10 +71,12 @@ if(KDChart_FOUND)
 endif()
 set_target_properties(kdreports PROPERTIES DEFINE_SYMBOL KDREPORTS_BUILD_KDREPORTS_LIB)
 set_target_properties(kdreports PROPERTIES SOVERSION ${${PROJECT_NAME}_SOVERSION} VERSION ${${PROJECT_NAME}_VERSION})
-target_include_directories(kdreports
+target_include_directories(
+    kdreports
     INTERFACE "$<INSTALL_INTERFACE:${INSTALL_INCLUDE_DIR}/KDReports${${PROJECT_NAME}_LIBRARY_QTID}/>"
 )
-target_include_directories(kdreports
+target_include_directories(
+    kdreports
     INTERFACE "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/KDReports>"
               "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/KDReports>"
 )
@@ -137,35 +139,35 @@ ecm_generate_headers(
     ORIGINAL
     CAMELCASE
     HEADER_NAMES
-        KDReportsReport
-        KDReportsElement
-        KDReportsChartElement
-        KDReportsTextElement
-        KDReportsHtmlElement
-        KDReportsTableElement
-        KDReportsAutoTableElement
-        KDReportsAbstractTableElement
-        KDReportsImageElement
-        KDReportsHLineElement
-        KDReportsPreviewDialog
-        KDReportsPreviewWidget
-        KDReportsHeader
-        KDReportsCell
-        KDReportsFrame
-        KDReportsGlobal
-        KDReportsXmlElementHandler
-        KDReportsVariableType
-        KDReportsUnit
-        KDReportsTableBreakingSettingsDialog
-        KDReportsMainTable
-        KDReportsXmlHelper
-        KDReportsErrorDetails
+    KDReportsReport
+    KDReportsElement
+    KDReportsChartElement
+    KDReportsTextElement
+    KDReportsHtmlElement
+    KDReportsTableElement
+    KDReportsAutoTableElement
+    KDReportsAbstractTableElement
+    KDReportsImageElement
+    KDReportsHLineElement
+    KDReportsPreviewDialog
+    KDReportsPreviewWidget
+    KDReportsHeader
+    KDReportsCell
+    KDReportsFrame
+    KDReportsGlobal
+    KDReportsXmlElementHandler
+    KDReportsVariableType
+    KDReportsUnit
+    KDReportsTableBreakingSettingsDialog
+    KDReportsMainTable
+    KDReportsXmlHelper
+    KDReportsErrorDetails
     OUTPUT_DIR
-        ${CMAKE_CURRENT_BINARY_DIR}/KDReports
+    ${CMAKE_CURRENT_BINARY_DIR}/KDReports
     RELATIVE
-        KDReports
+    KDReports
     COMMON_HEADER
-        KDReports
+    KDReports
 )
 file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReports "#include \"KDReports.h\"\n")
 
