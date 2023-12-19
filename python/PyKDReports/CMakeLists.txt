@@ -81,7 +81,7 @@ install(
     DESTINATION ${${PROJECT_NAME}_PYTHON_BINDINGS_INSTALL_PREFIX}
 )
 if(NOT WIN32)
-    install(FILES $<TARGET_LINKER_FILE:KDReports::kdreports> $<TARGET_SONAME_FILE:KDAB::kdreports>
+    install(FILES $<TARGET_LINKER_FILE:KDReports::kdreports> $<TARGET_SONAME_FILE:KDReports::kdreports>
             DESTINATION ${${PROJECT_NAME}_PYTHON_BINDINGS_INSTALL_PREFIX}
     )
 endif()
