@@ -59,7 +59,7 @@ Please submit your contributions or issue reports from our GitHub space at
 
 ## License
 
-The KD Reports Software is Copyright 2007-2023 Klarälvdalens Datakonsult AB (KDAB),
+The KD Reports Software is © 2007 Klarälvdalens Datakonsult AB (KDAB),
 and is available under the terms of the [MIT](LICENSES/MIT.txt) license.
 
 Contact KDAB at <info@kdab.com> for any licensing queries.
