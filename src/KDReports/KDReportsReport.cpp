@@ -355,7 +355,7 @@ bool KDReports::ReportPrivate::doPrint(QPrinter *printer, QWidget *parent)
     // caller has to ensure that we have been layouted for this printer already
     const int pageCount = m_layout->numberOfPages();
     std::unique_ptr<QProgressDialog> dialog;
-    if (QThread::currentThread() == qApp->thread()) {
+    if (m_progressDialogEnabled && QThread::currentThread() == qApp->thread()) {
         dialog.reset(new QProgressDialog(QObject::tr("Printing"), QObject::tr("Cancel"), 0, pageCount, parent));
         dialog->setWindowModality(Qt::ApplicationModal);
     }
@@ -381,6 +381,7 @@ bool KDReports::ReportPrivate::doPrint(QPrinter *printer, QWidget *parent)
             if (dialog->wasCanceled())
                 break;
         }
+        emit q->printingProgress(pageIndex);
 
         if (!firstPage)
             printer->newPage();
@@ -659,6 +660,11 @@ void KDReports::Report::dump() const
 QString KDReports::Report::asHtml() const
 {
     return d->m_layout->toHtml();
+}
+
+void KDReports::Report::setProgressDialogEnabled(bool enable)
+{
+    d->m_progressDialogEnabled = enable;
 }
 
 bool KDReports::Report::printWithDialog(QWidget *parent)

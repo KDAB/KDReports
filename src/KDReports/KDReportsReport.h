@@ -533,8 +533,21 @@ public:
     QString documentName() const;
 
     /**
+     * Allows to disable the QProgressDialog when printing or exporting
+     * By default, printing from the main thread shows a QProgressDialog.
+     * This method allows to disable it, for instance when the application
+     * generates multiple documents and has its own progress dialog for the overall operation.
+     * Note the signal printingProgress for this purpose.
+     * This affects printWithDialog(), print(), and exportToFile().
+     * \param enable indicates whether to show the progress dialog
+     * \since 2.3
+     */
+    void setProgressDialogEnabled(bool enable);
+
+    /**
      * Show the print dialog to let the user choose a printer, and print.
-     * \param parent the parent widget for the progress dialog that appears when printing
+     * \param parent the parent widget for the print dialog, and for the progress
+     * dialog that appears when printing (see setProgressDialogEnabled())
      * \return false if the print dialog was cancelled
      */
     bool printWithDialog(QWidget *parent);
@@ -550,6 +563,7 @@ public:
      * Returns false if cancelled (not possible yet).
      * \param printer the printer to use for printing
      * \param parent the parent widget for the progress dialog that appears when printing
+     * (see setProgressDialogEnabled())
      */
     bool print(QPrinter *printer, QWidget *parent = nullptr);
 
@@ -558,6 +572,8 @@ public:
      * If the file name has the suffix ".ps" then PostScript is automatically
      * selected as output format.
      * If the file name has the ".pdf" suffix PDF is generated.
+     * \param parent the parent widget for the progress dialog that appears when printing
+     * (see setProgressDialogEnabled())
      */
     bool exportToFile(const QString &fileName, QWidget *parent = nullptr);
 
@@ -879,6 +895,15 @@ public:
      * @since 2.1
      */
     QTextDocument *mainTextDocument() const;
+
+signals:
+    /**
+     * Emitted during printWithDialog(), print() or exportToFile()
+     * \param the page number, starting at 0
+     * For the page count, see numberOfPages().
+     * \since 2.3
+     */
+    void printingProgress(int pageIndex);
 
 private:
     friend class Test;
