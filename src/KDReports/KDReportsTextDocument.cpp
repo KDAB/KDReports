@@ -112,5 +112,5 @@ void KDReports::TextDocument::regenerateAutoTables()
 void KDReports::TextDocument::regenerateAutoTableForModel(QAbstractItemModel *model)
 {
     m_contentDocument.regenerateAutoTableForModel(model);
-//@endcond
+    //@endcond
 }
