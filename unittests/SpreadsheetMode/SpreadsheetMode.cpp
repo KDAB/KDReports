@@ -455,7 +455,7 @@ private slots:
 
     void testScaleTables()
     {
-        qWarning("test temporarily disabled");
+        QSKIP("Test is too flaky for CI");
 #if 0
         // Note that this font is huge; each column is in fact larger than the page,
         // so it wraps. Interesting testcase :)
@@ -558,7 +558,7 @@ private slots:
 
     void testBreakSimpleTable() // No constraints, no known number of pages. Not so "simple".
     {
-        qWarning("temporarily disabled");
+        QSKIP("Test is too flaky for CI");
 #if 0
         Report report;
         report.setTableBreakingEnabled( true );

@@ -9,10 +9,6 @@ remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 
 add_subdirectory(tools)
-include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}/tools ${CMAKE_CURRENT_SOURCE_DIR}/../src/KDReports
-    ${CMAKE_CURRENT_BINARY_DIR}/../src/KDReports
-)
 add_subdirectory(Letter)
 add_subdirectory(Labels)
 add_subdirectory(HelloWorld)

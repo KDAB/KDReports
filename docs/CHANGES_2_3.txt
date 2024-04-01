@@ -1,0 +1,19 @@
+What is new in KD Reports 2.3
+=============================
+
+General:
+--------
+
+Bugfixes:
+-------------
+* Preserve resolution in watermark image (issue #42)
+* Fix right-aligned tabs not working when setting paragraphs margins
+
+New features:
+-------------
+* AutoTableElement: add customization functions for header styling, see setHorizontalHeaderFormatFunction and setVerticalHeaderFormatFunction, and their use in the PriceList example.
+* Cell: add setCellFormatFunction for customizing cell borders and padding individually, see example in ReferenceReport.
+* Cell: add setVerticalAlignment, for vertical centering (or top alignment) of text in table cells, e.g. when using different font sizes in the same row.
+* AbstractTablElement: setColumnsConstraints now supports columns with no constraints (just pass {}). The point is to specify a constraint for a column further right than the one without a constraint.
+* TableElement: add rowCount() and columnCount(). These methods can be useful in a generic function that takes a TableElement and changes background colors on alternate rows, for instance.
+* Report: add setProgressDialogEnabled(false) to disable the progress dialog when printing or when exporting to PDF. This can be useful when the application generates multiple documents and has its own progress dialog for the overall operation, or prefers embedding a progressbar.

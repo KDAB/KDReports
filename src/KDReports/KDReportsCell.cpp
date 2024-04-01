@@ -19,6 +19,8 @@ public:
     QList<ElementData> m_elements;
     int m_columnSpan = 1;
     int m_rowSpan = 1;
+    Qt::AlignmentFlag m_verticalAlignment = Qt::AlignmentFlag(0);
+    Cell::CellFormatFunc m_cellFormatFunc;
 };
 
 KDReports::Cell::Cell()
@@ -83,6 +85,26 @@ void KDReports::Cell::addVariable(VariableType variable)
 void KDReports::Cell::addVerticalSpacing(qreal space)
 {
     d->m_elements.append(KDReports::ElementData(KDReports::ElementData::VerticalSpacing, space));
+}
+
+void KDReports::Cell::setVerticalAlignment(Qt::AlignmentFlag verticalAlignment)
+{
+    d->m_verticalAlignment = verticalAlignment;
+}
+
+Qt::AlignmentFlag KDReports::Cell::verticalAlignment() const
+{
+    return d->m_verticalAlignment;
+}
+
+void KDReports::Cell::setCellFormatFunction(const CellFormatFunc &func)
+{
+    d->m_cellFormatFunc = func;
+}
+
+KDReports::Cell::CellFormatFunc KDReports::Cell::cellFormatFunction() const
+{
+    return d->m_cellFormatFunc;
 }
 
 void KDReports::Cell::build(ReportBuilder &builder) const

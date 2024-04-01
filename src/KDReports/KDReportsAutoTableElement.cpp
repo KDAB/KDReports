@@ -27,6 +27,8 @@ class KDReports::AutoTableElementPrivate
 public:
     void fillCellFromHeaderData(int section, Qt::Orientation orientation, QTextTableCell &cell, QTextDocument &textDoc, QTextTable *textTable, ReportBuilder &builder) const;
     QSize fillTableCell(int row, int column, QTextTableCell &cell, QTextDocument &textDoc, QTextTable *textTable, ReportBuilder &builder) const;
+    void createHorizontalHeader(ReportBuilder &builder, QTextDocument &textDoc, QTextTable *textTable, int columns, int headerColumnCount) const;
+    void createVerticalHeader(ReportBuilder &builder, QTextDocument &textDoc, QTextTable *textTable, int rows, int headerRowCount) const;
 
     QAbstractItemModel *m_tableModel = nullptr;
     QString m_modelKey;
@@ -34,6 +36,8 @@ public:
     bool m_horizontalHeaderVisible = true;
     QBrush m_headerBackground = QColor(218, 218, 218);
     QSize m_iconSize = QSize(32, 32);
+    AutoTableElement::CellFormatFunc m_horizontalHeaderFormatFunc;
+    AutoTableElement::CellFormatFunc m_verticalHeaderFormatFunc;
 };
 
 // Helper for fillCellFromHeaderData and fillTableCell
@@ -86,21 +90,6 @@ private:
     QTextCursor cellCursor;
 };
 
-static QTextCharFormat::VerticalAlignment toVerticalAlignment(Qt::Alignment alignment)
-{
-    switch (alignment & Qt::AlignVertical_Mask) {
-    case Qt::AlignTop:
-        return QTextCharFormat::AlignTop;
-    case Qt::AlignBottom:
-        return QTextCharFormat::AlignBottom;
-    case Qt::AlignVCenter:
-        return QTextCharFormat::AlignMiddle;
-    case Qt::AlignBaseline:
-        return QTextCharFormat::AlignBaseline;
-    }
-    return QTextCharFormat::AlignNormal;
-}
-
 void FillCellHelper::fill(QTextTable *textTable, KDReports::ReportBuilder &builder, QTextDocument &textDoc, QTextTableCell &cell)
 {
     cellCursor = cell.firstCursorPosition();
@@ -108,7 +97,7 @@ void FillCellHelper::fill(QTextTable *textTable, KDReports::ReportBuilder &build
     if (background.canConvert<QBrush>()) {
         cellFormat.setBackground(qvariant_cast<QBrush>(background));
     }
-    cellFormat.setVerticalAlignment(toVerticalAlignment(alignment));
+    cellFormat.setVerticalAlignment(KDReports::ReportBuilder::toVerticalAlignment(alignment));
     cell.setFormat(cellFormat);
 
     QTextBlockFormat blockFormat = cellCursor.blockFormat();
@@ -258,6 +247,38 @@ QSize KDReports::AutoTableElementPrivate::fillTableCell(int row, int column, QTe
     return span;
 }
 
+void KDReports::AutoTableElementPrivate::createHorizontalHeader(ReportBuilder &builder, QTextDocument &textDoc, QTextTable *textTable, int columns, int headerColumnCount) const
+{
+    if (m_horizontalHeaderVisible) {
+        for (int column = 0; column < columns; column++) {
+            QTextTableCell cell = textTable->cellAt(0, column + headerColumnCount);
+            Q_ASSERT(cell.isValid());
+            QTextTableCellFormat tableHeaderFormat;
+            tableHeaderFormat.setBackground(m_headerBackground);
+            if (m_horizontalHeaderFormatFunc)
+                m_horizontalHeaderFormatFunc(column, tableHeaderFormat);
+            cell.setFormat(tableHeaderFormat);
+            fillCellFromHeaderData(column, Qt::Horizontal, cell, textDoc, textTable, builder);
+        }
+    }
+}
+
+void KDReports::AutoTableElementPrivate::createVerticalHeader(ReportBuilder &builder, QTextDocument &textDoc, QTextTable *textTable, int rows, int headerRowCount) const
+{
+    if (m_verticalHeaderVisible) {
+        for (int row = 0; row < rows; row++) {
+            QTextTableCell cell = textTable->cellAt(row + headerRowCount, 0);
+            Q_ASSERT(cell.isValid());
+            QTextTableCellFormat tableHeaderFormat;
+            tableHeaderFormat.setBackground(m_headerBackground);
+            if (m_verticalHeaderFormatFunc)
+                m_verticalHeaderFormatFunc(row, tableHeaderFormat);
+            cell.setFormat(tableHeaderFormat);
+            fillCellFromHeaderData(row, Qt::Vertical, cell, textDoc, textTable, builder);
+        }
+    }
+}
+
 void KDReports::AutoTableElement::build(ReportBuilder &builder) const
 {
     if (!d->m_tableModel) {
@@ -284,27 +305,10 @@ void KDReports::AutoTableElement::build(ReportBuilder &builder) const
 
     QTextTable *textTable = textDocCursor.insertTable(rows + headerRowCount, columns + headerColumnCount, tableFormat);
 
-    QTextCharFormat tableHeaderFormat;
-    tableHeaderFormat.setBackground(d->m_headerBackground);
     // qDebug( "rows = %d, columns = %d", textTable->rows(), textTable->columns() );
 
-    if (d->m_horizontalHeaderVisible) {
-        for (int column = 0; column < columns; column++) {
-            QTextTableCell cell = textTable->cellAt(0, column + headerColumnCount);
-            Q_ASSERT(cell.isValid());
-            cell.setFormat(tableHeaderFormat);
-            d->fillCellFromHeaderData(column, Qt::Horizontal, cell, textDoc, textTable, builder);
-        }
-    }
-
-    if (d->m_verticalHeaderVisible) {
-        for (int row = 0; row < rows; row++) {
-            QTextTableCell cell = textTable->cellAt(row + headerRowCount, 0);
-            Q_ASSERT(cell.isValid());
-            cell.setFormat(tableHeaderFormat);
-            d->fillCellFromHeaderData(row, Qt::Vertical, cell, textDoc, textTable, builder);
-        }
-    }
+    d->createHorizontalHeader(builder, textDoc, textTable, columns, headerColumnCount);
+    d->createVerticalHeader(builder, textDoc, textTable, rows, headerRowCount);
 
     QVector<QBitArray> coveredCells;
     coveredCells.resize(rows);
@@ -394,4 +398,14 @@ void KDReports::AutoTableElement::setModelKey(const QString &modelKey)
 QBrush KDReports::AutoTableElement::headerBackground() const
 {
     return d->m_headerBackground;
+}
+
+void KDReports::AutoTableElement::setHorizontalHeaderFormatFunction(const CellFormatFunc &func)
+{
+    d->m_horizontalHeaderFormatFunc = func;
+}
+
+void KDReports::AutoTableElement::setVerticalHeaderFormatFunction(const CellFormatFunc &func)
+{
+    d->m_verticalHeaderFormatFunc = func;
 }

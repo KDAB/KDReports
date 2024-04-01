@@ -142,8 +142,15 @@ endif()
 include(KDQtInstallPaths) #to set QT_INSTALL_FOO variables
 
 # look for KDChart
-find_package(KDChart${${PROJECT_NAME}_LIBRARY_QTID} CONFIG
-)# First try the cmake file provided by kdchart, ideal solution
+if(TARGET KDChart::kdchart)
+    # already defined => it's probably in another gitsubmodule in the same overall cmake project
+    set(KDChart_FOUND TRUE)
+else()
+    set(KDChartPackageName KDChart${${PROJECT_NAME}_LIBRARY_QTID})
+    find_package(${KDChartPackageName} CONFIG)
+    set(KDChart_FOUND ${${KDChartPackageName}_FOUND})
+endif()
+# First try the cmake file provided by kdchart, ideal solution
 if(NOT ${PROJECT_NAME}_QT6)
     if(NOT KDChart_FOUND)
         find_package(KDChart MODULE) # use FindKDChart.cmake in case kdchart was built with qmake
@@ -303,6 +310,6 @@ endif()
 if(${PROJECT_NAME}_IS_ROOT_PROJECT)
     # Add uninstall target (not for submodules since parent projects typically have uninstall too)
     include(ECMUninstallTarget)
-endif()
 
-feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
+    feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
+endif()

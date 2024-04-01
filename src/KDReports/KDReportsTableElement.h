@@ -50,6 +50,16 @@ public:
     TableElement &operator=(const TableElement &other);
 
     /**
+     * Returns the reference to a cell in the table.
+     * This is the method to use in order to fill the table.
+     * Cells are created on demand, you don't have to define a number of rows and columns before hand.
+     *
+     * @param row number, starting from 0
+     * @param column number, starting from 0
+     */
+    Cell &cell(int row, int column);
+
+    /**
      * Declares the first @p count rows of the table as table header.
      * The table header rows get repeated when a table is broken across a page boundary.
      * The default number of header rows is 0.
@@ -78,11 +88,15 @@ public:
     int headerColumnCount() const;
 
     /**
-     * Returns the reference to a cell in the table.
-     * @param row number, starting from 0
-     * @param column number, starting from 0
+     * \return number of rows, based on the calls to cell(row, column)
+     * \since 2.3
      */
-    Cell &cell(int row, int column);
+    int rowCount() const;
+    /**
+     * \return number of columns, based on the calls to cell(row, column)
+     * \since 2.3
+     */
+    int columnCount() const;
 
     /**
      * @internal

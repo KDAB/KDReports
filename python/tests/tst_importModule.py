@@ -23,7 +23,12 @@ class TestImportModules(unittest.TestCase):
         for t in inspect.getmembers(m):
             moduleSymbols.append(t[0])
 
-        symbols = ['ChartElement', 'PageCount', 'Report']
+        symbols = ['AbstractTableElement', 'AutoTableElement', 'Cell', 'ChartElement',
+                   'Element', 'ErrorDetails', 'Frame', 'HLineElement', 'Header',
+                   'HeaderLocation', 'HtmlElement', 'ImageElement', 'MainTable',
+                   'PreviewDialog', 'PreviewWidget', 'Report', 'ReportBuilder',
+                   'TableBreakingSettingsDialog', 'TableElement', 'TextElement', 'Unit',
+                   'VariableType', 'XmlHelper']
         for symbol in symbols:
             self.assertIn(symbol, moduleSymbols)
 

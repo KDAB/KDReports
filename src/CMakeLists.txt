@@ -53,7 +53,7 @@ add_library(
     ${KDReports_LIBRARY_MODE} ${SOURCES} ${RESOURCES}
 )
 add_library(
-    KDAB::kdreports ALIAS kdreports
+    KDReports::kdreports ALIAS kdreports
 )
 set_target_properties(kdreports PROPERTIES OUTPUT_NAME "kdreports${${PROJECT_NAME}_LIBRARY_QTID}")
 if(${PROJECT_NAME}_STATIC)
@@ -73,6 +73,11 @@ set_target_properties(kdreports PROPERTIES SOVERSION ${${PROJECT_NAME}_SOVERSION
 target_include_directories(
     kdreports
     INTERFACE "$<INSTALL_INTERFACE:${INSTALL_INCLUDE_DIR}/KDReports${${PROJECT_NAME}_LIBRARY_QTID}/>"
+)
+target_include_directories(
+    kdreports
+    INTERFACE "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/KDReports>"
+              "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/KDReports>"
 )
 
 #version libraries on Windows
@@ -125,45 +130,47 @@ if(${PROJECT_NAME}_IS_ROOT_PROJECT)
         NAMESPACE KDReports::
         FILE "${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReportsTargets.cmake"
     )
+endif()
 
-    include(ECMGenerateHeaders)
-    ecm_generate_headers(
-        kdreports_HEADERS
-        ORIGINAL
-        CAMELCASE
-        HEADER_NAMES
-        KDReportsReport
-        KDReportsElement
-        KDReportsChartElement
-        KDReportsTextElement
-        KDReportsHtmlElement
-        KDReportsTableElement
-        KDReportsAutoTableElement
-        KDReportsAbstractTableElement
-        KDReportsImageElement
-        KDReportsHLineElement
-        KDReportsPreviewDialog
-        KDReportsPreviewWidget
-        KDReportsHeader
-        KDReportsCell
-        KDReportsFrame
-        KDReportsGlobal
-        KDReportsXmlElementHandler
-        KDReportsVariableType
-        KDReportsUnit
-        KDReportsTableBreakingSettingsDialog
-        KDReportsMainTable
-        KDReportsXmlHelper
-        KDReportsErrorDetails
-        OUTPUT_DIR
-        ${CMAKE_CURRENT_BINARY_DIR}/KDReports
-        RELATIVE
-        KDReports
-        COMMON_HEADER
-        KDReports
-    )
-    file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReports "#include \"KDReports.h\"\n")
+include(ECMGenerateHeaders)
+ecm_generate_headers(
+    kdreports_HEADERS
+    ORIGINAL
+    CAMELCASE
+    HEADER_NAMES
+    KDReportsReport
+    KDReportsElement
+    KDReportsChartElement
+    KDReportsTextElement
+    KDReportsHtmlElement
+    KDReportsTableElement
+    KDReportsAutoTableElement
+    KDReportsAbstractTableElement
+    KDReportsImageElement
+    KDReportsHLineElement
+    KDReportsPreviewDialog
+    KDReportsPreviewWidget
+    KDReportsHeader
+    KDReportsCell
+    KDReportsFrame
+    KDReportsGlobal
+    KDReportsXmlElementHandler
+    KDReportsVariableType
+    KDReportsUnit
+    KDReportsTableBreakingSettingsDialog
+    KDReportsMainTable
+    KDReportsXmlHelper
+    KDReportsErrorDetails
+    OUTPUT_DIR
+    ${CMAKE_CURRENT_BINARY_DIR}/KDReports
+    RELATIVE
+    KDReports
+    COMMON_HEADER
+    KDReports
+)
+file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReports "#include \"KDReports.h\"\n")
 
+if(${PROJECT_NAME}_IS_ROOT_PROJECT)
     install(
         FILES ${kdreports_HEADERS}
               KDReports/KDReportsReport.h

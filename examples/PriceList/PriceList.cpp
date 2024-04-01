@@ -15,6 +15,22 @@
 #include <QDebug>
 #include <QPainter>
 
+static void setHorizontalHeaderFormat(int column, QTextTableCellFormat &format)
+{
+    Q_UNUSED(column)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    format.setTopBorder(1);
+    format.setBottomBorder(1);
+    format.setTopBorderStyle(QTextFrameFormat::BorderStyle_Solid);
+    format.setBottomBorderStyle(QTextFrameFormat::BorderStyle_Solid);
+    format.setTopBorderBrush(QColor(0x326090));
+    format.setBottomBorderBrush(QColor(0x326090));
+    format.setLeftBorder(0);
+    format.setRightBorder(0);
+#endif
+    format.setPadding(0);
+}
+
 int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
@@ -80,6 +96,9 @@ int main(int argc, char **argv)
     // Q_ASSERT( table1.data( table1.index( 0, 0 ) ).toString() == "Product" );
     KDReports::AutoTableElement autoTableElement1(&table1);
     autoTableElement1.setWidth(100, KDReports::Percent);
+    autoTableElement1.setVerticalHeaderVisible(false);
+    autoTableElement1.setBorder(0);
+    autoTableElement1.setHorizontalHeaderFormatFunction(setHorizontalHeaderFormat);
     report.addElement(autoTableElement1);
 
     report.addVerticalSpacing(5);
@@ -95,6 +114,10 @@ int main(int argc, char **argv)
     table2.loadFromCSV(":/table2");
     KDReports::AutoTableElement autoTableElement2(&table2);
     autoTableElement2.setWidth(100, KDReports::Percent);
+    autoTableElement2.setBorder(0);
+    autoTableElement2.setHorizontalHeaderFormatFunction(setHorizontalHeaderFormat);
+    autoTableElement2.setVerticalHeaderVisible(false);
+
     report.addElement(autoTableElement2);
 
     // and again, on the second page

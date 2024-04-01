@@ -10,6 +10,7 @@
 
 #include "KDReportsXmlHelper.h"
 #include <QDebug>
+#include <QDomElement>
 
 Qt::AlignmentFlag KDReports::XmlHelper::stringToAlignment(const QString &str)
 {

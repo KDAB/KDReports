@@ -36,15 +36,9 @@ public:
     };
     enum
     {
-        Color = 1
-    };
-    enum
-    {
-        Thickness = 2
-    };
-    enum
-    {
-        Margin = 3
+        Color = 1,
+        Thickness = 2,
+        Margin = 3,
     };
 
     /**

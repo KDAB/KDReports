@@ -13,11 +13,13 @@
 
 #include "KDReportsAbstractTableElement.h"
 #include <QtCore/QSize>
+#include <functional>
 
 QT_BEGIN_NAMESPACE
+class QAbstractItemModel;
 class QTextDocument;
 class QTextTableCell;
-class QAbstractItemModel;
+class QTextTableCellFormat;
 QT_END_NAMESPACE
 
 namespace KDReports {
@@ -118,6 +120,25 @@ public:
      * \since 1.4
      */
     QBrush headerBackground() const;
+
+    using CellFormatFunc = std::function<void(int /*section number*/, QTextTableCellFormat &)>;
+    /*!
+     * Sets the function to call in order to customize the format of the cells
+     * created for the horizontal header.
+     * This allows to set the width, style, and color of the 4 borders independently,
+     * customize the padding, etc.
+     * \since 2.3
+     */
+    void setHorizontalHeaderFormatFunction(const CellFormatFunc &func);
+
+    /*!
+     * Sets the function to call in order to customize the format of the cells
+     * created for the horizontal header.
+     * This allows to set the width, style, and color of the 4 borders independently,
+     * customize the padding, etc.
+     * \since 2.3
+     */
+    void setVerticalHeaderFormatFunction(const CellFormatFunc &func);
 
     /**
      * Sets the size of the decoration icons, in pixels.

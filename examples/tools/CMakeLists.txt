@@ -20,6 +20,10 @@ endif()
 target_link_libraries(
     kdreporttesttools ${QT_LIBRARIES}
 )
+target_include_directories(
+    kdreporttesttools
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
+)
 set_target_properties(kdreporttesttools PROPERTIES DEFINE_SYMBOL KDREPORT_BUILD_TESTTOOLS_LIB)
 set_target_properties(
     kdreporttesttools PROPERTIES SOVERSION ${${PROJECT_NAME}_SOVERSION} VERSION ${${PROJECT_NAME}_VERSION}

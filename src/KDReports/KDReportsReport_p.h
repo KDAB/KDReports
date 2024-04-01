@@ -136,6 +136,7 @@ public:
     Report::WatermarkFunction m_watermarkFunction;
     int m_firstPageNumber;
     bool m_pageContentSizeDirty;
+    bool m_progressDialogEnabled = true;
 
     // int m_numHorizontalPages; // for scaleTo(). 1 if not set.
     // int m_numVerticalPages;   // for scaleTo(). 0 if not set.

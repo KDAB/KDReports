@@ -18,10 +18,13 @@
 #include <QtCore/Qt>
 #include <memory>
 
+QT_BEGIN_NAMESPACE
+class QTextTableCellFormat;
+QT_END_NAMESPACE
+
 namespace KDReports {
 class ReportBuilder;
 class Element;
-class CellContentMap;
 class TableElement;
 class CellPrivate;
 
@@ -77,6 +80,33 @@ public:
      * \since 2.2
      */
     void addVerticalSpacing(qreal space);
+
+    /*!
+     * Set the vertical alignment of the cell contents
+     * \since 2.3
+     */
+    void setVerticalAlignment(Qt::AlignmentFlag verticalAlignment);
+    /*!
+     * Returns the vertical alignment of the cell contents
+     * \since 2.3
+     */
+    Qt::AlignmentFlag verticalAlignment() const;
+
+    using CellFormatFunc = std::function<void(int /*row*/, int /*column*/, QTextTableCellFormat &)>;
+
+    /*!
+     * Sets the function to call in order to customize the format of the cell.
+     * This allows to set the width, style, and color of the 4 borders independently,
+     * customize the padding, etc.
+     * \since 2.3
+     */
+    void setCellFormatFunction(const CellFormatFunc &func);
+
+    /*!
+     * Returns the function passed to setCellFormatFunction()
+     * \since 2.3
+     */
+    CellFormatFunc cellFormatFunction() const;
 
     /**
      * @internal

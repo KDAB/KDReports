@@ -292,14 +292,10 @@ void KDReports::ReportPrivate::paintPage(int pageNumber, QPainter &painter)
         //
         // It also means the image could end up being bigger than the page, and we don't want that.
         // So we scale down if necessary. But never up.
-        QImage img = m_watermarkImage;
-        if (m_watermarkImage.width() > textDocRect.width() || m_watermarkImage.height() > textDocRect.height()) {
-            // should probably be cached?
-            img = m_watermarkImage.scaled(textDocRect.size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
-        }
-        const QRect imageRect = QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, img.size(), textDocRect);
-        // qDebug() << "textDocRect=" << textDocRect << "size=" << img.size() << "-> imageRect=" << imageRect;
-        painter.drawImage(imageRect.topLeft(), img);
+        const QSize scaledSize = m_watermarkImage.size().scaled(textDocRect.size(), Qt::KeepAspectRatio);
+        const QRect imageRect = QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, scaledSize, textDocRect);
+        // qDebug() << "textDocRect=" << textDocRect << "size=" << scaledSize << "-> imageRect=" << imageRect;
+        painter.drawImage(imageRect, m_watermarkImage);
     }
 
     painter.save();
@@ -359,7 +355,7 @@ bool KDReports::ReportPrivate::doPrint(QPrinter *printer, QWidget *parent)
     // caller has to ensure that we have been layouted for this printer already
     const int pageCount = m_layout->numberOfPages();
     std::unique_ptr<QProgressDialog> dialog;
-    if (QThread::currentThread() == qApp->thread()) {
+    if (m_progressDialogEnabled && QThread::currentThread() == qApp->thread()) {
         dialog.reset(new QProgressDialog(QObject::tr("Printing"), QObject::tr("Cancel"), 0, pageCount, parent));
         dialog->setWindowModality(Qt::ApplicationModal);
     }
@@ -385,6 +381,7 @@ bool KDReports::ReportPrivate::doPrint(QPrinter *printer, QWidget *parent)
             if (dialog->wasCanceled())
                 break;
         }
+        emit q->printingProgress(pageIndex);
 
         if (!firstPage)
             printer->newPage();
@@ -665,6 +662,11 @@ QString KDReports::Report::asHtml() const
     return d->m_layout->toHtml();
 }
 
+void KDReports::Report::setProgressDialogEnabled(bool enable)
+{
+    d->m_progressDialogEnabled = enable;
+}
+
 bool KDReports::Report::printWithDialog(QWidget *parent)
 {
     QPrinter printer;
@@ -930,7 +932,7 @@ QImage KDReports::Report::watermarkImage() const
 
 void KDReports::Report::setWatermarkFunction(WatermarkFunction function)
 {
-    d->m_watermarkFunction = function;
+    d->m_watermarkFunction = std::move(function);
 }
 
 KDReports::Report::WatermarkFunction KDReports::Report::watermarkFunction() const
