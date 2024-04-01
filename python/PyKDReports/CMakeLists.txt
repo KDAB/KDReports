@@ -49,9 +49,9 @@ set(PyKDReports_target_include_directories ${CMAKE_SOURCE_DIR}/src/ ${CMAKE_SOUR
 # Libraries that will be necessary to link the target, this will used in the command 'target_link_libraries'
 set(PyKDReports_target_link_libraries
     kdreports
-    Qt${Qt_VERSION_MAJOR}::Core
-    Qt${Qt_VERSION_MAJOR}::Gui
-    Qt${Qt_VERSION_MAJOR}::Widgets
+    Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_VERSION_MAJOR}::Gui
+    Qt${QT_VERSION_MAJOR}::Widgets
     ${Python3_LIBRARIES}
 )
 

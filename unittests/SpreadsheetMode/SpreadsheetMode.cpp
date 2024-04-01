@@ -28,7 +28,7 @@ class Test;
 }
 
 #define FUZZYCOMPARE(a, b)   \
-    QVERIFY((a) >= ( b )-4); \
+    QVERIFY((a) >= (b) - 4); \
     QVERIFY((a) <= (b) + 4);
 
 class KDReports::Test : public QObject

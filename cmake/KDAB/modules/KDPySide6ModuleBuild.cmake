@@ -1,5 +1,5 @@
 #
-# SPDX-FileCopyrightText: 2020-2023 Klarälvdalens Datakonsult AB, a KDAB Group company <info@kdab.com>
+# SPDX-FileCopyrightText: 2020 Klarälvdalens Datakonsult AB, a KDAB Group company <info@kdab.com>
 # Author: Renato Araujo Oliveira Filho <renato.araujo@kdab.com>
 #
 # SPDX-License-Identifier: BSD-3-Clause
@@ -115,11 +115,6 @@ macro(
         PROPERTY INCLUDE_DIRECTORIES
     )
     make_path(python_dir_include_dirs ${raw_python_dir_include_dirs})
-    # Maybe check if python_dir_include_dirs is empty?
-    # this causes ${shiboken_include_dirs} to have a trailing ':' (${PATH_SEP}) at the
-    # end making shiboken misbehaving
-    # https://bugreports.qt.io/browse/PYSIDE-2505
-    #set(shiboken_include_dirs "${shiboken_include_dirs}${PATH_SEP}${python_dir_include_dirs}")
 
     set(shiboken_framework_include_dirs_option "")
     if(CMAKE_HOST_APPLE)

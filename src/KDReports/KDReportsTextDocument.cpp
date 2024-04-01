@@ -102,7 +102,6 @@ QList<KDReports::AutoTableElement *> KDReports::TextDocument::autoTableElements(
     return m_contentDocument.autoTableElements(); // doesn't matter in which one we call it
 }
 
-//@cond PRIVATE
 void KDReports::TextDocument::regenerateAutoTables()
 {
     m_contentDocument.regenerateAutoTables();
