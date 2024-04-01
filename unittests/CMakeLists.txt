@@ -39,13 +39,13 @@ macro(add_unittest _source)
     add_test(NAME kdreports-${_name} COMMAND ${_name})
     target_link_libraries(
         ${_name}
-        Qt${Qt_VERSION_MAJOR}::Core
-        Qt${Qt_VERSION_MAJOR}::Gui
-        Qt${Qt_VERSION_MAJOR}::Test
+        Qt${QT_VERSION_MAJOR}::Core
+        Qt${QT_VERSION_MAJOR}::Gui
+        Qt${QT_VERSION_MAJOR}::Test
         kdreports
     )
     if(NOT EMSCRIPTEN)
-        target_link_libraries(${_name} Qt${Qt_VERSION_MAJOR}::Sql)
+        target_link_libraries(${_name} Qt${QT_VERSION_MAJOR}::Sql)
     endif()
 endmacro()
 
@@ -57,8 +57,8 @@ add_subdirectory(SpreadsheetMode)
 add_subdirectory(InThread)
 
 if(NOT EMSCRIPTEN)
-    if(TARGET Qt${Qt_VERSION_MAJOR}::Sql)
-        list(APPEND QT_LIBRARIES Qt${Qt_VERSION_MAJOR}::Sql)
+    if(TARGET Qt${QT_VERSION_MAJOR}::Sql)
+        list(APPEND QT_LIBRARIES Qt${QT_VERSION_MAJOR}::Sql)
         add_subdirectory(PageLayout)
         add_subdirectory(TextDocument)
     else()
