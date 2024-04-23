@@ -92,7 +92,7 @@ void KDReports::setVariableMarker(QTextDocument &textDoc, int pos, KDReports::Va
     c.setPosition(pos);
     c.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
     QTextCharFormat charFormat = c.charFormat();
-    charFormat.setProperty(ResizableImageProperty, QVariant());
+    charFormat.clearProperty(ResizableImageProperty);
     charFormat.setProperty(VariableTypeProperty, variableType);
     charFormat.setProperty(VariableLengthProperty, valueLength);
     c.setCharFormat(charFormat);
@@ -100,9 +100,9 @@ void KDReports::setVariableMarker(QTextDocument &textDoc, int pos, KDReports::Va
 
 void KDReports::cleanupVariableProperties(QTextCharFormat &charFormat)
 {
-    charFormat.setProperty(ResizableImageProperty, QVariant());
-    charFormat.setProperty(VariableTypeProperty, QVariant());
-    charFormat.setProperty(VariableLengthProperty, QVariant());
+    charFormat.clearProperty(ResizableImageProperty);
+    charFormat.clearProperty(VariableTypeProperty);
+    charFormat.clearProperty(VariableLengthProperty);
 }
 
 void KDReports::Header::addVariable(VariableType variable)
