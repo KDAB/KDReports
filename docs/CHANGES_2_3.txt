@@ -9,6 +9,7 @@ Bugfixes:
 * Fix infinite loop and other issues with Qt 6.7 due to QTextFormat behavior change
 * Preserve resolution in watermark image (issue #42)
 * Fix right-aligned tabs not working when setting paragraphs margins
+* Fix blurry rendering in hi-dpi (DPR != 1) situations (issue #58)
 
 New features:
 -------------
