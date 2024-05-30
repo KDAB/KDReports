@@ -127,8 +127,7 @@ void KDReports::PreviewDialogPrivate::slotTableBreakingDialog() const
 void KDReports::PreviewDialogPrivate::slotPrintWithDialog() const
 {
     if (m_previewWidget->printWithDialog()) {
-        q->setResult(KDReports::PreviewDialog::Printed);
-        q->accept();
+        q->done(KDReports::PreviewDialog::Printed);
     }
 }
 
@@ -139,8 +138,7 @@ void KDReports::PreviewDialogPrivate::slotQuickPrint() const
     report->setupPrinter(&printer);
     printer.setPrinterName(m_quickPrinterName);
     report->print(&printer, q);
-    q->setResult(KDReports::PreviewDialog::Printed);
-    q->accept();
+    q->done(KDReports::PreviewDialog::Printed);
 }
 
 void KDReports::PreviewDialogPrivate::slotSave()
@@ -181,11 +179,10 @@ void KDReports::PreviewDialogPrivate::slotSave()
         m_savedFileName = file;
         report->print(&printer, q);
         if (QFile::exists(file)) {
-            q->setResult(KDReports::PreviewDialog::SavedSuccessfully);
+            q->done(KDReports::PreviewDialog::SavedSuccessfully);
         } else {
-            q->setResult(KDReports::PreviewDialog::SaveError);
+            q->done(KDReports::PreviewDialog::SaveError);
         }
-        q->accept();
     }
 }
 
