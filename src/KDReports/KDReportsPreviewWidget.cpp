@@ -195,21 +195,24 @@ void KDReports::PreviewWidgetPrivate::paintItem(QListWidgetItem *item, int index
 
     // Use a QImage so that the raster paint engine is used.
     // Gives a 7.7 times speedup (!) compared to X11.
-    QImage img(PreviewSize, PreviewSize, QImage::Format_ARGB32_Premultiplied);
+    const qreal dpr = q->devicePixelRatioF();
+    QImage img(PreviewSize * dpr, PreviewSize * dpr, QImage::Format_ARGB32_Premultiplied);
+    img.setDevicePixelRatio(dpr);
+    img.fill(Qt::transparent);
     const QSizeF paperSize = m_report->paperSize();
-    const qreal longestSide = qMax(paperSize.width(), paperSize.height());
-    qreal width = img.width() * paperSize.width() / longestSide;
-    qreal height = img.height() * paperSize.height() / longestSide;
-    // img.fill( QColor( Qt::white ).rgb() );
-    img.fill(qRgba(0, 0, 0, 0)); // transparent
+    const qreal paperWidth = paperSize.width();
+    const qreal paperHeight = paperSize.height();
+    const qreal longestSide = qMax(paperWidth, paperHeight);
+    const qreal width = PreviewSize * paperWidth / longestSide;
+    const qreal height = PreviewSize * paperHeight / longestSide;
     QPainter painter(&img);
-    painter.setRenderHint(QPainter::Antialiasing);
-    painter.translate((img.width() - width) / 2, (img.height() - height) / 2);
+    painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing | QPainter::SmoothPixmapTransform, true);
+    painter.translate((PreviewSize - width) / 2, (PreviewSize - height) / 2);
     painter.fillRect(QRectF(0, 0, width, height), QBrush(Qt::white));
-    painter.scale(img.width() / longestSide, img.height() / longestSide);
+    painter.scale(PreviewSize / longestSide, PreviewSize / longestSide);
     m_report->paintPage(index, painter);
     painter.setPen(QPen(1));
-    painter.drawRect(QRectF(0, 0, paperSize.width(), paperSize.height()));
+    painter.drawRect(QRectF(0, 0, paperWidth, paperHeight));
 
     item->setIcon(QIcon(QPixmap::fromImage(img)));
 }
@@ -231,15 +234,18 @@ QPixmap KDReports::PreviewWidgetPrivate::paintPreview(int index) const
     const QSizeF paperSize = m_report->paperSize();
     const int width = qCeil(paperSize.width() * m_zoomFactor);
     const int height = qCeil(paperSize.height() * m_zoomFactor);
+    const qreal dpr = q->devicePixelRatioF();
 
-    QPixmap pixmap(width, height);
+    QPixmap pixmap(width * dpr, height * dpr);
+    pixmap.setDevicePixelRatio(dpr);
+    pixmap.fill(Qt::transparent);
     // qDebug() << width << "," << height;
 
     // qDebug() << "paintPreview " << index;
 
     QPainter painter(&pixmap);
-    painter.setRenderHint(QPainter::Antialiasing);
-    painter.setRenderHint(QPainter::SmoothPixmapTransform);
+    painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing | QPainter::SmoothPixmapTransform, true);
+
     painter.fillRect(QRectF(0, 0, width, height), QBrush(Qt::white));
     painter.scale(m_zoomFactor, m_zoomFactor);
     m_report->paintPage(index, painter);
