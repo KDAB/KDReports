@@ -10,6 +10,7 @@ Bugfixes:
 * Preserve resolution in watermark image (issue #42)
 * Fix right-aligned tabs not working when setting paragraphs margins
 * Fix blurry rendering in hi-dpi (DPR != 1) situations (issue #58)
+* Fix result codes set by KDReportsPreviewDialog. The Result enum promised values that weren't actually set because accept() overwrote them (issue #59)
 
 New features:
 -------------
