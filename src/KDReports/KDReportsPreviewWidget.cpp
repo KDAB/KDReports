@@ -666,10 +666,12 @@ KDReports::Report *KDReports::PreviewWidget::report() const
 bool KDReports::PreviewWidget::printWithDialog()
 {
     QPointer<QPrintDialog> dialog = new QPrintDialog(&d->m_printer, this);
+    // cppcheck-suppress nullPointerRedundantCheck
     dialog->setOption(QAbstractPrintDialog::PrintSelection, true);
+    // cppcheck-suppress nullPointerRedundantCheck
     dialog->setOption(QAbstractPrintDialog::PrintPageRange, true);
     bool ok = false;
-    /* cppcheck-suppress nullPointerRedundantCheck */
+    // cppcheck-suppress nullPointerRedundantCheck
     if (dialog->exec() == QDialog::Accepted && dialog) {
         if (dialog->printRange() == QAbstractPrintDialog::AllPages) {
             // Select all pages
