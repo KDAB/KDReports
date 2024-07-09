@@ -32,7 +32,7 @@ See [INSTALL.txt](INSTALL.txt) for installation instructions using CMake.
 
 Learn more at our:
 
-* [online API reference](https://docs.kdab.com/kdreports)
+* [online API reference](https://kdab.github.io/KDReports)
 * [programmers manual with examples](docs/manual/kdreports.pdf)
 * [sorted example programs](examples/)
 
