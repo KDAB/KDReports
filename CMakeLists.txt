@@ -174,11 +174,8 @@ set(CMAKE_AUTORCC TRUE)
 set(CMAKE_AUTOUIC TRUE)
 set(CMAKE_LINK_DEPENDS_NO_SHARED TRUE) # don't relink dependencies when a shared lib changes
 
-set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-if(TARGET Qt6::Core)
-    set(CMAKE_CXX_STANDARD 17)
-endif()
+set(CMAKE_CXX_STANDARD 17)
 
 # Default to hidden visibility for symbols
 set(CMAKE_C_VISIBILITY_PRESET hidden)
