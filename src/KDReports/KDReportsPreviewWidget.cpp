@@ -273,7 +273,7 @@ void KDReports::PreviewWidgetPrivate::handleMouseRelease(QPoint pos)
     const QPoint unscaledPos = pos / m_zoomFactor;
     const QString link = m_report->anchorAt(pageList->currentRow(), unscaledPos);
     if (!link.isEmpty()) {
-        Q_EMIT q->linkActivated(link);
+        Q_EMIT q->linkActivated(QUrl(link));
     }
 }
 

@@ -208,8 +208,7 @@ private slots:
         QTextTable *thirdTable = c.insertTable(1, 1);
         thirdTable->firstCursorPosition().insertText("in table");
         c.insertText("Foo");
-        QList<QTextTable *> origTables;
-        origTables << firstTable << secondTable << thirdTable;
+        const QList<QTextTable *> origTables = { firstTable, secondTable, thirdTable };
 
         // A generic and slow solution is
         //    curs.currentTable() && !tablesFound.contains(curs.currentTable())
@@ -240,7 +239,7 @@ private slots:
             QVERIFY(curs.currentTable());
 
             // generic loop, works. This approach is in TextDocument::breakTables now.
-            Q_FOREACH (QTextTable *origTable, origTables) {
+            for (QTextTable *origTable : origTables) {
                 QTextCursor curs(clonedDoc);
                 curs.setPosition(origTable->firstCursorPosition().position());
                 tablesByPos.append(curs.currentTable());

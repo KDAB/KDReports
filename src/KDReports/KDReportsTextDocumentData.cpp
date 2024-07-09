@@ -262,7 +262,7 @@ void KDReports::TextDocumentData::scaleFontsBy(qreal factor)
 
     // Also adjust the padding in the cells so that it remains proportional,
     // and the column constraints.
-    Q_FOREACH (QTextTable *table, m_tables) {
+    for (QTextTable *table : std::as_const(m_tables)) {
         QTextTableFormat format = table->format();
         format.setCellPadding(format.cellPadding() * factor);
 
@@ -388,7 +388,7 @@ void KDReports::TextDocumentData::regenerateOneTable(const KDReports::AutoTableE
 
 void KDReports::TextDocumentData::saveResourcesToFiles()
 {
-    Q_FOREACH (const QString &name, m_resourceNames) {
+    for (const QString &name : std::as_const(m_resourceNames)) {
         const QVariant v = m_document.resource(QTextDocument::ImageResource, QUrl(name));
         QPixmap pix = v.value<QPixmap>();
         if (!pix.isNull()) {

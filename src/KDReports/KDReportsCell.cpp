@@ -109,7 +109,7 @@ KDReports::Cell::CellFormatFunc KDReports::Cell::cellFormatFunction() const
 
 void KDReports::Cell::build(ReportBuilder &builder) const
 {
-    foreach (const KDReports::ElementData &ed, d->m_elements) {
+    for (const KDReports::ElementData &ed : std::as_const(d->m_elements)) {
         switch (ed.m_type) {
         case KDReports::ElementData::Inline:
             builder.addInlineElement(*ed.m_element);

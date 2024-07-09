@@ -156,7 +156,7 @@ void KDReports::Frame::build(ReportBuilder &builder) const
     ReportBuilder contentsBuilder(builder.currentDocumentData(), contentsCursor, builder.report());
     contentsBuilder.copyStateFrom(builder);
 
-    foreach (const KDReports::ElementData &ed, d->m_elements) {
+    for (const KDReports::ElementData &ed : std::as_const(d->m_elements)) {
         switch (ed.m_type) {
         case KDReports::ElementData::Inline:
             contentsBuilder.addInlineElement(*ed.m_element);
