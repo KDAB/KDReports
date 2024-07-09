@@ -420,7 +420,7 @@ Q_GLOBAL_STATIC(ModelMap, globalModelMap)
 
 QAbstractItemModel *KDReports::modelForKey(const QString &key)
 {
-    return globalModelMap()->value(key, 0);
+    return globalModelMap()->value(key, nullptr);
 }
 
 qreal KDReports::ReportPrivate::textDocumentWidth() const
