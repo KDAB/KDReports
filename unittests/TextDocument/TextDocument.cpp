@@ -208,7 +208,7 @@ private slots:
         QTextTable *thirdTable = c.insertTable(1, 1);
         thirdTable->firstCursorPosition().insertText("in table");
         c.insertText("Foo");
-        const QList<QTextTable *> origTables = { firstTable, secondTable, thirdTable };
+        const QList<QTextTable *> origTables = {firstTable, secondTable, thirdTable};
 
         // A generic and slow solution is
         //    curs.currentTable() && !tablesFound.contains(curs.currentTable())
