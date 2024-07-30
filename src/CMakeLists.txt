@@ -55,7 +55,6 @@ add_library(
 add_library(
     KDReports::kdreports ALIAS kdreports
 )
-set_target_properties(kdreports PROPERTIES OUTPUT_NAME "kdreports${${PROJECT_NAME}_LIBRARY_QTID}")
 if(${PROJECT_NAME}_STATIC)
     target_compile_definitions(kdreports PUBLIC KDREPORTS_STATICLIB)
 else()
@@ -83,13 +82,9 @@ target_include_directories(
 #version libraries on Windows
 if(WIN32)
     set(postfix ${${PROJECT_NAME}_SOVERSION})
-    string(TOUPPER ${CMAKE_BUILD_TYPE} UPPER_BUILD_TYPE)
-    if(${UPPER_BUILD_TYPE} MATCHES "^DEBUG")
-        string(CONCAT postfix ${postfix} "d")
-        set_target_properties(kdreports PROPERTIES DEBUG_POSTFIX ${postfix})
-    else()
-        set_target_properties(kdreports PROPERTIES ${UPPER_BUILD_TYPE}_POSTFIX ${postfix})
-    endif()
+    set_target_properties(kdreports PROPERTIES OUTPUT_NAME "kdreports${${PROJECT_NAME}_LIBRARY_QTID}$<$<CONFIG:Debug>:d>")
+else()
+    set_target_properties(kdreports PROPERTIES OUTPUT_NAME "kdreports${${PROJECT_NAME}_LIBRARY_QTID}")
 endif()
 
 # Generate library version files
