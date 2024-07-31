@@ -82,7 +82,9 @@ target_include_directories(
 #version libraries on Windows
 if(WIN32)
     set(postfix ${${PROJECT_NAME}_SOVERSION})
-    set_target_properties(kdreports PROPERTIES OUTPUT_NAME "kdreports${${PROJECT_NAME}_LIBRARY_QTID}$<$<CONFIG:Debug>:d>")
+    set_target_properties(
+        kdreports PROPERTIES OUTPUT_NAME "kdreports${${PROJECT_NAME}_LIBRARY_QTID}$<$<CONFIG:Debug>:d>"
+    )
 else()
     set_target_properties(kdreports PROPERTIES OUTPUT_NAME "kdreports${${PROJECT_NAME}_LIBRARY_QTID}")
 endif()
