@@ -899,7 +899,7 @@ public:
 signals:
     /**
      * Emitted during printWithDialog(), print() or exportToFile()
-     * \param the page number, starting at 0
+     * \param pageIndex the page number, starting at 0
      * For the page count, see numberOfPages().
      * \since 2.3
      */
