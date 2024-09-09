@@ -1,9 +1,9 @@
-<div>
-<img src="images/kdreports-trademark.png" width="68%"/>
-<img src="images/kdreports.png" height="200px"/>
-</div>
-
 # Introduction
+
+<div>
+<img src="images/kdreports-trademark.png" width="68%" alt="<kdreports-trademark>"/>
+<img src="images/kdreports.png" height="200px" alt="<kdreports-logo>" />
+</div>
 
 KD Reports is a Qt tool that lets you easily create printable reports by
 providing all of the necessary features for a variety of applications.
@@ -42,7 +42,7 @@ The starting point for using KD Reports is the KDReports::Report class.
 
 * See our official home page: <https://www.kdab.com/development-resources/qt-tools/kd-reports>
 * Visit us on GitHub: <https://github.com/KDAB/KDReports>
-* Email info@kdab.com for questions about this product.
+* Email <info@kdab.com> for questions about this product.
 
 Stay up-to-date with KDAB product announcements:
 

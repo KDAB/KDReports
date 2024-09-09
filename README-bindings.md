@@ -55,6 +55,7 @@ except installing `shiboken6 pyside6 shiboken6_generator` with pip3.
 ## Building KDReports Python Bindings
 
 Tell CMake to build the bindings by passing the `-DKDReports_PYTHON_BINDINGS=True' option.
+
 Then run `cmake --build` as usual.
 
 The bindings will be installed to `CMAKE_INSTALL_PREFIX`, which might require setting
