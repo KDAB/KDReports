@@ -36,9 +36,9 @@ public:
     };
     enum
     {
-        Color = 1,
-        Thickness = 2,
-        Margin = 3,
+        Color = QTextFormat::UserProperty + 1,
+        Thickness = QTextFormat::UserProperty + 2,
+        Margin = QTextFormat::UserProperty + 3,
     };
 
     /**
