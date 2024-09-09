@@ -293,6 +293,8 @@ void KDReports::AutoTableElement::build(ReportBuilder &builder) const
     const int headerColumnCount = d->m_verticalHeaderVisible ? 1 : 0;
     tableFormat.setHeaderRowCount(headerRowCount);
     tableFormat.setProperty(KDReports::HeaderColumnsProperty, headerColumnCount);
+    tableFormat.setCellPadding(2); // Qt 6.8 changes the default to 4, enforce 2
+    tableFormat.setBorderCollapse(false); // Qt 6.8 changes the default to true, enforce false
 
     tableFormat.setAlignment(textDocCursor.blockFormat().alignment());
     fillTableFormat(tableFormat, textDocCursor);

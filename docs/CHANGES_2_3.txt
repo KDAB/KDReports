@@ -11,6 +11,7 @@ Bugfixes:
 * Fix right-aligned tabs not working when setting paragraphs margins
 * Fix blurry rendering in hi-dpi (DPR != 1) situations (issue #58)
 * Fix result codes set by KDReportsPreviewDialog. The Result enum promised values that weren't actually set because accept() overwrote them (issue #59)
+* Fix tables losing their cell borders after upgrading to Qt 6.8
 
 New features:
 -------------

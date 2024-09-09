@@ -143,6 +143,8 @@ void KDReports::TableElement::build(ReportBuilder &builder) const
     tableFormat.setProperty(KDReports::HeaderColumnsProperty, d->m_headerColumnCount);
     tableFormat.setAlignment(textDocCursor.blockFormat().alignment());
     tableFormat.setBackground(background());
+    tableFormat.setCellPadding(2); // Qt 6.8 changes the default to 4, enforce 2
+    tableFormat.setBorderCollapse(false); // Qt 6.8 changes the default to true, enforce false
     fillTableFormat(tableFormat, textDocCursor);
     QTextCharFormat charFormat = textDocCursor.charFormat();
 
