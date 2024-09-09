@@ -9,10 +9,12 @@ on:
     branches:
       - master
       - kdreports-2.2
+      - kdreports-2.3
   pull_request:
     branches:
       - master
       - kdreports-2.2
+      - kdreports-2.3
 
 jobs:
   build:
