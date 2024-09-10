@@ -2,10 +2,14 @@
 
 ## Prerelease Source Checking
 
+* make sure the [github actions CI](https://github.com/KDAB/KDReports/actions) is green
+* make sure the [KDAB CI](https://kdab.ci.kdab.com/#/projects/25) is green
 * look for any static checking issues (clazy, clang-tidy, cppcheck, etc) that may need fixing.
+  check [KDAB CI](https://kdab-artifacts.ci.kdab.com/analysis/kdreports-stable)
+  and [Github Nightly CI](https://github.com/KDAB/KDReports/actions/workflows/nightly.yml)
 * look for any changes in the README.md or INSTALL.txt that may need updating or improving.
 * follow the [prerelease source code review](prerelease-source.md) instructions.
-* merge any changes made during the review and make sure the CIs are green before continuing.
+* merge any changes made during the review
 * create the tag (**do not push the tag yet**)
 
 ## Prerelease Build Checking
