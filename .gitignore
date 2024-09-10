@@ -45,3 +45,9 @@ ReportEditor/unittests/XmlSaving/XmlSaving
 Makefile*
 
 internal/tests/qttests/qttests
+
+kdreports-*-doc.zip
+kdreports-*.tar.gz
+kdreports-*.tar.gz.asc
+kdreports-*.zip
+kdreports-*.zip.asc
