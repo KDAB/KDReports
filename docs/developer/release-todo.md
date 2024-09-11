@@ -58,7 +58,7 @@ Go to <https://github.com/KDAB/KDReports/releases> and make an official release.
 #### Change the default branch
 
 For major (X.Y.0) releases, change the default branch at
-<https://github.com/KDAB/KDReports/settings/branches> to kdreports-X.Y
+<https://github.com/KDAB/KDReports/settings> to kdreports-X.Y
 
 ## Postrelease
 
