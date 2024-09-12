@@ -1,0 +1,14 @@
+What is new in KD Reports 2.4
+=============================
+
+General:
+--------
+*
+
+Bugfixes:
+-------------
+*
+
+New features:
+-------------
+*
