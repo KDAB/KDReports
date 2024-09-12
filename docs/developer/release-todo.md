@@ -34,15 +34,6 @@ If so:
 git push --tags
 ```
 
-### Create and push the release branch
-
-In the subversion / commercial release days we did this. No idea if still needed.  Doesn't hurt.
-
-```shell
-    # how things were done way back in the subversion and commercial release days
-    git checkout -b kdreports-X.Y.Z-release && git push origin kdreports-X.Y.Z-release
-```
-
 ### Github
 
 #### Make a release on Github
