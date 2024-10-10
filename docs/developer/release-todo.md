@@ -67,5 +67,5 @@ For major (X.Y.0) releases, change the default branch at
 
 In the branch:
 
-* increase the ${PROJECT_NAME}_VERSION_PATCH value in the top-level CMakeLists.txt
+* increment the ${PROJECT_NAME}_VERSION_PATCH value in the top-level CMakeLists.txt
 * merge to the "master" branch

@@ -44,6 +44,6 @@ Then create the new tag using the command:
 
 ```shell
     git tag -m "KDReports X.Y.Z" kdreports-X.Y.Z
-  ```
+```
 
 **DO NOT PUSH THE TAG YET!**
