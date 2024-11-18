@@ -9,13 +9,13 @@
 
 include(CMakeFindDependencyMacro)
 
-find_dependency(Qt@Qt_VERSION_MAJOR@Core @QT_MIN_VERSION@)
-find_dependency(Qt@Qt_VERSION_MAJOR@Widgets @QT_MIN_VERSION@)
-find_dependency(Qt@Qt_VERSION_MAJOR@PrintSupport @QT_MIN_VERSION@)
-find_dependency(Qt@Qt_VERSION_MAJOR@Xml @QT_MIN_VERSION@)
+find_dependency(Qt@QT_VERSION_MAJOR@Core @QT_MIN_VERSION@)
+find_dependency(Qt@QT_VERSION_MAJOR@Widgets @QT_MIN_VERSION@)
+find_dependency(Qt@QT_VERSION_MAJOR@PrintSupport @QT_MIN_VERSION@)
+find_dependency(Qt@QT_VERSION_MAJOR@Xml @QT_MIN_VERSION@)
 
 if (@KDChart_FOUND@)
-    find_dependency(KDChart)
+    find_dependency(@KDChartPackageName@)
 endif()
 
 include("${CMAKE_CURRENT_LIST_DIR}/KDReportsTargets.cmake")
