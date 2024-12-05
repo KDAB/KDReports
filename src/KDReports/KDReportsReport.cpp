@@ -816,10 +816,18 @@ bool KDReports::Report::loadFromXML(QIODevice *iodevice, ErrorDetails *details)
     else
         iodevice->open(QIODevice::ReadOnly);
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+    const auto result = doc.setContent(iodevice, QDomDocument::ParseOption::UseNamespaceProcessing);
+    const QString errorMsg = result.errorMessage;
+    const int errorLine = result.errorLine;
+    const int errorColumn = result.errorColumn;
+    const bool ret = bool(result);
+#else
     QString errorMsg;
     int errorLine = 0;
     int errorColumn = 0;
-    bool ret = doc.setContent(iodevice, true, &errorMsg, &errorLine, &errorColumn);
+    const bool ret = doc.setContent(iodevice, true, &errorMsg, &errorLine, &errorColumn);
+#endif
     if (!ret) {
         if (details) {
             details->setLine(errorLine);
