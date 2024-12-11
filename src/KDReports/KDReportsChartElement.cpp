@@ -34,12 +34,10 @@ public:
         : m_tableModel(nullptr)
         , m_size(100, 100)
         , m_unit(KDReports::Millimeters)
-        ,
 #ifdef HAVE_KDCHART
-        m_chart(0)
-        ,
+        , m_chart(nullptr)
 #endif
-        m_deleteChart(false)
+        , m_deleteChart(false)
     {
     }
 
@@ -138,7 +136,7 @@ void KDReports::ChartElement::build(ReportBuilder &builder) const
         d->m_deleteChart = true;
     }
 
-    if (d->m_chart->coordinatePlane()->diagram() == 0) {
+    if (d->m_chart->coordinatePlane()->diagram() == nullptr) {
         KDChart::BarDiagram *diagram = new KDChart::BarDiagram();
         diagram->setModel(d->m_tableModel);
         d->m_chart->coordinatePlane()->replaceDiagram(diagram);
