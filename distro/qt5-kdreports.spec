@@ -49,7 +49,7 @@ develop programs using kdreports.
 %setup -q
 
 %build
-cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DKDReports_QT6=False
 %__make %{?_smp_mflags}
 
 %post -p /sbin/ldconfig
