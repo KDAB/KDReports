@@ -3,7 +3,7 @@ What is new in KD Reports 2.4
 
 General:
 --------
-*
+* KDReports now looks for Qt6 by default, rather than Qt5. If your Qt5 build broke, pass -DKDReports_QT6=OFF to CMake.
 
 Bugfixes:
 -------------
