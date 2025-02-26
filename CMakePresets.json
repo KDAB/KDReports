@@ -1,0 +1,38 @@
+{
+    "version": 2,
+    "configurePresets": [
+        {
+            "name": "dev",
+            "description": "Simple development preset",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build-dev",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "KDSoap_TESTS": "ON",
+                "KDSoap_QT6": "ON"
+            }
+        },
+        {
+            "name": "dev-asan",
+            "description": "Simple development preset with sanitizers",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build-dev-asan",
+            "cacheVariables": {
+                "ECM_ENABLE_SANITIZERS": "'address;undefined'"
+            },
+            "inherits": "dev"
+        },
+        {
+            "name": "dev-profiling",
+            "description": "Simple development preset with optimizations and debug symbols",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build-dev-profiling",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "KDSoap_QT6": "ON"
+            }
+        }
+    ]
+}
