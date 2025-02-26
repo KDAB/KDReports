@@ -9,8 +9,8 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-                "KDSoap_TESTS": "ON",
-                "KDSoap_QT6": "ON"
+                "KDReports_TESTS": "ON",
+                "KDReports_QT6": "ON"
             }
         },
         {
@@ -31,7 +31,7 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "RelWithDebInfo",
                 "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-                "KDSoap_QT6": "ON"
+                "KDReports_QT6": "ON"
             }
         }
     ]
