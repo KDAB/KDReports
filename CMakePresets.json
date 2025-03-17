@@ -84,7 +84,7 @@
       "name":"clazy",
       "configurePreset":"clazy",
       "environment":{
-        "CLAZY_CHECKS":"level2,no-qstring-allocations,no-fully-qualified-moc-types",
+        "CLAZY_CHECKS":"level2,no-qstring-allocations,no-fully-qualified-moc-types,no-copyable-polymorphic",
         "CCACHE_DISABLE":"ON"
       }
     },

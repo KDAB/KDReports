@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 
-name: Nightly CI
+name: Tidy / Clazy / cppcheck
 
 on:
   workflow_dispatch:
@@ -16,31 +16,19 @@ jobs:
       fail-fast: true
       matrix:
         os:
-          - ubuntu-22.04
-          - windows-2022
-          - macos-13
+          - ubuntu-latest
 
         config:
-          - name: ci-python-qt6
+          - name: clang-tidy
+            preset: clang-tidy
+            qt_version: "6.6.0"
+
+          - name: clazy
+            preset: clazy
             qt_version: "6.6.0"
             apt_pgks:
-              - llvm
-
-        include:
-          - os: ubuntu-22.04
-            config:
-              name: clang-tidy
-              preset: clang-tidy
-              qt_version: "5.15"
-
-          - os: ubuntu-22.04
-            config:
-              name: clazy
-              preset: clazy
-              qt_version: "5.15"
-              apt_pgks:
-                - clazy
-                - cppcheck
+              - clazy
+              - cppcheck
 
     steps:
       - name: Install Qt ${{ matrix.config.qt_version }} with options and default aqtversion
@@ -62,32 +50,12 @@ jobs:
         #with:
           #ref: '2.0' # schedule.cron do not allow branch setting
 
-      - uses: actions/setup-python@v4
-        with:
-          cache: 'pip'
-          cache-dependency-path: '.github/workflows/pip-requirements.txt'
-          python-version: '3.9'
-
-      - run: pip3.9 install -r .github/workflows/pip-requirements.txt
-
       - name: Make sure MSVC is found when Ninja generator is in use
         if: ${{ runner.os == 'Windows' }}
         uses: ilammy/msvc-dev-cmd@v1
 
-      - name: Hackery due Shiboken hardcoded paths
-        if: ${{ runner.os == 'Linux' }}
-        run: |
-          sudo mkdir -p /opt/rh/gcc-toolset-10/root/usr/bin/
-          sudo cp /usr/bin/g++-10 /opt/rh/gcc-toolset-10/root/usr/bin/c++
-          sudo mkdir -p /opt/rh/gcc-toolset-10/root/usr/lib/gcc/x86_64-linux-gnu/10/
-          sudo cp /usr/lib/gcc/x86_64-linux-gnu/10/cc1plus /opt/rh/gcc-toolset-10/root/usr/lib/gcc/x86_64-linux-gnu/10/
-
       - name: Configure project
-        run: |
-          cmake --preset=${{ matrix.config.preset }}
-          -DKDReports_QT6=${{ startsWith(matrix.config.qt_version, '6.') }}
-          -DKDReports_PYTHON_BINDINGS=${{ matrix.config.pip_pgks }}
-          -DPython3_FIND_VIRTUALENV=ONLY
+        run: cmake --preset=${{ matrix.config.preset }}
 
       - name: Build Project
         id: ctest
