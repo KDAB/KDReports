@@ -27,7 +27,7 @@ using CellContentMap = QMap<QPair<int /*row*/, int /*column*/>, Cell>;
 class KDReports::TableElementPrivate
 {
 public:
-    void createCell(QTextTable *textTable, ReportBuilder &builder, int row, int column, const Cell &cell, QTextCharFormat charFormat) const;
+    void createCell(QTextTable *textTable, ReportBuilder &builder, int row, int column, const Cell &cell, const QTextCharFormat &charFormat) const;
 
     KDReports::CellContentMap m_cellContentMap;
     int m_rowCount = 0;
@@ -107,7 +107,7 @@ KDReports::Cell &KDReports::TableElement::cell(int row, int column)
     return d->m_cellContentMap[coord]; // find or create
 }
 
-void KDReports::TableElementPrivate::createCell(QTextTable *textTable, ReportBuilder &builder, int row, int column, const Cell &cell, QTextCharFormat charFormat) const
+void KDReports::TableElementPrivate::createCell(QTextTable *textTable, ReportBuilder &builder, int row, int column, const Cell &cell, const QTextCharFormat &charFormat) const
 {
     if (cell.columnSpan() > 1 || cell.rowSpan() > 1)
         textTable->mergeCells(row, column, cell.rowSpan(), cell.columnSpan());
