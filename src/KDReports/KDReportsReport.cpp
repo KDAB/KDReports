@@ -1101,6 +1101,7 @@ void KDReports::Report::setCurrentRow(const QAbstractItemModel *model, int row)
 void KDReports::Report::setDocumentName(const QString &name)
 {
     d->m_documentName = name;
+    Q_EMIT documentNameChanged();
 }
 
 QString KDReports::Report::documentName() const

@@ -206,7 +206,7 @@ void KDReports::TextDocumentData::updatePercentSize(QTextImageFormat &imageForma
             prop = QStringLiteral("H100");
         }
     }
-    const qreal percent = prop.mid(1).toDouble();
+    const qreal percent = prop.mid(1).toDouble(); // clazy:exclude=qstring-ref
     switch (prop[0].toLatin1()) {
     case 'W': {
         const qreal newWidth = pageWidth * percent / 100.0;
@@ -352,7 +352,7 @@ void KDReports::TextDocumentData::regenerateAutoTableForModel(QAbstractItemModel
         KDReports::AutoTableElement tableElement = it.value();
         if (tableElement.tableModel() == model) {
             QTextTable *table = it.key();
-            m_autoTables.erase(it);
+            m_autoTables.erase(it); // clazy:exclude=strict-iterators
             regenerateOneTable(tableElement, table);
             break;
         }

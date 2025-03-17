@@ -114,6 +114,18 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     )
 endif()
 
+if(CMAKE_COMPILE_WARNING_AS_ERROR)
+    # These -Wno-error flags are here to enable -Werror for clazy in CI
+    # it doesn't mean we endorse those warnings.
+    # MSVC is untested and probably will have a few hundered errors
+    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+        add_compile_options(-Wno-error=deprecated-declarations)
+        if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+            add_compile_options(-Wno-error=documentation -Wno-error=unused-private-field -Wno-error=c++20-extensions)
+        endif()
+    endif()
+endif()
+
 if(${PROJECT_NAME}_QT6)
     set(QT_VERSION_MAJOR 6)
     set(QT_MIN_VERSION "6.0.0")
@@ -313,3 +325,16 @@ if(${PROJECT_NAME}_IS_ROOT_PROJECT)
 
     feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 endif()
+
+# TODO once cppcheck is passing change --error-exitcode=1 so CI step fails on new errors
+add_custom_target(
+    cppcheck
+    COMMENT "Run cppcheck on sources"
+    USES_TERMINAL
+    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+    COMMAND
+        ${CMAKE_COMMAND} -E env cppcheck --project=${PROJECT_BINARY_DIR}/compile_commands.json --enable=all
+        --error-exitcode=0 --language=c++ --inline-suppr --quiet --disable=missingInclude,unusedFunction
+        --check-level=exhaustive --library=qt.cfg -i3rdParty/ --suppress=*:*.moc --suppress=*:*moc_*.cpp -i/cmake/ECM/
+        -i/cmake/KDAB/
+)

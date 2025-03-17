@@ -1,38 +1,96 @@
 {
-    "version": 2,
-    "configurePresets": [
-        {
-            "name": "dev",
-            "description": "Simple development preset",
-            "generator": "Ninja",
-            "binaryDir": "${sourceDir}/build-dev",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug",
-                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-                "KDReports_TESTS": "ON",
-                "KDReports_QT6": "ON"
-            }
-        },
-        {
-            "name": "dev-asan",
-            "description": "Simple development preset with sanitizers",
-            "generator": "Ninja",
-            "binaryDir": "${sourceDir}/build-dev-asan",
-            "cacheVariables": {
-                "ECM_ENABLE_SANITIZERS": "'address;undefined'"
-            },
-            "inherits": "dev"
-        },
-        {
-            "name": "dev-profiling",
-            "description": "Simple development preset with optimizations and debug symbols",
-            "generator": "Ninja",
-            "binaryDir": "${sourceDir}/build-dev-profiling",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "RelWithDebInfo",
-                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-                "KDReports_QT6": "ON"
-            }
-        }
-    ]
+  "version":2,
+  "configurePresets":[
+    {
+      "name":"base",
+      "generator":"Ninja",
+      "binaryDir":"${sourceDir}/build-${presetName}",
+      "hidden":true,
+      "cacheVariables":{
+        "CMAKE_EXPORT_COMPILE_COMMANDS":"ON"
+      },
+      "warnings":{
+        "uninitialized":true
+      },
+      "errors":{
+        "dev":true
+      }
+    },
+    {
+      "name":"dev",
+      "description":"Simple development preset",
+      "inherits":[
+        "base"
+      ],
+      "cacheVariables":{
+        "CMAKE_BUILD_TYPE":"Debug",
+        "KDReports_TESTS":"ON",
+        "KDReports_QT6":"ON"
+      }
+    },
+    {
+      "name":"dev-asan",
+      "description":"Simple development preset with sanitizers",
+      "generator":"Ninja",
+      "binaryDir":"${sourceDir}/build-dev-asan",
+      "cacheVariables":{
+        "ECM_ENABLE_SANITIZERS":"'address;undefined'"
+      },
+      "inherits":"dev"
+    },
+    {
+      "name":"dev-profiling",
+      "description":"Simple development preset with optimizations and debug symbols",
+      "generator":"Ninja",
+      "binaryDir":"${sourceDir}/build-dev-profiling",
+      "cacheVariables":{
+        "CMAKE_BUILD_TYPE":"RelWithDebInfo",
+        "CMAKE_EXPORT_COMPILE_COMMANDS":"ON",
+        "KDReports_QT6":"ON"
+      }
+    },
+    {
+      "name":"clazy",
+      "inherits":"dev",
+      "cacheVariables":{
+        "KDReports_EXAMPLES":"OFF",
+        "KDReports_TESTS":"OFF",
+        "CMAKE_COMPILE_WARNING_AS_ERROR":"ON"
+      },
+      "environment":{
+        "CXX":"clazy",
+        "CCACHE_DISABLE":"ON"
+      }
+    },
+    {
+      "name":"clang-tidy",
+      "inherits":"dev",
+      "cacheVariables":{
+        "KDReports_EXAMPLES":"OFF",
+        "KDReports_TESTS":"OFF",
+        "CMAKE_CXX_CLANG_TIDY":"clang-tidy"
+      }
+    },
+    {
+      "name":"release",
+      "inherits":"base",
+      "cacheVariables":{
+        "CMAKE_BUILD_TYPE":"Release"
+      }
+    }
+  ],
+  "buildPresets":[
+    {
+      "name":"clazy",
+      "configurePreset":"clazy",
+      "environment":{
+        "CLAZY_CHECKS":"level2,no-qstring-allocations,no-fully-qualified-moc-types",
+        "CCACHE_DISABLE":"ON"
+      }
+    },
+    {
+      "name":"clang-tidy",
+      "configurePreset":"clang-tidy"
+    }
+  ]
 }

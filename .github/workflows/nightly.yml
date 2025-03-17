@@ -5,6 +5,7 @@
 name: Nightly CI
 
 on:
+  workflow_dispatch:
   schedule:
   - cron: '0 3 * * *'
 
@@ -28,17 +29,18 @@ jobs:
         include:
           - os: ubuntu-22.04
             config:
-              name: ci-clang-tidy-qt5
-              cmake_arg: '-DCMAKE_CXX_CLANG_TIDY=clang-tidy'
+              name: clang-tidy
+              preset: clang-tidy
               qt_version: "5.15"
 
           - os: ubuntu-22.04
             config:
               name: clazy
-              cmake_arg: '-DCMAKE_CXX_COMPILER=clazy'
+              preset: clazy
               qt_version: "5.15"
               apt_pgks:
                 - clazy
+                - cppcheck
 
     steps:
       - name: Install Qt ${{ matrix.config.qt_version }} with options and default aqtversion
@@ -81,21 +83,22 @@ jobs:
           sudo cp /usr/lib/gcc/x86_64-linux-gnu/10/cc1plus /opt/rh/gcc-toolset-10/root/usr/lib/gcc/x86_64-linux-gnu/10/
 
       - name: Configure project
-        run: >
-          cmake -S . -B ./build -G Ninja ${{ matrix.config.cmake_arg }}
-          -DCMAKE_BUILD_TYPE=Release
-          --warn-uninitialized
-          -Werror=dev
+        run: |
+          cmake --preset=${{ matrix.config.preset }}
           -DKDReports_QT6=${{ startsWith(matrix.config.qt_version, '6.') }}
           -DKDReports_PYTHON_BINDINGS=${{ matrix.config.pip_pgks }}
           -DPython3_FIND_VIRTUALENV=ONLY
 
       - name: Build Project
         id: ctest
-        run: cmake --build ./build
+        run: cmake --build --preset=${{ matrix.config.preset }}
 
       - name: Read tests log when it fails
         uses: andstor/file-reader-action@v1
         if: ${{ steps.ctest.conclusion == 'failure' }}
         with:
           path: "./build/Testing/Temporary/LastTest.log"
+
+      - name: Run cppcheck
+        if: ${{ matrix.config.preset == 'clazy' }}
+        run: cmake --build --preset=${{ matrix.config.preset }} --target cppcheck
