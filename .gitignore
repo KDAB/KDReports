@@ -51,3 +51,5 @@ kdreports-*.tar.gz
 kdreports-*.tar.gz.asc
 kdreports-*.zip
 kdreports-*.zip.asc
+
+build*/

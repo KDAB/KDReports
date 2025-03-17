@@ -78,7 +78,7 @@ Q_DECLARE_FLAGS(HeaderLocations, HeaderLocation)
 class KDREPORTS_EXPORT Report : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString documentName READ documentName WRITE setDocumentName)
+    Q_PROPERTY(QString documentName READ documentName WRITE setDocumentName NOTIFY documentNameChanged)
 
 public:
     /**
@@ -896,7 +896,7 @@ public:
      */
     QTextDocument *mainTextDocument() const;
 
-signals:
+Q_SIGNALS:
     /**
      * Emitted during printWithDialog(), print() or exportToFile()
      * \param pageIndex the page number, starting at 0
@@ -904,6 +904,8 @@ signals:
      * \since 2.3
      */
     void printingProgress(int pageIndex);
+
+    void documentNameChanged();
 
 private:
     friend class Test;
