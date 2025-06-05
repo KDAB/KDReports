@@ -11,4 +11,5 @@ Bugfixes:
 
 New features:
 -------------
-*
+* New method Report::toHtml which turns images into data: URLs in order to make the HTML standalone. This can be used together with Aspose to export to MS Word in docx format.
+

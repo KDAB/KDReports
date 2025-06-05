@@ -63,6 +63,11 @@ QString KDReports::TextDocument::asHtml() const
 {
     return m_contentDocument.asHtml();
 }
+
+QString KDReports::TextDocument::toStandaloneHtml()
+{
+    return m_contentDocument.toStandaloneHtml();
+}
 //@endcond
 
 void KDReports::TextDocument::preciseDump()

@@ -57,7 +57,9 @@ public:
     /// \reimp
     QString anchorAt(int pageNumber, QPoint pos) override;
     /// \reimp
-    QString toHtml() const override;
+    QString toStandaloneHtml() override;
+    /// \reimp
+    QString asHtml() const override;
     /// \reimp
     void finishHtmlExport() override;
 

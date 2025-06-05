@@ -546,7 +546,12 @@ qreal KDReports::SpreadsheetReportLayout::layoutAsOnePage(qreal width)
     return pageContentHeight;
 }
 
-QString KDReports::SpreadsheetReportLayout::toHtml() const
+QString KDReports::SpreadsheetReportLayout::toStandaloneHtml()
+{
+    return QStringLiteral("Not implemented");
+}
+
+QString KDReports::SpreadsheetReportLayout::asHtml() const
 {
     return QStringLiteral("Not implemented");
 }

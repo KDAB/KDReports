@@ -60,8 +60,10 @@ public:
 
     virtual QString anchorAt(int pageNumber, QPoint pos) = 0;
 
-    virtual QString toHtml() const = 0;
-    virtual void finishHtmlExport() = 0;
+    virtual QString toStandaloneHtml() = 0; // turns images into data URLs
+
+    virtual QString asHtml() const = 0;
+    virtual void finishHtmlExport() = 0; // saves images as separate files
 };
 
 }

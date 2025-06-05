@@ -57,7 +57,12 @@ void KDReports::TextDocReportLayout::ensureLayouted()
 {
 }
 
-QString KDReports::TextDocReportLayout::toHtml() const
+QString KDReports::TextDocReportLayout::toStandaloneHtml()
+{
+    return m_textDocument.toStandaloneHtml();
+}
+
+QString KDReports::TextDocReportLayout::asHtml() const
 {
     return m_textDocument.asHtml();
 }

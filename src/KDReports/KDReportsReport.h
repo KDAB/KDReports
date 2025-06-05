@@ -595,6 +595,15 @@ public:
     bool exportToHtml(const QString &fileName);
 
     /**
+     * Returns the whole report converted to HTML.
+     * Note that HTML export does not include headers and footers, nor watermark.
+     *
+     * Images are turned into data: URLs
+     * \since 2.4
+     */
+    QString toHtml() const;
+
+    /**
      * Paints a given page of the report into the painter.
      * Note that this method can be used for printing and for on-screen rendering
      * so it doesn't fill the background with white, the caller has do to that.
@@ -912,8 +921,6 @@ private:
     friend class ::ReportData;
     friend class ::EditorData;
     KDReports::TextDocument &doc() const;
-
-    QString asHtml() const;
 
     void setupPrinter(QPrinter *printer);
 

@@ -16,6 +16,7 @@
 #include "KDReportsTextDocumentData_p.h"
 
 #include <QAbstractTextDocumentLayout>
+#include <QBuffer>
 #include <QDebug>
 #include <QTextTable>
 #include <QUrl>
@@ -292,6 +293,38 @@ void KDReports::TextDocumentData::setFontSizeHelper(QTextCursor &lastCursor, int
 }
 
 //@cond PRIVATE
+
+QString KDReports::TextDocumentData::toStandaloneHtml()
+{
+    // Generate data URLs for images
+    QTextCursor c(&m_document);
+    c.beginEditBlock();
+
+    for (auto block = m_document.begin(); block != m_document.end(); block = block.next()) {
+        for (auto fragmentIt = block.begin(); !fragmentIt.atEnd(); ++fragmentIt) {
+            QTextFragment fragment = fragmentIt.fragment();
+            if (fragment.isValid() && fragment.charFormat().isImageFormat()) {
+                QTextImageFormat imageFormat = fragment.charFormat().toImageFormat();
+                if (imageFormat.name().isEmpty())
+                    continue;
+                QImage image = m_document.resource(QTextDocument::ImageResource, QUrl(imageFormat.name())).value<QImage>();
+                if (image.isNull())
+                    continue;
+                QBuffer buffer;
+                buffer.open(QIODevice::WriteOnly);
+                image.save(&buffer, "PNG");
+                imageFormat.setName(QStringLiteral("data:image/png;base64,%1").arg(QString::fromLatin1(buffer.data().toBase64())));
+                c.setPosition(fragment.position());
+                c.setPosition(fragment.position() + 1, QTextCursor::KeepAnchor);
+                c.setCharFormat(imageFormat);
+            }
+        }
+    }
+
+    c.endEditBlock();
+    return asHtml();
+}
+
 QString KDReports::TextDocumentData::asHtml() const
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)

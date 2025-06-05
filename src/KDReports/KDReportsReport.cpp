@@ -400,7 +400,7 @@ void KDReports::ReportPrivate::debugLayoutToPdf(const char *fileName)
 
     QFile html(QFile::decodeName(fileName) + QStringLiteral(".html"));
     Q_ASSERT(html.open(QIODevice::WriteOnly));
-    const QString htmlText = m_layout->toHtml();
+    const QString htmlText = m_layout->asHtml();
     html.write(htmlText.toUtf8());
     html.close();
 
@@ -654,12 +654,7 @@ int KDReports::Report::numberOfPages() const
 
 void KDReports::Report::dump() const
 {
-    qDebug() << asHtml();
-}
-
-QString KDReports::Report::asHtml() const
-{
-    return d->m_layout->toHtml();
+    qDebug() << d->m_layout->asHtml();
 }
 
 void KDReports::Report::setProgressDialogEnabled(bool enable)
@@ -723,7 +718,7 @@ bool KDReports::Report::exportToFile(const QString &fileName, QWidget *parent)
 
 bool KDReports::Report::exportToHtml(const QString &fileName)
 {
-    const QString html = asHtml();
+    const QString html = d->m_layout->asHtml();
     QFile file(fileName);
     if (file.open(QIODevice::WriteOnly)) {
         file.write(html.toUtf8());
@@ -731,6 +726,11 @@ bool KDReports::Report::exportToHtml(const QString &fileName)
         return true;
     }
     return false;
+}
+
+QString KDReports::Report::toHtml() const
+{
+    return d->m_layout->toStandaloneHtml();
 }
 
 bool KDReports::Report::exportToImage(QSize size, const QString &fileName, const char *format)

@@ -80,6 +80,7 @@ public:
     QList<KDReports::AutoTableElement *> autoTableElements();
 
     QString asHtml() const;
+    QString toStandaloneHtml();
     void preciseDump();
 
 private:
