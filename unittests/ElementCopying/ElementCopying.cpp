@@ -92,6 +92,8 @@ private slots:
         QVERIFY(clonedTableElement);
         // check properties were copied
         QCOMPARE(int(clonedTableElement->padding()), 42);
+        delete baseElem1;
+        delete baseElem2;
     }
 };
 
