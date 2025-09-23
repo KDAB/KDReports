@@ -38,6 +38,7 @@ jobs:
         config:
           - qt_version: "5.15"
           - qt_version: "6.6.0"
+          - qt_version: "6.10.*" # Bump to latest freely
 
         include:
           - os: ubuntu-22.04
@@ -52,7 +53,7 @@ jobs:
 
     steps:
       - name: Install Qt with options and default aqtversion
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v4
         with:
           aqtversion: null # use whatever the default is
           modules: ${{ matrix.config.modules }}
