@@ -168,7 +168,6 @@ ecm_generate_headers(
     COMMON_HEADER
     KDReports
 )
-file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/KDReports/KDReports "#include \"KDReports.h\"\n")
 
 if(${PROJECT_NAME}_IS_ROOT_PROJECT)
     install(
