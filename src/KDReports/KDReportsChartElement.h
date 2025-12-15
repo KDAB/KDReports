@@ -32,7 +32,7 @@ class ChartElementPrivate;
  * The KDReports::ChartElement class represents a chart in the report.
  * The data is provided by a QAbstractItemModel.
  */
-class KDREPORTS_EXPORT ChartElement : public Element
+class KDREPORTS_EXPORT ChartElement : public Element // clazy:exclude=copyable-polymorphic
 {
 public:
     /**

@@ -26,7 +26,7 @@ class ImageElementPrivate;
 /**
  * The KDReports::ImageElement class represents an image in the report.
  */
-class KDREPORTS_EXPORT ImageElement : public Element
+class KDREPORTS_EXPORT ImageElement : public Element // clazy:exclude=copyable-polymorphic
 {
 public:
     /**

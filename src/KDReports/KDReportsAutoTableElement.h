@@ -33,7 +33,7 @@ class AutoTableElementPrivate;
  * The header row is repeated on every page if the table is broken across page
  * boundaries.
  */
-class KDREPORTS_EXPORT AutoTableElement : public AbstractTableElement
+class KDREPORTS_EXPORT AutoTableElement : public AbstractTableElement // clazy:exclude=copyable-polymorphic
 {
 public:
     /**

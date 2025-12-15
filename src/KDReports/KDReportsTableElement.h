@@ -23,7 +23,7 @@ class TableElementPrivate;
  *
  * Use AutoTableElement instead if you have the data in a QAbstractItemModel.
  */
-class KDREPORTS_EXPORT TableElement : public AbstractTableElement
+class KDREPORTS_EXPORT TableElement : public AbstractTableElement // clazy:exclude=copyable-polymorphic
 {
 public:
     /**

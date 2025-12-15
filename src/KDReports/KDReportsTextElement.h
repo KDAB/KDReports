@@ -27,7 +27,7 @@ class TextElementPrivate;
  * The KDReports::TextElement class represents text in the report.
  * This is one way to insert rich text into the report (the other way is with HtmlElement).
  */
-class KDREPORTS_EXPORT TextElement : public Element
+class KDREPORTS_EXPORT TextElement : public Element // clazy:exclude=copyable-polymorphic
 {
 public:
     /**

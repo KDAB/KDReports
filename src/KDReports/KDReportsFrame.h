@@ -28,7 +28,7 @@ class FramePrivate;
  * The frame can be visible or not.
  * \since 1.7
  */
-class KDREPORTS_EXPORT Frame : public Element
+class KDREPORTS_EXPORT Frame : public Element // clazy:exclude=copyable-polymorphic
 {
 public:
     /**
