@@ -4,6 +4,7 @@
 *.app
 *.user
 *.rej
+.cache
 
 moc_*.cpp
 ui_*.h

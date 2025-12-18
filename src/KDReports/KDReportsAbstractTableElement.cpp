@@ -124,13 +124,15 @@ void KDReports::AbstractTableElementPrivate::fillConstraints(QTextTableFormat *t
         constraints.reserve(m_constraints.size());
         for (const auto &c : m_constraints) {
             QTextLength length; // Variable by default
-            switch (c.unit) {
-            case Millimeters:
-                length = QTextLength(QTextLength::FixedLength, mmToPixels(c.width));
-                break;
-            case Percent:
-                length = QTextLength(QTextLength::PercentageLength, c.width);
-                break;
+            if (c.unit.has_value()) {
+                switch (*c.unit) {
+                case Millimeters:
+                    length = QTextLength(QTextLength::FixedLength, mmToPixels(c.width));
+                    break;
+                case Percent:
+                    length = QTextLength(QTextLength::PercentageLength, c.width);
+                    break;
+                }
             }
             constraints.append(length);
         }

@@ -7,7 +7,7 @@ General:
 
 Bugfixes:
 -------------
-*
+* Fix undefined behaviour (invalid int-to-enum cast) in AbstractTableElementPrivate::fillConstraints, detected by UBSAN.
 
 New features:
 -------------
