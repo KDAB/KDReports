@@ -13,6 +13,7 @@
 
 #include "KDReportsElement.h"
 #include "KDReportsUnit.h"
+#include <optional>
 
 QT_BEGIN_NAMESPACE
 template<typename T>
@@ -105,16 +106,10 @@ public:
      */
     QFont defaultFont(bool *isSet) const;
 
-    enum // separate because we don't want "Variable" in other uses of Unit
-    {
-        Variable = Unit::Percent + 1 /// < no constraint, \since 2.3
-    };
-
     struct ColumnConstraint
     {
         ColumnConstraint()
             : width(0)
-            , unit(static_cast<Unit>(Variable))
         {
         }
         ColumnConstraint(qreal w, Unit u)
@@ -123,7 +118,7 @@ public:
         {
         }
         qreal width;
-        Unit unit;
+        std::optional<Unit> unit;
     };
 
     /**
