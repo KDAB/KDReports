@@ -25,7 +25,8 @@ jobs:
         os:
           - ubuntu-22.04
           - windows-2022
-          - macos-13
+          - macos-14
+          - macos-15-intel
 
         build_type:
           - Debug
@@ -39,6 +40,19 @@ jobs:
           - qt_version: "5.15"
           - qt_version: "6.6.0"
           - qt_version: "6.10.*" # Bump to latest freely
+
+        exclude:
+          # 5.15.2 is intel-only, do not attempt on ARM
+          - os: macos-14
+            config:
+                qt_version: "5.15"
+          # Do not build 6.x on Intel to avoid combinatorial explosion
+          - os: macos-15-intel
+            config:
+                qt_version: "6.6.0"
+          - os: macos-15-intel
+            config:
+                qt_version: "6.10.*"
 
         include:
           - os: ubuntu-22.04
