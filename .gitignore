@@ -16,9 +16,8 @@ qrc_*.cpp
 
 rc_price_list.py
 CPackConfig.cmake
-
-configure.sh
-configure.bat
+CMakeUserPresets.json
+compile_commands.json
 
 bin/
 lib/
