@@ -54,4 +54,3 @@ jobs:
           ctest --test-dir ./build-${{ matrix.preset }} --output-on-failure
         env:
           QT_QPA_PLATFORM: offscreen
-          LSAN_OPTIONS: detect_leaks=0 # for now
