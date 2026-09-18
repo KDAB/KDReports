@@ -82,6 +82,12 @@ jobs:
           sudo apt update -qq
           echo ${{ join(matrix.config.apt_pgks, ' ') }} | xargs sudo apt install -y
 
+      - name: Setup Python for the bindings
+        if: ${{ matrix.config.pip_pgks }}
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
       - name: Install Python dependencies (${{ join(matrix.config.pip_pgks, ' ') }})
         if: ${{ matrix.config.pip_pgks }}
         run: echo ${{ join(matrix.config.pip_pgks, ' ') }} | xargs pip install
@@ -109,6 +115,7 @@ jobs:
           -DKDReports_QT6=${{ startsWith(matrix.config.qt_version, '6.') }}
           -DKDReports_PYTHON_BINDINGS=${{ matrix.config.pip_pgks }}
           -DPython3_FIND_VIRTUALENV=ONLY
+          -DPython3_FIND_STRATEGY=LOCATION
           -DKDReports_TESTS=${{ matrix.build_type == 'Debug' }}
           -DKDReports_STATIC=${{ matrix.link_type == 'static' }}
           -DKDReports_EXAMPLES=${{ matrix.build_type == 'Debug' }}
